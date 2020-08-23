@@ -10,6 +10,9 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+    
+    // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
+    var statusBarItemController: menuFunctions?
 
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
@@ -19,14 +22,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
 
-
+        // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
+        statusBarItemController = menuFunctions()
+        
         // Run the dataloaders at app startup
-         menuFunctions().menuRefresh()
+//        menuFunctions().menuRefresh(NSMenuItem)
         
         // periodically update the menu
-        let timer = Timer.scheduledTimer(withTimeInterval: 600.0, repeats: true) { timer in
-            menuFunctions().menuRefresh()
-        }
+        _ = Timer.scheduledTimer(withTimeInterval: 600.0, repeats: true) { timer in
+            self.statusBarItemController = menuFunctions()        }
         
     }
 

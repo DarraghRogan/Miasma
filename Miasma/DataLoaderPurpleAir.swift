@@ -100,7 +100,7 @@ var purpleAirData = PurpleAirDataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=57451")! as URL,
+            "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=59111")! as URL,
  //           "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=\(AppDelegate().defaults.object(forKey:"PurpleAirStation") as? String ?? String())")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
