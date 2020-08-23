@@ -25,7 +25,30 @@ class menuFunctions: NSObject {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.1, execute: {
             self.purpleAirLocation.title = "🗺: \(String(purpleAirData.results?[0].label ?? ""))"
-            self.purpleAirPM2_5.title = "🌫: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)"
+            
+            var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "0") ?? 0
+            let pM2_5ColourButton: String
+                switch (pM2_5Value) {
+                    case _ where pM2_5Value >= 0 && pM2_5Value < 12:
+                        pM2_5ColourButton = "🟢"
+                    case _ where pM2_5Value > 12 && pM2_5Value < 35:
+                        pM2_5ColourButton = "🟡"
+                    case _ where pM2_5Value > 35 && pM2_5Value < 55:
+                        pM2_5ColourButton = "🟠"
+                    case _ where pM2_5Value > 55 && pM2_5Value < 150:
+                        pM2_5ColourButton = "🔴"
+                    case _ where pM2_5Value > 150 && pM2_5Value < 250:
+                        pM2_5ColourButton = "🟣"
+                    case _ where pM2_5Value > 250 && pM2_5Value < 350:
+                        pM2_5ColourButton = "🟣🟣"
+                    case _ where pM2_5Value > 350 && pM2_5Value < 500:
+                        pM2_5ColourButton = "🟤"
+                    case _ where pM2_5Value > 500:
+                        pM2_5ColourButton = "🟤🟤"
+                    default:
+                        pM2_5ColourButton = ""
+                }
+            self.purpleAirPM2_5.title = "🌫: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current); \(pM2_5ColourButton)"
             
             let Fahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
             func calculateCelsius(fahrenheit: Double) -> String {
