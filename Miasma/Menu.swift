@@ -12,14 +12,30 @@ import Cocoa
     // Define the Menu
      let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
      let menu = NSMenu()
-    
-    var purpleAirHumidity : NSMenuItem = {
-        return NSMenuItem(title: "Relative Humidity: Loading (10s)", action: nil, keyEquivalent: "")
+
+    var purpleAirLocation : NSMenuItem = {
+       return NSMenuItem(title: "🗺: Loading (10s)", action: nil, keyEquivalent: "")
+    }()
+
+    var purpleAirPM2_5 : NSMenuItem = {
+        return NSMenuItem(title: "🌫: Loading (10s)", action: nil, keyEquivalent: "")
      }()
 
-var purpleAirTemperature : NSMenuItem = {
-    return NSMenuItem(title: "Temperature: Loading (10s)", action: nil, keyEquivalent: "")
- }()
+    var purpleAirTemperature : NSMenuItem = {
+       return NSMenuItem(title: "🌡: Loading (10s)", action: nil, keyEquivalent: "")
+    }()
+
+    var purpleAirHumidity : NSMenuItem = {
+        return NSMenuItem(title: "💧: 🗣 Loading (10s)", action: nil, keyEquivalent: "")
+     }()
+
+    var purpleAirPressure : NSMenuItem = {
+       return NSMenuItem(title: "💪: Loading (10s)", action: nil, keyEquivalent: "")
+    }()
+
+    var purpleAirReadingAge : NSMenuItem = {
+       return NSMenuItem(title: "⏳: Loading (10s)", action: nil, keyEquivalent: "")
+    }()
 
 // Define how to open windows & web addresses from menu
 
@@ -37,8 +53,12 @@ class menuFunctions{
         DataLoaderPurpleAir().loadPurpleAirData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-            purpleAirHumidity.title = "Relative Humidity: \(String(purpleAirData.results?[0].humidity ?? "0"))%"
-            purpleAirTemperature.title = "Temperature: \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+            purpleAirLocation.title = "🗺: \(String(purpleAirData.results?[0].label ?? ""))"
+            purpleAirPM2_5.title = "🌫: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)"
+            purpleAirTemperature.title = "🌡: \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+            purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
+            purpleAirPressure.title = "💪: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar"
+            purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minutes old at Miama refresh time"
 
 })
     }
@@ -54,14 +74,23 @@ func menuLoadOptionals() {
      keyEquivalent: "p"
      )
     )
+    
+    menu.addItem(purpleAirLocation)
+    
+    menu.addItem(purpleAirPM2_5)
 
     menu.addItem(purpleAirTemperature)
     
     menu.addItem(purpleAirHumidity)
-
+    
+    menu.addItem(purpleAirPressure)
+    
+    menu.addItem(purpleAirReadingAge)
+    
     menu.addItem(
     NSMenuItem.separator()
     )
+    
 }
         
 func menuLoadNonOptionals(){
