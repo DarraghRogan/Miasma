@@ -26,11 +26,19 @@ class menuFunctions: NSObject {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.1, execute: {
             self.purpleAirLocation.title = "🗺: \(String(purpleAirData.results?[0].label ?? ""))"
             self.purpleAirPM2_5.title = "🌫: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)"
-            self.purpleAirTemperature.title = "🌡: \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+            
+            let Fahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
+            func calculateCelsius(fahrenheit: Double) -> String {
+                var celsius: Double
+                celsius = (fahrenheit - 32) * 5 / 9
+                let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
+                return celciusRoundedString
+            }
+            self.purpleAirTemperature.title = "🌡: \(String(purpleAirData.results?[0].tempF ?? "0"))℉ / \(calculateCelsius(fahrenheit: Fahrenheit))℃"
+            
             self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
             self.purpleAirPressure.title = "💪: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar"
             self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
-
             })
     }
     
