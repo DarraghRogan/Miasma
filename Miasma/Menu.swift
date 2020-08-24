@@ -194,9 +194,24 @@ class menuFunctions: NSObject {
     @objc func openAboutMiasma(_ sender: NSMenuItem){
          NSWorkspace.shared.open(URL(string: "http://miasma.kissengineering.ie")!)
      }
+    
+    @objc func menuReview(_ sender: NSMenuItem){
+         NSWorkspace.shared.open(URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
+     }
+    
+    @objc func showPreferences(_ sender: Any) {
+            var myWindow: NSWindow? = nil
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"),bundle: nil)
+        let controller = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("PreferencesStoryboard")) as! NSViewController
+            myWindow = NSWindow(contentViewController: controller)
+            NSApp.activate(ignoringOtherApps: true)
+            myWindow?.makeKeyAndOrderFront(self)
+            let vc = NSWindowController(window: myWindow)
+            vc.showWindow(self)
+        }
 
     func menuLoadNonOptionals(){
-        statusItem.button?.title = "Ⓜ"
+        statusItem.button?.title = "Ⓜ ⚪"
         statusItem.button?.target = self
         statusItem.menu = menu
             
@@ -211,6 +226,22 @@ class menuFunctions: NSObject {
         )
         menuRefresh.target = self
         menu.addItem(menuRefresh)
+        
+        let menuPreferences = NSMenuItem(
+            title: "Ⓜiasma Preferences",
+            action: #selector(menuFunctions.showPreferences(_:)),
+            keyEquivalent: ","
+        )
+        menuPreferences.target = self
+        menu.addItem(menuPreferences)
+        
+        let menuReview = NSMenuItem(
+            title: "Review / Suggest Improvements for Ⓜiasma",
+            action: #selector(menuFunctions.menuReview(_:)),
+            keyEquivalent: "e"
+        )
+        menuReview.target = self
+        menu.addItem(menuReview)
                     
         let aboutMiasma = NSMenuItem(
             title: "About Ⓜiasma...",

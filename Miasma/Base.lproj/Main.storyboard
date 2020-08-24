@@ -681,10 +681,10 @@
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
         </scene>
-        <!--View Controller-->
+        <!--Miasma Preferences-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Miasma" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Miasma Preferences" storyboardIdentifier="PreferencesStoryboard" id="XfG-lQ-9wD" customClass="ViewController" customModule="Miasma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
