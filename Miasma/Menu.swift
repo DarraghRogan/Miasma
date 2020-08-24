@@ -25,7 +25,7 @@ class menuFunctions: NSObject {
         DataLoaderAPICovid19().loadAPICovid19Data()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-            self.purpleAirLocation.title = "🗺: \(String(purpleAirData.results?[0].label ?? ""))"
+            self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? ""))"
             
             var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "0") ?? 0
             let pM2_5ColourButton: String
@@ -33,39 +33,39 @@ class menuFunctions: NSObject {
                     case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                         pM2_5ColourButton = "[🟢_______]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟢"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 12 && pM2_5Value < 35:
                         pM2_5ColourButton = "[_🟡______]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟡"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 35 && pM2_5Value < 55:
                         pM2_5ColourButton = "[__🟠_____]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟠"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 55 && pM2_5Value < 150:
                         pM2_5ColourButton = "[___🔴____]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🔴"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 150 && pM2_5Value < 250:
                         pM2_5ColourButton = "[____🟣___]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 250 && pM2_5Value < 350:
                         pM2_5ColourButton = "[_____🟣__]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 350 && pM2_5Value < 500:
                         pM2_5ColourButton = "[______🟤_]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 500:
                         pM2_5ColourButton = "[_______🟤]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     default:
                         pM2_5ColourButton = ""
                         self.purpleAirPM2_5StatusBarIcon.title = "⚪"
-                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                 }
             self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
             
@@ -98,7 +98,7 @@ class menuFunctions: NSObject {
 
 
             
-            self.aPICovid19Location.title = "🗺: \(String(aPICovid19Data.response?[0].country ?? "0"))"
+            self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
             
             if aPICovid19Data.response?[0].country != nil {
                 let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases.new ?? "0")!
@@ -126,7 +126,7 @@ class menuFunctions: NSObject {
 // Define the initial variables for each menu entry
     
     var purpleAirLocation : NSMenuItem = {
-       return NSMenuItem(title: "🗺: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌍: Loading (5s)", action: nil, keyEquivalent: "")
     }()
 
     var purpleAirPM2_5 : NSMenuItem = {
@@ -157,7 +157,7 @@ class menuFunctions: NSObject {
     
     
     var aPICovid19Location : NSMenuItem = {
-       return NSMenuItem(title: "🗺: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌍: Loading (5s)", action: nil, keyEquivalent: "")
     }()
     
     var aPICovid19Cases : NSMenuItem = {
@@ -211,7 +211,7 @@ class menuFunctions: NSObject {
         }
 
     func menuLoadNonOptionals(){
-        statusItem.button?.title = "Ⓜ ⚪"
+        statusItem.button?.title = "M ⚪"
         statusItem.button?.target = self
         statusItem.menu = menu
             
@@ -228,7 +228,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuRefresh)
         
         let menuPreferences = NSMenuItem(
-            title: "Ⓜiasma Preferences",
+            title: "Miasma Preferences",
             action: #selector(menuFunctions.showPreferences(_:)),
             keyEquivalent: ","
         )
@@ -236,7 +236,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuPreferences)
         
         let menuReview = NSMenuItem(
-            title: "Review / Suggest Improvements for Ⓜiasma",
+            title: "Review / Suggest Improvements for Miasma",
             action: #selector(menuFunctions.menuReview(_:)),
             keyEquivalent: "e"
         )
@@ -244,7 +244,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuReview)
                     
         let aboutMiasma = NSMenuItem(
-            title: "About Ⓜiasma...",
+            title: "About Miasma...",
             action: #selector(menuFunctions.openAboutMiasma(_:)),
             keyEquivalent: "a"
         )
