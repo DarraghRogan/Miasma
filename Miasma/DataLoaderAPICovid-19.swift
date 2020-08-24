@@ -28,7 +28,8 @@ struct APICovid19Parameters: Codable {
 }
 
 struct APICovid19Response: Codable {
-    var continent, country: String
+    var continent: String
+    var country: String
     var population: Int
     var cases: APICovid19Cases
     var deaths: APICovid19Deaths
@@ -116,14 +117,13 @@ var aPICovid19Data = APICovid19DataStructure()
                 do {
                     let dataFromAPICovid19 = try decoder.decode(APICovid19DataStructure.self, from: data!)
                     aPICovid19Data = dataFromAPICovid19
-                    print(aPICovid19Data.response?[0].country)
-                    print(aPICovid19Data.response?[0].cases.new)
-                    print(aPICovid19Data.response?[0].cases.the1MPop)
-                    print(aPICovid19Data.response?[0].deaths.new)
-                    print(aPICovid19Data.response?[0].deaths.the1MPop)
-                    print(aPICovid19Data.response?[0].tests.the1MPop)
-                    print(aPICovid19Data.response?[0].time)
-
+//                    print(aPICovid19Data.response?[0].country)
+//                    print(aPICovid19Data.response?[0].cases.new)
+//                    print(aPICovid19Data.response?[0].cases.the1MPop)
+//                    print(aPICovid19Data.response?[0].deaths.new)
+//                    print(aPICovid19Data.response?[0].deaths.the1MPop)
+//                    print(aPICovid19Data.response?[0].tests.the1MPop)
+//                    print(aPICovid19Data.response?[0].time)
                 }
                 catch {
                     print("Error in API-Covid-19 JSON parsing")

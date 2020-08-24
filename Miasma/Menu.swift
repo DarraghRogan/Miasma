@@ -32,22 +32,40 @@ class menuFunctions: NSObject {
                 switch (pM2_5Value) {
                     case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                         pM2_5ColourButton = "[🟢_______]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟢"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 12 && pM2_5Value < 35:
                         pM2_5ColourButton = "[_🟡______]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟡"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 35 && pM2_5Value < 55:
                         pM2_5ColourButton = "[__🟠_____]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟠"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 55 && pM2_5Value < 150:
                         pM2_5ColourButton = "[___🔴____]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🔴"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 150 && pM2_5Value < 250:
                         pM2_5ColourButton = "[____🟣___]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟣"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 250 && pM2_5Value < 350:
                         pM2_5ColourButton = "[_____🟣__]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟣"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 350 && pM2_5Value < 500:
                         pM2_5ColourButton = "[______🟤_]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟤"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     case _ where pM2_5Value > 500:
                         pM2_5ColourButton = "[_______🟤]"
+                        self.purpleAirPM2_5StatusBarIcon.title = "🟤"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                     default:
                         pM2_5ColourButton = ""
+                        self.purpleAirPM2_5StatusBarIcon.title = "⚪"
+                        statusItem.button?.title = "Ⓜ \(self.purpleAirPM2_5StatusBarIcon.title)"
                 }
             self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
             
@@ -58,7 +76,7 @@ class menuFunctions: NSObject {
                 let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                 return celciusRoundedString
             }
-            self.purpleAirTemperature.title = "🌡: \(String(purpleAirData.results?[0].tempF ?? "0"))℉ / \(calculateCelsius(fahrenheit: Fahrenheit))℃"
+            self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Fahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
             
             self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
             
@@ -77,8 +95,33 @@ class menuFunctions: NSObject {
                 }
             self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
             self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Ⓜiasma refresh time"
+
+
+            
+            self.aPICovid19Location.title = "🗺: \(String(aPICovid19Data.response?[0].country ?? "0"))"
+            
+            if aPICovid19Data.response?[0].country != nil {
+                let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases.new ?? "0")!
+                let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases.the1MPop ?? "0")!
+                self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
+            }
+
+            if aPICovid19Data.response?[0].country != nil {
+                let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths.new ?? "0")!
+                let aPICovid19DataResponseDeathsThe1MPop : Int = Int(aPICovid19Data.response?[0].deaths.the1MPop ?? "0")!
+            self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
+            }
+
+            if aPICovid19Data.response?[0].country != nil {
+                let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests.the1MPop ?? "0")!
+            self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
+            }
+            
+            self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].time ?? "0"))"
+            
             })
     }
+    
     
 // Define the initial variables for each menu entry
     
@@ -95,7 +138,7 @@ class menuFunctions: NSObject {
     }()
 
     var purpleAirHumidity : NSMenuItem = {
-        return NSMenuItem(title: "💧: 🗣 Loading (5s)", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "💧: Loading (5s)", action: nil, keyEquivalent: "")
      }()
 
     var purpleAirPressure : NSMenuItem = {
@@ -105,16 +148,52 @@ class menuFunctions: NSObject {
     var purpleAirReadingAge : NSMenuItem = {
        return NSMenuItem(title: "⏳: Loading (5s)", action: nil, keyEquivalent: "")
     }()
+    
+    var purpleAirPM2_5StatusBarIcon : NSMenuItem = {
+        return NSMenuItem(title: "", action: nil, keyEquivalent: "")
+     }()
+    
+
+    
+    
+    var aPICovid19Location : NSMenuItem = {
+       return NSMenuItem(title: "🗺: Loading (5s)", action: nil, keyEquivalent: "")
+    }()
+    
+    var aPICovid19Cases : NSMenuItem = {
+       return NSMenuItem(title: "🗣: Loading (5s)", action: nil, keyEquivalent: "")
+    }()
+    
+    var aPICovid19Deaths : NSMenuItem = {
+       return NSMenuItem(title: "💀: Loading (5s)", action: nil, keyEquivalent: "")
+    }()
+    
+    var aPICovid19Tests : NSMenuItem = {
+       return NSMenuItem(title: "📝: Loading (5s)", action: nil, keyEquivalent: "")
+    }()
+    
+    var aPICovid19Time : NSMenuItem = {
+       return NSMenuItem(title: "📅: Loading (5s)", action: nil, keyEquivalent: "")
+    }()
+    
+    
 
 // Define how to open windows & web addresses from menu
    @objc func openPurpleAir(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "http://www.purpleair.com/map")!)
     }
     
+    @objc func openAPICovid19(_ sender: NSMenuItem){
+         NSWorkspace.shared.open(URL(string: "https://api-sports.io/documentation/covid-19")!)
+     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
         menuFunctions()
     }
+    
+    @objc func openAboutMiasma(_ sender: NSMenuItem){
+         NSWorkspace.shared.open(URL(string: "http://miasma.kissengineering.ie")!)
+     }
 
     func menuLoadNonOptionals(){
         statusItem.button?.title = "Ⓜ"
@@ -132,6 +211,14 @@ class menuFunctions: NSObject {
         )
         menuRefresh.target = self
         menu.addItem(menuRefresh)
+                    
+        let aboutMiasma = NSMenuItem(
+            title: "About Ⓜiasma...",
+            action: #selector(menuFunctions.openAboutMiasma(_:)),
+            keyEquivalent: "a"
+        )
+        aboutMiasma.target = self
+        menu.addItem(aboutMiasma)
         
         menu.addItem(
             NSMenuItem(
@@ -159,9 +246,23 @@ class menuFunctions: NSObject {
         menu.addItem(purpleAirHumidity)
         menu.addItem(purpleAirPressure)
         menu.addItem(purpleAirReadingAge)
-        menu.addItem(
-        NSMenuItem.separator()
+        menu.addItem(NSMenuItem.separator())
+            
+        let aPICovid19 = NSMenuItem(
+            title: "API-Covid-19...",
+            action: #selector(menuFunctions.openAPICovid19(_:)),
+            keyEquivalent: "c"
         )
+        aPICovid19.target = self
+        menu.addItem(aPICovid19)
+            
+        menu.addItem(aPICovid19Location)
+        menu.addItem(aPICovid19Cases)
+        menu.addItem(aPICovid19Deaths)
+        menu.addItem(aPICovid19Tests)
+        menu.addItem(aPICovid19Time)
+            
+        
     }
         
 }
