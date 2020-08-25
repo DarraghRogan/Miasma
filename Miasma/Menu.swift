@@ -94,7 +94,7 @@ class menuFunctions: NSObject {
                         pressure_visual = ""
                 }
             self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
-            self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Ⓜiasma refresh time"
+            self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
 
 
             
@@ -228,7 +228,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuRefresh)
         
         let menuPreferences = NSMenuItem(
-            title: "Miasma Preferences",
+            title: "Miasma Preferences...",
             action: #selector(menuFunctions.showPreferences(_:)),
             keyEquivalent: ","
         )
@@ -236,7 +236,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuPreferences)
         
         let menuReview = NSMenuItem(
-            title: "Review / Suggest Improvements for Miasma",
+            title: "Review / Suggest Improvements for Miasma...",
             action: #selector(menuFunctions.menuReview(_:)),
             keyEquivalent: "e"
         )
