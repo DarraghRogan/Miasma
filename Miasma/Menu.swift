@@ -21,16 +21,16 @@ class menuFunctions: NSObject {
         menu.removeAllItems()
         menuLoadOptionals()
         menuLoadNonOptionals()
-        DataLoaderPurpleAir().loadPurpleAirData()
+        DataLoaderPurpleAir().loadPurpleAirData(id: 8918)
         DataLoaderAPICovid19().loadAPICovid19Data()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-            self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "")); \(String(purpleAirData.results?[0].deviceLocationtype ?? ""))"
+            self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? ""))"
             
-            var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "0") ?? 0
+            var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0
             let pM2_5ColourButton: String
                 switch (pM2_5Value) {
-                    case _ where pM2_5Value >= 0 && pM2_5Value < 12:
+                    case _ where pM2_5Value > 0 && pM2_5Value < 12:
                         pM2_5ColourButton = "[🟢_______]"
                         self.purpleAirPM2_5StatusBarIcon.title = "🟢"
                         statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
