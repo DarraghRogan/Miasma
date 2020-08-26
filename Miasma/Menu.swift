@@ -25,7 +25,7 @@ class menuFunctions: NSObject {
         DataLoaderAPICovid19().loadAPICovid19Data()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-            self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? ""))"
+            self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "")); \(String(purpleAirData.results?[0].deviceLocationtype ?? ""))"
             
             var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "0") ?? 0
             let pM2_5ColourButton: String

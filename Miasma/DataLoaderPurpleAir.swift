@@ -127,7 +127,7 @@ var purpleAirData = PurpleAirDataStructure()
                 do {
                     let dataFromPurpleAir = try decoder.decode(PurpleAirDataStructure.self, from: data!)
                     purpleAirData = dataFromPurpleAir
-//                    print(purpleAirData)
+//                    print(purpleAirData.results?[0].deviceLocationtype)
 
                 }
                 catch {
