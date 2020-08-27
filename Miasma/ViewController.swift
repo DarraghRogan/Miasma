@@ -7,8 +7,12 @@
 //
 
 import Cocoa
+import ServiceManagement
+
 
 class ViewController: NSViewController {
+    
+    @IBOutlet weak var MiasmaVersionLabel: NSTextField!
     
     @IBOutlet weak var AirQualityDisabledRadioOutlet: NSButton!
     
@@ -19,12 +23,26 @@ class ViewController: NSViewController {
         
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
     
+    @IBAction func PurpleAirMapButton(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "http://www.purpleair.com/map")!)
+    }
+    
+    @IBAction func PurpleAirWebpageSnip(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "http://www.purpleair.com/map")!)
+    }
+    
     @IBOutlet weak var PurpleAirIDField: NSTextField!
+    
+    @IBAction func PurpleAirIDField(_ sender: Any) {
+            PurpleAirCheckButton((Any).self)
+    }
     
     @IBAction func PurpleAirRadioAction(_ sender: Any) {
         AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
     }
+    
+    @IBOutlet weak var PurpleAirIDSaveButton: NSButton!
     
     @IBAction func PurpleAirIDSaveButton(_ sender: Any) {
         AppDelegate().defaults.set(PurpleAirIDField.stringValue, forKey: "PurpleAirStationID")
@@ -42,9 +60,8 @@ class ViewController: NSViewController {
                 self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
             } else {
                 self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
+                self.PurpleAirIDSaveButton.isEnabled = true
             }
-            
-
         })
         
         
@@ -54,12 +71,15 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
     
-    
+    let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 0 {
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
