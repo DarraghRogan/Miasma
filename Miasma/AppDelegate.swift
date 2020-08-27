@@ -16,8 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
-//    AppDelegate().defaults.set("59111", forKey: "YouTubeInUse")
-
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
