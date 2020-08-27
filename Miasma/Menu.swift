@@ -22,7 +22,7 @@ class menuFunctions: NSObject {
         menuLoadOptionals()
         menuLoadNonOptionals()
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
-            DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? Int ?? Int()))
+            DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                        self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
                        
@@ -271,6 +271,8 @@ class menuFunctions: NSObject {
 
     func menuLoadOptionals() {
         
+        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
+
         let purpleAir = NSMenuItem(
             title: "PurpleAir...",
             action: #selector(menuFunctions.openPurpleAir(_:)),
@@ -286,6 +288,10 @@ class menuFunctions: NSObject {
         menu.addItem(purpleAirPressure)
         menu.addItem(purpleAirReadingAge)
         menu.addItem(NSMenuItem.separator())
+        }
+        else{
+            
+        }
             
         let aPICovid19 = NSMenuItem(
             title: "API-Covid-19...",

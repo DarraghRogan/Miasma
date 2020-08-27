@@ -843,6 +843,9 @@
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="PurpleAirCheckButton:" target="XfG-lQ-9wD" id="Jkz-xs-bjL"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-AC-O5j">
                                 <rect key="frame" x="179" y="238" width="184" height="32"/>
@@ -856,9 +859,9 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-L0-Tvd">
-                                <rect key="frame" x="157" y="273" width="166" height="16"/>
+                                <rect key="frame" x="157" y="273" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="&lt;response&gt;" id="elL-8h-8rm">
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="elL-8h-8rm">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -867,7 +870,7 @@
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lSN-T0-4a0">
                                 <rect key="frame" x="190" y="224" width="168" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" id="3lh-8m-sd7">
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="3lh-8m-sd7">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -877,6 +880,7 @@
                     </view>
                     <connections>
                         <outlet property="AirQualityDisabledRadioOutlet" destination="a8B-2u-OhJ" id="YAl-eQ-97k"/>
+                        <outlet property="PurpleAirCheckedLabel" destination="HhU-L0-Tvd" id="bI0-mM-yMM"/>
                         <outlet property="PurpleAirIDField" destination="Ij3-Vr-ptz" id="S9J-1I-yud"/>
                         <outlet property="PurpleAirRadioOutlet" destination="dNg-47-2VM" id="YPN-09-bPM"/>
                         <outlet property="PurpleAirSavedIDLabel" destination="lSN-T0-4a0" id="0wV-9T-dJg"/>

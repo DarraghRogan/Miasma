@@ -93,7 +93,7 @@ var purpleAirData = PurpleAirDataStructure()
  public class DataLoaderPurpleAir {
 
     
-    func loadPurpleAirData(id:Int) {
+    func loadPurpleAirData(id:String) {
 
         
         let headers = [
@@ -101,7 +101,7 @@ var purpleAirData = PurpleAirDataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-         "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")! as URL,
+         "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=\(id)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         

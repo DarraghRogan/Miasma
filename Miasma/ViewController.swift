@@ -15,7 +15,6 @@ class ViewController: NSViewController {
     @IBAction func AirQualityDisabledRadioAction(_ sender: Any) {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-
     }
         
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
@@ -33,10 +32,28 @@ class ViewController: NSViewController {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
+    }
+    
+    @IBAction func PurpleAirCheckButton(_ sender: Any) {
+        DataLoaderPurpleAir().loadPurpleAirData(id: PurpleAirIDField.stringValue)
+        PurpleAirCheckedLabel.stringValue = "Loading (5s)"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+            if purpleAirData.results!.isEmpty {
+                self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
+            } else {
+                self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
+            }
+            
+
+        })
         
         
     }
+    
+    @IBOutlet weak var PurpleAirCheckedLabel: NSTextField!
+    
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
+    
     
     
     override func viewDidLoad() {
@@ -44,8 +61,16 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         
-        PurpleAirRadioOutlet.state.self = AppDelegate().defaults.object(forKey:"PurpleAirInUse") as? NSControl.StateValue ?? NSControl.StateValue(1)
-        AirQualityDisabledRadioOutlet.state.self = AppDelegate().defaults.object(forKey:"PurpleAirInUse") as? NSControl.StateValue ?? NSControl.StateValue(1)
+        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 0 {
+            PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        }
+        else{
+            PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        }
+
+
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
 
         
