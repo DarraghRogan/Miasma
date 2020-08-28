@@ -27,27 +27,27 @@ class menuFunctions: NSObject {
 // Define the initial variables for each menu entry
     
     var purpleAirLocation : NSMenuItem = {
-       return NSMenuItem(title: "🌍: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
     }()
 
     var purpleAirPM2_5 : NSMenuItem = {
-        return NSMenuItem(title: "🌫: Loading (5s)", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "🌫: ", action: nil, keyEquivalent: "")
      }()
 
     var purpleAirTemperature : NSMenuItem = {
-       return NSMenuItem(title: "🌡: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
     }()
 
     var purpleAirHumidity : NSMenuItem = {
-        return NSMenuItem(title: "💧: Loading (5s)", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "💧: ", action: nil, keyEquivalent: "")
      }()
 
     var purpleAirPressure : NSMenuItem = {
-       return NSMenuItem(title: "🌬️: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌬️: ", action: nil, keyEquivalent: "")
     }()
 
     var purpleAirReadingAge : NSMenuItem = {
-       return NSMenuItem(title: "⏳: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "⏳: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirPM2_5StatusBarIcon : NSMenuItem = {
@@ -58,23 +58,23 @@ class menuFunctions: NSObject {
     
     
     var aPICovid19Location : NSMenuItem = {
-       return NSMenuItem(title: "🌍: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
     }()
     
     var aPICovid19Cases : NSMenuItem = {
-       return NSMenuItem(title: "🗣: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "🗣: ", action: nil, keyEquivalent: "")
     }()
     
     var aPICovid19Deaths : NSMenuItem = {
-       return NSMenuItem(title: "💀: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "💀: ", action: nil, keyEquivalent: "")
     }()
     
     var aPICovid19Tests : NSMenuItem = {
-       return NSMenuItem(title: "📝: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "📝: ", action: nil, keyEquivalent: "")
     }()
     
     var aPICovid19Time : NSMenuItem = {
-       return NSMenuItem(title: "📅: Loading (5s)", action: nil, keyEquivalent: "")
+       return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
     }()
     
     
@@ -285,7 +285,7 @@ class menuFunctions: NSObject {
             
          DataLoaderAPICovid19().loadAPICovid19Data(id: (AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String()))
          
-             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+             DispatchQueue.main.asyncAfter(deadline: .now() + 2.1, execute: {
 
              self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
              
@@ -306,7 +306,7 @@ class menuFunctions: NSObject {
              self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
              }
              
-             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].time ?? "0"))"
+             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].day ?? "0"))"
              
              })
             
