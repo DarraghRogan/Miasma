@@ -297,8 +297,8 @@ class menuFunctions: NSObject {
 
                 if aPICovid19Data.response?[0].deaths?.the1MPop != nil {
                     let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths?.new ?? "0")!
-                    let aPICovid19DataResponseDeathsThe1MPop : Double  = Double(aPICovid19Data.response?[0].deaths?.the1MPop ?? "0")! ?? 0
-             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
+                    let aPICovid19DataResponseDeathsThe1MPop : Float = Float(aPICovid19Data.response?[0].deaths?.the1MPop ?? "0")!
+             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%.1F", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
              }
 
                 if aPICovid19Data.response?[0].tests?.the1MPop != nil {
