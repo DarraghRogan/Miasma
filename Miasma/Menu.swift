@@ -295,13 +295,13 @@ class menuFunctions: NSObject {
                  self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
              }
 
-             if aPICovid19Data.response?[0].country != nil {
+             if aPICovid19Data.response?[0].deaths.the1MPop != nil {
                  let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths.new ?? "0")!
                  let aPICovid19DataResponseDeathsThe1MPop : Int = Int(aPICovid19Data.response?[0].deaths.the1MPop ?? "0")!
              self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
              }
 
-             if aPICovid19Data.response?[0].country != nil {
+             if aPICovid19Data.response?[0].tests.the1MPop != nil {
                  let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests.the1MPop ?? "0")!
              self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
              }
