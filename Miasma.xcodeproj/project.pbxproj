@@ -15,6 +15,7 @@
 		0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */; };
 		0283DD9B24F0528C00E4CC07 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9A24F0528C00E4CC07 /* APIKeys.swift */; };
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
+		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
 		0283DD9A24F0528C00E4CC07 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
 				0218870A24F4486900F95C20 /* DataLoaderAPICovid-19.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
+				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				0283DD9124F051BF00E4CC07 /* Info.plist */,
 				0283DD8E24F051BF00E4CC07 /* Main.storyboard */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
@@ -151,6 +154,7 @@
 				0283DD9B24F0528C00E4CC07 /* APIKeys.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
+				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
