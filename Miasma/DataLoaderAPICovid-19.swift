@@ -82,7 +82,7 @@ var aPICovid19Data = APICovid19DataStructure()
  public class DataLoaderAPICovid19 {
 
     
-    func loadAPICovid19Data() {
+    func loadAPICovid19Data(id:String) {
 
         
         let headers = [
@@ -90,8 +90,7 @@ var aPICovid19Data = APICovid19DataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://covid-193.p.rapidapi.com/statistics?country=Ireland")! as URL,
- //           "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=\(AppDelegate().defaults.object(forKey:"PurpleAirStation") as? String ?? String())")! as URL,
+            "https://covid-193.p.rapidapi.com/statistics?country=\(id)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         

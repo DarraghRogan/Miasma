@@ -92,7 +92,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var Covid19PopUpOutlet: NSPopUpButton!
         
     @IBAction func Covid19PopUpAction(_ sender: Any) {
-        AppDelegate().defaults.set(Covid19PopUpOutlet.selectedItem, forKey: "APICovid19Country")
+        AppDelegate().defaults.set(Covid19PopUpOutlet.titleOfSelectedItem, forKey: "APICovid19Country")
     }
     
     
@@ -128,8 +128,12 @@ class ViewController: NSViewController {
             Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
             Covid19DisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
+        
+        Covid19PopUpOutlet.removeAllItems()
+        Covid19PopUpOutlet.addItems(withTitles: ["Ireland", "USA", "Finland", "France"])
 
         Covid19PopUpOutlet.selectItem(withTitle: AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String())
+        
         
         print(AppDelegate().defaults.object(forKey:"APICovid19Country"))
         
