@@ -50,6 +50,8 @@ class ViewController: NSViewController {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
+//        menuFunctions()
+        
     }
     
     @IBAction func PurpleAirCheckButton(_ sender: Any) {
@@ -70,6 +72,30 @@ class ViewController: NSViewController {
     @IBOutlet weak var PurpleAirCheckedLabel: NSTextField!
     
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
+    
+    
+    
+    @IBOutlet weak var Covid19DisabledRadioOutlet: NSButton!
+    
+    @IBAction func Covid19DisabledRadioAction(_ sender: Any) {
+        Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "APICovid19InUse")
+    }
+    
+    @IBOutlet weak var Covid19APIRadioOutlet: NSButton!
+    
+    @IBAction func Covid19APIRadioAction(_ sender: Any) {
+        AppDelegate().defaults.set(1, forKey: "APICovid19InUse")
+        Covid19DisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+    }
+    
+    @IBOutlet weak var Covid19PopUpOutlet: NSPopUpButton!
+        
+    @IBAction func Covid19PopUpAction(_ sender: Any) {
+        AppDelegate().defaults.set(Covid19PopUpOutlet.selectedItem, forKey: "APICovid19Country")
+    }
+    
+    
     
     let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
 
@@ -92,8 +118,20 @@ class ViewController: NSViewController {
 
 
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
-
         
+        
+        if AppDelegate().defaults.integer(forKey:"APICovid19InUse") == 0 {
+            Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+            Covid19DisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        }
+        else{
+            Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+            Covid19DisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        }
+
+        Covid19PopUpOutlet.selectItem(withTitle: AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String())
+        
+        print(AppDelegate().defaults.object(forKey:"APICovid19Country"))
         
         
     }

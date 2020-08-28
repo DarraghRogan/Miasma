@@ -21,113 +21,6 @@ class menuFunctions: NSObject {
         menu.removeAllItems()
         menuLoadOptionals()
         menuLoadNonOptionals()
-        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
-            DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-                       self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
-                       
-                           var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0
-                           let pM2_5ColourButton: String
-                               switch (pM2_5Value) {
-                                   case _ where pM2_5Value > 0 && pM2_5Value < 12:
-                                       pM2_5ColourButton = "[🟢_______]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟢"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 12 && pM2_5Value < 35:
-                                       pM2_5ColourButton = "[_🟡______]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟡"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 35 && pM2_5Value < 55:
-                                       pM2_5ColourButton = "[__🟠_____]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟠"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 55 && pM2_5Value < 150:
-                                       pM2_5ColourButton = "[___🔴____]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🔴"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 150 && pM2_5Value < 250:
-                                       pM2_5ColourButton = "[____🟣___]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 250 && pM2_5Value < 350:
-                                       pM2_5ColourButton = "[_____🟣__]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 350 && pM2_5Value < 500:
-                                       pM2_5ColourButton = "[______🟤_]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   case _ where pM2_5Value > 500:
-                                       pM2_5ColourButton = "[_______🟤]"
-                                       self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                                   default:
-                                       pM2_5ColourButton = ""
-                                       self.purpleAirPM2_5StatusBarIcon.title = "⚪"
-                                       statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                               }
-                           self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
-                           
-                           let Fahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
-                           func calculateCelsius(fahrenheit: Double) -> String {
-                               var celsius: Double
-                               celsius = (fahrenheit - 32) * 5 / 9
-                               let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
-                               return celciusRoundedString
-                           }
-                           self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Fahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
-                           
-                           self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
-                           
-                           var pressureValue = Double(purpleAirData.results?[0].pressure ?? "0") ?? 0
-                           let pressure_visual: String
-                           // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                               switch (pressureValue) {
-                                   case _ where pressureValue < 1009.144:
-                                       pressure_visual = "[Low/______/____]"
-                                   case _ where pressureValue > 1009.144 && pressureValue < 1022.689:
-                                       pressure_visual = "[___/Normal/____]"
-                                   case _ where pressureValue > 1022.689:
-                                       pressure_visual = "[___/______/High]"
-                                   default:
-                                       pressure_visual = ""
-                               }
-                           self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
-                           self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
-                   })
-        }
-        else {
-        }
-        
-        DataLoaderAPICovid19().loadAPICovid19Data()
-        
-       
-
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-
-            self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
-            
-            if aPICovid19Data.response?[0].country != nil {
-                let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases.new ?? "0")!
-                let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases.the1MPop ?? "0")!
-                self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
-            }
-
-            if aPICovid19Data.response?[0].country != nil {
-                let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths.new ?? "0")!
-                let aPICovid19DataResponseDeathsThe1MPop : Int = Int(aPICovid19Data.response?[0].deaths.the1MPop ?? "0")!
-            self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
-            }
-
-            if aPICovid19Data.response?[0].country != nil {
-                let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests.the1MPop ?? "0")!
-            self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
-            }
-            
-            self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].time ?? "0"))"
-            
-            })
     }
     
     
@@ -196,7 +89,9 @@ class menuFunctions: NSObject {
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
-        menuFunctions()
+        menu.removeAllItems()
+        menuLoadOptionals()
+        menuLoadNonOptionals()
     }
     
     @objc func openAboutMiasma(_ sender: NSMenuItem){
@@ -290,7 +185,6 @@ class menuFunctions: NSObject {
         menu.addItem(NSMenuItem.separator())
         }
         else{
-            
         }
             
         let aPICovid19 = NSMenuItem(
@@ -307,6 +201,111 @@ class menuFunctions: NSObject {
         menu.addItem(aPICovid19Tests)
         menu.addItem(aPICovid19Time)
             
+         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
+             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                        self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
+                        
+                            var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0
+                            let pM2_5ColourButton: String
+                                switch (pM2_5Value) {
+                                    case _ where pM2_5Value > 0 && pM2_5Value < 12:
+                                        pM2_5ColourButton = "[🟢_______]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟢"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 12 && pM2_5Value < 35:
+                                        pM2_5ColourButton = "[_🟡______]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟡"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 35 && pM2_5Value < 55:
+                                        pM2_5ColourButton = "[__🟠_____]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟠"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 55 && pM2_5Value < 150:
+                                        pM2_5ColourButton = "[___🔴____]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🔴"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 150 && pM2_5Value < 250:
+                                        pM2_5ColourButton = "[____🟣___]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟣"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 250 && pM2_5Value < 350:
+                                        pM2_5ColourButton = "[_____🟣__]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟣"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 350 && pM2_5Value < 500:
+                                        pM2_5ColourButton = "[______🟤_]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟤"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    case _ where pM2_5Value > 500:
+                                        pM2_5ColourButton = "[_______🟤]"
+                                        self.purpleAirPM2_5StatusBarIcon.title = "🟤"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                    default:
+                                        pM2_5ColourButton = ""
+                                        self.purpleAirPM2_5StatusBarIcon.title = "⚪"
+                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                }
+                            self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
+                            
+                            let Fahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
+                            func calculateCelsius(fahrenheit: Double) -> String {
+                                var celsius: Double
+                                celsius = (fahrenheit - 32) * 5 / 9
+                                let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
+                                return celciusRoundedString
+                            }
+                            self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Fahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+                            
+                            self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
+                            
+                            var pressureValue = Double(purpleAirData.results?[0].pressure ?? "0") ?? 0
+                            let pressure_visual: String
+                            // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                                switch (pressureValue) {
+                                    case _ where pressureValue < 1009.144:
+                                        pressure_visual = "[Low/______/____]"
+                                    case _ where pressureValue > 1009.144 && pressureValue < 1022.689:
+                                        pressure_visual = "[___/Normal/____]"
+                                    case _ where pressureValue > 1022.689:
+                                        pressure_visual = "[___/______/High]"
+                                    default:
+                                        pressure_visual = ""
+                                }
+                            self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
+                            self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
+                    })
+         }
+         else {
+             
+         }
+         
+         DataLoaderAPICovid19().loadAPICovid19Data()
+         
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+
+             self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
+             
+             if aPICovid19Data.response?[0].country != nil {
+                 let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases.new ?? "0")!
+                 let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases.the1MPop ?? "0")!
+                 self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
+             }
+
+             if aPICovid19Data.response?[0].country != nil {
+                 let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths.new ?? "0")!
+                 let aPICovid19DataResponseDeathsThe1MPop : Int = Int(aPICovid19Data.response?[0].deaths.the1MPop ?? "0")!
+             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
+             }
+
+             if aPICovid19Data.response?[0].country != nil {
+                 let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests.the1MPop ?? "0")!
+             self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
+             }
+             
+             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].time ?? "0"))"
+             
+             })
         
     }
         
