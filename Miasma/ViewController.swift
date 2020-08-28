@@ -93,6 +93,9 @@ class ViewController: NSViewController {
         
     @IBAction func Covid19PopUpAction(_ sender: Any) {
         AppDelegate().defaults.set(Covid19PopUpOutlet.titleOfSelectedItem, forKey: "APICovid19Country")
+        AppDelegate().defaults.set(1, forKey: "APICovid19InUse")
+        Covid19DisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
     }
     
     
@@ -130,12 +133,11 @@ class ViewController: NSViewController {
         }
         
         Covid19PopUpOutlet.removeAllItems()
-        Covid19PopUpOutlet.addItems(withTitles: ["Ireland", "USA", "Finland", "France"])
+        Covid19PopUpOutlet.addItems(withTitles: ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua-and-Barbuda", "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia-and-Herzegovina", "Brazil", "Brunei-", "Bulgaria", "Burkina-Faso", "Cabo-Verde", "Cambodia", "Cameroon", "Canada", "CAR", "Cayman-Islands", "Chad", "Channel-Islands", "Chile", "China", "Colombia", "Congo", "Costa-Rica", "Croatia", "Cuba", "Cura&ccedil;ao", "Cyprus", "Czechia", "Denmark", "Diamond-Princess-", "Djibouti", "Dominican-Republic", "DRC", "Ecuador", "Egypt", "El-Salvador", "Equatorial-Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Faeroe-Islands", "Fiji", "Finland", "France", "French-Guiana", "French-Polynesia", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Gibraltar", "Greece", "Greenland", "Guadeloupe", "Guam", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", "Hong-Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle-of-Man", "Israel", "Italy", "Ivory-Coast", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan", "Latvia", "Lebanon", "Liberia", "Liechtenstein", "Lithuania", "Luxembourg", "Macao", "Madagascar", "Malaysia", "Maldives", "Malta", "Martinique", "Mauritania", "Mauritius", "Mayotte", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Montserrat", "Morocco", "Namibia", "Nepal", "Netherlands", "New-Caledonia", "New-Zealand", "Nicaragua", "Niger", "Nigeria", "North-Macedonia", "Norway", "Oman", "Pakistan", "Palestine", "Panama", "Papua-New-Guinea", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto-Rico", "Qatar", "R&eacute;union", "Romania", "Russia", "Rwanda", "S.-Korea", "Saint-Lucia", "Saint-Martin", "San-Marino", "Saudi-Arabia", "Senegal", "Serbia", "Seychelles", "Singapore", "Sint-Maarten", "Slovakia", "Slovenia", "Somalia", "South-Africa", "Spain", "Sri-Lanka", "St.-Barth", "St.-Vincent-Grenadines", "Sudan", "Suriname", "Sweden", "Switzerland", "Taiwan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Trinidad-and-Tobago", "Tunisia", "Turkey", "U.S.-Virgin-Islands", "UAE", "Uganda", "UK", "Ukraine", "Uruguay", "USA", "Uzbekistan", "Vatican-City", "Venezuela", "Vietnam", "Zambia", "Zimbabwe"])
 
         Covid19PopUpOutlet.selectItem(withTitle: AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String())
         
         
-        print(AppDelegate().defaults.object(forKey:"APICovid19Country"))
         
         
     }

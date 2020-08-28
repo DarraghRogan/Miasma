@@ -165,43 +165,28 @@ class menuFunctions: NSObject {
 // The function to manually run the data loaders, by loading the data, changing the menu bar to say loading, then after a delay filling in the correct data
 
     func menuLoadOptionals() {
-        
-        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
+            
 
-        let purpleAir = NSMenuItem(
-            title: "PurpleAir...",
-            action: #selector(menuFunctions.openPurpleAir(_:)),
-            keyEquivalent: "p"
-        )
-        purpleAir.target = self
-        menu.addItem(purpleAir)
-        
-        menu.addItem(purpleAirLocation)
-        menu.addItem(purpleAirPM2_5)
-        menu.addItem(purpleAirTemperature)
-        menu.addItem(purpleAirHumidity)
-        menu.addItem(purpleAirPressure)
-        menu.addItem(purpleAirReadingAge)
-        menu.addItem(NSMenuItem.separator())
-        }
-        else{
-        }
-            
-        let aPICovid19 = NSMenuItem(
-            title: "API-Covid-19...",
-            action: #selector(menuFunctions.openAPICovid19(_:)),
-            keyEquivalent: "c"
-        )
-        aPICovid19.target = self
-        menu.addItem(aPICovid19)
-            
-        menu.addItem(aPICovid19Location)
-        menu.addItem(aPICovid19Cases)
-        menu.addItem(aPICovid19Deaths)
-        menu.addItem(aPICovid19Tests)
-        menu.addItem(aPICovid19Time)
             
          if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
+            
+            
+            let purpleAir = NSMenuItem(
+                title: "PurpleAir...",
+                action: #selector(menuFunctions.openPurpleAir(_:)),
+                keyEquivalent: "p"
+            )
+            purpleAir.target = self
+            menu.addItem(purpleAir)
+            
+            menu.addItem(purpleAirLocation)
+            menu.addItem(purpleAirPM2_5)
+            menu.addItem(purpleAirTemperature)
+            menu.addItem(purpleAirHumidity)
+            menu.addItem(purpleAirPressure)
+            menu.addItem(purpleAirReadingAge)
+            menu.addItem(NSMenuItem.separator())
+            
              DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                         self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
@@ -280,6 +265,24 @@ class menuFunctions: NSObject {
              
          }
          
+        
+        if AppDelegate().defaults.integer(forKey:"APICovid19InUse") == 1 {
+            
+            let aPICovid19 = NSMenuItem(
+                title: "API-Covid-19...",
+                action: #selector(menuFunctions.openAPICovid19(_:)),
+                keyEquivalent: "c"
+            )
+            aPICovid19.target = self
+            menu.addItem(aPICovid19)
+                
+            menu.addItem(aPICovid19Location)
+            menu.addItem(aPICovid19Cases)
+            menu.addItem(aPICovid19Deaths)
+            menu.addItem(aPICovid19Tests)
+            menu.addItem(aPICovid19Time)
+            
+            
          DataLoaderAPICovid19().loadAPICovid19Data(id: (AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String()))
          
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
@@ -306,6 +309,12 @@ class menuFunctions: NSObject {
              self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].time ?? "0"))"
              
              })
+            
+        }
+        else
+        {
+            
+        }
         
     }
         
