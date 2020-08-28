@@ -31,18 +31,18 @@ struct APICovid19Response: Codable {
     var continent: String
     var country: String
     var population: Int
-    var cases: APICovid19Cases
-    var deaths: APICovid19Deaths
-    var tests: APICovid19Tests
+    var cases: APICovid19Cases?
+    var deaths: APICovid19Deaths?
+    var tests: APICovid19Tests?
     var day: String
     var time: String
 }
 
 struct APICovid19Cases: Codable {
-    var new: String
-    var active, critical, recovered: Int
-    var the1MPop: String
-    var total: Int
+    var new: String?
+    var active, critical, recovered: Int?
+    var the1MPop: String?
+    var total: Int?
 
     enum CodingKeys: String, CodingKey {
         case new, active, critical, recovered
@@ -53,8 +53,8 @@ struct APICovid19Cases: Codable {
 
 struct APICovid19Deaths: Codable {
     var new: String?
-    var the1MPop: String
-    var total: Int
+    var the1MPop: String?
+    var total: Int?
 
     enum CodingKeys: String, CodingKey {
         case new
@@ -64,8 +64,8 @@ struct APICovid19Deaths: Codable {
 }
 
 struct APICovid19Tests: Codable {
-    var the1MPop: String
-    var total: Int
+    var the1MPop: String?
+    var total: Int?
 
     enum CodingKeys: String, CodingKey {
         case the1MPop = "1M_pop"
@@ -104,13 +104,13 @@ var aPICovid19Data = APICovid19DataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the API-Covid-19 API")
-//                if let data = data,
-//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
+                print("Received from the API-Covid-19 API")
+                if let data = data,
+                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                    print(urlContent)
+                } else {
+                    print("error with printing string encoded data")
+                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
