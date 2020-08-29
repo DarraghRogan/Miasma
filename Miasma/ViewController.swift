@@ -15,21 +15,25 @@ class ViewController: NSViewController {
     // Invoke RegEx Extension for each account type
     let validityTypePurpleAir: String.ValidityType = .purpleAirID
     
-//    @objc fileprivate func handleTextChangeYouTube() {
-//        guard let text = youTubeField?.stringValue else { return }
-//        if text.isValid(purpleAirID) {
-//            youTubeGuidanceField.isHidden = true
-//            youTubeLabel.stringValue = AppDelegate().defaults.object(forKey:"YouTubeChannelID") as? String ?? String()
-//            AppDelegate().defaults.set(youTubeField.stringValue, forKey: "YouTubeChannelID")
-//            youTubeField.layer?.borderWidth = 0.0
-//            AppDelegate().defaults.set(1, forKey: "YouTubeInUse")
-//            youTubeSlider.state.self = AppDelegate().defaults.object(forKey:"YouTubeInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
-//        } else {
-//            youTubeGuidanceField.isHidden = false
-//            youTubeField.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
-//            youTubeField.layer?.borderWidth = 2.0
-//        }
-//    }
+    @objc fileprivate func handleTextChangePurpleAir() {
+        guard let text = PurpleAirIDField?.stringValue else { return }
+        if text.isValid(validityTypePurpleAir) {
+            DataLoaderPurpleAir().loadPurpleAirData(id: PurpleAirIDField.stringValue)
+            PurpleAirCheckedLabel.stringValue = "Loading (5s)"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                if purpleAirData.results!.isEmpty {
+                    self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
+                } else {
+                    self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
+                    self.PurpleAirIDSaveButton.isEnabled = true
+                }
+            })
+            PurpleAirIDField.layer?.borderWidth = 0.0
+        } else {
+            PurpleAirIDField.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
+            PurpleAirIDField.layer?.borderWidth = 2.0
+        }
+    }
     
     @IBOutlet weak var MiasmaVersionLabel: NSTextField!
     
@@ -69,22 +73,18 @@ class ViewController: NSViewController {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
-//        menuFunctions()
+        if PurpleAirIDField.stringValue == ""{
+            AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+        }
+        else{
+        }
+        
+
         
     }
     
     @IBAction func PurpleAirCheckButton(_ sender: Any) {
-        DataLoaderPurpleAir().loadPurpleAirData(id: PurpleAirIDField.stringValue)
-        PurpleAirCheckedLabel.stringValue = "Loading (5s)"
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-            if purpleAirData.results!.isEmpty {
-                self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
-            } else {
-                self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
-                self.PurpleAirIDSaveButton.isEnabled = true
-            }
-        })
-        
+        handleTextChangePurpleAir()
         
     }
     
