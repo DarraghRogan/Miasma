@@ -920,7 +920,7 @@ It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the 
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="YHs-ow-CcT" id="4nE-Vw-LnG">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" metaFont="menu"/>
                                     <menu key="menu" id="L7j-Mo-su0">
                                         <items>
                                             <menuItem title="Item 1" state="on" id="YHs-ow-CcT"/>
@@ -940,6 +940,9 @@ It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the 
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="autoRunAtStartup:" target="XfG-lQ-9wD" id="4qo-gA-Vtd"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zr-hR-aKv">
                                 <rect key="frame" x="985" y="20" width="32" height="16"/>
@@ -972,6 +975,7 @@ It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the 
                         <outlet property="PurpleAirIDSaveButton" destination="0PM-AC-O5j" id="Wgx-H0-SyX"/>
                         <outlet property="PurpleAirRadioOutlet" destination="dNg-47-2VM" id="YPN-09-bPM"/>
                         <outlet property="PurpleAirSavedIDLabel" destination="lSN-T0-4a0" id="0wV-9T-dJg"/>
+                        <outlet property="autoRunAtStartup" destination="lwP-qa-jNJ" id="mtO-An-oat"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

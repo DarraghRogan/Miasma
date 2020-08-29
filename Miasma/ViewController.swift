@@ -117,7 +117,20 @@ class ViewController: NSViewController {
         Covid19APIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
     }
     
+    @IBOutlet weak var autoRunAtStartup: NSButton!
     
+    @IBAction func autoRunAtStartup(_ sender: Any) {
+        let launcherAppId = "Darragh-Rogan.MiasmaLauncherApplication"
+
+        if autoRunAtStartup.state.self.rawValue == 0{
+             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
+            SMLoginItemSetEnabled(launcherAppId as CFString, false)
+        }
+        else if autoRunAtStartup.state.self.rawValue == 1{
+            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
+                        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+        }
+    }
     
     let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
 
@@ -128,6 +141,8 @@ class ViewController: NSViewController {
         // Do any additional setup after loading the view.
         
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
+        
+        autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 0 {
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
