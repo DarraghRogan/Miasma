@@ -19,7 +19,6 @@
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75924FA53A9006ED277 /* Assets.xcassets */; };
-		02F3C75D24FA53A9006ED277 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75C24FA53A9006ED277 /* Preview Assets.xcassets */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncherApplication.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */; };
 		02F3C77024FA54B4006ED277 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
@@ -134,7 +133,6 @@
 		02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncherApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02F3C75924FA53A9006ED277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		02F3C75C24FA53A9006ED277 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		02F3C76124FA53A9006ED277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02F3C76224FA53A9006ED277 /* MiasmaLauncherApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiasmaLauncherApplication.entitlements; sourceTree = "<group>"; };
 		02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
@@ -203,17 +201,8 @@
 				02F3C75924FA53A9006ED277 /* Assets.xcassets */,
 				02F3C76124FA53A9006ED277 /* Info.plist */,
 				02F3C76224FA53A9006ED277 /* MiasmaLauncherApplication.entitlements */,
-				02F3C75B24FA53A9006ED277 /* Preview Content */,
 			);
 			path = MiasmaLauncherApplication;
-			sourceTree = "<group>";
-		};
-		02F3C75B24FA53A9006ED277 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				02F3C75C24FA53A9006ED277 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		02F3C76724FA5487006ED277 /* Frameworks */ = {
@@ -326,7 +315,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02F3C75D24FA53A9006ED277 /* Preview Assets.xcassets in Resources */,
 				02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -588,7 +576,7 @@
 				CODE_SIGN_ENTITLEMENTS = MiasmaLauncherApplication/MiasmaLauncherApplication.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"MiasmaLauncherApplication/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -612,7 +600,7 @@
 				CODE_SIGN_ENTITLEMENTS = MiasmaLauncherApplication/MiasmaLauncherApplication.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_ASSET_PATHS = "\"MiasmaLauncherApplication/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;

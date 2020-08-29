@@ -22,27 +22,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
         let mainAppIdentifier = "Darragh-Rogan.Miasma"
-                let runningApps = NSWorkspace.shared.runningApplications
-                let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
+        let runningApps = NSWorkspace.shared.runningApplications
+        let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
 
-                if !isRunning {
-                    DistributedNotificationCenter.default().addObserver(self, selector: #selector(self.terminate), name: .killLauncher, object: mainAppIdentifier)
+        if !isRunning {
+            DistributedNotificationCenter.default().addObserver(self, selector: #selector(self.terminate), name: .killLauncher, object: mainAppIdentifier)
 
-                    let path = Bundle.main.bundlePath as NSString
-                    var components = path.pathComponents
-                    components.removeLast()
-                    components.removeLast()
-                    components.removeLast()
-                    components.append("MacOS")
-                    components.append("Miasma") //main app name
+            let path = Bundle.main.bundlePath as NSString
+            var components = path.pathComponents
+            components.removeLast()
+            components.removeLast()
+            components.removeLast()
+            components.append("MacOS")
+            components.append("Miasma") //main app name
 
-                    let newPath = NSString.path(withComponents: components)
+            let newPath = NSString.path(withComponents: components)
 
-                    NSWorkspace.shared.launchApplication(newPath)
-                }
-                else {
-                    self.terminate()
-                }
+            NSWorkspace.shared.launchApplication(newPath)
+        }
+        else {
+            self.terminate()
+        }
             
 
     }
