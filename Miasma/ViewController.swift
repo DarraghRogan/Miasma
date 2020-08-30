@@ -21,7 +21,8 @@ class ViewController: NSViewController {
             DataLoaderPurpleAir().loadPurpleAirData(id: PurpleAirIDField.stringValue)
             PurpleAirCheckedLabel.stringValue = "Loading (5s)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-                if purpleAirData.results!.isEmpty {
+                
+                if purpleAirData.results?.isEmpty ?? true {
                     self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
                 } else {
                     self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
@@ -61,8 +62,8 @@ class ViewController: NSViewController {
     }
     
     @IBAction func PurpleAirRadioAction(_ sender: Any) {
-        AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
-        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+            AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
+            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
     }
     
     @IBOutlet weak var PurpleAirIDSaveButton: NSButton!

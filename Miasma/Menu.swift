@@ -285,7 +285,7 @@ class menuFunctions: NSObject {
             
          DataLoaderAPICovid19().loadAPICovid19Data(id: (AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String()))
          
-             DispatchQueue.main.asyncAfter(deadline: .now() + 2.1, execute: {
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
 
              self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
              

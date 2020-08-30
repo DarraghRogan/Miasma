@@ -39,12 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if isRunning {
             DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)
         }
-        else
-        {
-        }
         
-        print(isRunning)
-        print(SMLoginItemSetEnabled(launcherAppId as CFString, true))
 
         // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
         statusBarItemController = menuFunctions()
