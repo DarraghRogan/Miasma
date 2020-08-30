@@ -17,6 +17,7 @@
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncherApplication.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
+		02BE00B624FBC40E0064F5B8 /* Graphics in Resources */ = {isa = PBXBuildFile; fileRef = 02BE00B524FBC40E0064F5B8 /* Graphics */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75924FA53A9006ED277 /* Assets.xcassets */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncherApplication.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */; };
@@ -130,6 +131,7 @@
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		02BE00B524FBC40E0064F5B8 /* Graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphics; sourceTree = "<group>"; };
 		02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncherApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02F3C75924FA53A9006ED277 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -179,17 +181,18 @@
 		0283DD8724F051B700E4CC07 /* Miasma */ = {
 			isa = PBXGroup;
 			children = (
+				02BE00B524FBC40E0064F5B8 /* Graphics */,
+				0283DD9224F051BF00E4CC07 /* Miasma.entitlements */,
+				0283DD9124F051BF00E4CC07 /* Info.plist */,
 				0283DD9A24F0528C00E4CC07 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
-				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
 				0218870A24F4486900F95C20 /* DataLoaderAPICovid-19.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
-				0283DD9124F051BF00E4CC07 /* Info.plist */,
-				0283DD8E24F051BF00E4CC07 /* Main.storyboard */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
-				0283DD9224F051BF00E4CC07 /* Miasma.entitlements */,
 				0283DD8A24F051B700E4CC07 /* ViewController.swift */,
+				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
+				0283DD8E24F051BF00E4CC07 /* Main.storyboard */,
 			);
 			path = Miasma;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02F3C76824FA5487006ED277 /* MiasmaLauncherApplication.app in Resources */,
+				02BE00B624FBC40E0064F5B8 /* Graphics in Resources */,
 				0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */,
 				0283DD9024F051BF00E4CC07 /* Main.storyboard in Resources */,
 			);
@@ -534,6 +538,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Miasma/Miasma.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -557,6 +562,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Miasma/Miasma.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -580,6 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MiasmaLauncherApplication/MiasmaLauncherApplication.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
@@ -603,6 +610,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = MiasmaLauncherApplication/MiasmaLauncherApplication.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
