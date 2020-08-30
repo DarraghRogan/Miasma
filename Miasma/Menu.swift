@@ -81,11 +81,11 @@ class menuFunctions: NSObject {
 
 // Define how to open windows & web addresses from menu
    @objc func openPurpleAir(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "http://www.purpleair.com/map")!)
+        NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mPM25/a10/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
     }
     
     @objc func openAPICovid19(_ sender: NSMenuItem){
-         NSWorkspace.shared.open(URL(string: "https://api-sports.io/documentation/covid-19")!)
+         NSWorkspace.shared.open(URL(string: "https://rapidapi.com/api-sports/api/covid-193/details")!)
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -172,7 +172,7 @@ class menuFunctions: NSObject {
             
             
             let purpleAir = NSMenuItem(
-                title: "PurpleAir...",
+                title: "Air Quality...",
                 action: #selector(menuFunctions.openPurpleAir(_:)),
                 keyEquivalent: "p"
             )

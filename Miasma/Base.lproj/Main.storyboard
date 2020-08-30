@@ -710,9 +710,9 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-47-2VM">
-                                <rect key="frame" x="240" y="679" width="78" height="18"/>
+                                <rect key="frame" x="240" y="679" width="113" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="PurpleAir" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="bJw-cj-Cpj">
+                                <buttonCell key="cell" type="radio" title="From PurpleAir" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="bJw-cj-Cpj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -901,11 +901,12 @@ It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the 
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-Fz-uYk">
-                                <rect key="frame" x="240" y="182" width="433" height="32"/>
+                                <rect key="frame" x="240" y="162" width="436" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" id="eX7-Bn-7OB">
+                                <textFieldCell key="cell" selectable="YES" id="eX7-Bn-7OB">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">This Covid-19 data source uses Rapid API's data, which originates from Google (who in turn source their data from Wikpedia etc.)</string>
+                                    <string key="title">This Covid-19 data source uses Rapid API's data, which originates from Google (who in turn source their data from Wikpedia etc.) - see: 
+https://rapidapi.com/api-sports/api/covid-193/details</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
