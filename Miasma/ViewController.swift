@@ -62,9 +62,15 @@ class ViewController: NSViewController {
     }
     
     @IBAction func PurpleAirRadioAction(_ sender: Any) {
+        if PurpleAirSavedIDLabel.stringValue == ""{
+            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        }
+        else{
             AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
             AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        }
     }
+        
     
     @IBOutlet weak var PurpleAirIDSaveButton: NSButton!
     
