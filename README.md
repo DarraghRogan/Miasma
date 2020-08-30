@@ -1,10 +1,10 @@
-<center><img src="Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
+<center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
 Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality from PurpleAir, and country level Covid-19 statistics.
 You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online.
 
 ### Download
-<a href="https://apps.apple.com/us/app/id1529785874"><img src="Graphics/badge-download-on-the-mac-app-store.svg" class="img-responsive" alt=""></a>
+<a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
 
 The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on Git Hub for interested parties to review.
 It does not have any tracking cookies, advertising codes, pop ups, notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
