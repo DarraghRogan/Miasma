@@ -172,7 +172,7 @@ class menuFunctions: NSObject {
             
             
             let purpleAir = NSMenuItem(
-                title: "Air Quality...",
+                title: "PurpleAir...",
                 action: #selector(menuFunctions.openPurpleAir(_:)),
                 keyEquivalent: "p"
             )
@@ -266,56 +266,57 @@ class menuFunctions: NSObject {
          }
          
         
-        if AppDelegate().defaults.integer(forKey:"APICovid19InUse") == 1 {
+        if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             
             let aPICovid19 = NSMenuItem(
-                title: "API-Covid-19...",
+                title: "WAQI...",
                 action: #selector(menuFunctions.openAPICovid19(_:)),
                 keyEquivalent: "c"
             )
             aPICovid19.target = self
             menu.addItem(aPICovid19)
                 
-            menu.addItem(aPICovid19Location)
-            menu.addItem(aPICovid19Cases)
-            menu.addItem(aPICovid19Deaths)
-            menu.addItem(aPICovid19Tests)
-            menu.addItem(aPICovid19Time)
+//            menu.addItem(aPICovid19Location)
+//            menu.addItem(aPICovid19Cases)
+//            menu.addItem(aPICovid19Deaths)
+//            menu.addItem(aPICovid19Tests)
+//            menu.addItem(aPICovid19Time)
             
-            
-         DataLoaderAPICovid19().loadAPICovid19Data(id: (AppDelegate().defaults.object(forKey:"APICovid19Country") as? String ?? String()))
+
+         DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
          
-             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-
-             self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
-             
-             if aPICovid19Data.response?[0].country != nil {
-                let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases?.new ?? "0")!
-                let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases?.the1MPop ?? "0")!
-                 self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
-             }
-
-                if aPICovid19Data.response?[0].deaths?.the1MPop != nil {
-                    let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths?.new ?? "0")!
-                    let aPICovid19DataResponseDeathsThe1MPop : Float = Float(aPICovid19Data.response?[0].deaths?.the1MPop ?? "0")!
-             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%.1F", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
-             }
-
-                if aPICovid19Data.response?[0].tests?.the1MPop != nil {
-                    let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests?.the1MPop ?? "0")!
-             self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
-             }
-             
-             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].day ?? "0"))"
-             
-             })
-            
-        }
-        else
-        {
-            
-        }
+//             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+//
+//             self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
+//
+//             if aPICovid19Data.response?[0].country != nil {
+//                let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases?.new ?? "0")!
+//                let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases?.the1MPop ?? "0")!
+//                 self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
+//             }
+//
+//                if aPICovid19Data.response?[0].deaths?.the1MPop != nil {
+//                    let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths?.new ?? "0")!
+//                    let aPICovid19DataResponseDeathsThe1MPop : Float = Float(aPICovid19Data.response?[0].deaths?.the1MPop ?? "0")!
+//             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%.1F", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
+//             }
+//
+//                if aPICovid19Data.response?[0].tests?.the1MPop != nil {
+//                    let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests?.the1MPop ?? "0")!
+//             self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
+//             }
+//
+//             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].day ?? "0"))"
+//
+//             })
+//
+//        }
+//        else
+//        {
+//
+//        }
         
     }
         
+}
 }

@@ -9,4 +9,4 @@
 import Foundation
 
 let APIKeyPurpleAir = "TBJSG33CGLSMFTRQ"
-let APIKeyAPICovid19 = "08ea6a9efamsh764bea158b9a173p1190e3jsnde9343b579ae"
+let APIKeyWAQI = "feafe596361757cbc5cd0566d4680c3a675dd3d2"
