@@ -84,8 +84,8 @@ class menuFunctions: NSObject {
         NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mPM25/a10/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
     }
     
-    @objc func openAPICovid19(_ sender: NSMenuItem){
-         NSWorkspace.shared.open(URL(string: "https://rapidapi.com/api-sports/api/covid-193/details")!)
+    @objc func openWAQI(_ sender: NSMenuItem){
+         NSWorkspace.shared.open(URL(string: "https://aqicn.org/here/")!)
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -270,7 +270,7 @@ class menuFunctions: NSObject {
             
             let aPICovid19 = NSMenuItem(
                 title: "WAQI...",
-                action: #selector(menuFunctions.openAPICovid19(_:)),
+                action: #selector(menuFunctions.openWAQI(_:)),
                 keyEquivalent: "c"
             )
             aPICovid19.target = self

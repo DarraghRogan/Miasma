@@ -183,14 +183,14 @@
 		0283DD8724F051B700E4CC07 /* Miasma */ = {
 			isa = PBXGroup;
 			children = (
+				02ADB06C24FDA15700126F0C /* .gitignore */,
 				02BE00B524FBC40E0064F5B8 /* Graphics */,
 				0283DD9224F051BF00E4CC07 /* Miasma.entitlements */,
 				0283DD9124F051BF00E4CC07 /* Info.plist */,
 				0283DD9A24F0528C00E4CC07 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
-				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
-				02ADB06C24FDA15700126F0C /* .gitignore */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
+				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
 				0283DD8A24F051B700E4CC07 /* ViewController.swift */,

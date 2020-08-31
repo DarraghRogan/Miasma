@@ -22,18 +22,18 @@ struct WAQIDataClass: Codable {
     var dominentpol: String
     var iaqi: WAQIIaqi
     var time: WAQITime
-    var forecast: WAQIForecast
-    var debug: WAQIDebug
+////    var forecast: WAQIForecast
+//    var debug: WAQIDebug
 }
 
 struct WAQIAttribution: Codable {
     var url: String
     var name: String
-    var logo: String?
+//    var logo: String?
 }
 
 struct WAQICity: Codable {
-    var geo: [Double]
+//    var geo: [Double]
     var name: String
     var url: String
 }
@@ -42,13 +42,13 @@ struct WAQIDebug: Codable {
     var sync: Date
 }
 
-struct WAQIForecast: Codable {
-    var daily: WAQIDaily
-}
-
-struct WAQIDaily: Codable {
-    var o3, pm10, pm25, uvi: [WAQIO3]
-}
+//struct WAQIForecast: Codable {
+//    var daily: WAQIDaily
+//}
+//
+//struct WAQIDaily: Codable {
+//    var o3, pm10, pm25, uvi: [WAQIO3]
+//}
 
 struct WAQIO3: Codable {
     var avg: Int
@@ -57,9 +57,12 @@ struct WAQIO3: Codable {
 }
 
 struct WAQIIaqi: Codable {
-    var co, h, no2, o3: WAQICo
-    var p, pm10, pm25, so2: WAQICo
-    var t, w: WAQICo
+    var co: WAQICo?
+    var h: WAQICo?
+    var no2: WAQICo?
+    var o3: WAQICo?
+    var p, pm10, pm25, so2: WAQICo?
+    var t, w, wg: WAQICo?
 }
 
 struct WAQICo: Codable {
@@ -69,7 +72,7 @@ struct WAQICo: Codable {
 struct WAQITime: Codable {
     var s, tz: String
     var v: Int
-    var iso: Date
+//    var iso: Date
 }
 
 
@@ -115,9 +118,14 @@ var wAQIData = WAQIDataStructure()
                 do {
                     let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
                     wAQIData = dataFromWAQI
-                    print(wAQIData)
+//                    print(wAQIData)
                     print(wAQIData.status)
                     print(wAQIData.data?.aqi)
+                    print(wAQIData.data?.attributions[0].name)
+                    print(wAQIData.data?.attributions[1].name)
+                    print(wAQIData.data?.dominentpol)
+                    print(wAQIData.data?.iaqi.pm25)
+                    print(wAQIData.data?.time)
 
                 }
                 catch {
