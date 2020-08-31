@@ -1,0 +1,15 @@
+Hi there, Many thanks for your review commentary. To address: 
+
+1. Covid-19 reference. Your point makes sense, to direct people to authoratitive sources. I have removed metadata references to same. I trust this is okay, and it is still okay to include the Covid-19 stats in the app.
+
+2. Copycats.
+I think your concern here is that I am using a third party's trademark (PurpleAir) in my metadata too prominent, and for that I acknowledge & apologies. I have reformatted the metadata to make it less prominent, and also revised the wording in the app to make it more generic (however I am still making it clear to the user where their data comes from).
+Also, please note PurpleAir are content for developers to use their data based on their FAQ: https://www2.purpleair.com/community/faq#!hc-access-the-json
+
+In terms of copycats, I have searched the app store, and of the two apps I could find that were similar to my proposed app, neither of them offer the functionality I am seeking (which is basically: at a glance info, extended info after a click, good accuracy.
+Inhale ( https://apps.apple.com/ie/app/inhale-air-quality-monitor/id1492833468 ) gives good data, but doesn't have a menubar entry (I suspect it is a carbon adaption of an iOS app?
+& Pollution Monitor ( https://apps.apple.com/ie/app/pollution-monitor/id1197195842?mt=12 ): while it does have a menu bar entry, which changes colour to offer at a glance data, it doesn't give the user extended data after a single click, and in any cases sources it's data from AQICN.org which has a wider array of sensors (which are not to the same consistent accuracy standard of PurpleAir sensors)
+
+Best regards, and I shall resubmit.
+
+Darragh

@@ -29,6 +29,7 @@ struct WAQIDataClass: Codable {
 struct WAQIAttribution: Codable {
     var url: String
     var name: String
+    var logo: String?
 }
 
 struct WAQICity: Codable {

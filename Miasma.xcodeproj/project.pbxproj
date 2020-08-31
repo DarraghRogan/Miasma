@@ -17,6 +17,7 @@
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncherApplication.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
+		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02BE00B624FBC40E0064F5B8 /* Graphics in Resources */ = {isa = PBXBuildFile; fileRef = 02BE00B524FBC40E0064F5B8 /* Graphics */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75924FA53A9006ED277 /* Assets.xcassets */; };
@@ -131,6 +132,7 @@
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02BE00B524FBC40E0064F5B8 /* Graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphics; sourceTree = "<group>"; };
 		02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncherApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				0283DD9A24F0528C00E4CC07 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
+				02ADB06C24FDA15700126F0C /* .gitignore */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
@@ -308,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02ADB06D24FDA15700126F0C /* .gitignore in Resources */,
 				02F3C76824FA5487006ED277 /* MiasmaLauncherApplication.app in Resources */,
 				02BE00B624FBC40E0064F5B8 /* Graphics in Resources */,
 				0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */,
