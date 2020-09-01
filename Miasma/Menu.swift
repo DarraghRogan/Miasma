@@ -31,7 +31,7 @@ class menuFunctions: NSObject {
     }()
 
     var purpleAirPM2_5 : NSMenuItem = {
-        return NSMenuItem(title: "🌫: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
      }()
 
     var purpleAirTemperature : NSMenuItem = {
@@ -53,27 +53,30 @@ class menuFunctions: NSObject {
     var purpleAirPM2_5StatusBarIcon : NSMenuItem = {
         return NSMenuItem(title: "", action: nil, keyEquivalent: "")
      }()
-    
 
     
     
-    var aPICovid19Location : NSMenuItem = {
+    var wAQICity : NSMenuItem = {
        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
     }()
     
-    var aPICovid19Cases : NSMenuItem = {
-       return NSMenuItem(title: "🗣: ", action: nil, keyEquivalent: "")
+    var wAQIAttribution : NSMenuItem = {
+       return NSMenuItem(title: "📜: ", action: nil, keyEquivalent: "")
     }()
     
-    var aPICovid19Deaths : NSMenuItem = {
-       return NSMenuItem(title: "💀: ", action: nil, keyEquivalent: "")
+    var wAQIAQI : NSMenuItem = {
+       return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
     }()
     
-    var aPICovid19Tests : NSMenuItem = {
-       return NSMenuItem(title: "📝: ", action: nil, keyEquivalent: "")
+    var wAQIDominentPol : NSMenuItem = {
+       return NSMenuItem(title: "🎯: ", action: nil, keyEquivalent: "")
     }()
     
-    var aPICovid19Time : NSMenuItem = {
+    var wAQITemperature : NSMenuItem = {
+       return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var wAQITime : NSMenuItem = {
        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
     }()
     
@@ -85,7 +88,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openWAQI(_ sender: NSMenuItem){
-         NSWorkspace.shared.open(URL(string: "https://aqicn.org/here/")!)
+        NSWorkspace.shared.open(URL(string: "\(wAQIData.data?.city.url ?? "https://aqicn.org/here/")")!)
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -166,8 +169,6 @@ class menuFunctions: NSObject {
 
     func menuLoadOptionals() {
             
-
-            
          if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
             
             
@@ -233,14 +234,14 @@ class menuFunctions: NSObject {
                                 }
                             self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
                             
-                            let Fahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
+                            let PurpleAirFahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
                             func calculateCelsius(fahrenheit: Double) -> String {
                                 var celsius: Double
                                 celsius = (fahrenheit - 32) * 5 / 9
                                 let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                                 return celciusRoundedString
                             }
-                            self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Fahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+                            self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: PurpleAirFahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
                             
                             self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
                             
@@ -268,55 +269,76 @@ class menuFunctions: NSObject {
         
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             
-            let aPICovid19 = NSMenuItem(
-                title: "WAQI...",
-                action: #selector(menuFunctions.openWAQI(_:)),
-                keyEquivalent: "c"
-            )
-            aPICovid19.target = self
-            menu.addItem(aPICovid19)
-                
-//            menu.addItem(aPICovid19Location)
-//            menu.addItem(aPICovid19Cases)
-//            menu.addItem(aPICovid19Deaths)
-//            menu.addItem(aPICovid19Tests)
-//            menu.addItem(aPICovid19Time)
-            
+        let WAQILink = NSMenuItem(
+            title: "WAQI...",
+            action: #selector(menuFunctions.openWAQI(_:)),
+            keyEquivalent: "w"
+        )
+        WAQILink.target = self
+        menu.addItem(WAQILink)
+        
+        menu.addItem(wAQICity)
+        menu.addItem(wAQIAttribution)
+        menu.addItem(wAQIAQI)
+        menu.addItem(wAQIDominentPol)
+        menu.addItem(wAQITemperature)
+        menu.addItem(wAQITime)
 
          DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
-         
-//             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-//
-//             self.aPICovid19Location.title = "🌍: \(String(aPICovid19Data.response?[0].country ?? "0"))"
-//
-//             if aPICovid19Data.response?[0].country != nil {
-//                let aPICovid19DataResponseCasesNew: Int = Int(aPICovid19Data.response?[0].cases?.new ?? "0")!
-//                let aPICovid19DataResponseCasesThe1MPop : Int = Int(aPICovid19Data.response?[0].cases?.the1MPop ?? "0")!
-//                 self.aPICovid19Cases.title = "🗣: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesNew)) daily new cases / \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseCasesThe1MPop)) total per 1 million polulation"
-//             }
-//
-//                if aPICovid19Data.response?[0].deaths?.the1MPop != nil {
-//                    let aPICovid19DataResponseDeathsNew: Int = Int(aPICovid19Data.response?[0].deaths?.new ?? "0")!
-//                    let aPICovid19DataResponseDeathsThe1MPop : Float = Float(aPICovid19Data.response?[0].deaths?.the1MPop ?? "0")!
-//             self.aPICovid19Deaths.title = "💀: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseDeathsNew)) daily new deaths / \(String(format: "%.1F", locale: Locale.current, aPICovid19DataResponseDeathsThe1MPop)) total per 1 million polulation"
-//             }
-//
-//                if aPICovid19Data.response?[0].tests?.the1MPop != nil {
-//                    let aPICovid19DataResponseTestsThe1MPop: Int = Int(aPICovid19Data.response?[0].tests?.the1MPop ?? "0")!
-//             self.aPICovid19Tests.title = "📝: \(String(format: "%U", locale: Locale.current, aPICovid19DataResponseTestsThe1MPop)) tests per 1 million population"
-//             }
-//
-//             self.aPICovid19Time.title = "📅: Data from \(String(aPICovid19Data.response?[0].day ?? "0"))"
-//
-//             })
-//
-//        }
-//        else
-//        {
-//
-//        }
-        
+            
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+
+                if wAQIData.status == "ok" {
+
+                    self.wAQICity.title = "🌍: \(String(wAQIData.data?.city.name ?? "0"))"
+                    self.wAQIAttribution.title = "📜: \(String(wAQIData.data?.attributions[0].name ?? "0"))"
+                    
+                    var wAQIAQI = wAQIData.data?.aqi ?? 0
+                    let wAQIAQIColourButton: String
+                        switch (wAQIAQI) {
+                            case _ where wAQIAQI > 0 && wAQIAQI < 50:
+                                wAQIAQIColourButton = "[🟢_______]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🟢"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            case _ where wAQIAQI > 51 && wAQIAQI < 100:
+                                wAQIAQIColourButton = "[_🟡____]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🟡"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            case _ where wAQIAQI > 101 && wAQIAQI < 200:
+                                wAQIAQIColourButton = "[__🟠___]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🟠"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            case _ where wAQIAQI > 201 && wAQIAQI < 300:
+                                wAQIAQIColourButton = "[___🔴__]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🔴"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            case _ where wAQIAQI > 301 && wAQIAQI < 400:
+                                wAQIAQIColourButton = "[____🟣_]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🟣"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            case _ where wAQIAQI > 400:
+                                wAQIAQIColourButton = "[_____🟤]"
+//                                self.purpleAirPM2_5StatusBarIcon.title = "🟤"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                            default:
+                                wAQIAQIColourButton = ""
+//                                self.purpleAirPM2_5StatusBarIcon.title = "⚪"
+//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                        }
+                    self.wAQIAQI.title = "☁️: \(String(wAQIData.data?.aqi ?? 0)) AQI (US EPA, Current)     \(wAQIAQIColourButton)"
+                    
+                    self.wAQIDominentPol.title = "🎯: Dominant Pollutant: \(String(wAQIData.data?.dominentpol ?? "0"))"
+                    
+                    
+                    self.wAQITemperature.title = "🌡: \(String(wAQIData.data?.iaqi.t?.v ?? 0))℃"
+                    
+                    self.wAQITime.title = "📅: Reading Taken: \(String(wAQIData.data?.time.s ?? "0"))"
+                    
+                }
+           })
+
+        }
+
     }
         
-}
 }

@@ -86,11 +86,6 @@ var wAQIData = WAQIDataStructure()
     
     func loadWAQIData(id:String) {
 
-        
-//        let headers = [
-//            "x-rapidapi-key":"\(APIKeyAPIWAQI)"
-//        ]
-
         let request = NSMutableURLRequest(url: NSURL(string:
             "https://api.waqi.info/feed/\(id)/?token=\(APIKeyWAQI)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
@@ -98,7 +93,6 @@ var wAQIData = WAQIDataStructure()
         
         
         request.httpMethod = "GET"
-//        request.allHTTPHeaderFields = headers
 
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
@@ -106,26 +100,18 @@ var wAQIData = WAQIDataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print("Received from the WAQI API")
-                if let data = data,
-                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                    print(urlContent)
-                } else {
-                    print("error with printing string encoded data")
-                }
+//                print("Received from the WAQI API")
+//                if let data = data,
+//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
                     let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
                     wAQIData = dataFromWAQI
-//                    print(wAQIData)
-                    print(wAQIData.status)
-                    print(wAQIData.data?.aqi)
-                    print(wAQIData.data?.attributions[0].name)
-                    print(wAQIData.data?.attributions[1].name)
-                    print(wAQIData.data?.dominentpol)
-                    print(wAQIData.data?.iaqi.pm25)
-                    print(wAQIData.data?.time)
 
                 }
                 catch {
