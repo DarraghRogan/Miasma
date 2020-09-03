@@ -18,11 +18,12 @@ extension String {
     
     enum ValidityType {
         case purpleAirID
+        case wAQICity
     }
     
     enum Regex: String {
         case purpleAirID = "[0-9]{4,5}"
-
+        case wAQICity = "[a-z]"
     }
     
     func isValid(_ validityType: ValidityType) -> Bool {
@@ -32,6 +33,8 @@ extension String {
         switch validityType {
         case .purpleAirID:
             regex = Regex.purpleAirID.rawValue
+        case .wAQICity:
+            regex = Regex.wAQICity.rawValue
         }
         
         return NSPredicate(format: format, regex).evaluate(with: self)

@@ -54,7 +54,9 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "", action: nil, keyEquivalent: "")
      }()
 
-    
+    var wAQIAQIColourButton : NSMenuItem = {
+        return NSMenuItem(title: "", action: nil, keyEquivalent: "")
+     }()
     
     var wAQICity : NSMenuItem = {
        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
@@ -198,39 +200,39 @@ class menuFunctions: NSObject {
                                     case _ where pM2_5Value > 0 && pM2_5Value < 12:
                                         pM2_5ColourButton = "[🟢_______]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟢"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 12 && pM2_5Value < 35:
                                         pM2_5ColourButton = "[_🟡______]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟡"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 35 && pM2_5Value < 55:
                                         pM2_5ColourButton = "[__🟠_____]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟠"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 55 && pM2_5Value < 150:
                                         pM2_5ColourButton = "[___🔴____]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🔴"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 150 && pM2_5Value < 250:
                                         pM2_5ColourButton = "[____🟣___]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 250 && pM2_5Value < 350:
                                         pM2_5ColourButton = "[_____🟣__]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 350 && pM2_5Value < 500:
                                         pM2_5ColourButton = "[______🟤_]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     case _ where pM2_5Value > 500:
                                         pM2_5ColourButton = "[_______🟤]"
                                         self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                     default:
                                         pM2_5ColourButton = ""
                                         self.purpleAirPM2_5StatusBarIcon.title = "⚪"
-                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+//                                        statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                                 }
                             self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
                             
@@ -298,32 +300,32 @@ class menuFunctions: NSObject {
                         switch (wAQIAQI) {
                             case _ where wAQIAQI > 0 && wAQIAQI < 50:
                                 wAQIAQIColourButton = "[🟢_______]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🟢"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🟢"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 51 && wAQIAQI < 100:
                                 wAQIAQIColourButton = "[_🟡____]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🟡"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🟡"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 101 && wAQIAQI < 200:
                                 wAQIAQIColourButton = "[__🟠___]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🟠"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🟠"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 201 && wAQIAQI < 300:
                                 wAQIAQIColourButton = "[___🔴__]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🔴"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🔴"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 301 && wAQIAQI < 400:
                                 wAQIAQIColourButton = "[____🟣_]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🟣"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 400:
                                 wAQIAQIColourButton = "[_____🟤]"
-//                                self.purpleAirPM2_5StatusBarIcon.title = "🟤"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "🟤"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             default:
                                 wAQIAQIColourButton = ""
-//                                self.purpleAirPM2_5StatusBarIcon.title = "⚪"
-//                                statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                                self.wAQIAQIColourButton.title = "⚪"
+                                statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         }
                     self.wAQIAQI.title = "☁️: \(String(wAQIData.data?.aqi ?? 0)) AQI (US EPA, Current)     \(wAQIAQIColourButton)"
                     
