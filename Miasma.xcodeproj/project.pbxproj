@@ -166,6 +166,7 @@
 		0283DD7C24F051B700E4CC07 = {
 			isa = PBXGroup;
 			children = (
+				02ADB06C24FDA15700126F0C /* .gitignore */,
 				0283DD8724F051B700E4CC07 /* Miasma */,
 				02F3C75424FA53A5006ED277 /* MiasmaLauncherApplication */,
 				0283DD8624F051B700E4CC07 /* Products */,
@@ -185,7 +186,6 @@
 		0283DD8724F051B700E4CC07 /* Miasma */ = {
 			isa = PBXGroup;
 			children = (
-				02ADB06C24FDA15700126F0C /* .gitignore */,
 				02ECB5BB25017D8A00F26500 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,

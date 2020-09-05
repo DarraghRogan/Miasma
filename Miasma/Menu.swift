@@ -331,7 +331,7 @@ class menuFunctions: NSObject {
                     let wAQIAQIColourButton: String
                         switch (wAQIAQI) {
                             case _ where wAQIAQI > 0 && wAQIAQI < 50:
-                                wAQIAQIColourButton = "[🟢_______]"
+                                wAQIAQIColourButton = "[🟢_____]"
                                 self.wAQIAQIColourButton.title = "🟢"
                                 statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                             case _ where wAQIAQI > 51 && wAQIAQI < 100:
