@@ -184,7 +184,7 @@ class ViewController: NSViewController {
         }
         
         WAQIComboBoxOutlet.removeAllItems()
-        WAQIComboBoxOutlet.addItems(withObjectValues: [AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String(),"Dublin","London","Krakow"])
+        WAQIComboBoxOutlet.addItems(withObjectValues: [AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String(),"here","--------","Dublin","London","Krakow"])
         WAQIComboBoxOutlet.selectItem(at: 0)
         
     }

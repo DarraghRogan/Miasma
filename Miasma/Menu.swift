@@ -83,6 +83,18 @@ class menuFunctions: NSObject {
     }()
     
     
+    var cO2Country : NSMenuItem = {
+       return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var cO2carbonIntensity : NSMenuItem = {
+       return NSMenuItem(title: "🔥: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var cO2fossilFuelPercentage : NSMenuItem = {
+       return NSMenuItem(title: "🦖: ", action: nil, keyEquivalent: "")
+    }()
+    
 
 // Define how to open windows & web addresses from menu
    @objc func openPurpleAir(_ sender: NSMenuItem){
@@ -91,6 +103,10 @@ class menuFunctions: NSObject {
     
     @objc func openWAQI(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "\(wAQIData.data?.city.url ?? "https://aqicn.org/here/")")!)
+     }
+    
+    @objc func openCO2(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://github.com/tmrowco/electricitymap-contrib#data-sources")!)
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -272,7 +288,7 @@ class menuFunctions: NSObject {
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             
         let WAQILink = NSMenuItem(
-            title: "WAQI...",
+            title: "World Air Quality Index...",
             action: #selector(menuFunctions.openWAQI(_:)),
             keyEquivalent: "w"
         )
@@ -285,6 +301,19 @@ class menuFunctions: NSObject {
         menu.addItem(wAQIDominentPol)
         menu.addItem(wAQITemperature)
         menu.addItem(wAQITime)
+
+        menu.addItem(NSMenuItem.separator())
+        let CO2Link = NSMenuItem(
+            title: "CO2 Signal (Electricity Consumption)...",
+            action: #selector(menuFunctions.openCO2(_:)),
+            keyEquivalent: "c"
+        )
+        CO2Link.target = self
+        menu.addItem(CO2Link)
+            
+        menu.addItem(cO2Country)
+        menu.addItem(cO2carbonIntensity)
+        menu.addItem(cO2fossilFuelPercentage)
 
          DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
                         
@@ -341,6 +370,14 @@ class menuFunctions: NSObject {
                     
                 }
            })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                self.cO2Country.title = "🌍: Carbon Intensity of Electricity Consumption in \(cO2Data.countryCode ?? "")"
+                self.cO2carbonIntensity.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0)) \(cO2Data.units?.carbonIntensity ?? "")"
+                self.cO2fossilFuelPercentage.title = "🦖: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.fossilFuelPercentage ?? 0))% fossil fueled"
+
+            })
+
 
         }
 
