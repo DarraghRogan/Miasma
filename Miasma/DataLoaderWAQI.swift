@@ -33,7 +33,7 @@ struct WAQIAttribution: Codable {
 }
 
 struct WAQICity: Codable {
-//    var geo: [Double]
+    var geo: [Double]
     var name: String
     var url: String
 }

@@ -128,7 +128,7 @@ class menuFunctions: NSObject {
             )
         
         let menuRefresh = NSMenuItem(
-            title: "Refresh (automatically every 10 minutes)",
+            title: "Refresh (automatically every hour)",
             action: #selector(menuFunctions.menuRefresh(_:)),
             keyEquivalent: "r"
         )
@@ -287,8 +287,11 @@ class menuFunctions: NSObject {
         menu.addItem(wAQITime)
 
          DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
-            
+                        
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                DataLoaderCO2().loadCO2Data()
+
 
                 if wAQIData.status == "ok" {
 

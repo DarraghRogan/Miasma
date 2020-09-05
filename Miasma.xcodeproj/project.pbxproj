@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */; };
+		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
 		0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0283DD8C24F051BF00E4CC07 /* Assets.xcassets */; };
@@ -120,6 +121,7 @@
 
 /* Begin PBXFileReference section */
 		0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
+		0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
 		0283DD8524F051B700E4CC07 /* Miasma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miasma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0283DD8824F051B700E4CC07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0283DD8A24F051B700E4CC07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				02ECB5BB25017D8A00F26500 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
+				0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
@@ -341,6 +344,7 @@
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
+				0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@ struct PurpleAirResult: Codable {
     var label: String
     var deviceLocationtype: String?
 //    var thingspeakPrimaryID, thingspeakPrimaryIDReadKey, thingspeakSecondaryID, thingspeakSecondaryIDReadKey: String
-//    var lat, lon: Double
+    var lat, lon: Double?
     var pm25Value: String?
 //    var lastSeen: Int
 //    var type: String?
