@@ -43,6 +43,9 @@ class ViewController: NSViewController {
     @IBAction func AirQualityDisabledRadioAction(_ sender: Any) {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+        
+        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
     }
         
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
@@ -69,6 +72,10 @@ class ViewController: NSViewController {
             AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
             AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
+        
+        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+        
     }
         
     
@@ -80,6 +87,7 @@ class ViewController: NSViewController {
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
+        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         if PurpleAirIDField.stringValue == ""{
             AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
         }
@@ -99,22 +107,17 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
     
-    
-    
-    @IBOutlet weak var WAQIDisabledRadioOutlet: NSButton!
-
-    
-    @IBAction func WAQIDisabledRadioAction(_ sender: Any) {
-        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
-    }
  
     @IBOutlet weak var WAQIRadioOutlet: NSButton!
     
     
     @IBAction func WAQIRadioAction(_ sender: Any) {
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-        WAQIDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        
+        PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+    
     }
     
     @IBOutlet weak var WAQIComboBoxOutlet: NSComboBox!
@@ -123,8 +126,11 @@ class ViewController: NSViewController {
     @IBAction func WAQIComboBoxAction(_ sender: Any) {
         AppDelegate().defaults.set(WAQIComboBoxOutlet.stringValue, forKey: "WAQICity")
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-        WAQIDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        
+        PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
     }
     
     
@@ -161,26 +167,16 @@ class ViewController: NSViewController {
         
         autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
-        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 0 {
-            PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-        }
-        else{
+        if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
 
 
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
         
         
-        if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 0 {
-            WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-            WAQIDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-        }
-        else{
+        if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-            WAQIDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
         
         WAQIComboBoxOutlet.removeAllItems()
