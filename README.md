@@ -1,6 +1,6 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
-Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality from PurpleAir, and country level Covid-19 statistics.
+Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality from PurpleAir.
 You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online.
 
 ### Download
@@ -10,11 +10,11 @@ The app is distributed on the Apple Store (with automatic updates for when featu
 It does not have any tracking cookies, advertising codes, pop ups, notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
 
 ### Source Code
-Source code is all shared here, as is, no warratnies, express or implied. APIKeys.swift is excluded, so if you are using the code, please create this file and list your own RapidAPI key in it (you will see how they are referred to in the DataLoader files, in the URL section).
+Source code is all shared here, as is, no warratnies, express or implied. APIKeys.swift is excluded, so if you are using the code, please create this file and list your own API key in it (you will see how they are referred to in the DataLoader files, in the URL section).
 Project should open in Xcode.
 
 ### Data Sources
-All PurpleAir metric requests are sent directly, using HTTPS, to PurpleAir from your Mac, and for Covid-19 a third party service via rapidapi.com is used (again, directly connected to from your Mac). Note that PurpleAir & RapidAPI can see the ID of PurpleAir sensor you're interested in, and your Mac's public IP address which can be unique to you depending on network configuration.
+All PurpleAir metric requests are sent directly, using HTTPS, to PurpleAir from your Mac, . Note that PurpleAir can see the ID of PurpleAir sensor you're interested in, and your Mac's public IP address which can be unique to you depending on network configuration.
 
 ### Support
 Please email me on miasma@kissengineering.ie - this is a side project for me so understand it may take me a couple of days to get back.
@@ -53,7 +53,6 @@ In Short:  We only share information with your consent, to comply with laws, to 
 • Vital Interests: We may disclose your information where we believe it is necessary to investigate, prevent, or take action regarding potential violations of our policies, suspected fraud, situations involving potential threats to the safety of any person and illegal activities, or as evidence in litigation in which we are involved.More specifically, we may need to process your data or share your personal information in the following situations:
 • Business Transfers. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
 • Business Partners. We may share your information with our business partners to offer you certain products, services or promotions. Specifically, see the data provider's privacy policy here too:
-https://rapidapi.com/privacy-policy
 https://www2.purpleair.com/policies/privacy-policy
 
 4 IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
