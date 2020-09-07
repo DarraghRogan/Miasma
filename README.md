@@ -20,7 +20,7 @@ All PurpleAir metric requests are sent directly, using HTTPS, to PurpleAir from 
 Please email me on miasma@kissengineering.ie - this is a side project for me so understand it may take me a couple of days to get back.
 
 ### About the name
-Miasma is an obselete medical theory that bad vapours in the air caused sickness. Nowadays, with climate change caused by smoke & Covid-19 being spread, maybe the theory isn't so obselete! See https://en.wikipedia.org/wiki/Miasma_theory
+Miasma is an obselete medical theory that bad vapours in the air caused sickness. Nowadays, with climate change caused by smoke being spread, maybe the theory isn't so obselete! See https://en.wikipedia.org/wiki/Miasma_theory
 
 ### Privacy Policy
 Last updated August 30th, 2020
