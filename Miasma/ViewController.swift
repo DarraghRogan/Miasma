@@ -133,6 +133,19 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
     }
     
+    @IBAction func CO2SignalButton(_ sender: Any) {
+        
+        if CO2SignalButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(false, forKey: "CO2SignalInUse")
+
+        }
+        if CO2SignalButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(true, forKey: "CO2SignalInUse")
+
+        }
+    }
+    
+    @IBOutlet weak var CO2SignalButtonOutlet: NSButton!
     
     
     @IBOutlet weak var autoRunAtStartup: NSButton!
@@ -143,15 +156,11 @@ class ViewController: NSViewController {
         let isAuto = (sender as AnyObject).state == .on
         SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
 
-        if autoRunAtStartup.state.rawValue == 0{
+        if autoRunAtStartup.state == NSControl.StateValue.off {
             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
-//            SMLoginItemSetEnabled(launcherAppId as CFString, false)
-//            print(AppDelegate().defaults.integer(forKey: "AutorunAtStartup"))
         }
-        else if autoRunAtStartup.state.rawValue == 1{
+        if autoRunAtStartup.state == NSControl.StateValue.on {
             AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
-//            SMLoginItemSetEnabled(launcherAppId as CFString, true)
-//            print(AppDelegate().defaults.integer(forKey: "AutorunAtStartup"))
         }
     }
     
@@ -163,9 +172,13 @@ class ViewController: NSViewController {
 
         // Do any additional setup after loading the view.
         
+//        print(CO2SignalButtonOutlet.isOn)
+        
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
         autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        
+        CO2SignalButtonOutlet.state = AppDelegate().defaults.object(forKey:"CO2SignalInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)

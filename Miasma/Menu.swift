@@ -206,6 +206,8 @@ class menuFunctions: NSObject {
             menu.addItem(purpleAirReadingAge)
             menu.addItem(NSMenuItem.separator())
             
+            if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+
            let CO2Link = NSMenuItem(
                title: "CO2 Signal (Electricity Consumption)...",
                action: #selector(menuFunctions.openCO2(_:)),
@@ -218,10 +220,14 @@ class menuFunctions: NSObject {
            menu.addItem(cO2carbonIntensity)
            menu.addItem(cO2fossilFuelPercentage)
             
+            }
+            
              DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+                if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                    DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+                }
 
                         self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
                         
@@ -294,13 +300,14 @@ class menuFunctions: NSObject {
                             self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
                             self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
                     })
-            
+                        if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
             DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                 self.cO2Country.title = "🌍: Carbon Intensity of Electricity Consumption in \(cO2Data.countryCode ?? "")"
                 self.cO2carbonIntensity.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0)) \(cO2Data.units?.carbonIntensity ?? "")"
                 self.cO2fossilFuelPercentage.title = "🦖: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.fossilFuelPercentage ?? 0))% fossil fueled"
 
             })
+            }
             
          }
 
