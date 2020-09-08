@@ -106,7 +106,7 @@ class menuFunctions: NSObject {
      }
     
     @objc func openCO2(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://github.com/tmrowco/electricitymap-contrib#data-sources")!)
+        NSWorkspace.shared.open(URL(string: "https://www.electricitymap.org/")!)
      }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -206,8 +206,23 @@ class menuFunctions: NSObject {
             menu.addItem(purpleAirReadingAge)
             menu.addItem(NSMenuItem.separator())
             
+           let CO2Link = NSMenuItem(
+               title: "CO2 Signal (Electricity Consumption)...",
+               action: #selector(menuFunctions.openCO2(_:)),
+               keyEquivalent: "c"
+           )
+           CO2Link.target = self
+           menu.addItem(CO2Link)
+               
+           menu.addItem(cO2Country)
+           menu.addItem(cO2carbonIntensity)
+           menu.addItem(cO2fossilFuelPercentage)
+            
              DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+
                         self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
                         
                             var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0
@@ -279,10 +294,16 @@ class menuFunctions: NSObject {
                             self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
                             self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
                     })
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                self.cO2Country.title = "🌍: Carbon Intensity of Electricity Consumption in \(cO2Data.countryCode ?? "")"
+                self.cO2carbonIntensity.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0)) \(cO2Data.units?.carbonIntensity ?? "")"
+                self.cO2fossilFuelPercentage.title = "🦖: \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.fossilFuelPercentage ?? 0))% fossil fueled"
+
+            })
+            
          }
-         else {
-             
-         }
+
          
         
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
@@ -319,7 +340,7 @@ class menuFunctions: NSObject {
                         
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                DataLoaderCO2().loadCO2Data()
+                DataLoaderCO2().loadCO2Data(lat: String(wAQIData.data?.city.geo[1] ?? 0), lon: String(wAQIData.data?.city.geo[0] ?? 0))
 
 
                 if wAQIData.status == "ok" {

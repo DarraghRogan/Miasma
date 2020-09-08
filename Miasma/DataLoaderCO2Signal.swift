@@ -38,7 +38,7 @@ var cO2Data = CO2DataStructure()
  public class DataLoaderCO2 {
 
     
-    func loadCO2Data() {
+    func loadCO2Data(lat:String, lon:String) {
         
         let headers = [
             "Accept": "application/json",
@@ -46,7 +46,7 @@ var cO2Data = CO2DataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.co2signal.com/v1/latest?lon=\(String(wAQIData.data?.city.geo[1] ?? 0))&lat=\(String(wAQIData.data?.city.geo[0] ?? 0))")! as URL,
+            "https://api.co2signal.com/v1/latest?lon=\(lon)&lat=\(lat)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         
