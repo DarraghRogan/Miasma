@@ -120,7 +120,8 @@ class menuFunctions: NSObject {
      }
     
     @objc func menuReview(_ sender: NSMenuItem){
-         NSWorkspace.shared.open(URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
+//         NSWorkspace.shared.open(URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
+        
      }
     
     @objc func showPreferences(_ sender: Any) {
@@ -227,6 +228,8 @@ class menuFunctions: NSObject {
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+                    
+                    DataLoaderOpenSky().loadOpenSkyData()
                 }
 
                         self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
