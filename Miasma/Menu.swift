@@ -256,7 +256,7 @@ class menuFunctions: NSObject {
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((purpleAirData.results?[0].lat ?? 0)-2), lomin: ((purpleAirData.results?[0].lon ?? 0)-2), lamax: ((purpleAirData.results?[0].lat ?? 0)+2), lomax: ((purpleAirData.results?[0].lon ?? 0)+2))
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((purpleAirData.results?[0].lat ?? 0)-1), lomin: ((purpleAirData.results?[0].lon ?? 0)-1), lamax: ((purpleAirData.results?[0].lat ?? 0)+1), lomax: ((purpleAirData.results?[0].lon ?? 0)+1))
                 }
                 
                 self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
@@ -342,7 +342,7 @@ class menuFunctions: NSObject {
             
             if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                    self.openSkyAircraftInBox.title = "✈️: \(String(format: "%U", locale: Locale.current, openSkyData.states?.count ?? 0)) aircraft in ±2° latitude/longitude box over Air Quality sensor"
+                    self.openSkyAircraftInBox.title = "✈️: \(String(format: "%U", locale: Locale.current, openSkyData.states?.count ?? 0)) aircraft in ±1° latitude/longitude box over Air Quality sensor"
                 })
             }
             

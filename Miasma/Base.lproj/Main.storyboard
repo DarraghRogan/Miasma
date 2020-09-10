@@ -852,15 +852,11 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-ko-3zN">
-                                <rect key="frame" x="245" y="256" width="176" height="208"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S58-dZ-Zj6">
+                                <rect key="frame" x="485" y="180" width="438" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" id="UiA-qh-nNp">
+                                <textFieldCell key="cell" title="Both of these data sources are customised according to the Latitude &amp; Longitude returned with the Air Quality sensor data feed." id="Juj-d8-sfB">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">This Air Quality data source uses PurpleAir sensors.
-Please find the ID for the sensor you are interested in from the PurpleAir website map.
-It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the sensor pop-up - see screenshot for guidance -&gt;
-</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -894,6 +890,17 @@ It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the 
                                 </buttonCell>
                                 <connections>
                                     <action selector="CO2SignalButton:" target="XfG-lQ-9wD" id="7ge-aF-0fp"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVz-6J-wiF">
+                                <rect key="frame" x="130" y="179" width="297" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Quantity of aircraft in vicinity (from OpenSky)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="sUl-q7-ora">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="OpenSkyButtonAction:" target="XfG-lQ-9wD" id="PQW-7D-4Ju"/>
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8R-2h-NA4">
@@ -973,17 +980,18 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eVz-6J-wiF">
-                                <rect key="frame" x="130" y="179" width="297" height="18"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-ko-3zN">
+                                <rect key="frame" x="236" y="272" width="185" height="192"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Quantity of aircraft in vicinity (from OpenSky)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="sUl-q7-ora">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="OpenSkyButtonAction:" target="XfG-lQ-9wD" id="PQW-7D-4Ju"/>
-                                </connections>
-                            </button>
+                                <textFieldCell key="cell" id="UiA-qh-nNp">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">This Air Quality data source uses PurpleAir sensors.
+Please find the ID for the sensor you are interested in from the PurpleAir website map.
+It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the sensor pop-up (see screenshot for guidance -&gt;), or visible in the URL.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
