@@ -12,81 +12,82 @@ import Foundation
 
 
 struct OpenSkyDataStructure: Codable {
-        var time: Int?
-        var states: [[State]]?
-    }
+    var time: Int?
+    var states: [[State]]?
+}
 
-    enum State: Codable {
-        case bool(Bool)
-        case double(Double)
-        case string(String)
-        case null
-
-        init(from decoder: Decoder) throws {
-            let container = try decoder.singleValueContainer()
-            if let x = try? container.decode(Bool.self) {
-                self = .bool(x)
-                return
-            }
-            if let x = try? container.decode(Double.self) {
-                self = .double(x)
-                return
-            }
-            if let x = try? container.decode(String.self) {
-                self = .string(x)
-                return
-            }
-            if container.decodeNil() {
-                self = .null
-                return
-            }
-            throw DecodingError.typeMismatch(State.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for State"))
+enum State: Codable {
+    case bool(Bool)
+    case double(Double)
+    case string(String)
+    case null
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(Bool.self) {
+            self = .bool(x)
+            return
         }
-
-        func encode(to encoder: Encoder) throws {
-            var container = encoder.singleValueContainer()
-            switch self {
-            case .bool(let x):
-                try container.encode(x)
-            case .double(let x):
-                try container.encode(x)
-            case .string(let x):
-                try container.encode(x)
-            case .null:
-                try container.encodeNil()
-            }
+        if let x = try? container.decode(Double.self) {
+            self = .double(x)
+            return
+        }
+        if let x = try? container.decode(String.self) {
+            self = .string(x)
+            return
+        }
+        if container.decodeNil() {
+            self = .null
+            return
+        }
+        throw DecodingError.typeMismatch(State.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for State"))
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .bool(let x):
+            try container.encode(x)
+        case .double(let x):
+            try container.encode(x)
+        case .string(let x):
+            try container.encode(x)
+        case .null:
+            try container.encodeNil()
         }
     }
+}
 
 
 // define an instance of the data that can be filled by the data loader and read by the menu
 var openSkyData = OpenSkyDataStructure()
 
- public class DataLoaderOpenSky {
-
+public class DataLoaderOpenSky {
+    
     var arrayss = [String:Any]()
     var keys = [String]()
     var stateCount = 0
-
     
-    func loadOpenSkyData() {
-
+    
+    func loadOpenSkyData(lamin:Double, lomin:Double, lamax:Double, lomax:Double) {
+        
         
         let headers = [
             "Accept": "application/json"
         ]
-
+        
         let request = NSMutableURLRequest(url: NSURL(string:
-         "https://opensky-network.org/api/states/all?lamin=45.8389&lomin=5.9962&lamax=47.8229&lomax=10.5226")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
+            "https://opensky-network.org/api/states/all?lamin=\(lamin)&lomin=\(lomin)&lamax=\(lamax)&lomax=\(lomax)")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
+//        print(request)
         
-
+        
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
@@ -94,32 +95,29 @@ var openSkyData = OpenSkyDataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print("Received from the OpenSky API")
-                if let data = data,
-                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                    print(urlContent)
-                } else {
-                    print("error with printing string encoded data")
-                }
+//                print("Received from the OpenSky API")
+//                if let data = data,
+//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
                     let dataFromOpenSky = try decoder.decode(OpenSkyDataStructure.self, from: data!)
                     openSkyData = dataFromOpenSky
-                    
-                    let counts = openSkyData.states?.count
-                    print(counts)
-                    //(into: [:]) { $0[$1, default: 0] += 1 }
-
+                    //                    let counts = openSkyData.states?.count
+                    //                    print(counts)
                 }
                 catch {
                     print("Error in OpenSky JSON parsing")
-//                    print(purpleAirData)
+                    //                    print(purpleAirData)
                 }
                 
             }
         })
-
+        
         dataTask.resume()
     }
- }
+}

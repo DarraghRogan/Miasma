@@ -47,7 +47,7 @@ class ViewController: NSViewController {
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
     }
-        
+    
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
     
     @IBAction func PurpleAirMapButton(_ sender: Any) {
@@ -61,7 +61,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var PurpleAirIDField: NSTextField!
     
     @IBAction func PurpleAirIDField(_ sender: Any) {
-            PurpleAirCheckButton((Any).self)
+        PurpleAirCheckButton((Any).self)
     }
     
     @IBAction func PurpleAirRadioAction(_ sender: Any) {
@@ -77,7 +77,7 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         
     }
-        
+    
     
     @IBOutlet weak var PurpleAirIDSaveButton: NSButton!
     
@@ -94,7 +94,7 @@ class ViewController: NSViewController {
         else{
         }
         
-
+        
         
     }
     
@@ -107,7 +107,7 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
     
- 
+    
     @IBOutlet weak var WAQIRadioOutlet: NSButton!
     
     
@@ -117,7 +117,7 @@ class ViewController: NSViewController {
         
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-    
+        
     }
     
     @IBOutlet weak var WAQIComboBoxOutlet: NSComboBox!
@@ -137,15 +137,29 @@ class ViewController: NSViewController {
         
         if CO2SignalButtonOutlet.state == NSControl.StateValue.off {
             AppDelegate().defaults.set(false, forKey: "CO2SignalInUse")
-
+            
         }
         if CO2SignalButtonOutlet.state == NSControl.StateValue.on {
             AppDelegate().defaults.set(true, forKey: "CO2SignalInUse")
-
+            
         }
     }
     
     @IBOutlet weak var CO2SignalButtonOutlet: NSButton!
+    
+    
+    @IBAction func OpenSkyButtonAction(_ sender: Any) {
+        
+        if OpenSkyButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(false, forKey: "OpenSkyInUse")
+            
+        }
+        if OpenSkyButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(true, forKey: "OpenSkyInUse")
+        }
+    }
+    
+    @IBOutlet weak var OpenSkyButtonOutlet: NSButton!
     
     
     @IBOutlet weak var autoRunAtStartup: NSButton!
@@ -155,7 +169,7 @@ class ViewController: NSViewController {
         
         let isAuto = (sender as AnyObject).state == .on
         SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
-
+        
         if autoRunAtStartup.state == NSControl.StateValue.off {
             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
         }
@@ -165,14 +179,14 @@ class ViewController: NSViewController {
     }
     
     let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
-//        print(CO2SignalButtonOutlet.isOn)
+        //        print(CO2SignalButtonOutlet.isOn)
         
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
@@ -180,11 +194,14 @@ class ViewController: NSViewController {
         
         CO2SignalButtonOutlet.state = AppDelegate().defaults.object(forKey:"CO2SignalInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
+        OpenSkyButtonOutlet.state = AppDelegate().defaults.object(forKey:"OpenSkyInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        
+        
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         }
-
-
+        
+        
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
         
         
@@ -197,13 +214,13 @@ class ViewController: NSViewController {
         WAQIComboBoxOutlet.selectItem(at: 0)
         
     }
-
+    
     override var representedObject: Any? {
         didSet {
-        // Update the view, if already loaded.
+            // Update the view, if already loaded.
         }
     }
-
-
+    
+    
 }
 
