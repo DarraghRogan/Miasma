@@ -6,7 +6,7 @@ You can click the app if you want to see pertinent metrics, and the menu bar ico
 ### Download
 <a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
 
-The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on Git Hub for interested parties to review.
+The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on GitHub for interested parties to review.
 It does not have any tracking cookies, advertising codes, pop ups, notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
 
 ### Source Code
@@ -40,6 +40,7 @@ TABLE OF CONTENTS
 11. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?
 
 1 WHAT INFORMATION DO WE COLLECT?
+
 2 HOW DO WE USE YOUR INFORMATION?
 In Short:  We process your information for purposes based on legitimate business interests, the fulfillment of our contract with you, compliance with our legal obligations, and/or your consent.We use personal information collected via our App for a variety of business purposes described below. We process your personal information for these purposes in reliance on our legitimate business interests, in order to enter into or perform a contract with you, with your consent, and/or for compliance with our legal obligations. We indicate the specific processing grounds we rely on next to each purpose listed below.We use the information we collect or receive:
 • Assessing usage of the app to improve it
@@ -54,6 +55,9 @@ In Short:  We only share information with your consent, to comply with laws, to 
 • Business Transfers. We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
 • Business Partners. We may share your information with our business partners to offer you certain products, services or promotions. Specifically, see the data provider's privacy policy here too:
 https://www2.purpleair.com/policies/privacy-policy
+https://www.electricitymap.org/faq
+https://opensky-network.org/index.php/about/privacy-policy
+
 
 4 IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
 In Short:  We may transfer, store, and process your information in countries other than your own.Our servers are located in. If you are accessing our App from outside, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information (see "WILL YOUR INFORMATION BE SHARED WITH ANYONE?" above), in and other countries.If you are a resident in the European Economic Area, then these countries may not necessarily have data protection laws or other similar laws as comprehensive as those in your country. We will however take all necessary measures to protect your personal information in accordance with this privacy notice and applicable law.
@@ -68,7 +72,7 @@ In Short:  We aim to protect your personal information through a system of organ
 In Short:  We do not knowingly collect data from or market to children under 18 years of age.We do not knowingly solicit data from or market to children under 18 years of age. By using the App, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the App. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at support@permille.app.
 
 8 WHAT ARE YOUR PRIVACY RIGHTS?
-In Short:  You may review, change, or terminate your account at any time.If you are resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm.If you are resident in Switzerland, the contact details for the data protection authorities are available here: https://www.edoeb.admin.ch/edoeb/en/home.html.
+In Short:  You may review, change, or terminate your account at any time.If you are resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm. If you are resident in Switzerland, the contact details for the data protection authorities are available here: https://www.edoeb.admin.ch/edoeb/en/home.html.
 
 9 CONTROLS FOR DO-NOT-TRACK FEATURES
 Most web browsers and some mobile operating systems and mobile applications include a Do-Not-Track (“DNT”) feature or setting you can activate to signal your privacy preference not to have data about your online browsing activities monitored and collected. At this stage, no uniform technology standard for recognizing and implementing DNT signals has been finalized. As such, we do not currently respond to DNT browser signals or any other mechanism that automatically communicates your choice not to be tracked online. If a standard for online tracking is adopted that we must follow in the future, we will inform you about that practice in a revised version of this privacy notice.
