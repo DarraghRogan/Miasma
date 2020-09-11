@@ -19,7 +19,6 @@
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02BE00B624FBC40E0064F5B8 /* Graphics in Resources */ = {isa = PBXBuildFile; fileRef = 02BE00B524FBC40E0064F5B8 /* Graphics */; };
-		02ECB5BC25017D8A00F26500 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ECB5BB25017D8A00F26500 /* APIKeys.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75924FA53A9006ED277 /* Assets.xcassets */; };
@@ -136,7 +135,6 @@
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02BE00B524FBC40E0064F5B8 /* Graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphics; sourceTree = "<group>"; };
-		02ECB5BB25017D8A00F26500 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
 		02F3C75324FA53A5006ED277 /* MiasmaLauncherApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncherApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 		0283DD8724F051B700E4CC07 /* Miasma */ = {
 			isa = PBXGroup;
 			children = (
-				02ECB5BB25017D8A00F26500 /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
 				0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */,
@@ -342,7 +339,6 @@
 			files = (
 				0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */,
 				0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */,
-				02ECB5BC25017D8A00F26500 /* APIKeys.swift in Sources */,
 				0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
