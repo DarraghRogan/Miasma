@@ -129,7 +129,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func menuReview(_ sender: NSMenuItem){
-        //         NSWorkspace.shared.open(URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
+        NSWorkspace.shared.open(URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
         
     }
     
