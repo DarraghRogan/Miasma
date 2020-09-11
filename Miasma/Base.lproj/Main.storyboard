@@ -842,8 +842,7 @@
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <string key="title">This Air Quality data source uses PurpleAir sensors.
 Please find the ID for the sensor you are interested in from the PurpleAir website map.
-It is a 4 or 5 digit number visible when hovering over "Get This Widget" on the sensor pop-up - see screenshot for guidance -&gt;
-</string>
+It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in - see screen clip -&gt;</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1003,6 +1002,6 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
         </scene>
     </scenes>
     <resources>
-        <image name="PurpleAirWebpageSample" width="500" height="312"/>
+        <image name="PurpleAirWebpageSample" width="838" height="509"/>
     </resources>
 </document>
