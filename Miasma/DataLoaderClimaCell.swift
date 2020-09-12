@@ -12,9 +12,51 @@ import Foundation
 
 
 struct ClimaCellDataStructure: Codable {
-//    var time: Int?
-//    var states: [[State]]?
-}
+        var lat, lon: Double?
+        var temp, feelsLike, windSpeed, windDirection: FeelsLike?
+        var epaAqi: EpaAqi?
+        var epaPrimaryPollutant: EpaPrimaryPollutant?
+        var pm25, pollenTree, pollenWeed, pollenGrass: FeelsLike?
+        var observationTime, weatherCode: EpaPrimaryPollutant?
+
+        enum CodingKeys: String, CodingKey {
+            case lat, lon, temp
+            case feelsLike
+            case windSpeed
+            case windDirection
+            case epaAqi
+            case epaPrimaryPollutant
+            case pm25
+            case pollenTree
+            case pollenWeed
+            case pollenGrass
+            case observationTime
+            case weatherCode
+        }
+    }
+
+    struct EpaAqi: Codable {
+        var value: Double?
+    }
+
+    struct EpaPrimaryPollutant: Codable {
+        var value: String?
+    }
+
+    struct FeelsLike: Codable {
+        var value: Double?
+        var units: Units?
+    }
+
+    enum Units: String, Codable {
+        case c = "C"
+        case climacellPollenIndex = "Climacell Pollen Index"
+        case degrees = "degrees"
+        case mS = "m/s"
+        case âµgM3 = "Âµg/m3"
+    }
+
+    typealias Welcome = [ClimaCellDataStructure]
 
 
 // define an instance of the data that can be filled by the data loader and read by the menu
@@ -31,7 +73,7 @@ public class DataLoaderClimaCell {
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.climacell.co/v3/weather/realtime?lat=\(lat)&lon=\(lon)&unit_system=si&fields=pollen_tree%2Cpollen_grass%2Cpollen_weed%2Cfeels_like&apikey=\(APIKeyClimaCell)")! as URL,
+            "https://api.climacell.co/v3/weather/nowcast?lat=\(lat)&lon=\(lon)&unit_system=si&timestep=60&start_time=now&fields=pollen_tree%2Cpollen_grass%2Cpollen_weed%2Cfeels_like%2Ctemp%2Cweather_code%2Cwind_direction%2Cwind_speed%2Cpm25%2Cepa_aqi%2Cepa_primary_pollutant&apikey=\(APIKeyClimaCell)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         
