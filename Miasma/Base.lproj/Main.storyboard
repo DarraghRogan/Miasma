@@ -865,6 +865,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="OpenSkyButtonAction:" target="XfG-lQ-9wD" id="Cip-sM-4BK"/>
+                                </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8R-2h-NA4">
                                 <rect key="frame" x="418" y="301" width="219" height="133"/>
@@ -986,6 +989,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                         <outlet property="AirQualityDisabledRadioOutlet" destination="a8B-2u-OhJ" id="YAl-eQ-97k"/>
                         <outlet property="CO2SignalButtonOutlet" destination="y2M-5l-BYI" id="Qh2-vA-we7"/>
                         <outlet property="MiasmaVersionLabel" destination="3zr-hR-aKv" id="nNv-ZG-dmB"/>
+                        <outlet property="OpenSkyButtonOutlet" destination="K3l-fb-Zew" id="ahk-MA-9gw"/>
                         <outlet property="PurpleAirCheckedLabel" destination="HhU-L0-Tvd" id="bI0-mM-yMM"/>
                         <outlet property="PurpleAirIDField" destination="Ij3-Vr-ptz" id="S9J-1I-yud"/>
                         <outlet property="PurpleAirIDSaveButton" destination="0PM-AC-O5j" id="Wgx-H0-SyX"/>

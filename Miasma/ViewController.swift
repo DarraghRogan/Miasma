@@ -147,9 +147,7 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var CO2SignalButtonOutlet: NSButton!
     
-    
     @IBAction func OpenSkyButtonAction(_ sender: Any) {
-        
         if OpenSkyButtonOutlet.state == NSControl.StateValue.off {
             AppDelegate().defaults.set(false, forKey: "OpenSkyInUse")
             
@@ -160,7 +158,6 @@ class ViewController: NSViewController {
     }
     
     @IBOutlet weak var OpenSkyButtonOutlet: NSButton!
-    
     
     @IBOutlet weak var autoRunAtStartup: NSButton!
     
