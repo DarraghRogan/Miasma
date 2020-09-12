@@ -253,6 +253,8 @@ class menuFunctions: NSObject {
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+                    DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.results?[0].lat ?? 0, lon: purpleAirData.results?[0].lon ?? 0)
+
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
