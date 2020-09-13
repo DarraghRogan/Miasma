@@ -997,9 +997,9 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rkG-ht-MDd">
-                                <rect key="frame" x="130" y="174" width="179" height="18"/>
+                                <rect key="frame" x="130" y="174" width="276" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Nearcast (from ClimaCell)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kT-JR-afS">
+                                <buttonCell key="cell" type="check" title="Nearcast 1 hour Forecast (from ClimaCell)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kT-JR-afS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

@@ -88,6 +88,14 @@ class ViewController: NSViewController {
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+        
+        AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+        CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+        OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+//        AppDelegate().defaults.set(1, forKey:"ClimaCellInUse")
+//        ClimaCellButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        
         if PurpleAirIDField.stringValue == ""{
             AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
         }

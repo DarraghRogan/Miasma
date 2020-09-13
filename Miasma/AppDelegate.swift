@@ -48,7 +48,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //        menuFunctions().menuRefresh(NSMenuItem)
         
         // periodically update the menu
-        _ = Timer.scheduledTimer(withTimeInterval: 600.0, repeats: true) { timer in
+        _ = Timer.scheduledTimer(withTimeInterval: 1200.0, repeats: true) { timer in
             self.statusBarItemController = menuFunctions()        }
         
     }
