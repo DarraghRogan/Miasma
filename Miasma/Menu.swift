@@ -396,7 +396,7 @@ class menuFunctions: NSObject {
                         fossilFuelPercentage_visual = ""
                     }
                     
-                    self.cO2FossilFuelMix.title = "⚡️: Low Carbon / Fossil mix: \(fossilFuelPercentage_visual)"
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
                     
                 })
             }
@@ -563,7 +563,7 @@ class menuFunctions: NSObject {
                     fossilFuelPercentage_visual = ""
                 }
                 
-                self.cO2FossilFuelMix.title = "⚡️: Low Carbon / Fossil mix: \(fossilFuelPercentage_visual)"
+                self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
                 
             })
             

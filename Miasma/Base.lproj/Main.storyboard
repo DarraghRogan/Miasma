@@ -1008,7 +1008,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqm-uh-k6W">
-                                <rect key="frame" x="507" y="202" width="420" height="48"/>
+                                <rect key="frame" x="501" y="194" width="426" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="aDs-2S-5Cv">
                                     <font key="font" usesAppearanceFont="YES"/>
