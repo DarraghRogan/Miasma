@@ -412,7 +412,7 @@ class menuFunctions: NSObject {
                     
                     self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(String(format: "%.1f", locale: Locale.current, (round(climaCellData[0].windDirection?.value ?? 0))))° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
                     
-                    self.climaCellAirQuality.title = "☁️: US EPA AQI will be \((String(format: "%.1f", locale: Locale.current,climaCellData[0].epaAqi?.value ?? 0))), with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pm25?.value ?? 0))µg/m³ PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
                     

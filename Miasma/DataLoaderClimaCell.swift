@@ -19,7 +19,7 @@ struct WelcomeElement: Codable {
         var windDirection: FeelsLike?
         var epaAqi: EpaAqi?
         var epaPrimaryPollutant: EpaPrimaryPollutant?
-//        var pm25: FeelsLike?
+        var pm25: FeelsLike?
         var pollenTree, pollenWeed, pollenGrass: FeelsLike?
         var observationTime: EpaPrimaryPollutant?
         var weatherCode: EpaPrimaryPollutant?
@@ -32,7 +32,7 @@ struct WelcomeElement: Codable {
             case windDirection = "wind_direction"
             case epaAqi = "epa_aqi"
             case epaPrimaryPollutant = "epa_primary_pollutant"
-//            case pm25
+            case pm25
             case pollenTree = "pollen_tree"
             case pollenWeed = "pollen_weed"
             case pollenGrass = "pollen_grass"
@@ -59,7 +59,7 @@ struct WelcomeElement: Codable {
         case climacellPollenIndex = "Climacell Pollen Index"
         case degrees = "degrees"
         case mS = "m/s"
-        case âµgM3 = "Âµg/m3"
+        case µgM3 = "µg/m3"
     }
 
     typealias ClimaCellDataStructure = [WelcomeElement]
