@@ -385,11 +385,11 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-//                    self.climaCellWeather.title = "🌦: Feels Like \(climaCellData[0].feelsLike ?? 0)℃, \(climaCellData[0].weatherCode ?? ""), \(climaCellData[0].windSpeed ?? 0)m/s @ \(climaCellData[0].windDirection ?? 0)°"
+                    self.climaCellWeather.title = "🌦: Feels Like \(climaCellData[0].feelsLike?.value ?? 0)℃, \(climaCellData[0].weatherCode?.value ?? ""), \(climaCellData[0].windSpeed?.value ?? 0)m/s @ \(climaCellData[0].windDirection?.value ?? 0)°"
 
-//                    self.climaCellAirQuality.title = "☁️: \(climaCellData[0].epaAqi) US EPA AQI, Primary Pollutant: \(climaCellData[0].epaPrimaryPollutant)"
+                    self.climaCellAirQuality.title = "☁️: \(climaCellData[0].epaAqi?.value ?? 0) US EPA AQI, Primary Pollutant: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
-//                    self.climaCellPollen.title = "🌳: Trees: \(climaCellData[0].pollenTree), Grass: \(climaCellData[0].pollenGrass), Weeds: \(climaCellData[0].pollenWeed)"
+                    self.climaCellPollen.title = "🌳: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
 
                 })
             }
