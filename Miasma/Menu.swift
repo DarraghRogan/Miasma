@@ -267,7 +267,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let OpenClimaCell = NSMenuItem(
-                    title: "Nearcast 1 Hour Forecast (ClimaCell)...",
+                    title: "1 Hour Forecast (ClimaCell Nearcast)...",
                     action: #selector(menuFunctions.openClimaCell(_:)),
                     keyEquivalent: "c"
                 )
@@ -385,11 +385,11 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-                    self.climaCellWeather.title = "🌦: Feels Like \(climaCellData[0].feelsLike?.value ?? 0)℃, \(climaCellData[0].weatherCode?.value ?? ""), \(climaCellData[0].windSpeed?.value ?? 0)m/s @ \(climaCellData[0].windDirection?.value ?? 0)°"
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(String(format: "%.1f", locale: Locale.current, (round(climaCellData[0].windDirection?.value ?? 0))))° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
 
-                    self.climaCellAirQuality.title = "☁️: \(climaCellData[0].epaAqi?.value ?? 0) US EPA AQI, Primary Pollutant: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
+                    self.climaCellAirQuality.title = "☁️: US EPA AQI will be \((String(format: "%.1f", locale: Locale.current,climaCellData[0].epaAqi?.value ?? 0))), with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
-                    self.climaCellPollen.title = "🌳: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
 
                 })
             }
