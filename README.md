@@ -1,7 +1,7 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
-Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality from PurpleAir.
-You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online.
+Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality.
+You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
 
 ### Download
 <a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
@@ -14,7 +14,7 @@ Source code is all shared here, as is, no warratnies, express or implied. APIKey
 Project should open in Xcode.
 
 ### Data Sources
-All PurpleAir metric requests are sent directly, using HTTPS, to PurpleAir from your Mac, . Note that PurpleAir can see the ID of PurpleAir sensor you're interested in, and your Mac's public IP address which can be unique to you depending on network configuration.
+All data requests are sent directly, using HTTPS, to the data providers from your Mac. Note that the data providers can see the ID of PurpleAir sensor you're interested in or the resultant coordinates, and your Mac's public IP address which can be unique to you depending on network configuration.
 
 ### Support
 Please email me on miasma@kissengineering.ie - this is a side project for me so understand it may take me a couple of days to get back.
@@ -22,8 +22,19 @@ Please email me on miasma@kissengineering.ie - this is a side project for me so 
 ### About the name
 Miasma is an obselete medical theory that bad vapours in the air caused sickness. Nowadays, with climate change caused by smoke being spread, maybe the theory isn't so obselete! See https://en.wikipedia.org/wiki/Miasma_theory
 
+### Roadmap
+## Info
+- Add road traffic data
+- Try include global CO2 targets
+
+## Platform
+- Widget for Mac OS
+- Compile for Apple Silicon
+- Create for iOS
+- Expand to Android & Windows
+
 ### Privacy Policy
-Last updated August 30th, 2020
+Last updated September 13th, 2020
 Thank you for choosing to be part of our community at Darragh Rogan (“Company”, “we”, “us”, or “our”). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns about this privacy notice, or our practices with regards to your personal information, please contact us at miasma@kissengineering.ie . When you use our application, as the case may be (the "App") and more generally, use any of our services (the "Services", which include the App), we appreciate that you are trusting us with your personal information. We take your privacy very seriously. In this privacy notice, we seek to explain to you in the clearest way possible what information we collect, how we use it and what rights you have in relation to it. We hope you take some time to read through it carefully, as it is important. If there are any terms in this privacy notice that you do not agree with, please discontinue use of our Services immediately.This privacy notice applies to all information collected through our Services (which, as described above, includes our App), as well as any related services, sales, marketing or events.Please read this privacy notice carefully as it will help you understand what we do with the information that we collect.
 
 TABLE OF CONTENTS
@@ -57,6 +68,7 @@ In Short:  We only share information with your consent, to comply with laws, to 
 https://www2.purpleair.com/policies/privacy-policy
 https://www.electricitymap.org/faq
 https://opensky-network.org/index.php/about/privacy-policy
+https://www.climacell.co/legal/product-privacy-policy/
 
 
 4 IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
@@ -69,7 +81,7 @@ In Short:  We keep your information for as long as necessary to fulfill the purp
 In Short:  We aim to protect your personal information through a system of organizational and technical security measures.We have implemented appropriate technical and organizational security measures designed to protect the security of any personal information we process. However, despite our safeguards and efforts to secure your information, no electronic transmission over the Internet or information storage technology can be guaranteed to be 100% secure, so we cannot promise or guarantee that hackers, cybercriminals, or other unauthorized third parties will not be able to defeat our security, and improperly collect, access, steal, or modify your information. Although we will do our best to protect your personal information, transmission of personal information to and from our App is at your own risk. You should only access the App within a secure environment.
 
 7 DO WE COLLECT INFORMATION FROM MINORS?
-In Short:  We do not knowingly collect data from or market to children under 18 years of age.We do not knowingly solicit data from or market to children under 18 years of age. By using the App, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the App. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at support@permille.app.
+In Short:  We do not knowingly collect data from or market to children under 18 years of age.We do not knowingly solicit data from or market to children under 18 years of age. By using the App, you represent that you are at least 18 or that you are the parent or guardian of such a minor and consent to such minor dependent’s use of the App. If we learn that personal information from users less than 18 years of age has been collected, we will deactivate the account and take reasonable measures to promptly delete such data from our records. If you become aware of any data we may have collected from children under age 18, please contact us at miasma@kissengineering.ie .
 
 8 WHAT ARE YOUR PRIVACY RIGHTS?
 In Short:  You may review, change, or terminate your account at any time.If you are resident in the European Economic Area and you believe we are unlawfully processing your personal information, you also have the right to complain to your local data protection supervisory authority. You can find their contact details here: http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm. If you are resident in Switzerland, the contact details for the data protection authorities are available here: https://www.edoeb.admin.ch/edoeb/en/home.html.
