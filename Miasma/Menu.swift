@@ -410,7 +410,31 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(String(format: "%.1f", locale: Locale.current, (round(climaCellData[0].windDirection?.value ?? 0))))° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
+                    var windDirection = climaCellData[0].windDirection?.value ?? 0
+                    let windDirection_acronymn: String
+                    // directiosn from http://www.angelfire.com/space/one1/cal.html
+                    switch (windDirection) {
+                    case _ where windDirection < 45:
+                        windDirection_acronymn = "NNE"
+                    case _ where windDirection > 45 && windDirection < 90:
+                        windDirection_acronymn = "ENE"
+                    case _ where windDirection > 90 && windDirection < 135:
+                        windDirection_acronymn = "ESE"
+                    case _ where windDirection > 135 && windDirection < 180:
+                        windDirection_acronymn = "SSE"
+                    case _ where windDirection > 180 && windDirection < 225:
+                        windDirection_acronymn = "SSW"
+                    case _ where windDirection > 225 && windDirection < 270:
+                        windDirection_acronymn = "WSW"
+                    case _ where windDirection > 270 && windDirection < 315:
+                        windDirection_acronymn = "WNW"
+                    case _ where windDirection > 315:
+                        windDirection_acronymn = "NNW"
+                    default:
+                        windDirection_acronymn = ""
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pm25?.value ?? 0))µg/m³ PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
