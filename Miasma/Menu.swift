@@ -95,11 +95,23 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "🦖: ", action: nil, keyEquivalent: "")
     }()
     
+    
     var openSkyAircraftInBox : NSMenuItem = {
         return NSMenuItem(title: "✈️: ", action: nil, keyEquivalent: "")
     }()
 
     
+    var climaCellWeather : NSMenuItem = {
+        return NSMenuItem(title: "🌦: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var climaCellAirQuality : NSMenuItem = {
+        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var climaCellPollen : NSMenuItem = {
+        return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
+    }()
     
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
@@ -116,6 +128,10 @@ class menuFunctions: NSObject {
     
     @objc func openOpenSky(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://opensky-network.org/")!)
+    }
+    
+    @objc func openClimaCell(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://www.climacell.co/consumer-app/")!)
     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -221,7 +237,7 @@ class menuFunctions: NSObject {
                 let CO2Link = NSMenuItem(
                     title: "Electricity Consumption (CO2 Signal)...",
                     action: #selector(menuFunctions.openCO2(_:)),
-                    keyEquivalent: "c"
+                    keyEquivalent: "e"
                 )
                 CO2Link.target = self
                 menu.addItem(CO2Link)
@@ -247,18 +263,36 @@ class menuFunctions: NSObject {
 
             }
             
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenClimaCell = NSMenuItem(
+                    title: "Nearcast 1 Hour Forecast (ClimaCell)...",
+                    action: #selector(menuFunctions.openClimaCell(_:)),
+                    keyEquivalent: "c"
+                )
+                OpenClimaCell.target = self
+                menu.addItem(OpenClimaCell)
+                
+                menu.addItem(climaCellWeather)
+                menu.addItem(climaCellAirQuality)
+                menu.addItem(climaCellPollen)
+            }
+            
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
-                    DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.results?[0].lat ?? 0, lon: purpleAirData.results?[0].lon ?? 0)
-
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
                     DataLoaderOpenSky().loadOpenSkyData(lamin: ((purpleAirData.results?[0].lat ?? 0)-1), lomin: ((purpleAirData.results?[0].lon ?? 0)-1), lamax: ((purpleAirData.results?[0].lat ?? 0)+1), lomax: ((purpleAirData.results?[0].lon ?? 0)+1))
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                    DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.results?[0].lat ?? 0, lon: purpleAirData.results?[0].lon ?? 0)
                 }
                 
                 self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
@@ -345,6 +379,18 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     self.openSkyAircraftInBox.title = "✈️: \(String(format: "%U", locale: Locale.current, openSkyData.states?.count ?? 0)) aircraft in ±1° latitude/longitude box over Air Quality sensor"
+                })
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    
+//                    self.climaCellWeather.title = "🌦: Feels Like \(climaCellData[0].feelsLike ?? 0)℃, \(climaCellData[0].weatherCode ?? ""), \(climaCellData[0].windSpeed ?? 0)m/s @ \(climaCellData[0].windDirection ?? 0)°"
+
+//                    self.climaCellAirQuality.title = "☁️: \(climaCellData[0].epaAqi) US EPA AQI, Primary Pollutant: \(climaCellData[0].epaPrimaryPollutant)"
+                    
+//                    self.climaCellPollen.title = "🌳: Trees: \(climaCellData[0].pollenTree), Grass: \(climaCellData[0].pollenGrass), Weeds: \(climaCellData[0].pollenWeed)"
+
                 })
             }
             

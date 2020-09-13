@@ -159,6 +159,18 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var OpenSkyButtonOutlet: NSButton!
     
+    @IBAction func ClimaCellButtonAction(_ sender: Any) {
+        if ClimaCellButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(false, forKey: "ClimaCellInUse")
+            
+        }
+        if ClimaCellButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(true, forKey: "ClimaCellInUse")
+        }
+    }
+    
+    @IBOutlet weak var ClimaCellButtonOutlet: NSButton!
+    
     @IBOutlet weak var autoRunAtStartup: NSButton!
     
     @IBAction func autoRunAtStartup(_ sender: Any) {
@@ -193,6 +205,8 @@ class ViewController: NSViewController {
         
         OpenSkyButtonOutlet.state = AppDelegate().defaults.object(forKey:"OpenSkyInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
+        ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
+
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
