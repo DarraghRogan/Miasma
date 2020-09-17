@@ -108,7 +108,7 @@ class menuFunctions: NSObject {
     var climaCellPollen : NSMenuItem = {
         return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
     }()
-        
+    
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
@@ -333,7 +333,7 @@ class menuFunctions: NSObject {
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
-
+                    
                 case _ where pM2_5Value > 250.5 && pM2_5Value < 500.5:
                     pM2_5ColourButton = "[_____🟤_]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟤"
@@ -470,7 +470,7 @@ class menuFunctions: NSObject {
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             
             let WAQILink = NSMenuItem(
-                title: "World Air Quality Index...",
+                title: "Air Quality (World Air Quality Index)...",
                 action: #selector(menuFunctions.openWAQI(_:)),
                 keyEquivalent: "w"
             )
@@ -485,23 +485,70 @@ class menuFunctions: NSObject {
             menu.addItem(wAQITime)
             
             menu.addItem(NSMenuItem.separator())
-            let CO2Link = NSMenuItem(
-                title: "CO2 Signal (Electricity Consumption)...",
-                action: #selector(menuFunctions.openCO2(_:)),
-                keyEquivalent: "c"
-            )
-            CO2Link.target = self
-            menu.addItem(CO2Link)
             
-            menu.addItem(cO2Country)
-            menu.addItem(cO2FossilFuelMix)
+            if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let CO2Link = NSMenuItem(
+                    title: "Electricity Consumption (CO₂ Signal)...",
+                    action: #selector(menuFunctions.openCO2(_:)),
+                    keyEquivalent: "e"
+                )
+                CO2Link.target = self
+                menu.addItem(CO2Link)
+                
+                menu.addItem(cO2Country)
+                menu.addItem(cO2FossilFuelMix)
+                
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenSkyLink = NSMenuItem(
+                    title: "Aircraft Overhead (OpenSky)...",
+                    action: #selector(menuFunctions.openOpenSky(_:)),
+                    keyEquivalent: "o"
+                )
+                OpenSkyLink.target = self
+                menu.addItem(OpenSkyLink)
+                
+                menu.addItem(openSkyAircraftInBox)
+                
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenClimaCell = NSMenuItem(
+                    title: "1 Hour Forecast (ClimaCell Nearcast)...",
+                    action: #selector(menuFunctions.openClimaCell(_:)),
+                    keyEquivalent: "c"
+                )
+                OpenClimaCell.target = self
+                menu.addItem(OpenClimaCell)
+                
+                menu.addItem(climaCellWeather)
+                menu.addItem(climaCellAirQuality)
+                menu.addItem(climaCellPollen)
+            }
             
             DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                DataLoaderCO2().loadCO2Data(lat: String(wAQIData.data?.city.geo[1] ?? 0), lon: String(wAQIData.data?.city.geo[0] ?? 0))
                 
+                if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                    DataLoaderCO2().loadCO2Data(lat: String(wAQIData.data?.city.geo[0] ?? 0), lon: String(wAQIData.data?.city.geo[1] ?? 0))
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((wAQIData.data?.city.geo[0] ?? 0)-1), lomin: ((wAQIData.data?.city.geo[1] ?? 0)-1), lamax: ((wAQIData.data?.city.geo[0] ?? 0)+1), lomax: ((wAQIData.data?.city.geo[1] ?? 0)+1))
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                    DataLoaderClimaCell().loadClimaCellData(lat: wAQIData.data?.city.geo[0] ?? 0, lon: wAQIData.data?.city.geo[1] ?? 0)
+                }
                 
                 if wAQIData.status == "ok" {
                     
@@ -551,45 +598,88 @@ class menuFunctions: NSObject {
                 }
             })
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
-                var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                let fossilFuelPercentage_visual: String
-                // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                switch (fossilFuelPercentage) {
-                case _ where fossilFuelPercentage < 5:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                    fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                    fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                    fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                case _ where fossilFuelPercentage > 95:
-                    fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                default:
-                    fossilFuelPercentage_visual = ""
-                }
-                
-                self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
-                
-            })
+            if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    
+                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    let fossilFuelPercentage_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (fossilFuelPercentage) {
+                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
+                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
+                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
+                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
+                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
+                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 95:
+                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    default:
+                        fossilFuelPercentage_visual = ""
+                    }
+                    
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
+                    
+                })
+            }
             
+            if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    self.openSkyAircraftInBox.title = "✈️: \(String(format: "%U", locale: Locale.current, openSkyData.states?.count ?? 0)) aircraft in ±1° latitude/longitude box over Air Quality sensor"
+                })
+            }
             
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    
+                    var windDirection = climaCellData[0].windDirection?.value ?? 0
+                    let windDirection_acronymn: String
+                    // directiosn from http://www.angelfire.com/space/one1/cal.html
+                    switch (windDirection) {
+                    case _ where windDirection < 45:
+                        windDirection_acronymn = "NNE"
+                    case _ where windDirection > 45 && windDirection < 90:
+                        windDirection_acronymn = "ENE"
+                    case _ where windDirection > 90 && windDirection < 135:
+                        windDirection_acronymn = "ESE"
+                    case _ where windDirection > 135 && windDirection < 180:
+                        windDirection_acronymn = "SSE"
+                    case _ where windDirection > 180 && windDirection < 225:
+                        windDirection_acronymn = "SSW"
+                    case _ where windDirection > 225 && windDirection < 270:
+                        windDirection_acronymn = "WSW"
+                    case _ where windDirection > 270 && windDirection < 315:
+                        windDirection_acronymn = "WNW"
+                    case _ where windDirection > 315:
+                        windDirection_acronymn = "NNW"
+                    default:
+                        windDirection_acronymn = ""
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
+                    
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(climaCellData[0].epaAqi?.value ?? 0)) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
+                    
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
+                    
+                })
+                
+            }
         }
         
     }
-    
 }
