@@ -108,10 +108,10 @@ class menuFunctions: NSObject {
     var climaCellPollen : NSMenuItem = {
         return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
     }()
-    
+        
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mPM25/a10/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
+        NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
     }
     
     @objc func openWAQI(_ sender: NSMenuItem){
@@ -292,47 +292,67 @@ class menuFunctions: NSObject {
                 
                 self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
                 
-                var pM2_5Value = Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0
+                // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
+                
+                var pM2_5Value = round(Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0)
                 let pM2_5ColourButton: String
+                let aQI_CalculatedDouble: Double
+                var aQI_CalculatedRounded: Int = 0
                 switch (pM2_5Value) {
                 case _ where pM2_5Value > 0 && pM2_5Value < 12:
-                    pM2_5ColourButton = "[🟢_______]"
+                    pM2_5ColourButton = "[🟢_____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟢"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 12 && pM2_5Value < 35:
-                    pM2_5ColourButton = "[_🟡______]"
+                    aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                    
+                case _ where pM2_5Value > 12 && pM2_5Value < 35.5:
+                    pM2_5ColourButton = "[_🟡_____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟡"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 35 && pM2_5Value < 55:
-                    pM2_5ColourButton = "[__🟠_____]"
+                    aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                    
+                case _ where pM2_5Value > 35.5 && pM2_5Value < 55.5:
+                    pM2_5ColourButton = "[__🟠____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟠"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 55 && pM2_5Value < 150:
-                    pM2_5ColourButton = "[___🔴____]"
+                    aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                    
+                case _ where pM2_5Value > 55.5 && pM2_5Value < 150.5:
+                    pM2_5ColourButton = "[___🔴___]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🔴"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 150 && pM2_5Value < 250:
-                    pM2_5ColourButton = "[____🟣___]"
+                    aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                    
+                case _ where pM2_5Value > 150.5 && pM2_5Value < 250.5:
+                    pM2_5ColourButton = "[____🟣__]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟣"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 250 && pM2_5Value < 350:
-                    pM2_5ColourButton = "[_____🟣__]"
-                    self.purpleAirPM2_5StatusBarIcon.title = "🟣"
-                    statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 350 && pM2_5Value < 500:
-                    pM2_5ColourButton = "[______🟤_]"
+                    aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+
+                case _ where pM2_5Value > 250.5 && pM2_5Value < 500.5:
+                    pM2_5ColourButton = "[_____🟤_]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟤"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
-                case _ where pM2_5Value > 500:
-                    pM2_5ColourButton = "[_______🟤]"
+                    aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
+                    aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                    
+                case _ where pM2_5Value > 500.5:
+                    pM2_5ColourButton = "[______🟤]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟤"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
+                    aQI_CalculatedRounded = 500
+                    
                 default:
                     pM2_5ColourButton = ""
                     self.purpleAirPM2_5StatusBarIcon.title = "⚪"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                 }
-                self.purpleAirPM2_5.title = "☁️: \(String(purpleAirData.results?[0].pm25Value ?? "0"))µg/m³ PM₂.₅ (Current)   \(pM2_5ColourButton)"
+                self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ (Current)   \(pM2_5ColourButton)"
                 
                 let PurpleAirFahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
                 func calculateCelsius(fahrenheit: Double) -> String {
@@ -370,7 +390,7 @@ class menuFunctions: NSObject {
                     let fossilFuelPercentage_visual: String
                     // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                     switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage < 5:
+                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
                         fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
                     case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
                         fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
@@ -436,7 +456,7 @@ class menuFunctions: NSObject {
                     
                     self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pm25?.value ?? 0))µg/m³ PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(climaCellData[0].epaAqi?.value ?? 0)) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
                     
