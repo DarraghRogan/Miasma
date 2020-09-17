@@ -889,9 +889,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rd-Ce-8fv">
-                                <rect key="frame" x="663" y="691" width="161" height="18"/>
+                                <rect key="frame" x="663" y="691" width="195" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="radio" title="World Air Quality Index" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vjk-ap-k8q">
+                                <buttonCell key="cell" type="radio" title="From World Air Quality Index" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vjk-ap-k8q">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
