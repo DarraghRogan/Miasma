@@ -14,6 +14,7 @@ class ViewController: NSViewController {
     
     // Invoke RegEx Extension for each account type
     let validityTypePurpleAir: String.ValidityType = .purpleAirID
+    let validityTypeWAQI: String.ValidityType = .wAQICity
     
     @objc fileprivate func handleTextChangePurpleAir() {
         guard let text = PurpleAirIDField?.stringValue else { return }
@@ -33,6 +34,27 @@ class ViewController: NSViewController {
         } else {
             PurpleAirIDField.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
             PurpleAirIDField.layer?.borderWidth = 2.0
+        }
+    }
+    
+    @objc fileprivate func handleTextChangeWAQI() {
+        guard let text = WAQIComboBoxOutlet?.stringValue else { return }
+        if text.isValid(validityTypeWAQI) {
+            DataLoaderWAQI().loadWAQIData(id: WAQIComboBoxOutlet.stringValue)
+            WAQICheckedLabel.stringValue = "Loading (5s)"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                if wAQIData.status?.isEmpty ?? true {
+                    self.WAQICheckedLabel.stringValue = "Error. Check WAQI City / Station"
+                } else {
+                    self.WAQICheckedLabel.stringValue = String(wAQIData.data?.city.name ?? "")
+                    self.WAQISaveButtonOutlet.isEnabled = true
+                }
+            })
+            WAQIComboBoxOutlet.layer?.borderWidth = 0.0
+        } else {
+            WAQIComboBoxOutlet.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
+            WAQIComboBoxOutlet.layer?.borderWidth = 2.0
         }
     }
     
@@ -56,6 +78,10 @@ class ViewController: NSViewController {
     
     @IBAction func PurpleAirWebpageSnip(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "http://www.purpleair.com/map")!)
+    }
+    
+    @IBAction func WAQIMapButton(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://aqicn.org/city/all/")!)
     }
     
     @IBOutlet weak var PurpleAirIDField: NSTextField!
@@ -93,8 +119,8 @@ class ViewController: NSViewController {
         CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
         OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//        AppDelegate().defaults.set(1, forKey:"ClimaCellInUse")
-//        ClimaCellButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        //        AppDelegate().defaults.set(1, forKey:"ClimaCellInUse")
+        //        ClimaCellButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
         
         if PurpleAirIDField.stringValue == ""{
             AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
@@ -118,6 +144,11 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var WAQIRadioOutlet: NSButton!
     
+    @IBOutlet weak var WAQICheckedLabel: NSTextField!
+    
+    @IBOutlet weak var WAQISavedIDLabel: NSTextField!
+    
+    @IBOutlet weak var WAQISaveButtonOutlet: NSButton!
     
     @IBAction func WAQIRadioAction(_ sender: Any) {
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
@@ -132,14 +163,35 @@ class ViewController: NSViewController {
     
     
     @IBAction func WAQIComboBoxAction(_ sender: Any) {
+        handleTextChangeWAQI()
+    }
+    
+    @IBAction func WAQISaveButtonAction(_ sender: Any) {
         AppDelegate().defaults.set(WAQIComboBoxOutlet.stringValue, forKey: "WAQICity")
+        WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
         AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+        AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+        CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+        OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        //        AppDelegate().defaults.set(1, forKey:"ClimaCellInUse")
+        //        ClimaCellButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        
+        if WAQIComboBoxOutlet.stringValue == ""{
+            AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+        }
+        else{
+        }
+        
+        
+        
     }
+    
     
     @IBAction func CO2SignalButton(_ sender: Any) {
         
@@ -214,7 +266,7 @@ class ViewController: NSViewController {
         OpenSkyButtonOutlet.state = AppDelegate().defaults.object(forKey:"OpenSkyInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
-
+        
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{
             PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
@@ -222,6 +274,8 @@ class ViewController: NSViewController {
         
         
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
+        
+        WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
         
         
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {

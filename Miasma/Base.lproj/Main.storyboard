@@ -754,7 +754,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="xVc-Bf-m1q">
-                                <rect key="frame" x="648" y="340" width="5" height="368"/>
+                                <rect key="frame" x="648" y="321" width="5" height="368"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vfv-MY-HG1">
@@ -824,6 +824,17 @@
                                 </buttonCell>
                                 <connections>
                                     <action selector="PurpleAirMapButton:" target="XfG-lQ-9wD" id="Myx-mt-Lmy"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-pO-AHf">
+                                <rect key="frame" x="832" y="500" width="225" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Open WAQI Map Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ys-iL-kCJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="WAQIMapButton:" target="XfG-lQ-9wD" id="NKU-dK-Y26"/>
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-L0-Tvd">
@@ -898,21 +909,21 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-Fz-uYk">
-                                <rect key="frame" x="663" y="513" width="401" height="144"/>
+                                <rect key="frame" x="663" y="339" width="397" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="eX7-Bn-7OB">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">Please enter your City here (no spaces), or choose the option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
+                                    <mutableString key="title">Please enter your City here (no spaces) &amp; hit return ⏎, or choose the dropdown option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
 
 All data is routed via the World Air Quality Index, and the original measurement body is shown in the Miasma dropdown.
 
-According to the Air Quality Index returned, the Miasma icon changes colour according the the US EPA scale.</string>
+According to the Air Quality Index returned, the Miasma icon changes colour according the the US EPA AQI scale.</mutableString>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFf-fi-NMR">
-                                <rect key="frame" x="842" y="661" width="212" height="25"/>
+                                <rect key="frame" x="837" y="661" width="217" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Zg8-1E-aWn">
                                     <font key="font" metaFont="system"/>
@@ -1017,6 +1028,57 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ejb-tJ-8S4">
+                                <rect key="frame" x="659" y="542" width="392" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3U-Nm-BIN">
+                                <rect key="frame" x="664" y="578" width="160" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Saved WAQI City / Station" id="w2x-HY-jCQ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zrk-t2-bra">
+                                <rect key="frame" x="664" y="631" width="165" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="TgJ-F8-Upg">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZv-hX-fwv">
+                                <rect key="frame" x="832" y="595" width="225" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Save WAQI City / Station" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kGs-ow-l9D">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="WAQISaveButtonAction:" target="XfG-lQ-9wD" id="65V-Ks-d3w"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VqV-xm-FGg">
+                                <rect key="frame" x="835" y="578" width="201" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="izM-Eb-JEY">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1W-co-EyU">
+                                <rect key="frame" x="835" y="631" width="201" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="JoL-Tk-TAB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
@@ -1030,8 +1092,11 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                         <outlet property="PurpleAirIDSaveButton" destination="0PM-AC-O5j" id="Wgx-H0-SyX"/>
                         <outlet property="PurpleAirRadioOutlet" destination="dNg-47-2VM" id="YPN-09-bPM"/>
                         <outlet property="PurpleAirSavedIDLabel" destination="lSN-T0-4a0" id="0wV-9T-dJg"/>
+                        <outlet property="WAQICheckedLabel" destination="h1W-co-EyU" id="VUh-I6-MGF"/>
                         <outlet property="WAQIComboBoxOutlet" destination="RFf-fi-NMR" id="z1Q-7t-Plz"/>
                         <outlet property="WAQIRadioOutlet" destination="5rd-Ce-8fv" id="s1a-gP-ozt"/>
+                        <outlet property="WAQISaveButtonOutlet" destination="YZv-hX-fwv" id="VcU-bB-X9C"/>
+                        <outlet property="WAQISavedIDLabel" destination="VqV-xm-FGg" id="6gc-Vs-3Ko"/>
                         <outlet property="autoRunAtStartup" destination="lwP-qa-jNJ" id="mtO-An-oat"/>
                     </connections>
                 </viewController>

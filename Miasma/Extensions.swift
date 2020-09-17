@@ -23,7 +23,7 @@ extension String {
     
     enum Regex: String {
         case purpleAirID = "[0-9]{4,5}"
-        case wAQICity = "[a-z]"
+        case wAQICity = "^[a-zA-Z]*$"
     }
     
     func isValid(_ validityType: ValidityType) -> Bool {
