@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
         } else {
             
-            defaults.set(true, forKey: "For Launch")
+            defaults.set(true, forKey: "First Launch")
             defaults.set("here", forKey: "WAQICity")
             defaults.set(1, forKey: "WAQIInUse")
             defaults.set(1, forKey:"CO2SignalInUse")
