@@ -1,7 +1,7 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
 Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality.
-You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
+You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, WAQI/AQICN, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
 
 ### Download
 <a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
