@@ -33,7 +33,6 @@
 		02D06EC8250CB48800D81189 /* DataLoaderClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
-		02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75924FA53A9006ED277 /* Assets.xcassets */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; };
 		02F3C77024FA54B4006ED277 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */; };
 /* End PBXBuildFile section */
@@ -418,7 +417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				02F3C75A24FA53A9006ED277 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

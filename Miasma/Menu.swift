@@ -137,7 +137,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openAboutMiasma(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "http://miasma.kissengineering.ie")!)
+        NSWorkspace.shared.open(URL(string: "https://miasma.app")!)
     }
     
     @objc func menuReview(_ sender: NSMenuItem){

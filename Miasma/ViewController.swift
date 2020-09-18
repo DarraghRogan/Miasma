@@ -237,6 +237,7 @@ class ViewController: NSViewController {
         let launcherAppId = "Darragh-Rogan.MiasmaLauncherApplication"
         
         let isAuto = (sender as AnyObject).state == .on
+        
         SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
         
         if autoRunAtStartup.state == NSControl.StateValue.off {
