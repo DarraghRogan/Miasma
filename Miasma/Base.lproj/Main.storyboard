@@ -853,6 +853,7 @@
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <string key="title">This Air Quality data source uses PurpleAir sensors.
 Please find the ID for the sensor you are interested in from the PurpleAir website map.
+
 It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in - see screen clip -&gt;</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -909,15 +910,15 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-Fz-uYk">
-                                <rect key="frame" x="663" y="339" width="397" height="160"/>
+                                <rect key="frame" x="663" y="321" width="397" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="eX7-Bn-7OB">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <mutableString key="title">Please enter your City here (no spaces) &amp; hit return ⏎, or choose the dropdown option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
+                                    <string key="title">Please enter your City here (no spaces) &amp; hit return ⏎, or choose the dropdown option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
 
 All data is routed via the World Air Quality Index, and the original measurement body is shown in the Miasma dropdown.
 
-According to the Air Quality Index returned, the Miasma icon changes colour according the the US EPA AQI scale.</mutableString>
+According to the Air Quality Index returned, the Miasma icon changes colour according the the US EPA AQI scale.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
