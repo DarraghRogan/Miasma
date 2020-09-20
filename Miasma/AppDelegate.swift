@@ -16,7 +16,7 @@ extension Notification.Name {
 }
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
     
     
     // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
@@ -25,10 +25,37 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
     
+    // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
+    
+    func showNotification() -> Void {
+        var notification = NSUserNotification()
+        // All these values are optional
+        notification.title = "Test of notification"
+        notification.subtitle = "Subtitle of notifications"
+        notification.informativeText = "Main informative text"
+        //        notification.contentImage = Root\Graphics\RoundedIcon.png
+        notification.soundName = NSUserNotificationDefaultSoundName
+        
+        NSUserNotificationCenter.default.deliver(notification)
+    }
+    
+    func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+        return true
+    }
+    
     
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
+        
+        
+        
+        // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
+        
+        NSUserNotificationCenter.default.delegate = self
+        
+        showNotification()
+        
         
         // setting first launch to default to using WAQI with "here" as the city, to give users a nice first impression. Following technique from: https://medium.com/better-programming/checking-for-the-users-first-launch-in-swift-df02a1feb472
         
