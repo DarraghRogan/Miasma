@@ -32,7 +32,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // setting first launch to default to using WAQI with "here" as the city, to give users a nice first impression. Following technique from: https://medium.com/better-programming/checking-for-the-users-first-launch-in-swift-df02a1feb472
         
-        if defaults.bool(forKey: "First Launch") == true {
+        if (defaults.integer(forKey: "WAQIInUse") == 1 && defaults.integer(forKey: "PurpleAirInUse") == 1) {
+            
+            defaults.set(0, forKey: "WAQIInUse")
+            defaults.set(true, forKey: "First Launch")
+            
+        } else if (defaults.bool(forKey: "First Launch") == true || defaults.integer(forKey: "PurpleAirInUse") == 1) {
             
         } else {
             

@@ -8,10 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */; };
-		022F784C2510058600BE4BA8 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F784B2510058600BE4BA8 /* MapView.swift */; };
-		022F784E2510059300BE4BA8 /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022F784D2510059300BE4BA8 /* CircleImage.swift */; };
-		022F784F2510085F00BE4BA8 /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */; };
-		022F78502510087100BE4BA8 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
@@ -20,12 +16,6 @@
 		0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */; };
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		029733F7250FFAE10045BB8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029733F6250FFAE10045BB8A /* AppDelegate.swift */; };
-		029733F9250FFAE10045BB8A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029733F8250FFAE10045BB8A /* SceneDelegate.swift */; };
-		029733FB250FFAE10045BB8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 029733FA250FFAE10045BB8A /* ContentView.swift */; };
-		029733FD250FFAE50045BB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 029733FC250FFAE50045BB8A /* Assets.xcassets */; };
-		02973400250FFAE50045BB8A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 029733FF250FFAE50045BB8A /* Preview Assets.xcassets */; };
-		02973403250FFAE50045BB8A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 02973401250FFAE50045BB8A /* LaunchScreen.storyboard */; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
@@ -132,8 +122,6 @@
 
 /* Begin PBXFileReference section */
 		0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
-		022F784B2510058600BE4BA8 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
-		022F784D2510059300BE4BA8 /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
 		0283DD8524F051B700E4CC07 /* Miasma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miasma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0283DD8824F051B700E4CC07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -145,15 +133,6 @@
 		0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		029733F4250FFAE10045BB8A /* Miasma_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miasma_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		029733F6250FFAE10045BB8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		029733F8250FFAE10045BB8A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		029733FA250FFAE10045BB8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		029733FC250FFAE50045BB8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		029733FF250FFAE50045BB8A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		02973402250FFAE50045BB8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		02973404250FFAE50045BB8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		02973408250FFAF50045BB8A /* Miasma_iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Miasma_iOS.entitlements; sourceTree = "<group>"; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02B85173250C0B8D0048F2FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -177,13 +156,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		029733F1250FFAE10045BB8A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		02F3C75024FA53A5006ED277 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -200,7 +172,6 @@
 				02ADB06C24FDA15700126F0C /* .gitignore */,
 				0283DD8724F051B700E4CC07 /* Miasma */,
 				02F3C75424FA53A5006ED277 /* MiasmaLauncher */,
-				029733F5250FFAE10045BB8A /* Miasma_iOS */,
 				0283DD8624F051B700E4CC07 /* Products */,
 				02F3C76724FA5487006ED277 /* Frameworks */,
 			);
@@ -211,7 +182,6 @@
 			children = (
 				0283DD8524F051B700E4CC07 /* Miasma.app */,
 				02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */,
-				029733F4250FFAE10045BB8A /* Miasma_iOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,31 +206,6 @@
 				0283DD8A24F051B700E4CC07 /* ViewController.swift */,
 			);
 			path = Miasma;
-			sourceTree = "<group>";
-		};
-		029733F5250FFAE10045BB8A /* Miasma_iOS */ = {
-			isa = PBXGroup;
-			children = (
-				029733F6250FFAE10045BB8A /* AppDelegate.swift */,
-				029733FC250FFAE50045BB8A /* Assets.xcassets */,
-				022F784D2510059300BE4BA8 /* CircleImage.swift */,
-				029733FA250FFAE10045BB8A /* ContentView.swift */,
-				02973404250FFAE50045BB8A /* Info.plist */,
-				02973401250FFAE50045BB8A /* LaunchScreen.storyboard */,
-				022F784B2510058600BE4BA8 /* MapView.swift */,
-				02973408250FFAF50045BB8A /* Miasma_iOS.entitlements */,
-				029733FE250FFAE50045BB8A /* Preview Content */,
-				029733F8250FFAE10045BB8A /* SceneDelegate.swift */,
-			);
-			path = Miasma_iOS;
-			sourceTree = "<group>";
-		};
-		029733FE250FFAE50045BB8A /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				029733FF250FFAE50045BB8A /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		02F3C75424FA53A5006ED277 /* MiasmaLauncher */ = {
@@ -315,23 +260,6 @@
 			productReference = 0283DD8524F051B700E4CC07 /* Miasma.app */;
 			productType = "com.apple.product-type.application";
 		};
-		029733F3250FFAE10045BB8A /* Miasma_iOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 02973407250FFAE50045BB8A /* Build configuration list for PBXNativeTarget "Miasma_iOS" */;
-			buildPhases = (
-				029733F0250FFAE10045BB8A /* Sources */,
-				029733F1250FFAE10045BB8A /* Frameworks */,
-				029733F2250FFAE10045BB8A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Miasma_iOS;
-			productName = Miasma_iOS;
-			productReference = 029733F4250FFAE10045BB8A /* Miasma_iOS.app */;
-			productType = "com.apple.product-type.application";
-		};
 		02F3C75224FA53A5006ED277 /* MiasmaLauncher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 02F3C76524FA53A9006ED277 /* Build configuration list for PBXNativeTarget "MiasmaLauncher" */;
@@ -362,9 +290,6 @@
 					0283DD8424F051B700E4CC07 = {
 						CreatedOnToolsVersion = 11.6;
 					};
-					029733F3250FFAE10045BB8A = {
-						CreatedOnToolsVersion = 11.7;
-					};
 					02F3C75224FA53A5006ED277 = {
 						CreatedOnToolsVersion = 11.6;
 					};
@@ -385,7 +310,6 @@
 			targets = (
 				0283DD8424F051B700E4CC07 /* Miasma */,
 				02F3C75224FA53A5006ED277 /* MiasmaLauncher */,
-				029733F3250FFAE10045BB8A /* Miasma_iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -400,16 +324,6 @@
 				02BE00B624FBC40E0064F5B8 /* Graphics in Resources */,
 				0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */,
 				0283DD9024F051BF00E4CC07 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		029733F2250FFAE10045BB8A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				02973403250FFAE50045BB8A /* LaunchScreen.storyboard in Resources */,
-				02973400250FFAE50045BB8A /* Preview Assets.xcassets in Resources */,
-				029733FD250FFAE50045BB8A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,20 +351,6 @@
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 				02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */,
 				0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		029733F0250FFAE10045BB8A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				029733F7250FFAE10045BB8A /* AppDelegate.swift in Sources */,
-				022F784C2510058600BE4BA8 /* MapView.swift in Sources */,
-				022F78502510087100BE4BA8 /* APIKeys.swift in Sources */,
-				029733F9250FFAE10045BB8A /* SceneDelegate.swift in Sources */,
-				029733FB250FFAE10045BB8A /* ContentView.swift in Sources */,
-				022F784E2510059300BE4BA8 /* CircleImage.swift in Sources */,
-				022F784F2510085F00BE4BA8 /* DataLoaderPurpleAir.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,14 +429,6 @@
 				0283DD8F24F051BF00E4CC07 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		02973401250FFAE50045BB8A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				02973402250FFAE50045BB8A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -666,7 +558,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -676,7 +568,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -692,7 +584,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -702,59 +594,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.06;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		02973405250FFAE50045BB8A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Miasma_iOS/Miasma_iOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Miasma_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = VDLCQ62KZH;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Miasma_iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		02973406250FFAE50045BB8A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Miasma_iOS/Miasma_iOS.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Miasma_iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = VDLCQ62KZH;
-				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Miasma_iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.7;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma-iOS";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SUPPORTS_MACCATALYST = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -823,15 +666,6 @@
 			buildConfigurations = (
 				0283DD9624F051BF00E4CC07 /* Debug */,
 				0283DD9724F051BF00E4CC07 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		02973407250FFAE50045BB8A /* Build configuration list for PBXNativeTarget "Miasma_iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				02973405250FFAE50045BB8A /* Debug */,
-				02973406250FFAE50045BB8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

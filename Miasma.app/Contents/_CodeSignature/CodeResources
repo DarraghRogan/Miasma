@@ -14,23 +14,23 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		THBLr3eaLQftcHgQ4oLZwKSJxvQ=
+		+Oejz30AyfyrqjMZD6OwpLHMULg=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		60JiVsu0LegLa1g62ADnov7xfvc=
+		THZo5kNRqPeDISsA56Ttm14NKng=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<data>
-		VgRRrKFi2Hubl4ruugsVMnJzX8U=
+		a6Gh4kyNdGVg0YTXFykZBTEfTtY=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/PreferencesStoryboard.nib</key>
 		<data>
-		302WQx4etJh0FtIwyklTE/wWck8=
+		eo5fv/zmjtnehIhy+PMtIrfbdqA=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<data>
-		RMaxZu9WiDQGMYo2h0l6JSrbt4k=
+		ZpP/RG59Z4GQ7hU3x2C5EO+rclU=
 		</data>
 		<key>Resources/Graphics/AppIcons/appstore.png</key>
 		<data>
@@ -48,17 +48,21 @@
 		<data>
 		1jGcSBwejwzbXsI5slOZj2H9dKs=
 		</data>
-		<key>Resources/Graphics/ScreenshotMenu.png</key>
-		<data>
-		N0hNqOAYfNxNYywgNHlv/KElt3U=
-		</data>
 		<key>Resources/Graphics/ScreenshotMenuCropped.png</key>
 		<data>
-		0DC3g5i4K1kol+lQ/hFghhaflrc=
+		4qvtS8rzDS+Wu1o1pGynQ53ODY8=
+		</data>
+		<key>Resources/Graphics/ScreenshotMenuPurpleAir.png</key>
+		<data>
+		2i5Uzlf0EVjRTbshBJZVnXK8OFM=
+		</data>
+		<key>Resources/Graphics/ScreenshotMenuWAQI.png</key>
+		<data>
+		yEcO6w8JhsydX+DjBk9nvTfqMBI=
 		</data>
 		<key>Resources/Graphics/ScreenshotPreferences.png</key>
 		<data>
-		rrgtyXx22CeoGec6kxlJOx3Zdqc=
+		T3EsQoXhsFnold6Aocjwahfivug=
 		</data>
 		<key>Resources/Graphics/github-app-button.png</key>
 		<data>
@@ -70,63 +74,63 @@
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftAppKit.dylib</key>
 		<data>
-		Dyz0LCtMlGS8ouTsjX1NjwLhn5s=
+		VEAzW5z7i3eVtC4XQE7DjSAb7Go=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCore.dylib</key>
 		<data>
-		BpepjmoyGb2XM2av/rIviExNngA=
+		CJU5GxHCBUBS45ma8ZLiQUI2PCo=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreData.dylib</key>
 		<data>
-		J1i7RMxD7LxL2NqbxcIk+q+xC+8=
+		+FS1YZMRGrDDxbSIdIgARRIbRcs=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreFoundation.dylib</key>
 		<data>
-		34MMkvHj9YhvfVjnrCPr1GyanM0=
+		Ed442SoZpoH4TvqRD/iVUpwhsTM=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreGraphics.dylib</key>
 		<data>
-		p0EFPTvH/wgsJXd7H/2kFrU2qC4=
+		8mv0CVvY9ZJdYIbRener2uk279Q=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreImage.dylib</key>
 		<data>
-		OCGrbPAyPmvQWONHWWl6qRjo+Gk=
+		P7IbPZc83XvY2pjzksokLBgABCk=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftDarwin.dylib</key>
 		<data>
-		RilcMRIXTtn2gu/mle18nQRrOqw=
+		syHYO0+7YYl8mJmhsK+zsaGGfyw=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftDispatch.dylib</key>
 		<data>
-		ki7LbRKLqNDUvCONR/ekcirTmsk=
+		vkMUAfGbv97djCzYHiya8cb0mrU=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftFoundation.dylib</key>
 		<data>
-		C6aZ8p2xbAh/o9t+guYNTnWE02I=
+		AsVsSduj9jDBwgPezvljMD0RyKE=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftIOKit.dylib</key>
 		<data>
-		1XPrcvwTMjhEarZM+bJFGEENdOk=
+		2R4fS+UsDCfFb9CNm7j+zs8jKBg=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftMetal.dylib</key>
 		<data>
-		HXqW38hS/g0bmuEmliIst7sp73U=
+		ez21oQfxvQK5nYBxqesZIpHn3mM=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftObjectiveC.dylib</key>
 		<data>
-		rF90MyEHqoJYZKtHUaozYxq9xzo=
+		adoYzi6O8e5moKo+nJmwftsyNJ8=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftQuartzCore.dylib</key>
 		<data>
-		BexE0GdCDnt4BVJKuH3jFUE080U=
+		0Y7ehSFMYbJzgEjLxbXN2Arkluk=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftXPC.dylib</key>
 		<data>
-		37p4pTbGapZHF/bqtvoVjb8ngvs=
+		1bzuK5oTPzyKlMr5vdsQ1D85Xdk=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftos.dylib</key>
 		<data>
-		G1ckjDs1IGWjkzmI+eQjJW0tY1A=
+		XZUsumyD/Ih1fxzHwrCBWGigczI=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/Info.plist</key>
 		<data>
@@ -134,7 +138,7 @@
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/MacOS/MiasmaLauncher</key>
 		<data>
-		AebKZGX1pGB1EIGDaOX4hI9bhUc=
+		BoD1cLC8BUM7qiHXqHWgTB6PkI4=
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/PkgInfo</key>
 		<data>
@@ -142,7 +146,7 @@
 		</data>
 		<key>Resources/MiasmaLauncher.app/Contents/_CodeSignature/CodeResources</key>
 		<data>
-		xaGKH8XBBKGm+BKBSxfYiHAF9co=
+		XCeXx1I7OJHVIAP6y59BiwHAQZ8=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -151,145 +155,145 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			SjY/drT88qmmfIqGu8nRLSC99I4=
+			Tlq5oWWU/Wf0B4LxRag37ODEky4=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftAppKit" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftAppKit" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			WA51Gjvu/RmW2oHeyzFRnt3NtGA=
+			D6Ac8n9Sg1pgI1D3Sku9Wd1TIiQ=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCore" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCore" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreData.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			rJOXwHFYbmMU1DxJXpjitpduN2k=
+			/r5O2lMV9vGptd7rAtToirSLV6M=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreData" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreData" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreFoundation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			yH18lRYUaLPmJyaPdf9+A++J1Hk=
+			bcf6kb/OcTRvU1X+D2DcMQKoUqA=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreFoundation" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreFoundation" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreGraphics.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			cIf/YMY2bWMYXbbmOelN9xpPH0M=
+			0yXpJx5wnXKSs9woXZ8v/3+ITeY=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreGraphics" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreGraphics" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreImage.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Erw2d1IVveAZiqSmZSSvCO98TR4=
+			1QYsNLUk4wSWNwh9LhM2a3tmz+o=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftCoreImage" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreImage" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftDarwin.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			ZqSklsdpgXK75r/rYbj9xpFsqmc=
+			Sa83YD4HiW7VE6sxYa1zwzaBhUo=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftDarwin" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftDarwin" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftDispatch.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			0Ca6OM+Mt5ysOPNDnV0LwWv1HzU=
+			tFHpxMCnhMviMo0aZ9WF4vtAlUQ=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftDispatch" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftDispatch" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftFoundation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			6ibiitVWst1SBiVdLox14cncNdg=
+			BC4Ub0ZXaoJMkx7nw29z2V7JzVw=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftFoundation" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftFoundation" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftIOKit.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			m5uUn5yNsXst5TDh6fc39+WM4Wc=
+			i9g7eMykyknTY6bDk3wj7QLst1A=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftIOKit" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftIOKit" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftMetal.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			xjdKMFIoq1yNo/pmso+E4zMCShg=
+			8syFZjaTfcXT3D2i59MAiVrZ7V8=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftMetal" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftMetal" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftObjectiveC.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			6ib03KzntohfYl4LrSbOxPC95yg=
+			Hdtvt4IISu9N7fvdM9XhNRI7L/o=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftObjectiveC" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftObjectiveC" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftQuartzCore.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			aofxJiYCdY6/KhMY96dQW3IHaZk=
+			2vKkPg4YiuX0m8w+xaPVyqoHVuY=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftQuartzCore" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftQuartzCore" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftXPC.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			55XG9NCBPHdtMfHkj9DcWD1i6tE=
+			54nkC6ftR3zUa7UlAgVtdYkL0g4=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftXPC" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftXPC" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Frameworks/libswiftos.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Nfw3iV67lm3Bm92Z8S+XZBAQ/YY=
+			sw9JODis+zpPiynta0diMt2gSP8=
 			</data>
 			<key>requirement</key>
-			<string>identifier "com.apple.dt.runtime.swiftos" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftos" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Library/LoginItems/MiasmaLauncher.app</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			V/3oynejoF2EVE8eaFUpMCuPfyg=
+			dMembnfOUOhfIfkBmJ3UhXfQC0Y=
 			</data>
 			<key>requirement</key>
-			<string>identifier "Darragh-Rogan.MiasmaLauncher" and anchor apple generic and certificate leaf[subject.CN] = "Apple Development: Darragh Rogan (5KN988GM56)" and certificate 1[field.1.2.840.113635.100.6.2.1] /* exists */</string>
+			<string>anchor apple generic and identifier "Darragh-Rogan.MiasmaLauncher" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = VDLCQ62KZH)</string>
 		</dict>
 		<key>Resources/.gitignore</key>
 		<dict>
@@ -309,35 +313,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			15B7y4aqN9Z1/BwUmXoMofV2GOhrF6sYp+/qL/jKEvU=
+			562G2Y5PCB6KmyQ2OKtp4GqRQT6ygDigKo30zfYiA+8=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wZbRWpwhZwcEuHJ6N26ZhhgA2KJcRjIgTqNHfZNYOB4=
+			H0/E6nuA4FgcSYB5KFfv68MZ0Eid2kYNbzNjKhJSgRQ=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5/cLEvDfu+lJ7XpaYW8Rt1rOvyWGAG/dv0UeBNXDelo=
+			iUjzgEvGfuj7g0dKR8hLjhshho8b8IcL3paYi7C4c6k=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/PreferencesStoryboard.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H6TxMFmTP9WtTEtjBtOql9XzJxVZoFXYLLPbmoppVbE=
+			OwQc/1BHukcWShweJboDoy3KBivplwswyU4P1CGEblk=
 			</data>
 		</dict>
 		<key>Resources/Base.lproj/Main.storyboardc/XfG-lQ-9wD-view-m2S-Jp-Qdl.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			80pxPl7guXeOUs5C0HtfLyGlGtW9miCUAnEH5jTpLqA=
+			2FZPQ2EQLUl7Lzv74v7zT7yHTibDTk8BQF09yZ0fJG0=
 			</data>
 		</dict>
 		<key>Resources/Graphics/AppIcons/appstore.png</key>
@@ -368,25 +372,32 @@
 			YH2jY1fjV1rmJ8J5xYvqg2zRsE1D+5Ap5broIA9Rni4=
 			</data>
 		</dict>
-		<key>Resources/Graphics/ScreenshotMenu.png</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6oVLU6iE/bLFgYZ3icdrw93uUMNtYcbfheLwafnjXrE=
-			</data>
-		</dict>
 		<key>Resources/Graphics/ScreenshotMenuCropped.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xPz8iHxwyZhbQ9SAq2fGXdHMDfxaLoyhUISxsWr6BTo=
+			UBVfmHTu4Rum/J4hHx2upR0wW6V/1dN68FcTXZSwQjU=
+			</data>
+		</dict>
+		<key>Resources/Graphics/ScreenshotMenuPurpleAir.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			CpVMLyGVnHNqzqv/jfP4t2IaFuqlxzUyIEPZHZS3On8=
+			</data>
+		</dict>
+		<key>Resources/Graphics/ScreenshotMenuWAQI.png</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			g+9tWNeudmjH4vx4GRPHrqQuo/jxdiNgwRzAArZgrhs=
 			</data>
 		</dict>
 		<key>Resources/Graphics/ScreenshotPreferences.png</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fWvxfJHQyqenEiV9wR5mTrV447Qyym47Xky08oej5OM=
+			WZ9LIep9dQH4Q11Ym6DTubzQNYIfeGt1hh7H47uCkeU=
 			</data>
 		</dict>
 		<key>Resources/Graphics/github-app-button.png</key>
@@ -407,105 +418,105 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9x/QfMRtSKAH6G6lkJ+gipA7oFlNdEff4GONd2Ships=
+			pHyr6msvX6X/Bw8mSXb2m09KBjx9UuSA4pM1NJIhwIs=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCore.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jT8Pk9coigCt2alEr4UStJSGJuCA95eVFVJ3yHwJcd0=
+			EulviJnrHZ64/R+nV5NosCYcexsPNpaTYe3PYHQSKUQ=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreData.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pZehLt86ypg79/xJ2Hid6sMUkntjty6Wyjr+yPMR+O4=
+			n64Hw+6yono3tRFEPeI4BJjwFsuqYyNSA2EPH0WJbhc=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreFoundation.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			E2yN5W0LVfBcGcq3Gj1zSkY/sx42F/0dQSmN6OxM2tQ=
+			02LkYD3H6vgW32vkEyJCJY+mMgvej27TZVWdz2QWJDs=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreGraphics.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4fVczOlominQavh6NF98ZnIkL97zzr45eWg1TZWuE5Q=
+			dMatq6hbV3UsbxHIXViwQBgAKaAhdotaGzmO9xaXhaE=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftCoreImage.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			CI7lbFhLtzCB8Gy1RcJV3Q6o8jtQujXQ5BmSfkQHkN0=
+			xVwkqJicbLxIbsSujeCmwHAaCXwdfSSIeMsRbqbfdpo=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftDarwin.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			O4nt6cPTT3c4SYKPCsG2Sw4BvyCUPV1MVf27AWP00kk=
+			ZMacfJxge5d/y3OOszv8/94pGRix41CktrzBVboYsiQ=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftDispatch.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			nw/mPqehDcQQb32rcp+IOPFW5yVMB+Vuptw4MGcfal4=
+			NddvvS+FFcVy3ScSXPgs4coMYp+8aw5B7KTiuA1dcSY=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftFoundation.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AMyLLOSi/dkS6dhV9EM+OdfMNciMzZPnjAtqhDU5Cvk=
+			K+Ls42MHm8urlv/3eJKcUzZbpaPyAFy9CY4w2O/GQS4=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftIOKit.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i8LbU6b/06jQv5jifG3rTHgflno1DbbPNL37X3epXIE=
+			nQVuPmrH2Us1G0kivGfMGiMyUTUKeOqfjW99cxnxLoQ=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftMetal.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			DcxAgymYxKgzRbolwzK6hSPGWwz0owpLCQjQWX7a3Uc=
+			QVixI58HphkjW1xqF9ZTAvj5UJq+bM0oDAnd3AL1z6A=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftObjectiveC.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yje2hMc2i4DRbI7ckKErIeoCKapB1Ax0PHyUOgRfwmM=
+			UoVf4FasCL1FWiOo13t8AVExZQRlMMrzFfKfKkeKiIw=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftQuartzCore.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pTuhKizbKPoH/4W/0itXWFED7J2Vxz9KrgaGDpWbwDA=
+			vVr1TYBSuQHl2gVx0H6BWkk+jPr7iv0JxKaRkH5ug5w=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftXPC.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RTDlExm02IA38uaFOyzVlsd71hVGD00XAhRGTmsYqYU=
+			CQQl8PcoVXkvYGbK4SiTO0U/IcF6VjojYFSiM4pnY2o=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Frameworks/libswiftos.dylib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			xxOLAmOESCbLpCAal62JKvmNozs1Yax0gGYCPbhf89Q=
+			lHiIYlAs9wIoaz4JzClukHZIr6ezhO9YzfrRMDlyizc=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/Info.plist</key>
@@ -519,7 +530,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eyg+yDP6HTEZl/LlR0UohWEC3bzqv5z7jnpnzHuiNIY=
+			5QmMZm126jEp6NJUDOG/7Ic2qBHhQTrxBCiwKnabKx0=
 			</data>
 		</dict>
 		<key>Resources/MiasmaLauncher.app/Contents/PkgInfo</key>
@@ -533,7 +544,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			m6MoGThU/MbI6pjKFEvPUSHFrLPJUE8rGM9bL+04fQ8=
+			xe/+0x3cIo+DE+mX5ihWzMq38f8ZzkCGKqvtu52yw5c=
 			</data>
 		</dict>
 	</dict>
