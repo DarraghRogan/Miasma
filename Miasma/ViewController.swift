@@ -248,8 +248,19 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBOutlet weak var receiveNotificationsButtonOutlet: NSButton!
+    
+    
     let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
     
+    @IBAction func receiveNotificationsButtonAction(_ sender: Any) {
+        if receiveNotificationsButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(0, forKey: "ClimbingAQINotificationsWanted")
+        }
+        if receiveNotificationsButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -261,6 +272,10 @@ class ViewController: NSViewController {
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
         autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        
+        if AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1{
+            receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        }
         
         CO2SignalButtonOutlet.state = AppDelegate().defaults.object(forKey:"CO2SignalInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         

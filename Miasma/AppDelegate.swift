@@ -27,23 +27,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     
     // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
     
-    func showNotification() -> Void {
+    func showNotification(title: String, subtitle: String, informativeText: String) -> Void {
+
         var notification = NSUserNotification()
-        // All these values are optional
-        notification.title = "Test of notification"
-        notification.subtitle = "Subtitle of notifications"
-        notification.informativeText = "Main informative text"
-        //        notification.contentImage = Root\Graphics\RoundedIcon.png
+
+        notification.title = title
+        notification.subtitle = subtitle
+        notification.informativeText = informativeText
+//        notification.contentImage = contentImage
         notification.soundName = NSUserNotificationDefaultSoundName
-        
+
         NSUserNotificationCenter.default.deliver(notification)
+
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
+        AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
         return true
     }
     
-    
+
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -53,9 +56,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
         
         NSUserNotificationCenter.default.delegate = self
-        
-        showNotification()
-        
+                
         
         // setting first launch to default to using WAQI with "here" as the city, to give users a nice first impression. Following technique from: https://medium.com/better-programming/checking-for-the-users-first-launch-in-swift-df02a1feb472
         
@@ -66,6 +67,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             
         } else if (defaults.bool(forKey: "First Launch") == true || defaults.integer(forKey: "PurpleAirInUse") == 1) {
             
+            defaults.set(true, forKey: "First Launch")
+            
         } else {
             
             defaults.set(true, forKey: "First Launch")
@@ -73,6 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(1, forKey: "WAQIInUse")
             defaults.set(1, forKey:"CO2SignalInUse")
             defaults.set(1, forKey:"OpenSkyInUse")
+            defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
             
         }
         

@@ -686,11 +686,11 @@
             <objects>
                 <viewController title="Miasma Preferences" storyboardIdentifier="PreferencesStoryboard" id="XfG-lQ-9wD" customClass="ViewController" customModule="Miasma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1082" height="752"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1082" height="736"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ND2-AO-lfk">
-                                <rect key="frame" x="18" y="716" width="160" height="19"/>
+                                <rect key="frame" x="18" y="700" width="160" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Local Air Quality Data" id="Q7H-pg-MSl">
                                     <font key="font" metaFont="system" size="16"/>
@@ -699,7 +699,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a8B-2u-OhJ">
-                                <rect key="frame" x="131" y="691" width="75" height="18"/>
+                                <rect key="frame" x="19" y="675" width="75" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="Disabled" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="2cf-Ks-xZ9">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -710,7 +710,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-47-2VM">
-                                <rect key="frame" x="245" y="691" width="113" height="18"/>
+                                <rect key="frame" x="136" y="675" width="113" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="From PurpleAir" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="bJw-cj-Cpj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -721,7 +721,7 @@
                                 </connections>
                             </button>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ouk-EH-Ag6">
-                                <rect key="frame" x="234" y="542" width="392" height="5"/>
+                                <rect key="frame" x="118" y="526" width="508" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Vwz-kN-nnc">
@@ -738,7 +738,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ij3-Vr-ptz">
-                                <rect key="frame" x="413" y="655" width="131" height="21"/>
+                                <rect key="frame" x="420" y="639" width="122" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="9dE-KE-xoA">
                                     <font key="font" metaFont="system"/>
@@ -750,15 +750,11 @@
                                 </connections>
                             </textField>
                             <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Sl4-jY-Wle">
-                                <rect key="frame" x="223" y="321" width="5" height="368"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </box>
-                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="xVc-Bf-m1q">
-                                <rect key="frame" x="648" y="321" width="5" height="368"/>
+                                <rect key="frame" x="107" y="321" width="5" height="352"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vfv-MY-HG1">
-                                <rect key="frame" x="239" y="658" width="158" height="16"/>
+                                <rect key="frame" x="130" y="642" width="158" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Enter PurpleAir Sensor ID" id="WWi-W8-VW4">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -767,7 +763,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fM-sq-1wJ">
-                                <rect key="frame" x="239" y="578" width="163" height="16"/>
+                                <rect key="frame" x="130" y="562" width="163" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Saved PurpleAir Sensor ID" id="lFx-1e-Klv">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -776,7 +772,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73Y-KW-Zia">
-                                <rect key="frame" x="239" y="631" width="165" height="16"/>
+                                <rect key="frame" x="130" y="615" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="D2u-lD-rgC">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -785,7 +781,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UsL-kp-Bh7">
-                                <rect key="frame" x="541" y="648" width="96" height="32"/>
+                                <rect key="frame" x="544" y="632" width="96" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Validate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="708-pu-5Ko">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -796,7 +792,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-AC-O5j">
-                                <rect key="frame" x="407" y="595" width="225" height="32"/>
+                                <rect key="frame" x="415" y="573" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Save PurpleAir ID" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XsP-Wu-iZs">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -807,7 +803,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lSN-T0-4a0">
-                                <rect key="frame" x="410" y="578" width="168" height="16"/>
+                                <rect key="frame" x="418" y="556" width="168" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="3lh-8m-sd7">
                                     <font key="font" metaFont="system"/>
@@ -816,7 +812,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZW1-X2-lTG">
-                                <rect key="frame" x="414" y="498" width="225" height="32"/>
+                                <rect key="frame" x="414" y="482" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Open PurpleAir Map" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1mv-d9-6AL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -827,7 +823,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-pO-AHf">
-                                <rect key="frame" x="832" y="500" width="225" height="32"/>
+                                <rect key="frame" x="832" y="484" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Open WAQI Map Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ys-iL-kCJ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -838,7 +834,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-L0-Tvd">
-                                <rect key="frame" x="410" y="631" width="201" height="16"/>
+                                <rect key="frame" x="418" y="609" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="elL-8h-8rm">
                                     <font key="font" metaFont="system"/>
@@ -847,14 +843,13 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-ko-3zN">
-                                <rect key="frame" x="245" y="318" width="176" height="208"/>
+                                <rect key="frame" x="418" y="321" width="217" height="156"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="UiA-qh-nNp">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">This Air Quality data source uses PurpleAir sensors.
-Please find the ID for the sensor you are interested in from the PurpleAir website map.
+                                    <string key="title">Please find the ID for the sensor you are interested in from the PurpleAir website map.
 
-It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in - see screen clip -&gt;</string>
+It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in - see screen clip.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -882,7 +877,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8R-2h-NA4">
-                                <rect key="frame" x="418" y="352" width="219" height="133"/>
+                                <rect key="frame" x="118" y="324" width="294" height="191"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PurpleAirWebpageSample" id="D5H-E1-FCY"/>
                                 <connections>
@@ -890,7 +885,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rd-Ce-8fv">
-                                <rect key="frame" x="663" y="691" width="195" height="18"/>
+                                <rect key="frame" x="663" y="675" width="195" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="From World Air Quality Index" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vjk-ap-k8q">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -901,7 +896,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kij-pn-ZcW">
-                                <rect key="frame" x="663" y="667" width="83" height="16"/>
+                                <rect key="frame" x="663" y="651" width="83" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="City / Station" id="PXD-at-IxH">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -910,21 +905,19 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-Fz-uYk">
-                                <rect key="frame" x="663" y="321" width="397" height="178"/>
+                                <rect key="frame" x="657" y="305" width="403" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="eX7-Bn-7OB">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">Please enter your City here (no spaces) &amp; hit return ⏎, or choose the dropdown option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
+                                    <mutableString key="title">Please enter your City here (no spaces) &amp; hit return ⏎, or choose the dropdown option "here" to autoselect the Air Quality station closest to the recorded location for your Mac's IP address.
 
-All data is routed via the World Air Quality Index, and the original measurement body is shown in the Miasma dropdown.
-
-According to the Air Quality Index returned, the Miasma icon changes colour according the the US EPA AQI scale.</string>
+All data is routed via the World Air Quality Index, and the original measurement body is shown in the Miasma dropdown.</mutableString>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFf-fi-NMR">
-                                <rect key="frame" x="837" y="661" width="217" height="25"/>
+                                <rect key="frame" x="837" y="645" width="217" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Zg8-1E-aWn">
                                     <font key="font" metaFont="system"/>
@@ -941,7 +934,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </connections>
                             </comboBox>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="vk4-SD-1Dc">
-                                <rect key="frame" x="20" y="82" width="1042" height="5"/>
+                                <rect key="frame" x="20" y="75" width="1042" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxj-ZF-qYt">
@@ -958,7 +951,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ox-Vy-2lB">
-                                <rect key="frame" x="18" y="51" width="623" height="25"/>
+                                <rect key="frame" x="18" y="44" width="623" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Please choose Refresh from M ⚪ menu when preferences configuration is complete" id="2ym-07-W0I">
                                     <font key="font" metaFont="system" size="16"/>
@@ -967,7 +960,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwP-qa-jNJ">
-                                <rect key="frame" x="130" y="104" width="212" height="18"/>
+                                <rect key="frame" x="130" y="84" width="212" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Autorun Miasma at Mac startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Iyh-NB-hqN">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -977,8 +970,19 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                     <action selector="autoRunAtStartup:" target="XfG-lQ-9wD" id="4qo-gA-Vtd"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g0f-Nh-1l5">
+                                <rect key="frame" x="130" y="104" width="461" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Receive Notifications when AQI climbs to higher Level of Health Concern" bezelStyle="regularSquare" imagePosition="left" inset="2" id="7XY-Ob-Ywt">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="receiveNotificationsButtonAction:" target="XfG-lQ-9wD" id="dRb-wG-aay"/>
+                                </connections>
+                            </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcq-9r-sY0">
-                                <rect key="frame" x="934" y="27" width="98" height="16"/>
+                                <rect key="frame" x="934" y="20" width="98" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Miasma version" id="Qei-xh-kF2">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -987,7 +991,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zr-hR-aKv">
-                                <rect key="frame" x="1032" y="27" width="32" height="16"/>
+                                <rect key="frame" x="1032" y="20" width="32" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="0.00" id="sFz-zI-yy1">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1030,11 +1034,11 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Ejb-tJ-8S4">
-                                <rect key="frame" x="659" y="542" width="392" height="5"/>
+                                <rect key="frame" x="659" y="526" width="392" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3U-Nm-BIN">
-                                <rect key="frame" x="664" y="578" width="160" height="16"/>
+                                <rect key="frame" x="664" y="562" width="160" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Saved WAQI City / Station" id="w2x-HY-jCQ">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1043,7 +1047,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zrk-t2-bra">
-                                <rect key="frame" x="664" y="631" width="165" height="16"/>
+                                <rect key="frame" x="664" y="615" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="TgJ-F8-Upg">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1052,7 +1056,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZv-hX-fwv">
-                                <rect key="frame" x="832" y="595" width="225" height="32"/>
+                                <rect key="frame" x="832" y="579" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Save WAQI City / Station" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kGs-ow-l9D">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1063,7 +1067,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VqV-xm-FGg">
-                                <rect key="frame" x="835" y="578" width="201" height="16"/>
+                                <rect key="frame" x="835" y="562" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="izM-Eb-JEY">
                                     <font key="font" metaFont="system"/>
@@ -1072,7 +1076,7 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1W-co-EyU">
-                                <rect key="frame" x="835" y="631" width="201" height="16"/>
+                                <rect key="frame" x="835" y="615" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="JoL-Tk-TAB">
                                     <font key="font" metaFont="system"/>
@@ -1080,6 +1084,10 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="xVc-Bf-m1q">
+                                <rect key="frame" x="640" y="314" width="5" height="359"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
                         </subviews>
                     </view>
                     <connections>
@@ -1099,11 +1107,12 @@ According to the Air Quality Index returned, the Miasma icon changes colour acco
                         <outlet property="WAQISaveButtonOutlet" destination="YZv-hX-fwv" id="VcU-bB-X9C"/>
                         <outlet property="WAQISavedIDLabel" destination="VqV-xm-FGg" id="6gc-Vs-3Ko"/>
                         <outlet property="autoRunAtStartup" destination="lwP-qa-jNJ" id="mtO-An-oat"/>
+                        <outlet property="receiveNotificationsButtonOutlet" destination="g0f-Nh-1l5" id="17S-Pa-V8g"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="376" y="896"/>
+            <point key="canvasLocation" x="376" y="888"/>
         </scene>
     </scenes>
     <resources>
