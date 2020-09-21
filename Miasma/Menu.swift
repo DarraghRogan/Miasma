@@ -422,7 +422,7 @@ class menuFunctions: NSObject {
                 default:
                     pressure_visual = ""
                 }
-                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.sensor?.pressureA ?? 0)) millibar            \(pressure_visual)"
+                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.sensor?.pressureA ?? 0)) millibar                 \(pressure_visual)"
                 self.purpleAirReadingAge.title = "⏳: \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirData.sensor?.lastSeen ?? 0))) seconds old at Miasma refresh time"
             })
             
