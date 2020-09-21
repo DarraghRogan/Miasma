@@ -26,7 +26,7 @@ struct Sensor: Codable {
     var sensorIndex: Int?
     var name: String?
 //    var model: String?
-    var locationType: Int?
+//    var locationType: Int?
     var latitude, longitude: Double?
 //    var altitude: Int?
     var lastSeen: Int?
@@ -61,7 +61,7 @@ struct Sensor: Codable {
         case sensorIndex = "sensor_index"
         case name
 //        case model
-        case locationType = "location_type"
+//        case locationType = "location_type"
         case latitude, longitude
 //        case altitude
         case lastSeen = "last_seen"

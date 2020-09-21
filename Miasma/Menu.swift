@@ -304,7 +304,7 @@ class menuFunctions: NSObject {
                     DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.sensor?.latitude ?? 0, lon: purpleAirData.sensor?.longitude ?? 0)
                 }
                 
-                self.purpleAirLocation.title = "🌍: \(String(purpleAirData.sensor?.name ?? "0")); Type: \(String(purpleAirData.sensor?.locationType ?? 0))"
+                self.purpleAirLocation.title = "🌍: \(String(purpleAirData.sensor?.name ?? "0"))"
                 
                 // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                 
