@@ -293,22 +293,22 @@ class menuFunctions: NSObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
-                    DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.results?[0].lat ?? 0), lon: String(purpleAirData.results?[0].lon ?? 0))
+                    DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.sensor?.latitude ?? 0), lon: String(purpleAirData.sensor?.longitude ?? 0))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((purpleAirData.results?[0].lat ?? 0)-1), lomin: ((purpleAirData.results?[0].lon ?? 0)-1), lamax: ((purpleAirData.results?[0].lat ?? 0)+1), lomax: ((purpleAirData.results?[0].lon ?? 0)+1))
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((purpleAirData.sensor?.latitude ?? 0)-1), lomin: ((purpleAirData.sensor?.longitude ?? 0)-1), lamax: ((purpleAirData.sensor?.latitude ?? 0)+1), lomax: ((purpleAirData.sensor?.longitude ?? 0)+1))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
-                    DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.results?[0].lat ?? 0, lon: purpleAirData.results?[0].lon ?? 0)
+                    DataLoaderClimaCell().loadClimaCellData(lat: purpleAirData.sensor?.latitude ?? 0, lon: purpleAirData.sensor?.longitude ?? 0)
                 }
                 
-                self.purpleAirLocation.title = "🌍: \(String(purpleAirData.results?[0].label ?? "0")); Type: \(String(purpleAirData.results?[0].deviceLocationtype ?? "0"))"
+                self.purpleAirLocation.title = "🌍: \(String(purpleAirData.sensor?.name ?? "0")); Type: \(String(purpleAirData.sensor?.locationType ?? 0))"
                 
                 // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                 
-                var pM2_5Value = round(Double(purpleAirData.results?[0].pm25Value ?? "") ?? 0)
+                var pM2_5Value = round(((purpleAirData.sensor?.pm25_A ?? 0) + (purpleAirData.sensor?.pm25_B ?? 0))/2)
                 let pM2_5ColourButton: String
                 let aQI_CalculatedDouble: Double
                 var aQI_CalculatedRounded: Int = 0
@@ -329,7 +329,7 @@ class menuFunctions: NSObject {
                     
                     if self.previousStateForNotificationBefore == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
+                        AppDelegate().showNotification(title: "🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
                     }
                     
                 case _ where pM2_5Value > 35.5 && pM2_5Value < 55.5:
@@ -341,7 +341,7 @@ class menuFunctions: NSObject {
                     
                     if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
+                        AppDelegate().showNotification(title: "🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
                     }
                     
                 case _ where pM2_5Value > 55.5 && pM2_5Value < 150.5:
@@ -353,7 +353,7 @@ class menuFunctions: NSObject {
                     
                     if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
+                        AppDelegate().showNotification(title: "🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
                     }
                     
                 case _ where pM2_5Value > 150.5 && pM2_5Value < 250.5:
@@ -365,7 +365,7 @@ class menuFunctions: NSObject {
                     
                     if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
+                        AppDelegate().showNotification(title: "🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
                     }
                     
                 case _ where pM2_5Value > 250.5 && pM2_5Value < 500.5:
@@ -377,7 +377,7 @@ class menuFunctions: NSObject {
                     
                     if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                        AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                     }
                     
                 case _ where pM2_5Value > 500.5:
@@ -388,7 +388,7 @@ class menuFunctions: NSObject {
                     
                     if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
                     {
-                        AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.results?[0].label ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                        AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                     }
                     
                 default:
@@ -398,18 +398,18 @@ class menuFunctions: NSObject {
                 }
                 self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ (Current)   \(pM2_5ColourButton)"
                 
-                let PurpleAirFahrenheit: Double = Double(purpleAirData.results?[0].tempF ?? "0")!
+                let PurpleAirFahrenheit = purpleAirData.sensor?.temperatureA ?? 0
                 func calculateCelsius(fahrenheit: Double) -> String {
                     var celsius: Double
                     celsius = (fahrenheit - 32) * 5 / 9
                     let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                     return celciusRoundedString
                 }
-                self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: PurpleAirFahrenheit))℃ / \(String(purpleAirData.results?[0].tempF ?? "0"))℉"
+                self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(String(purpleAirData.sensor?.temperatureA ?? 0))℉"
                 
-                self.purpleAirHumidity.title = "💧: \(String(purpleAirData.results?[0].humidity ?? "0"))% Relative Humidity"
+                self.purpleAirHumidity.title = "💧: \(String(purpleAirData.sensor?.humidityA ?? 0))% Relative Humidity"
                 
-                var pressureValue = Double(purpleAirData.results?[0].pressure ?? "0") ?? 0
+                var pressureValue = Double(purpleAirData.sensor?.pressureA ?? 0) ?? 0
                 let pressure_visual: String
                 // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                 switch (pressureValue) {
@@ -422,8 +422,8 @@ class menuFunctions: NSObject {
                 default:
                     pressure_visual = ""
                 }
-                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.results?[0].pressure ?? "0")) millibar            \(pressure_visual)"
-                self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.results?[0].age ?? 0)) minute(s) old at Miasma refresh time"
+                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.sensor?.pressureA ?? 0)) millibar            \(pressure_visual)"
+                self.purpleAirReadingAge.title = "⏳: \(String(purpleAirData.sensor?.lastSeen ?? 0)) since Epoch at Miasma refresh time"
             })
             
             if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {

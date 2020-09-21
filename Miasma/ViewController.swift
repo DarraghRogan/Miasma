@@ -23,10 +23,10 @@ class ViewController: NSViewController {
             PurpleAirCheckedLabel.stringValue = "Loading (5s)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                if purpleAirData.results?.isEmpty ?? true {
+                if purpleAirData.sensor == nil {
                     self.PurpleAirCheckedLabel.stringValue = "Error. Check PurpleAir ID"
                 } else {
-                    self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.results?[0].label ?? "")
+                    self.PurpleAirCheckedLabel.stringValue = String(purpleAirData.sensor?.name ?? "")
                     self.PurpleAirIDSaveButton.isEnabled = true
                 }
             })
