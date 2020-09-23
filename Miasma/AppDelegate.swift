@@ -42,11 +42,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
-        AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
         return true
     }
-    
-
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -56,7 +53,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
         
         NSUserNotificationCenter.default.delegate = self
-                
+            
         
         // setting first launch to default to using WAQI with "here" as the city, to give users a nice first impression. Following technique from: https://medium.com/better-programming/checking-for-the-users-first-launch-in-swift-df02a1feb472
         
@@ -77,7 +74,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(1, forKey:"CO2SignalInUse")
             defaults.set(1, forKey:"OpenSkyInUse")
             defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
-            
+            defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
         }
         
         // Launching automatically at startup from tutorial: https://theswiftdev.com/how-to-launch-a-macos-app-at-login/

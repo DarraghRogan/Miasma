@@ -59,16 +59,7 @@ class ViewController: NSViewController {
     }
     
     @IBOutlet weak var MiasmaVersionLabel: NSTextField!
-    
-    @IBOutlet weak var AirQualityDisabledRadioOutlet: NSButton!
-    
-    @IBAction func AirQualityDisabledRadioAction(_ sender: Any) {
-        PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-        AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-        
-        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
-    }
+
     
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
     
@@ -92,11 +83,9 @@ class ViewController: NSViewController {
     
     @IBAction func PurpleAirRadioAction(_ sender: Any) {
         if PurpleAirSavedIDLabel.stringValue == ""{
-            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
         else{
             AppDelegate().defaults.set(1, forKey: "PurpleAirInUse")
-            AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         }
         
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
@@ -111,7 +100,6 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(PurpleAirIDField.stringValue, forKey: "PurpleAirStationID")
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         
@@ -152,7 +140,6 @@ class ViewController: NSViewController {
     
     @IBAction func WAQIRadioAction(_ sender: Any) {
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
@@ -170,7 +157,6 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(WAQIComboBoxOutlet.stringValue, forKey: "WAQICity")
         WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
         AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-        AirQualityDisabledRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
@@ -231,6 +217,8 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var ClimaCellButtonOutlet: NSButton!
     
+    
+    
     @IBOutlet weak var autoRunAtStartup: NSButton!
     
     @IBAction func autoRunAtStartup(_ sender: Any) {
@@ -248,10 +236,10 @@ class ViewController: NSViewController {
         }
     }
     
+    
+    
     @IBOutlet weak var receiveNotificationsButtonOutlet: NSButton!
     
-    
-    let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
     
     @IBAction func receiveNotificationsButtonAction(_ sender: Any) {
         if receiveNotificationsButtonOutlet.state == NSControl.StateValue.off {
@@ -262,10 +250,38 @@ class ViewController: NSViewController {
         }
     }
     
+    @IBAction func ClimbingAQINotificationTriggerSliderAction(_ sender: Any) {
+        
+        AppDelegate().defaults.set(ClimbingAQINotificationTriggerSliderOutlet.intValue.self, forKey: "ClimbingAQINotificationsTrigger")
+        AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
+        receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        
+    }
+    
+    @IBOutlet weak var ClimbingAQINotificationTriggerSliderOutlet: NSSlider!
+
+    
+    @IBAction func ShowAQIinMenubarButtonAction(_ sender: Any) {
+        if ShowAQIinMenubarButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(0, forKey: "ShowAQIinMenubar")
+        }
+        if ShowAQIinMenubarButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(1, forKey: "ShowAQIinMenubar")
+        }
+    }
+    
+    @IBOutlet weak var ShowAQIinMenubarButtonOutlet: NSButton!
+    
+    
+    
+    let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        
+        
         
         //        print(CO2SignalButtonOutlet.isOn)
         
@@ -275,7 +291,16 @@ class ViewController: NSViewController {
         
         if AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1{
             receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+            ClimbingAQINotificationTriggerSliderOutlet.intValue.self = Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+
         }
+        
+        
+        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1{
+            ShowAQIinMenubarButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        }
+        
+        
         
         CO2SignalButtonOutlet.state = AppDelegate().defaults.object(forKey:"CO2SignalInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
