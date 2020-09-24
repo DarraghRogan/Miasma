@@ -1008,7 +1008,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwP-qa-jNJ">
-                                <rect key="frame" x="130" y="84" width="212" height="18"/>
+                                <rect key="frame" x="130" y="86" width="212" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Autorun Miasma at Mac startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Iyh-NB-hqN">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1029,8 +1029,8 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <action selector="receiveNotificationsButtonAction:" target="XfG-lQ-9wD" id="dRb-wG-aay"/>
                                 </connections>
                             </button>
-                            <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Wr-dH-MEn">
-                                <rect key="frame" x="129" y="106" width="209" height="18"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Wr-dH-MEn">
+                                <rect key="frame" x="130" y="106" width="209" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Show AQI numbers in Menubar" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZTe-Gz-219">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>

@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  MiasmaLauncherApplication
+//  MiasmaLauncher
 //
 //  Created by Darragh Rogan on 29/08/2020.
 //  Copyright © 2020 Darragh Rogan. All rights reserved.

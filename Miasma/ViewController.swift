@@ -222,7 +222,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var autoRunAtStartup: NSButton!
     
     @IBAction func autoRunAtStartup(_ sender: Any) {
-        let launcherAppId = "Darragh-Rogan.MiasmaLauncherApplication"
+        let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
         
         let isAuto = (sender as AnyObject).state == .on
         
