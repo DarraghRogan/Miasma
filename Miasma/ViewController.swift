@@ -255,11 +255,14 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(ClimbingAQINotificationTriggerSliderOutlet.intValue.self, forKey: "ClimbingAQINotificationsTrigger")
         AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
         receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+//        print(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+        CLimbingAQITriggerReadoutOutlet.stringValue.self = String(ClimbingAQINotificationTriggerSliderOutlet.intValue.self)
         
     }
     
     @IBOutlet weak var ClimbingAQINotificationTriggerSliderOutlet: NSSlider!
-
+    
+    @IBOutlet weak var CLimbingAQITriggerReadoutOutlet: NSTextField!
     
     @IBAction func ShowAQIinMenubarButtonAction(_ sender: Any) {
         if ShowAQIinMenubarButtonOutlet.state == NSControl.StateValue.off {
@@ -292,6 +295,7 @@ class ViewController: NSViewController {
         if AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1{
             receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
             ClimbingAQINotificationTriggerSliderOutlet.intValue.self = Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+            CLimbingAQITriggerReadoutOutlet.stringValue.self = String(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
 
         }
         

@@ -327,7 +327,7 @@ class menuFunctions: NSObject {
                     aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
                     
-                    if self.previousStateForNotificationBefore == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if self.previousStateForNotificationBefore == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
                     }
@@ -339,7 +339,7 @@ class menuFunctions: NSObject {
                     aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
                     
-                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
                     }
@@ -351,7 +351,7 @@ class menuFunctions: NSObject {
                     aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
                     
-                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
                     }
@@ -363,7 +363,7 @@ class menuFunctions: NSObject {
                     aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
                     
-                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
                     }
@@ -375,7 +375,7 @@ class menuFunctions: NSObject {
                     aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
                     aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
                     
-                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                     }
@@ -386,7 +386,7 @@ class menuFunctions: NSObject {
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                     aQI_CalculatedRounded = 500
                     
-                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                    if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                     {
                         AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(purpleAirData.sensor?.name ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                     }
@@ -612,7 +612,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "🟡"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         
-                        if self.previousStateForNotificationBefore == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                        if self.previousStateForNotificationBefore == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && wAQIAQI >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
                             AppDelegate().showNotification(title: "🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(wAQIAQI) in \(String(wAQIData.data?.city.name ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
                         }
@@ -622,7 +622,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "🟠"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         
-                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && wAQIAQI >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
                             AppDelegate().showNotification(title: "🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(wAQIAQI) in \(String(wAQIData.data?.city.name ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
                         }
@@ -632,7 +632,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "🔴"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         
-                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && wAQIAQI >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
                             AppDelegate().showNotification(title: "🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(wAQIAQI) in \(String(wAQIData.data?.city.name ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
                         }
@@ -642,7 +642,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "🟣"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         
-                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && wAQIAQI >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
                             AppDelegate().showNotification(title: "🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(wAQIAQI) in \(String(wAQIData.data?.city.name ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
                         }
@@ -653,7 +653,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "🟤"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         
-                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1
+                        if (self.previousStateForNotificationBefore == "🟢" || self.previousStateForNotificationBefore == "🟡" || self.previousStateForNotificationBefore == "🟠" || self.previousStateForNotificationBefore == "🔴" || self.previousStateForNotificationBefore == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && wAQIAQI >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
                             AppDelegate().showNotification(title: "🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(wAQIAQI) in \(String(wAQIData.data?.city.name ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                         }
