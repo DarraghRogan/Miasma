@@ -226,9 +226,7 @@ class menuFunctions: NSObject {
     func menuLoadOptionals() {
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1 {
-            
-            print(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String)
-            
+                        
             let purpleAir = NSMenuItem(
                 title: "Air Quality (PurpleAir)...",
                 action: #selector(menuFunctions.openPurpleAir(_:)),
@@ -464,16 +462,18 @@ class menuFunctions: NSObject {
                 }
                 self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ (Current)   \(pM2_5ColourButton)"
                 
-                let PurpleAirFahrenheit = purpleAirData.sensor?.temperatureA ?? 0
+                // note including -8F & +4% corrections to temp & RH per: https://www.reddit.com/r/PurpleAir/comments/j14qln/temperature_reported_from_web_map_vs_api_mismatch/
+                
+                let PurpleAirFahrenheit = (purpleAirData.sensor?.temperatureA ?? 0)-8
                 func calculateCelsius(fahrenheit: Double) -> String {
                     var celsius: Double
                     celsius = (fahrenheit - 32) * 5 / 9
                     let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                     return celciusRoundedString
                 }
-                self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(String(purpleAirData.sensor?.temperatureA ?? 0))℉"
+                self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉"
                 
-                self.purpleAirHumidity.title = "💧: \(String(purpleAirData.sensor?.humidityA ?? 0))% Relative Humidity"
+                self.purpleAirHumidity.title = "💧: \(String((purpleAirData.sensor?.humidityA ?? 0)+4))% Relative Humidity"
                 
                 var pressureValue = Double(purpleAirData.sensor?.pressureA ?? 0) ?? 0
                 let pressure_visual: String
