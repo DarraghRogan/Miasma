@@ -7,6 +7,9 @@
 //
 
 import SwiftUI
+import CoreLocation
+
+
 
 struct ContentView: View {
 
@@ -23,10 +26,15 @@ struct ContentView: View {
     @State var sensorLatitude: Double = 34.011_286
     @State var sensorLongitude: Double = -116.166_868
     
+//    fileprivate var coordinates: Coordinates
+    var locationCoordinate = CLLocationCoordinate2DMake(34.011_286, -116.166_868)
+    
+
+    
     
     var body: some View {
         VStack {
-            MapView(coordinate: [sensorLatitude,sensorLongitude])
+            MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 200)
             
