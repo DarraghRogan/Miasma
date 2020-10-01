@@ -81,7 +81,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
 //            defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
 //            defaults.set("🟢", forKey: "PreviousStateForNotification")
 //
-            
+            // default config for new users
         } else {
             
             defaults.set(true, forKey: "First Launch")
