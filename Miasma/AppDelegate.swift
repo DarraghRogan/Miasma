@@ -73,14 +73,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
             defaults.set("🟢", forKey: "PreviousStateForNotification")
             
-            
-//        } else if (defaults.bool(forKey: "First Launch") == true || defaults.integer(forKey: "PurpleAirInUse") == 1) {
-//
-//            defaults.set(true, forKey: "First Launch")
-//            defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
-//            defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
-//            defaults.set("🟢", forKey: "PreviousStateForNotification")
-//
+           // this is where most returning users should end up and they need an initial state for the notifications
+        } else if defaults.bool(forKey: "First Launch") == true  {
+
+            defaults.set("🟢", forKey: "PreviousStateForNotification")
+
             // default config for new users
         } else {
             
