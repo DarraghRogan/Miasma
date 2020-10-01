@@ -23,19 +23,17 @@ struct ContentView: View {
     
     var body: some View {
         
-        
         List
-            {
+        {
             VStack{
-                Text("Air Quality (World Air Quality Index)...")
-                    .fontWeight(.bold).font(.title3)
-                //                Spacer()
+                Link("Air Quality (WAQI)...",
+                     destination: URL(string: wAQILink)!)
+                    .font(.title2)
                 
                 HStack {
                     Text("🌍: ")
                     Spacer()
                     Text("\(wAQICity)")
-                        .font(.title3)
                         .onAppear() {
                             self.updateListEntry()
                         }
@@ -44,6 +42,7 @@ struct ContentView: View {
                     Text("📜: ")
                     Spacer()
                     Text("\(wAQIAttribution)")
+                        .lineLimit(1)
                         .onAppear() {
                             self.updateListEntry()
                         }
@@ -51,51 +50,44 @@ struct ContentView: View {
                 HStack {
                     Text("☁️: ")
                     Spacer()
-                    Text("\(wAQIAQI) AQI (US EPA PM₂.₅, Current)")
+                    Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
                         .onAppear() {
                             self.updateListEntry()
                         }
                 }
                 HStack {
-                    Text("🎯: Dominant Pollutant: ")
+                    Text("🎯: ")
                     Spacer()
-                    Text("\(wAQIDominentPol)")
+                    Text("Dominant Pollutant is \(wAQIDominentPol)")
                         .onAppear() {
                             self.updateListEntry()
                         }
                 }
-                
                 HStack {
                     Text("🌡: ")
                     Spacer()
-                    Text("\(wAQITemperature)")
+                    Text("\(String(wAQITemperature))℃")
                         .onAppear() {
                             self.updateListEntry()
                         }
                 }
-                
                 HStack {
-                    Text("📅: Reading Taken: ")
+                    Text("📅:")
                     Spacer()
-                    Text("\(wAQITime)")
+                    Text("Taken: \(wAQITime)")
                         .onAppear() {
                             self.updateListEntry()
                         }
                 }
-                
             }
-            
-            
-            
         }
-        
     }
     
     private func updateListEntry() {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
-                
+                self.wAQILink = wAQIData.data?.city.url ?? "https://aqicn.org/here/"
                 self.wAQIAttribution = wAQIData.data?.attributions[0].name ?? "0"
                 self.wAQICity = wAQIData.data?.city.name ?? "0"
                 self.wAQIAQI = wAQIData.data?.aqi ?? 0
@@ -104,7 +96,6 @@ struct ContentView: View {
                 self.wAQITime = wAQIData.data?.time.s ?? "0"
             }
         }
-        
     }
 }
 
@@ -112,6 +103,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ContentView()
+                .environment(\.sizeCategory, .small)
         }
     }
 }
