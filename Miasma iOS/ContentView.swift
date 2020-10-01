@@ -27,7 +27,7 @@ struct ContentView: View {
     @State var sensorLongitude: Double = -116.166_868
     
 //    fileprivate var coordinates: Coordinates
-    var locationCoordinate = CLLocationCoordinate2DMake(34.011_286, -116.166_868)
+    @State var locationCoordinate = CLLocationCoordinate2DMake(34.011_286, -116.166_868)
     
 
     
@@ -110,6 +110,8 @@ struct ContentView: View {
                 self.wAQIDominentPol = wAQIData.data?.dominentpol ?? "0"
                 self.wAQITemperature = wAQIData.data?.iaqi.t?.v ?? 0
                 self.wAQITime = wAQIData.data?.time.s ?? "0"
+                
+                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIData.data?.city.geo[0] ?? 0, wAQIData.data?.city.geo[1] ?? 0)
                 
                 self.sensorLatitude = wAQIData.data?.city.geo[0] ?? 0
                 self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
