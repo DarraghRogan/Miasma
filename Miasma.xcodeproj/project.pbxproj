@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02028E162526955600D9368E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02028E152526955600D9368E /* CircleImage.swift */; };
 		0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */; };
 		023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */; };
 		023BBDF025251AC3006E8054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDEF25251AC3006E8054 /* ContentView.swift */; };
@@ -24,6 +25,7 @@
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
 		028E0E5A2526345600D03420 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028E0E592526345600D03420 /* MapView.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
@@ -129,6 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02028E152526955600D9368E /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
 		023BBDEB25251AC3006E8054 /* Miasma iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Miasma iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miasma_iOSApp.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		028E0E592526345600D03420 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02B85173250C0B8D0048F2FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -197,7 +201,9 @@
 			children = (
 				0269848125251DB7002BFB88 /* APIKeys.swift */,
 				023BBDF125251AC5006E8054 /* Assets.xcassets */,
+				02028E152526955600D9368E /* CircleImage.swift */,
 				023BBDEF25251AC3006E8054 /* ContentView.swift */,
+				02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				0269849125251E2E002BFB88 /* DataManager.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
@@ -427,9 +433,11 @@
 				0269848225251DB7002BFB88 /* APIKeys.swift in Sources */,
 				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				0269849225251E2E002BFB88 /* DataManager.swift in Sources */,
+				02028E162526955600D9368E /* CircleImage.swift in Sources */,
 				023BBDF025251AC3006E8054 /* ContentView.swift in Sources */,
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
 				023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */,
+				02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

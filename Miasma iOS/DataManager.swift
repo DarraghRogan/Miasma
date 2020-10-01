@@ -12,6 +12,6 @@ public class DataManager {
     func loadData()
     {
         DataLoaderWAQI().loadWAQIData(id: "here")
-        print(wAQIData.data?.aqi ?? 0)
+
     }
 }

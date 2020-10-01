@@ -23,25 +23,25 @@ struct ContentView: View {
     @State var wAQITemperature: Double = 0.0
     @State var wAQITime: String = "0"
     
-    @State var sensorLatitude: Double = 34.011_286
-    @State var sensorLongitude: Double = -116.166_868
-    
-//    fileprivate var coordinates: Coordinates
-    @State var locationCoordinate = CLLocationCoordinate2DMake(34.011_286, -116.166_868)
-    
-
-    
+    // the default location has top-notch food :-)
+    @State var sensorLatitude: Double = 53.27829386648741
+    @State var sensorLongitude: Double = -6.212225585789163
+    @State var locationCoordinate = CLLocationCoordinate2DMake(53.27829386648741, -6.212225585789163)
     
     var body: some View {
         VStack {
             MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
-                .frame(height: 200)
+                .frame(height: 150)
+            
+            CircleImage()
+                .offset(x: 0, y: -130)
+                .padding(.bottom, -130)
             
             List
             {
                 VStack{
-                    Link("Air Quality (WAQI)...",
+                    Link("Air Quality (WAQI) ⇀",
                          destination: URL(string: wAQILink)!)
                         .font(.title2)
                     
@@ -95,7 +95,61 @@ struct ContentView: View {
                             }
                     }
                 }
-            }
+                VStack{
+                    Link("Air Quality (WAQI) ⇀",
+                         destination: URL(string: wAQILink)!)
+                        .font(.title2)
+                    
+                    HStack {
+                        Text("🌍: ")
+                        Spacer()
+                        Text("\(wAQICity)")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("📜: ")
+                        Spacer()
+                        Text("\(wAQIAttribution)")
+                            .lineLimit(1)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("☁️: ")
+                        Spacer()
+                        Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("🎯: ")
+                        Spacer()
+                        Text("Dominant Pollutant is \(wAQIDominentPol)")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("🌡: ")
+                        Spacer()
+                        Text("\(String(wAQITemperature))℃")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("📅:")
+                        Spacer()
+                        Text("Taken: \(wAQITime)")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                }            }
         }
     }
     
