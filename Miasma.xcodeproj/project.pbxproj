@@ -22,6 +22,7 @@
 		0283DD9024F051BF00E4CC07 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0283DD8E24F051BF00E4CC07 /* Main.storyboard */; };
 		0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */; };
 		0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD9C24F0568000E4CC07 /* Menu.swift */; };
+		028E0E5A2526345600D03420 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028E0E592526345600D03420 /* MapView.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
@@ -149,6 +150,7 @@
 		0283DD9224F051BF00E4CC07 /* Miasma.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Miasma.entitlements; sourceTree = "<group>"; };
 		0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
 		0283DD9C24F0568000E4CC07 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		028E0E592526345600D03420 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				0269849125251E2E002BFB88 /* DataManager.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
+				028E0E592526345600D03420 /* MapView.swift */,
 				023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */,
 				023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */,
 				023BBDF325251AC5006E8054 /* Preview Content */,
@@ -422,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0269848225251DB7002BFB88 /* APIKeys.swift in Sources */,
+				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				0269849225251E2E002BFB88 /* DataManager.swift in Sources */,
 				023BBDF025251AC3006E8054 /* ContentView.swift in Sources */,
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
