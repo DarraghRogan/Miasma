@@ -28,17 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
     // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
     
     func showNotification(title: String, subtitle: String, informativeText: String) -> Void {
-
+        
         var notification = NSUserNotification()
-
+        
         notification.title = title
         notification.subtitle = subtitle
         notification.informativeText = informativeText
-//        notification.contentImage = contentImage
+        //        notification.contentImage = contentImage
         notification.soundName = NSUserNotificationDefaultSoundName
-
+        
         NSUserNotificationCenter.default.deliver(notification)
-
+        
     }
     
     func userNotificationCenter(_ center: NSUserNotificationCenter, shouldPresent notification: NSUserNotification) -> Bool {
@@ -53,7 +53,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         // setup ability to have notifications -code from https://nabtron.com/show-notification-cocoa-xcode-swift/
         
         NSUserNotificationCenter.default.delegate = self
-            
+        
+        func isKeyPresentInUserDefaults(key: String) -> Bool {
+            return UserDefaults.standard.object(forKey: key) != nil
+        }
         
         // setting first launch to default to using WAQI with "here" as the city, to give users a nice first impression. Following technique from: https://medium.com/better-programming/checking-for-the-users-first-launch-in-swift-df02a1feb472
         
@@ -65,47 +68,53 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         } else if (defaults.bool(forKey: "First Launch") == true || defaults.integer(forKey: "PurpleAirInUse") == 1) {
             
             defaults.set(true, forKey: "First Launch")
-            
-        } else {
-            
-            defaults.set(true, forKey: "First Launch")
-            defaults.set("here", forKey: "WAQICity")
-            defaults.set(1, forKey: "WAQIInUse")
-            defaults.set(1, forKey:"CO2SignalInUse")
-            defaults.set(1, forKey:"OpenSkyInUse")
             defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
             defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
+            
+        } else if (defaults.bool(forKey: "First Launch") == true && defaults.integer(forKey: "ClimbingAQINotificationsWanted") == 1 && isKeyPresentInUserDefaults(key: "ClimbingAQINotificationsTrigger") == false ) {
+                
+                defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
+                
+            } else {
+                
+                defaults.set(true, forKey: "First Launch")
+                defaults.set("here", forKey: "WAQICity")
+                defaults.set(1, forKey: "WAQIInUse")
+                defaults.set(1, forKey:"CO2SignalInUse")
+                defaults.set(1, forKey:"OpenSkyInUse")
+                defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
+                defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
+            }
+            
+            // Launching automatically at startup from tutorial: https://theswiftdev.com/how-to-launch-a-macos-app-at-login/
+            
+            let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
+            let runningApps = NSWorkspace.shared.runningApplications
+            let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
+            
+            //        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+            
+            if isRunning {
+                DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)
+            }
+            
+            
+            // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
+            statusBarItemController = menuFunctions()
+            
+            // Run the dataloaders at app startup
+            //        menuFunctions().menuRefresh(NSMenuItem)
+            
+            // periodically update the menu
+            _ = Timer.scheduledTimer(withTimeInterval: 1200.0, repeats: true) { timer in
+                self.statusBarItemController = menuFunctions()        }
+            
         }
         
-        // Launching automatically at startup from tutorial: https://theswiftdev.com/how-to-launch-a-macos-app-at-login/
-        
-        let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
-        let runningApps = NSWorkspace.shared.runningApplications
-        let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
-        
-        //        SMLoginItemSetEnabled(launcherAppId as CFString, true)
-        
-        if isRunning {
-            DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)
+        func applicationWillTerminate(_ aNotification: Notification) {
+            // Insert code here to tear down your application
         }
         
         
-        // Technique from https://stackoverflow.com/questions/55995415/nsmenuitem-with-action-added-to-nsstatusbar-is-grayed-out-when-the-selected-func to get status bar actions working
-        statusBarItemController = menuFunctions()
-        
-        // Run the dataloaders at app startup
-        //        menuFunctions().menuRefresh(NSMenuItem)
-        
-        // periodically update the menu
-        _ = Timer.scheduledTimer(withTimeInterval: 1200.0, repeats: true) { timer in
-            self.statusBarItemController = menuFunctions()        }
-        
     }
-    
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-    
-    
-}
 
