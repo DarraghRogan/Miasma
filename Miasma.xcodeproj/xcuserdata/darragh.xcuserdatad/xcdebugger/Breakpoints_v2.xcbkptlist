@@ -116,5 +116,53 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54F1763D-1B8C-4622-8BDB-863766D52A5E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Miasma iOS/MapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "unknown"
+            landmarkType = "0">
+            <Locations>
+               <Location
+                  uuid = "54F1763D-1B8C-4622-8BDB-863766D52A5E - eccad0972e1e7064"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "globalinit_33_089ED4CF1F693A651A0BC6665902BE06_func1"
+                  moduleName = "Miasma iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/darragh/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Miasma/Miasma%20iOS/MapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "4">
+               </Location>
+               <Location
+                  uuid = "54F1763D-1B8C-4622-8BDB-863766D52A5E - f97787f6489ecf8b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Miasma_iOS.passedLon.unsafeMutableAddressor : Swift.Double"
+                  moduleName = "Miasma iOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/darragh/Library/Mobile%20Documents/com~apple~CloudDocs/Documents/Miasma/Miasma%20iOS/MapView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "12"
+                  endingLineNumber = "12"
+                  offsetFromSymbolStart = "4">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

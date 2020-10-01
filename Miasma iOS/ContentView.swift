@@ -20,12 +20,13 @@ struct ContentView: View {
     @State var wAQITemperature: Double = 0.0
     @State var wAQITime: String = "0"
     
-    @State var latitude: Double = 34.011_286
-    @State var longitude: Double = -116.166_868
+    @State var sensorLatitude: Double = 34.011_286
+    @State var sensorLongitude: Double = -116.166_868
+    
     
     var body: some View {
         VStack {
-            MapView()
+            MapView(coordinate: [sensorLatitude,sensorLongitude])
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 200)
             
@@ -102,8 +103,9 @@ struct ContentView: View {
                 self.wAQITemperature = wAQIData.data?.iaqi.t?.v ?? 0
                 self.wAQITime = wAQIData.data?.time.s ?? "0"
                 
-                self.latitude = wAQIData.data?.city.geo[0] ?? 0
-                self.longitude = wAQIData.data?.city.geo[1] ?? 0
+                self.sensorLatitude = wAQIData.data?.city.geo[0] ?? 0
+                self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
+                
             }
         }
     }
