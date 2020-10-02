@@ -13,35 +13,47 @@ import CoreLocation
 
 struct ContentView: View {
     
-    @State var ListDestination: String = "0"
+    @State var ListDestination: String = "◌"
     
     @State var wAQILink: String = "0"
-    @State var wAQIAttribution: String = "0"
-    @State var wAQICity: String = "0"
+    @State var wAQIAttribution: String = "◌"
+    @State var wAQICity: String = "◌"
     @State var wAQIAQI: Int = 0
-    @State var wAQIDominentPol: String = "0"
+    @State var wAQIDominentPol: String = "◌"
     @State var wAQITemperature: Double = 0.0
-    @State var wAQITime: String = "0"
+    @State var wAQITime: String = "◌"
     
-    // the default location has top-notch food :-)
+    // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.27829386648741
     @State var sensorLongitude: Double = -6.212225585789163
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.27829386648741, -6.212225585789163)
     
-    @State var cO2Country: String = "0"
+    @State var cO2Country: String = "◌"
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
     
+    @State var openSkyAircraftInBox: Int = 0
+    
+    @State var climaCellWeatherCode: String = "◌"
+    @State var climaCellWindDirection: Double = 0.0
+    @State var climaCellFeelsLike: Double = 0.0
+    @State var climaCellWindSpeed: Double = 0.0
+    @State var climaCellEPAAQI: Int = 0
+    @State var climaCellEPAPrimaryPollutant: String = "◌"
+    @State var climaCellPollenTree: Int = 0
+    @State var climaCellPollenGrass: Int = 0
+    @State var climaCellPollenWeed: Int = 0
+
     
     var body: some View {
         VStack {
             MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
-                .frame(height: 125)
+                .frame(height: 100)
             
             CircleImage()
-                .offset(x: 0, y: -115)
-                .padding(.bottom, -115)
+                .offset(x: 0, y: -107)
+                .padding(.bottom, -90)
             
             List
             {
@@ -54,6 +66,7 @@ struct ContentView: View {
                         Text("🌍")
                         Spacer()
                         Text("\(wAQICity)")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -63,6 +76,7 @@ struct ContentView: View {
                         Spacer()
                         Text("\(wAQIAttribution)")
                             .lineLimit(1)
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -71,6 +85,7 @@ struct ContentView: View {
                         Text("☁️")
                         Spacer()
                         Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -79,6 +94,7 @@ struct ContentView: View {
                         Text("🎯")
                         Spacer()
                         Text("Dominant Pollutant is \(wAQIDominentPol)")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -87,6 +103,7 @@ struct ContentView: View {
                         Text("🌡")
                         Spacer()
                         Text("\(String(wAQITemperature))℃")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -95,21 +112,25 @@ struct ContentView: View {
                         Text("📅")
                         Spacer()
                         Text("Taken: \(wAQITime)")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
                     }
                     
                 }
+                
                 VStack{
                     Link("Electricity Consumption (CO₂ Signal) ⇀",
                          destination: URL(string: "https://www.electricitymap.org/")!)
+                        .padding(.top, 8.0)
                         .font(.title3)
                     
                     HStack {
                         Text("🌍")
                         Spacer()
                         Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -119,6 +140,59 @@ struct ContentView: View {
                         Spacer()
                         Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
                             .lineLimit(1)
+                            .padding(.top, 3.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                }
+                VStack{
+                    Link("Aircraft Overhead (OpenSky) ⇀",
+                         destination: URL(string: "https://opensky-network.org/")!)
+                        .padding(.top, 8.0)
+                        .font(.title3)
+                    
+                    HStack {
+                        Text("✈️")
+                        Spacer()
+                        Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
+                            .padding(.top, 2.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+
+                }
+                
+                VStack{
+                    Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
+                         destination: URL(string: "https://www.climacell.co/consumer-app/")!)
+                        .padding(.top, 8.0)
+                        .font(.title3)
+                    
+                    HStack {
+                        Text("🌦")
+                        Spacer()
+                        Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \((String(format: "%.1f", locale: Locale.current, climaCellWindDirection)))° @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
+                            .padding(.top, 3.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("☁️")
+                        Spacer()
+                        Text("Air Quality will be \(climaCellEPAAQI) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+                            .padding(.top, 3.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("🌳")
+                        Spacer()
+                        Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                            .padding(.top, 3.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -148,6 +222,10 @@ struct ContentView: View {
                 self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
                 
                 DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
+                
+                DataLoaderOpenSky().loadOpenSkyData(lamin: ((sensorLatitude ?? 0)-1), lomin: ((sensorLongitude ?? 0)-1), lamax: ((sensorLatitude ?? 0)+1), lomax: ((sensorLongitude ?? 0)+1))
+                
+                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude ?? 0, lon: sensorLongitude ?? 0)
             }
         }
         
@@ -157,6 +235,19 @@ struct ContentView: View {
                 self.cO2Country = cO2Data.countryCode ?? ""
                 self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
                 self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                
+                self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
+                
+                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? ""
+                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
+                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
+                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
+                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
+                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
+                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
+                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
+                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+                
             }
         }
     }

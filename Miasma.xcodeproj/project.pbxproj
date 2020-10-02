@@ -25,6 +25,8 @@
 		028E0E5A2526345600D03420 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028E0E592526345600D03420 /* MapView.swift */; };
 		0293625B24FA5601003EA39C /* MiasmaLauncher.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */; };
+		02A7409D2527228300830B35 /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */; };
+		02A740A22527263100830B35 /* DataLoaderClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A740A12527263100830B35 /* DataLoaderClimaCell.swift */; };
 		02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AAE82A24F9A56300948D5F /* Extensions.swift */; };
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
@@ -154,6 +156,8 @@
 		028E0E592526345600D03420 /* MapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		0293625724FA55B8003EA39C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
 		02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
+		02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
+		02A740A12527263100830B35 /* DataLoaderClimaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderClimaCell.swift; sourceTree = "<group>"; };
 		02AAE82A24F9A56300948D5F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02B85173250C0B8D0048F2FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
@@ -201,7 +205,9 @@
 				023BBDF125251AC5006E8054 /* Assets.xcassets */,
 				02028E152526955600D9368E /* CircleImage.swift */,
 				023BBDEF25251AC3006E8054 /* ContentView.swift */,
+				02A740A12527263100830B35 /* DataLoaderClimaCell.swift */,
 				02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */,
+				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
 				028E0E592526345600D03420 /* MapView.swift */,
@@ -431,7 +437,9 @@
 				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				02028E162526955600D9368E /* CircleImage.swift in Sources */,
 				023BBDF025251AC3006E8054 /* ContentView.swift in Sources */,
+				02A7409D2527228300830B35 /* DataLoaderOpenSky.swift in Sources */,
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
+				02A740A22527263100830B35 /* DataLoaderClimaCell.swift in Sources */,
 				023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */,
 				02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */,
 			);
