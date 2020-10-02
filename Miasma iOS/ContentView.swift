@@ -12,7 +12,7 @@ import CoreLocation
 
 
 struct ContentView: View {
-
+    
     @State var ListDestination: String = "0"
     
     @State var wAQILink: String = "0"
@@ -28,25 +28,30 @@ struct ContentView: View {
     @State var sensorLongitude: Double = -6.212225585789163
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.27829386648741, -6.212225585789163)
     
+    @State var cO2Country: String = "0"
+    @State var carbonIntensity: Double = 0.0
+    @State var fossilFuelPercentage: Double = 0.0
+    
+    
     var body: some View {
         VStack {
             MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
-                .frame(height: 150)
+                .frame(height: 125)
             
             CircleImage()
-                .offset(x: 0, y: -130)
-                .padding(.bottom, -130)
+                .offset(x: 0, y: -115)
+                .padding(.bottom, -115)
             
             List
             {
                 VStack{
                     Link("Air Quality (WAQI) ⇀",
                          destination: URL(string: wAQILink)!)
-                        .font(.title2)
+                        .font(.title3)
                     
                     HStack {
-                        Text("🌍: ")
+                        Text("🌍")
                         Spacer()
                         Text("\(wAQICity)")
                             .onAppear() {
@@ -54,7 +59,7 @@ struct ContentView: View {
                             }
                     }
                     HStack {
-                        Text("📜: ")
+                        Text("📜")
                         Spacer()
                         Text("\(wAQIAttribution)")
                             .lineLimit(1)
@@ -63,7 +68,7 @@ struct ContentView: View {
                             }
                     }
                     HStack {
-                        Text("☁️: ")
+                        Text("☁️")
                         Spacer()
                         Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
                             .onAppear() {
@@ -71,7 +76,7 @@ struct ContentView: View {
                             }
                     }
                     HStack {
-                        Text("🎯: ")
+                        Text("🎯")
                         Spacer()
                         Text("Dominant Pollutant is \(wAQIDominentPol)")
                             .onAppear() {
@@ -79,7 +84,7 @@ struct ContentView: View {
                             }
                     }
                     HStack {
-                        Text("🌡: ")
+                        Text("🌡")
                         Spacer()
                         Text("\(String(wAQITemperature))℃")
                             .onAppear() {
@@ -87,73 +92,45 @@ struct ContentView: View {
                             }
                     }
                     HStack {
-                        Text("📅:")
+                        Text("📅")
                         Spacer()
                         Text("Taken: \(wAQITime)")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    
+                }
+                VStack{
+                    Link("Electricity Consumption (CO₂ Signal) ⇀",
+                         destination: URL(string: "https://www.electricitymap.org/")!)
+                        .font(.title3)
+                    
+                    HStack {
+                        Text("🌍")
+                        Spacer()
+                        Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    HStack {
+                        Text("⚡️")
+                        Spacer()
+                        Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
+                            .lineLimit(1)
                             .onAppear() {
                                 self.updateListEntry()
                             }
                     }
                 }
-                VStack{
-                    Link("Air Quality (WAQI) ⇀",
-                         destination: URL(string: wAQILink)!)
-                        .font(.title2)
-                    
-                    HStack {
-                        Text("🌍: ")
-                        Spacer()
-                        Text("\(wAQICity)")
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("📜: ")
-                        Spacer()
-                        Text("\(wAQIAttribution)")
-                            .lineLimit(1)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("☁️: ")
-                        Spacer()
-                        Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("🎯: ")
-                        Spacer()
-                        Text("Dominant Pollutant is \(wAQIDominentPol)")
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("🌡: ")
-                        Spacer()
-                        Text("\(String(wAQITemperature))℃")
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("📅:")
-                        Spacer()
-                        Text("Taken: \(wAQITime)")
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                }            }
+            }
         }
     }
     
     private func updateListEntry() {
+        
+        DataLoaderWAQI().loadWAQIData(id: "here")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
@@ -170,6 +147,16 @@ struct ContentView: View {
                 self.sensorLatitude = wAQIData.data?.city.geo[0] ?? 0
                 self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
                 
+                DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { // sort of URL session task
+            DispatchQueue.main.async { // you need to update it in main thread!
+                
+                self.cO2Country = cO2Data.countryCode ?? ""
+                self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
+                self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
             }
         }
     }
