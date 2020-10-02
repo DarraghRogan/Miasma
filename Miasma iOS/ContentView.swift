@@ -9,8 +9,6 @@
 import SwiftUI
 import CoreLocation
 
-
-
 struct ContentView: View {
     
     @State var ListDestination: String = "◌"
@@ -57,7 +55,6 @@ struct ContentView: View {
                 .padding(.bottom, -90)
             
             List
-            
             {
                 VStack{
                     Link("Air Quality (WAQI) ⇀",
@@ -156,6 +153,7 @@ struct ContentView: View {
                             }
                     }
                 }
+                
                 VStack{
                     Link("Aircraft Overhead (OpenSky) ⇀",
                          destination: URL(string: "https://opensky-network.org/")!)
@@ -194,7 +192,7 @@ struct ContentView: View {
                     HStack {
                         Text("☁️")
                         Spacer()
-                        Text("Air Quality will be \(climaCellEPAAQI) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+                        Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
                             .font(.footnote)
                             .padding(.top, 5.0)
                             .onAppear() {
@@ -239,9 +237,9 @@ struct ContentView: View {
                 
                 DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 
-                DataLoaderOpenSky().loadOpenSkyData(lamin: ((sensorLatitude ?? 0)-1), lomin: ((sensorLongitude ?? 0)-1), lamax: ((sensorLatitude ?? 0)+1), lomax: ((sensorLongitude ?? 0)+1))
+                DataLoaderOpenSky().loadOpenSkyData(lamin: ((sensorLatitude )-1), lomin: ((sensorLongitude )-1), lamax: ((sensorLatitude)+1), lomax: ((sensorLongitude)+1))
                 
-                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude ?? 0, lon: sensorLongitude ?? 0)
+                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
             }
         }
         
