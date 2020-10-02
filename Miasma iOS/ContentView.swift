@@ -46,6 +46,7 @@ struct ContentView: View {
 
     
     var body: some View {
+        
         VStack {
             MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
@@ -56,17 +57,19 @@ struct ContentView: View {
                 .padding(.bottom, -90)
             
             List
+            
             {
                 VStack{
                     Link("Air Quality (WAQI) ⇀",
                          destination: URL(string: wAQILink)!)
-                        .font(.title3)
+                        .font(.headline)
                     
                     HStack {
                         Text("🌍")
                         Spacer()
                         Text("\(wAQICity)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -75,8 +78,9 @@ struct ContentView: View {
                         Text("📜")
                         Spacer()
                         Text("\(wAQIAttribution)")
+                            .font(.footnote)
                             .lineLimit(1)
-                            .padding(.top, 3.0)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -85,7 +89,8 @@ struct ContentView: View {
                         Text("☁️")
                         Spacer()
                         Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -94,7 +99,8 @@ struct ContentView: View {
                         Text("🎯")
                         Spacer()
                         Text("Dominant Pollutant is \(wAQIDominentPol)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -103,7 +109,8 @@ struct ContentView: View {
                         Text("🌡")
                         Spacer()
                         Text("\(String(wAQITemperature))℃")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -112,7 +119,8 @@ struct ContentView: View {
                         Text("📅")
                         Spacer()
                         Text("Taken: \(wAQITime)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -124,13 +132,14 @@ struct ContentView: View {
                     Link("Electricity Consumption (CO₂ Signal) ⇀",
                          destination: URL(string: "https://www.electricitymap.org/")!)
                         .padding(.top, 8.0)
-                        .font(.title3)
+                        .font(.headline)
                     
                     HStack {
                         Text("🌍")
                         Spacer()
                         Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -139,8 +148,9 @@ struct ContentView: View {
                         Text("⚡️")
                         Spacer()
                         Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
+                            .font(.footnote)
                             .lineLimit(1)
-                            .padding(.top, 3.0)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -150,13 +160,14 @@ struct ContentView: View {
                     Link("Aircraft Overhead (OpenSky) ⇀",
                          destination: URL(string: "https://opensky-network.org/")!)
                         .padding(.top, 8.0)
-                        .font(.title3)
+                        .font(.headline)
                     
                     HStack {
                         Text("✈️")
                         Spacer()
                         Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                            .padding(.top, 2.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -168,13 +179,14 @@ struct ContentView: View {
                     Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
                          destination: URL(string: "https://www.climacell.co/consumer-app/")!)
                         .padding(.top, 8.0)
-                        .font(.title3)
+                        .font(.headline)
                     
                     HStack {
                         Text("🌦")
                         Spacer()
                         Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \((String(format: "%.1f", locale: Locale.current, climaCellWindDirection)))° @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -183,7 +195,8 @@ struct ContentView: View {
                         Text("☁️")
                         Spacer()
                         Text("Air Quality will be \(climaCellEPAAQI) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -192,14 +205,17 @@ struct ContentView: View {
                         Text("🌳")
                         Spacer()
                         Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
-                            .padding(.top, 3.0)
+                            .font(.footnote)
+                            .padding(.top, 5.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
                     }
                 }
+
             }
         }
+        .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
     }
     
     private func updateListEntry() {
