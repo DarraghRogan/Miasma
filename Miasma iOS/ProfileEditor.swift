@@ -16,12 +16,12 @@ struct ProfileEditor: View {
         List {
             HStack {
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
-                    Text("WAQI/AQICN")
-                    Text("PurpleAir")
-                    Text("EU Smart Citizen")
+                    Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
+                    Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
+                    Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
                 }/*@END_MENU_TOKEN@*/
                 Divider()
-                Text("Chosen")
+                Text("\(AppDelegate().defaults.object(forKey:"AirQualityDataSource") as? String ?? String())")
             }
             HStack {
                 Text("Sensor ID")

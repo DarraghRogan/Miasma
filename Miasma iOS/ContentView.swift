@@ -236,7 +236,7 @@ struct ContentView: View {
     }
     
     
-    private func updateListEntry() {
+    func updateListEntry() {
         
         DataLoaderWAQI().loadWAQIData(id: "here")
         

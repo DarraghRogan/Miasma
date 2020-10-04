@@ -15,15 +15,10 @@ struct ProfileSummary: View {
             Text("Miasma")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
-            Button("Refresh", action: {
-                print("refresh")
+            Button("Refresh \(AppDelegate().defaults.object(forKey:"AirQualityDataSource") as? String ?? String()) \(AppDelegate().defaults.object(forKey:"AirQualityDataSource") as? String ?? String())", action: {
+                ContentView().updateListEntry()
             })
 
-            HStack{
-                Text("\(AppDelegate().defaults.object(forKey:"AirQualityDataSource") as? String ?? String())")
-                Spacer()
-                Text(AppDelegate().defaults.object(forKey:"AirQualityStationID") as? String ?? String())
-            }
             Text("Electricty Consumption data: \((AppDelegate().defaults.object(forKey:"ElectricalConsumptionDataWanted") != nil) ? "On": "Off" )")
             Text("Aircraft Overhead data: \((AppDelegate().defaults.object(forKey:"AircraftDataWanted") != nil) ? "On": "Off" )")
             Text("1 Hour Forecast: \((AppDelegate().defaults.object(forKey:"1HourForecastDataWanted") != nil) ? "On": "Off" )")
