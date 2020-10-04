@@ -62,6 +62,7 @@ struct ContentView: View {
                 .offset(x: 159, y: -115)
                 .padding(.bottom, -32)
                 .font(.title)
+                .foregroundColor(.black)
             
             List
             {
