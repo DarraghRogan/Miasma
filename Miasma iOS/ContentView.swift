@@ -11,6 +11,9 @@ import CoreLocation
 
 struct ContentView: View {
     
+    @State var showingProfile = false
+    @EnvironmentObject var userData: UserData
+    
     @State var ListDestination: String = "◌"
     
     @State var wAQILink: String = "0"
@@ -41,11 +44,12 @@ struct ContentView: View {
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
-
+    
     
     var body: some View {
         
         VStack {
+            
             MapView(coordinate: locationCoordinate)
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
@@ -54,6 +58,20 @@ struct ContentView: View {
                 .offset(x: 0, y: -107)
                 .padding(.bottom, -90)
             
+            Button("Darragh", action: { self.showingProfile.toggle()
+                    print("hello") } )
+                                .offset(x: 159, y: -100)
+                                .padding(.bottom, -24)
+            
+//            Button(action: { self.showingProfile.toggle()
+//            }) {
+//                Image(systemName: "square.and.arrow.down.on.square.fill")
+//                    .imageScale(.large)
+//                    .accessibility(label: Text("User Profile"))
+//                    .offset(x: 159, y: -100)
+//                    .padding(.bottom, -24)
+//            }
+
             List
             {
                 VStack{
@@ -170,7 +188,7 @@ struct ContentView: View {
                                 self.updateListEntry()
                             }
                     }
-
+                    
                 }
                 
                 VStack{
@@ -210,11 +228,21 @@ struct ContentView: View {
                             }
                     }
                 }
-
+                .sheet(isPresented: $showingProfile) {
+                    ProfileHost()
+                        .environmentObject(self.userData)
+                }
             }
+            
         }
+        
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
+        .sheet(isPresented: $showingProfile) {
+            ProfileHost()
+                .environmentObject(self.userData)
+        }
     }
+    
     
     private func updateListEntry() {
         

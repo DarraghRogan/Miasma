@@ -26,7 +26,7 @@ struct Miasma_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             
-            ContentView()
+            ContentView().environmentObject(UserData())
             
         }
     }
