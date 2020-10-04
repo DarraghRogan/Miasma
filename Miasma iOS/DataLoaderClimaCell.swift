@@ -86,7 +86,7 @@ public class DataLoaderClimaCell {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-//        print(request)
+        print(request)
         
         let session = URLSession.shared
         
@@ -95,13 +95,13 @@ public class DataLoaderClimaCell {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the ClimaCell API")
-//                if let data = data,
-//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
+                print("Received from the ClimaCell API")
+                if let data = data,
+                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                    print(urlContent)
+                } else {
+                    print("error with printing string encoded data")
+                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {

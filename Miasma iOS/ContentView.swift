@@ -58,20 +58,13 @@ struct ContentView: View {
                 .offset(x: 0, y: -107)
                 .padding(.bottom, -90)
             
-            Button("Darragh", action: { self.showingProfile.toggle()
+            Button("☰", action: { self.showingProfile.toggle()
                     print("hello") } )
-                                .offset(x: 159, y: -100)
-                                .padding(.bottom, -24)
+                .offset(x: 159, y: -115)
+                .padding(.bottom, -32)
+                .font(.title)
             
-//            Button(action: { self.showingProfile.toggle()
-//            }) {
-//                Image(systemName: "square.and.arrow.down.on.square.fill")
-//                    .imageScale(.large)
-//                    .accessibility(label: Text("User Profile"))
-//                    .offset(x: 159, y: -100)
-//                    .padding(.bottom, -24)
-//            }
-
+            
             List
             {
                 VStack{
@@ -267,7 +260,7 @@ struct ContentView: View {
                 
                 DataLoaderOpenSky().loadOpenSkyData(lamin: ((sensorLatitude )-1), lomin: ((sensorLongitude )-1), lamax: ((sensorLatitude)+1), lomax: ((sensorLongitude)+1))
                 
-                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
+//                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
             }
         }
         
@@ -280,15 +273,15 @@ struct ContentView: View {
                 
                 self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
                 
-                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? ""
-                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
-                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
-                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
-                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
-                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
-                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
-                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
-                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+//                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
+//                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
+//                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
+//                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
+//                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
+//                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
+//                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
+//                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
+//                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
                 
             }
         }
