@@ -13,3 +13,9 @@ final class UserData: ObservableObject {
 //    @Published var landmarks = landmarkData
     @Published var profile = Profile.default
 }
+
+struct UserData_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}

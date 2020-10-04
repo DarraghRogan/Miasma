@@ -58,12 +58,10 @@ struct ContentView: View {
                 .offset(x: 0, y: -107)
                 .padding(.bottom, -90)
             
-            Button("☰", action: { self.showingProfile.toggle()
-                    print("hello") } )
+            Button("☰", action: { self.showingProfile.toggle() } )
                 .offset(x: 159, y: -115)
                 .padding(.bottom, -32)
                 .font(.title)
-            
             
             List
             {
