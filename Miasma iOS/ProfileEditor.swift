@@ -26,7 +26,7 @@ struct ProfileEditor: View {
             HStack {
                 Text("Sensor ID")
                 Divider()
-                TextField("Sensor ID", text: $profile.username)
+                TextField("Sensor ID", text: $profile.sensorID)
             }
             Toggle(isOn: $profile.prefersNotifications) {
                 Text("Enable Electricty Consumption data")

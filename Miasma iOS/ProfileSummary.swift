@@ -1,9 +1,9 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-A view that summarizes a profile.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ A view that summarizes a profile.
+ */
 
 import SwiftUI
 
@@ -19,37 +19,31 @@ struct ProfileSummary: View {
     
     var body: some View {
         List {
-            Text(profile.username)
-                .bold()
+            Text("Miasma")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
-            
-            Text("Notifications: \(self.profile.prefersNotifications ? "On": "Off" )")
-                        
-            Text("Goal Date: \(self.profile.goalDate, formatter: Self.goalFormat)")
-            
-            VStack(alignment: .leading) {
-                Text("Completed Badges")
-                    .font(.headline)
-                ScrollView {
-//                    HStack {
-//                        HikeBadge(name: "First Hike")
-//
-//                        HikeBadge(name: "Earth Day")
-//                            .hueRotation(Angle(degrees: 90))
-//
-//                        HikeBadge(name: "Tenth Hike")
-//                            .grayscale(0.5)
-//                            .hueRotation(Angle(degrees: 45))
-//                    }
-                }
-                .frame(height: 140)
+            Button("Refresh", action: {
+                print("refresh")
+            })
+
+            HStack{
+                Text("\(self.profile.sensorID)")
+                Spacer()
+                Text(profile.sensorID)
             }
-            
-            VStack(alignment: .leading) {
-                Text("Recent Hikes")
-                    .font(.headline)
-            
-//                HikeView(hike: hikeData[0])
+            Text("Electricty Consumption data: \(self.profile.prefersNotifications ? "On": "Off" )")
+            Text("Aircraft Overhead data: \(self.profile.prefersNotifications ? "On": "Off" )")
+            Text("Notifications: \(self.profile.prefersNotifications ? "On": "Off" )")
+            Button("Review / Suggest Improvements for Miasma", action: {
+                print("refresh")
+            })
+            Button("About Miasma", action: {
+                print("refresh")
+            })
+            HStack{
+            Text("Version:")
+                Spacer()
+                Text(" \(self.profile.prefersNotifications ? "On": "Off" )")
             }
         }
     }
