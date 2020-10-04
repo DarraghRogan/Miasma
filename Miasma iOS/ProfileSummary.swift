@@ -10,13 +10,6 @@ import SwiftUI
 struct ProfileSummary: View {
     var profile: Profile
     
-    static let goalFormat: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .long
-        formatter.timeStyle = .none
-        return formatter
-    }()
-    
     var body: some View {
         List {
             Text("Miasma")
