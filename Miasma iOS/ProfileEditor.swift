@@ -8,10 +8,20 @@
 import SwiftUI
 
 struct ProfileEditor: View {
-    @Binding var profile: Profile
     
+    @AppStorage("AirQualityDataSource") var AirQualityDataSource = "WAQI/AQICN"
     
+    @AppStorage("SensorID") var SensorID = "here"
     
+    @AppStorage("ElectricalConsumptionDataWanted") var ElectricalConsumptionDataWanted = false
+    
+    @AppStorage("AircraftDataWanted") var AircraftDataWanted = false
+    
+    @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
+    
+    @AppStorage("NotificationsWanted") var NotificationsWanted = false
+
+
     var body: some View {
         List {
             HStack {
@@ -21,23 +31,23 @@ struct ProfileEditor: View {
                     Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
                 }/*@END_MENU_TOKEN@*/
                 Divider()
-                Text("\(AppDelegate().defaults.object(forKey:"AirQualityDataSource") as? String ?? String())")
+                Text("\(AirQualityDataSource)")
             }
             HStack {
                 Text("Sensor ID")
                 Divider()
-                TextField("Sensor ID", text: $profile.sensorID)
+                TextField("Sensor ID", text: $SensorID)
             }
-            Toggle(isOn: $profile.prefersNotifications) {
+            Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumption data")
             }
-            Toggle(isOn: $profile.prefersNotifications) {
+            Toggle(isOn: $AircraftDataWanted) {
                 Text("Enable Aircraft Overhead data")
             }
-            Toggle(isOn: $profile.prefersNotifications) {
+            Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }
-            Toggle(isOn: $profile.prefersNotifications) {
+            Toggle(isOn: $NotificationsWanted) {
                 Text("Enable Notifications")
             }
             
@@ -50,6 +60,6 @@ struct ProfileEditor: View {
 
 struct ProfileEditor_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileEditor(profile: .constant(.default))
+        ProfileEditor()
     }
 }
