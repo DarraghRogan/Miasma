@@ -12,7 +12,6 @@ import CoreLocation
 struct ContentView: View {
     
     @State var showingProfile = false
-    @EnvironmentObject var userData: UserData
     
     @State var ListDestination: String = "◌"
     
@@ -222,7 +221,6 @@ struct ContentView: View {
                 }
                 .sheet(isPresented: $showingProfile) {
                     ProfileHost()
-                        .environmentObject(self.userData)
                 }
             }
             
@@ -231,7 +229,6 @@ struct ContentView: View {
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
         .sheet(isPresented: $showingProfile) {
             ProfileHost()
-                .environmentObject(self.userData)
         }
     }
     

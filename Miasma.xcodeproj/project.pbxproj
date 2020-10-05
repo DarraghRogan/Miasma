@@ -34,8 +34,6 @@
 		02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
 		02BE00B624FBC40E0064F5B8 /* Graphics in Resources */ = {isa = PBXBuildFile; fileRef = 02BE00B524FBC40E0064F5B8 /* Graphics */; };
 		02D06EC8250CB48800D81189 /* DataLoaderClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */; };
-		02D5AB4E252A13E9007E73DC /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB4D252A13E9007E73DC /* Profile.swift */; };
-		02D5AB53252A13EE007E73DC /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB52252A13EE007E73DC /* UserData.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
@@ -170,8 +168,6 @@
 		02B85173250C0B8D0048F2FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		02BE00B524FBC40E0064F5B8 /* Graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphics; sourceTree = "<group>"; };
 		02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderClimaCell.swift; sourceTree = "<group>"; };
-		02D5AB4D252A13E9007E73DC /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		02D5AB52252A13EE007E73DC /* UserData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
 		02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
@@ -225,11 +221,9 @@
 				028E0E592526345600D03420 /* MapView.swift */,
 				023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */,
 				023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */,
-				02D5AB4D252A13E9007E73DC /* Profile.swift */,
 				02D5AB59252A144B007E73DC /* ProfileEditor.swift */,
 				022934BA252BB7D200CD4FFB /* ProfileHost.swift */,
 				02D5AB58252A144B007E73DC /* ProfileSummary.swift */,
-				02D5AB52252A13EE007E73DC /* UserData.swift */,
 				023BBDF325251AC5006E8054 /* Preview Content */,
 			);
 			path = "Miasma iOS";
@@ -459,12 +453,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0269848225251DB7002BFB88 /* APIKeys.swift in Sources */,
-				02D5AB4E252A13E9007E73DC /* Profile.swift in Sources */,
 				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */,
 				02028E162526955600D9368E /* CircleImage.swift in Sources */,
 				023BBDF025251AC3006E8054 /* ContentView.swift in Sources */,
-				02D5AB53252A13EE007E73DC /* UserData.swift in Sources */,
 				02A7409D2527228300830B35 /* DataLoaderOpenSky.swift in Sources */,
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
 				022934BB252BB7D200CD4FFB /* ProfileHost.swift in Sources */,
