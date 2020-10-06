@@ -100,7 +100,7 @@ var wAQIData = WAQIDataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the WAQI API")
+                print("Received from the WAQI API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

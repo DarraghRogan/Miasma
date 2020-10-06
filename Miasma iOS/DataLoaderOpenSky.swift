@@ -85,7 +85,7 @@ public class DataLoaderOpenSky {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-//        print(request)
+        print(request.url)
         
         
         let session = URLSession.shared
@@ -95,7 +95,7 @@ public class DataLoaderOpenSky {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the OpenSky API")
+                print("Received from the OpenSky API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

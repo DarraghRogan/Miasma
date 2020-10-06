@@ -17,7 +17,8 @@ struct ProfileSummary: View {
             Text("Miasma")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
-            Button("Refresh \(ProfileEditor().AirQualityDataSource) \(ProfileEditor().SensorID)", action: {
+            Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
+                AppDelegate().updateDataSources()
                 ContentView().updateListEntry()
             })
 

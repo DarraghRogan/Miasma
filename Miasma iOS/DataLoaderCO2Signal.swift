@@ -50,7 +50,7 @@ var cO2Data = CO2DataStructure()
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         
-//        print(request.url)
+        print(request.url)
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
@@ -61,7 +61,7 @@ var cO2Data = CO2DataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the CO2 API")
+                print("Received from the CO2 API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

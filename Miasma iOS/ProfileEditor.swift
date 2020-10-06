@@ -28,7 +28,7 @@ struct ProfileEditor: View {
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
                     Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
                     Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
-                    Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
+//                    Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
                 }/*@END_MENU_TOKEN@*/
                 Divider()
                 Text("\(AirQualityDataSource)")

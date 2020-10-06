@@ -23,6 +23,13 @@ struct ContentView: View {
     @State var wAQITemperature: Double = 0.0
     @State var wAQITime: String = "◌"
     
+    @State var purpleAirLocation: String = "0"
+    @State var purpleAirPM2_5 : String = "0"
+    @State var purpleAirTemperature: String = "0"
+    @State var purpleAirHumidity: String = "0"
+    @State var purpleAirPressure: String = "0"
+    @State var purpleAirReadingAge: String = "0"
+    
     // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.27829386648741
     @State var sensorLongitude: Double = -6.212225585789163
@@ -65,6 +72,9 @@ struct ContentView: View {
             
             List
             {
+                switch (ProfileEditor().AirQualityDataSource) {
+                case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
+                
                 VStack{
                     Link("Air Quality (WAQI) ⇀",
                          destination: URL(string: wAQILink)!)
@@ -132,6 +142,83 @@ struct ContentView: View {
                             }
                     }
                     
+                }
+                    
+                case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
+                    
+                    VStack{
+                        Link("Air Quality (WAQI) ⇀",
+                             destination: URL(string: wAQILink)!)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("🌍")
+                            Spacer()
+                            Text("\(wAQICity)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("📜")
+                            Spacer()
+                            Text("\(wAQIAttribution)")
+                                .font(.footnote)
+                                .lineLimit(1)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("☁️")
+                            Spacer()
+                            Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("🎯")
+                            Spacer()
+                            Text("Dominant Pollutant is \(wAQIDominentPol)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("🌡")
+                            Spacer()
+                            Text("\(String(wAQITemperature))℃")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("📅")
+                            Spacer()
+                            Text("Taken: \(wAQITime)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        
+                    }
+                    
+                default:
+                    Link("Air Quality (WAQI) ⇀",
+                         destination: URL(string: wAQILink)!)
+                        .font(.headline)
                 }
                 
                 VStack{
@@ -235,9 +322,7 @@ struct ContentView: View {
     
     func updateListEntry() {
         
-        DataLoaderWAQI().loadWAQIData(id: "here")
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 self.wAQILink = wAQIData.data?.city.url ?? "https://aqicn.org/here/"
                 self.wAQIAttribution = wAQIData.data?.attributions[0].name ?? "0"
@@ -252,15 +337,10 @@ struct ContentView: View {
                 self.sensorLatitude = wAQIData.data?.city.geo[0] ?? 0
                 self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
                 
-                DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
-                
-                DataLoaderOpenSky().loadOpenSkyData(lamin: ((sensorLatitude )-1), lomin: ((sensorLongitude )-1), lamax: ((sensorLatitude)+1), lomax: ((sensorLongitude)+1))
-                
-//                DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 self.cO2Country = cO2Data.countryCode ?? ""
@@ -269,15 +349,15 @@ struct ContentView: View {
                 
                 self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
                 
-//                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
-//                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
-//                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
-//                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
-//                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
-//                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
-//                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
-//                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
-//                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
+                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
+                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
+                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
+                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
+                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
+                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
+                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
+                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
                 
             }
         }
