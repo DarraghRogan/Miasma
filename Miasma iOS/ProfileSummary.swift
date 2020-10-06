@@ -19,7 +19,7 @@ struct ProfileSummary: View {
                 .font(.title)
             Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
                 AppDelegate().updateDataSources()
-                ContentView().updateListEntry()
+                ContentView().updateListEntry().self
             })
 
             Text("Electricty Consumption data: \((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")

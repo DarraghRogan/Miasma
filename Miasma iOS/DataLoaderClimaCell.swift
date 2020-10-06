@@ -86,7 +86,7 @@ public class DataLoaderClimaCell {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-        print(request)
+//        print(request)
         
         let session = URLSession.shared
         

@@ -9,7 +9,7 @@
 import SwiftUI
 import CoreLocation
 
-struct ContentView: View {
+public struct ContentView: View {
     
     @State var showingProfile = false
     
@@ -52,7 +52,7 @@ struct ContentView: View {
     @State var climaCellPollenWeed: Int = 0
     
     
-    var body: some View {
+    public var body: some View {
         
         VStack {
             
@@ -320,10 +320,16 @@ struct ContentView: View {
     }
     
     
-    func updateListEntry() {
+    public func updateListEntry() {
+        
+        print("updating list entries")
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
+                
+                print("updating +5s list entries")
+
+                
                 self.wAQILink = wAQIData.data?.city.url ?? "https://aqicn.org/here/"
                 self.wAQIAttribution = wAQIData.data?.attributions[0].name ?? "0"
                 self.wAQICity = wAQIData.data?.city.name ?? "0"
@@ -342,6 +348,9 @@ struct ContentView: View {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 10.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
+                
+                print("updating +10s list entries")
+
                 
                 self.cO2Country = cO2Data.countryCode ?? ""
                 self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0

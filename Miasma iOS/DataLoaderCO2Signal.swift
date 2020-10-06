@@ -50,7 +50,7 @@ var cO2Data = CO2DataStructure()
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         
-        print(request.url)
+//        print(request.url)
         
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers

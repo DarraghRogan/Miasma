@@ -85,8 +85,7 @@ public class DataLoaderOpenSky {
         request.httpMethod = "GET"
         request.allHTTPHeaderFields = headers
         
-        print(request.url)
-        
+//        print(request.url)
         
         let session = URLSession.shared
         
