@@ -11,6 +11,10 @@ import CoreLocation
 
 public struct ContentView: View {
     
+    // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
+    @ObservedObject var viewModel = WAQIViewModel()
+
+    
     @State var showingProfile = false
     
     @State var ListDestination: String = "◌"
@@ -90,6 +94,15 @@ public struct ContentView: View {
                                 self.updateListEntry()
                             }
                     }
+//                        HStack {
+//                            Text("🌍")
+//                            Spacer()
+//                            Text(viewModel.wAQIDataObserved[0].data?.attributions ?? "0")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//
+//
+//                    }
                     HStack {
                         Text("📜")
                         Spacer()

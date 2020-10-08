@@ -37,6 +37,7 @@ struct ProfileEditor: View {
                 Text("Sensor ID")
                 Divider()
                 TextField("Sensor ID", text: $SensorID)
+                    .disableAutocorrection(true)
             }
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumption data")

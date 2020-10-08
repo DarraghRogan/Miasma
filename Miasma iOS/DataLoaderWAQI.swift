@@ -7,6 +7,87 @@
 //
 
 import Foundation
+import Combine
+
+struct WAQIResponse: Codable {
+    let wAQIdata: [WAQIDataStructure]
+
+    enum CodingKeys: String, CodingKey {
+        case wAQIdata = "data"
+    }
+}
+
+class WAQIViewModel: ObservableObject {
+    
+    @Published var wAQIdata: [WAQIDataStructure] = []
+    
+    var wAQICancellationToken: AnyCancellable?
+    
+    init() {
+        getWAQI()
+    }
+}
+
+extension WAQIViewModel {
+    
+    func getWAQI() {
+        wAQICancellationToken = WAQIDB.request(.here)
+            .mapError({ (error) -> Error in
+                print(error)
+                return error
+            })
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: {
+                    self.wAQIdata = $0.wAQIdata
+                  })
+    }
+}
+
+struct WAQIAPIClient {
+    
+    struct Response<T> {
+        let value: T
+        let response: URLResponse
+    }
+    
+    func run<T: Decodable>(_ request: URLRequest) ->
+    AnyPublisher<Response<T>, Error> {
+        return URLSession.shared
+            .dataTaskPublisher(for: request)
+            .tryMap { result -> Response<T> in
+                let value = try JSONDecoder().decode(
+                    T.self, from: result.data)
+                                                     return Response(value: value, response: result.response)
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+}
+
+enum WAQIDB {
+    static let apiClient = WAQIAPIClient()
+    static let baseUrl = URL(string: "https://api.waqi.info/feed/")!
+}
+
+enum WAQIAPIPath: String {
+    case here = "here"
+}
+
+extension WAQIDB {
+    
+    static func request(_ path: WAQIAPIPath) -> AnyPublisher<WAQIResponse, Error> {
+        
+        guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
+        else { fatalError("Couldn't create URL Components")}
+        components.queryItems = [URLQueryItem(name: "Accept", value: "application/json")]
+        
+        let request = URLRequest(url: components.url!)
+        
+        return apiClient.run(request)
+            .map(\.value)
+            .eraseToAnyPublisher()
+    }
+}
 
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
