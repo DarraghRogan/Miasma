@@ -94,15 +94,15 @@ public struct ContentView: View {
                                 self.updateListEntry()
                             }
                     }
-//                        HStack {
-//                            Text("🌍")
-//                            Spacer()
-//                            Text(viewModel.wAQIDataObserved[0].data?.attributions ?? "0")
-//                                .font(.footnote)
-//                                .padding(.top, 5.0)
-//
-//
-//                    }
+                        HStack {
+                            Text("🌍")
+                            Spacer()
+                            Text(String(viewModel.wAQIdata.count))
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+
+
+                    }
                     HStack {
                         Text("📜")
                         Spacer()

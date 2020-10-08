@@ -13,7 +13,7 @@ struct WAQIResponse: Codable {
     let wAQIdata: [WAQIDataStructure]
 
     enum CodingKeys: String, CodingKey {
-        case wAQIdata = "data"
+        case wAQIdata = "results"
     }
 }
 
