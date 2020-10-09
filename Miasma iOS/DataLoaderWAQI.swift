@@ -10,16 +10,16 @@ import Foundation
 import Combine
 
 struct WAQIResponse: Codable {
-    let wAQIdata: WAQIDataStructure
+    let wAQIdata: WAQIDataClass
 
     enum CodingKeys: String, CodingKey {
-        case wAQIdata = "results"
+        case wAQIdata = "data"
     }
 }
 
 class WAQIViewModel: ObservableObject {
     
-    @Published var wAQIdata: WAQIDataStructure = WAQIDataStructure()
+    @Published var wAQIdata: WAQIDataClass = WAQIDataClass()
     
     var wAQICancellationToken: AnyCancellable?
     
@@ -99,12 +99,12 @@ struct WAQIDataStructure: Codable {
 }
 
 struct WAQIDataClass: Codable {
-    var aqi, idx: Int
-    var attributions: [WAQIAttribution]
-    var city: WAQICity
-    var dominentpol: String
-    var iaqi: WAQIIaqi
-    var time: WAQITime
+    var aqi, idx: Int?
+    var attributions: [WAQIAttribution]?
+    var city: WAQICity?
+    var dominentpol: String?
+    var iaqi: WAQIIaqi?
+    var time: WAQITime?
 ////    var forecast: WAQIForecast
 //    var debug: WAQIDebug
 }

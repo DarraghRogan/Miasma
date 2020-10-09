@@ -97,7 +97,7 @@ public struct ContentView: View {
                         HStack {
                             Text("🌍")
                             Spacer()
-                            Text(String(viewModel.wAQIdata.data?.dominentpol ?? "0"))
+                            Text(String(viewModel.wAQIdata.dominentpol ?? "0"))
                                 .font(.footnote)
                                 .padding(.top, 5.0)
 
@@ -343,18 +343,18 @@ public struct ContentView: View {
                 print("updating +5s list entries")
 
                 
-                self.wAQILink = wAQIData.data?.city.url ?? "https://aqicn.org/here/"
-                self.wAQIAttribution = wAQIData.data?.attributions[0].name ?? "0"
-                self.wAQICity = wAQIData.data?.city.name ?? "0"
+                self.wAQILink = wAQIData.data?.city?.url ?? "https://aqicn.org/here/"
+                self.wAQIAttribution = wAQIData.data?.attributions?[0].name ?? "0"
+                self.wAQICity = wAQIData.data?.city?.name ?? "0"
                 self.wAQIAQI = wAQIData.data?.aqi ?? 0
                 self.wAQIDominentPol = wAQIData.data?.dominentpol ?? "0"
-                self.wAQITemperature = wAQIData.data?.iaqi.t?.v ?? 0
-                self.wAQITime = wAQIData.data?.time.s ?? "0"
+                self.wAQITemperature = wAQIData.data?.iaqi?.t?.v ?? 0
+                self.wAQITime = wAQIData.data?.time?.s ?? "0"
                 
-                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIData.data?.city.geo[0] ?? 0, wAQIData.data?.city.geo[1] ?? 0)
+                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIData.data?.city?.geo[0] ?? 0, wAQIData.data?.city?.geo[1] ?? 0)
                 
-                self.sensorLatitude = wAQIData.data?.city.geo[0] ?? 0
-                self.sensorLongitude = wAQIData.data?.city.geo[1] ?? 0
+                self.sensorLatitude = wAQIData.data?.city?.geo[0] ?? 0
+                self.sensorLongitude = wAQIData.data?.city?.geo[1] ?? 0
                 
             }
         }
