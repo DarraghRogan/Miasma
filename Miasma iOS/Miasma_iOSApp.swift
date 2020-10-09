@@ -25,7 +25,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         switch (ProfileEditor().AirQualityDataSource) {
         
         case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
-            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
+//            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
+//            WAQIViewModel().getWAQI()
             print("called for the WAQI data loader")
             
         case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :

@@ -66,11 +66,11 @@ struct WAQIAPIClient {
 
 enum WAQIDB {
     static let apiClient = WAQIAPIClient()
-    static let baseUrl = URL(string: "https://api.waqi.info/feed/")!
+    static let baseUrl = URL(string: "https://api.waqi.info/feed/\(ProfileEditor().SensorID)")!
 }
 
 enum WAQIAPIPath: String {
-    case here = "here/"
+    case here = "/"
 }
 
 extension WAQIDB {

@@ -12,20 +12,12 @@ import CoreLocation
 public struct ContentView: View {
     
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
-    @ObservedObject var viewModel = WAQIViewModel()
+    @ObservedObject var wAQIViewModel = WAQIViewModel()
 
     
     @State var showingProfile = false
     
     @State var ListDestination: String = "◌"
-    
-    @State var wAQILink: String = "0"
-    @State var wAQIAttribution: String = "◌"
-    @State var wAQICity: String = "◌"
-    @State var wAQIAQI: Int = 0
-    @State var wAQIDominentPol: String = "◌"
-    @State var wAQITemperature: Double = 0.0
-    @State var wAQITime: String = "◌"
     
     @State var purpleAirLocation: String = "0"
     @State var purpleAirPM2_5 : String = "0"
@@ -81,156 +73,147 @@ public struct ContentView: View {
                 
                 VStack{
                     Link("Air Quality (WAQI) ⇀",
-                         destination: URL(string: wAQILink)!)
+                         destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                         .font(.headline)
                     
                     HStack {
                         Text("🌍")
                         Spacer()
-                        Text("\(wAQICity)")
+                        Text(wAQIViewModel.wAQIdata.city?.name ?? "0")
                             .font(.footnote)
                             .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                         HStack {
-                            Text("🌍")
+                            Text("📜")
                             Spacer()
-                            Text(String(viewModel.wAQIdata.dominentpol ?? "0"))
+                            Text(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
 
 
                     }
-                    HStack {
-                        Text("📜")
-                        Spacer()
-                        Text("\(wAQIAttribution)")
-                            .font(.footnote)
-                            .lineLimit(1)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
+
+                    
                     HStack {
                         Text("☁️")
                         Spacer()
-                        Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
+                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0))")
                             .font(.footnote)
                             .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     HStack {
                         Text("🎯")
                         Spacer()
-                        Text("Dominant Pollutant is \(wAQIDominentPol)")
+                        Text("Dominant Pollutant is \(wAQIViewModel.wAQIdata.dominentpol ?? "0")")
                             .font(.footnote)
                             .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     HStack {
                         Text("🌡")
                         Spacer()
-                        Text("\(String(wAQITemperature))℃")
+                        Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
                             .font(.footnote)
                             .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     HStack {
                         Text("📅")
                         Spacer()
-                        Text("Taken: \(wAQITime)")
+                        Text("Taken: \(wAQIData.data?.time?.s ?? "0") \(wAQIData.data?.time?.tz ?? "0")")
                             .font(.footnote)
                             .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     
                 }
                     
-                case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
-                    
-                    VStack{
-                        Link("Air Quality (WAQI) ⇀",
-                             destination: URL(string: wAQILink)!)
-                            .font(.headline)
-                        
-                        HStack {
-                            Text("🌍")
-                            Spacer()
-                            Text("\(wAQICity)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        HStack {
-                            Text("📜")
-                            Spacer()
-                            Text("\(wAQIAttribution)")
-                                .font(.footnote)
-                                .lineLimit(1)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        HStack {
-                            Text("☁️")
-                            Spacer()
-                            Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        HStack {
-                            Text("🎯")
-                            Spacer()
-                            Text("Dominant Pollutant is \(wAQIDominentPol)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        HStack {
-                            Text("🌡")
-                            Spacer()
-                            Text("\(String(wAQITemperature))℃")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        HStack {
-                            Text("📅")
-                            Spacer()
-                            Text("Taken: \(wAQITime)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        
-                    }
+//                case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
+//
+//                    VStack{
+//                        Link("Air Quality (WAQI) ⇀",
+//                             destination: URL(string: wAQILink)!)
+//                            .font(.headline)
+//
+//                        HStack {
+//                            Text("🌍")
+//                            Spacer()
+//                            Text("\(wAQICity)")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("📜")
+//                            Spacer()
+//                            Text("\(wAQIAttribution)")
+//                                .font(.footnote)
+//                                .lineLimit(1)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("☁️")
+//                            Spacer()
+//                            Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("🎯")
+//                            Spacer()
+//                            Text("Dominant Pollutant is \(wAQIDominentPol)")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("🌡")
+//                            Spacer()
+//                            Text("\(String(wAQITemperature))℃")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("📅")
+//                            Spacer()
+//                            Text("Taken: \(wAQITime)")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//
+//                    }
                     
                 default:
                     Link("Air Quality (WAQI) ⇀",
-                         destination: URL(string: wAQILink)!)
+                         destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                         .font(.headline)
                 }
                 
@@ -343,18 +326,10 @@ public struct ContentView: View {
                 print("updating +5s list entries")
 
                 
-                self.wAQILink = wAQIData.data?.city?.url ?? "https://aqicn.org/here/"
-                self.wAQIAttribution = wAQIData.data?.attributions?[0].name ?? "0"
-                self.wAQICity = wAQIData.data?.city?.name ?? "0"
-                self.wAQIAQI = wAQIData.data?.aqi ?? 0
-                self.wAQIDominentPol = wAQIData.data?.dominentpol ?? "0"
-                self.wAQITemperature = wAQIData.data?.iaqi?.t?.v ?? 0
-                self.wAQITime = wAQIData.data?.time?.s ?? "0"
+                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
                 
-                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIData.data?.city?.geo[0] ?? 0, wAQIData.data?.city?.geo[1] ?? 0)
-                
-                self.sensorLatitude = wAQIData.data?.city?.geo[0] ?? 0
-                self.sensorLongitude = wAQIData.data?.city?.geo[1] ?? 0
+                self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
+                self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
                 
             }
         }
