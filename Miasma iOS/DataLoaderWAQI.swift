@@ -10,7 +10,7 @@ import Foundation
 import Combine
 
 struct WAQIResponse: Codable {
-    let wAQIdata: [WAQIDataStructure]
+    let wAQIdata: WAQIDataStructure
 
     enum CodingKeys: String, CodingKey {
         case wAQIdata = "results"
@@ -19,7 +19,7 @@ struct WAQIResponse: Codable {
 
 class WAQIViewModel: ObservableObject {
     
-    @Published var wAQIdata: [WAQIDataStructure] = []
+    @Published var wAQIdata: WAQIDataStructure = WAQIDataStructure()
     
     var wAQICancellationToken: AnyCancellable?
     
@@ -70,7 +70,7 @@ enum WAQIDB {
 }
 
 enum WAQIAPIPath: String {
-    case here = "here"
+    case here = "here/"
 }
 
 extension WAQIDB {
@@ -79,9 +79,11 @@ extension WAQIDB {
         
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
-        components.queryItems = [URLQueryItem(name: "Accept", value: "application/json")]
+        components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
         
         let request = URLRequest(url: components.url!)
+        
+        print(request)
         
         return apiClient.run(request)
             .map(\.value)

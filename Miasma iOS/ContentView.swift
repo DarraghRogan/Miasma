@@ -97,7 +97,7 @@ public struct ContentView: View {
                         HStack {
                             Text("🌍")
                             Spacer()
-                            Text(String(viewModel.wAQIdata.count))
+                            Text(String(viewModel.wAQIdata.data?.dominentpol ?? "0"))
                                 .font(.footnote)
                                 .padding(.top, 5.0)
 
