@@ -17,15 +17,6 @@ public struct ContentView: View {
     
     @State var showingProfile = false
     
-    @State var ListDestination: String = "◌"
-    
-    @State var purpleAirLocation: String = "0"
-    @State var purpleAirPM2_5 : String = "0"
-    @State var purpleAirTemperature: String = "0"
-    @State var purpleAirHumidity: String = "0"
-    @State var purpleAirPressure: String = "0"
-    @State var purpleAirReadingAge: String = "0"
-    
     // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.3412
     @State var sensorLongitude: Double = -6.2507
@@ -190,94 +181,111 @@ public struct ContentView: View {
                         .font(.headline)
                 }
                 
-                VStack{
-                    Link("Electricity Consumption (CO₂ Signal) ⇀",
-                         destination: URL(string: "https://www.electricitymap.org/")!)
-                        .padding(.top, 8.0)
-                        .font(.headline)
-                    
-                    HStack {
-                        Text("🌍")
-                        Spacer()
-                        Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("⚡️")
-                        Spacer()
-                        Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
-                            .font(.footnote)
-                            .lineLimit(1)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                }
                 
-                VStack{
-                    Link("Aircraft Overhead (OpenSky) ⇀",
-                         destination: URL(string: "https://opensky-network.org/")!)
-                        .padding(.top, 8.0)
-                        .font(.headline)
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
                     
-                    HStack {
-                        Text("✈️")
-                        Spacer()
-                        Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+                    VStack{
+                        Link("Electricity Consumption (CO₂ Signal) ⇀",
+                             destination: URL(string: "https://www.electricitymap.org/")!)
+                            .padding(.top, 8.0)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("🌍")
+                            Spacer()
+                            Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("⚡️")
+                            Spacer()
+                            Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
+                                .font(.footnote)
+                                .lineLimit(1)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
                     }
                     
                 }
                 
-                VStack{
-                    Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                         destination: URL(string: "https://www.climacell.co/consumer-app/")!)
-                        .padding(.top, 8.0)
-                        .font(.headline)
+                if ProfileEditor().AircraftDataWanted == true
+                {
                     
-                    HStack {
-                        Text("🌦")
-                        Spacer()
-                        Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \((String(format: "%.1f", locale: Locale.current, climaCellWindDirection)))° @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+                    VStack{
+                        Link("Aircraft Overhead (OpenSky) ⇀",
+                             destination: URL(string: "https://opensky-network.org/")!)
+                            .padding(.top, 8.0)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("✈️")
+                            Spacer()
+                            Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        
                     }
-                    HStack {
-                        Text("☁️")
-                        Spacer()
-                        Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Text("🌳")
-                        Spacer()
-                        Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
+                    
                 }
-                .sheet(isPresented: $showingProfile) {
-                    ProfileHost()
+                
+                if ProfileEditor().OneHourForecastDataWanted == true
+                {
+                    
+                    VStack{
+                        Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
+                             destination: URL(string: "https://www.climacell.co/consumer-app/")!)
+                            .padding(.top, 8.0)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("🌦")
+                            Spacer()
+                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \((String(format: "%.1f", locale: Locale.current, climaCellWindDirection)))° @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("☁️")
+                            Spacer()
+                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("🌳")
+                            Spacer()
+                            Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                    }
+                    
                 }
+                
+            }
+            .sheet(isPresented: $showingProfile) {
+                ProfileHost()
             }
             
         }
@@ -294,7 +302,7 @@ public struct ContentView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +5s list entries")
+                print("running +5s data loaders")
                 
                 switch (ProfileEditor().AirQualityDataSource) {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
@@ -319,6 +327,23 @@ public struct ContentView: View {
                     self.sensorLongitude = -6.2507
                     
                 }
+                
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
+                    DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
+                }
+                
+                if ProfileEditor().AircraftDataWanted == true
+                {
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: sensorLatitude-1, lomin: sensorLongitude-1, lamax: sensorLatitude+1, lomax: sensorLongitude+1)
+                }
+                
+                if ProfileEditor().OneHourForecastDataWanted == true
+                {
+                    DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
+                }
+                
+                
             }
         }
         
@@ -327,22 +352,31 @@ public struct ContentView: View {
                 
                 print("updating +10s list entries")
                 
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
+                    self.cO2Country = cO2Data.countryCode ?? ""
+                    self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
+                    self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                }
                 
-                self.cO2Country = cO2Data.countryCode ?? ""
-                self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
-                self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                if ProfileEditor().AircraftDataWanted == true
+                {
+                    self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
+                }
                 
-                self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
-                
-                //                self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
-                //                self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
-                //                self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
-                //                self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
-                //                self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
-                //                self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? ""
-                //                self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
-                //                self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
-                //                self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+                if ProfileEditor().OneHourForecastDataWanted == true
+                {
+                    
+                    self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
+                    self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
+                    self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
+                    self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
+                    self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
+                    self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? "0"
+                    self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
+                    self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
+                    self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+                }
                 
             }
         }

@@ -26,19 +26,22 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
     // Triggered by the menu's refresh button
     func updateDataSources(){
-        switch (ProfileEditor().AirQualityDataSource) {
         
-        case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
-//            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
-            WAQIViewModel().getWAQI()
-            
-        case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
-            PurpleAirViewModel().getPurpleAir()
-            
-        default:
-            WAQIViewModel().getWAQI()
-            
-        }
+        ContentView()
+        
+//        switch (ProfileEditor().AirQualityDataSource) {
+//
+//        case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
+////            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
+//            WAQIViewModel().getWAQI()
+//
+//        case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
+//            PurpleAirViewModel().getPurpleAir()
+//
+//        default:
+//            WAQIViewModel().getWAQI()
+//            
+//        }
         
 
     }
