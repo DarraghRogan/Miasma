@@ -16,7 +16,6 @@
 		023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF425251AC5006E8054 /* Preview Assets.xcassets */; };
 		0269848225251DB7002BFB88 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848125251DB7002BFB88 /* APIKeys.swift */; };
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
-		0271CB5F2528BEEF008CC90C /* SwiftUIPullToRefresh in Frameworks */ = {isa = PBXBuildFile; productRef = 0271CB5E2528BEEF008CC90C /* SwiftUIPullToRefresh */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
@@ -186,7 +185,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0271CB5F2528BEEF008CC90C /* SwiftUIPullToRefresh in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,7 +319,6 @@
 			);
 			name = "Miasma iOS";
 			packageProductDependencies = (
-				0271CB5E2528BEEF008CC90C /* SwiftUIPullToRefresh */,
 			);
 			productName = "Miasma iOS";
 			productReference = 023BBDEB25251AC3006E8054 /* Miasma iOS.app */;
@@ -887,14 +884,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		0271CB5E2528BEEF008CC90C /* SwiftUIPullToRefresh */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 0271CB582528BEAE008CC90C /* XCRemoteSwiftPackageReference "SwiftUI-PullToRefresh" */;
-			productName = SwiftUIPullToRefresh;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0283DD7D24F051B700E4CC07 /* Project object */;
 }

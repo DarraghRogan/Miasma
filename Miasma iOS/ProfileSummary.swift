@@ -18,18 +18,42 @@ struct ProfileSummary: View {
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
             Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
-                AppDelegate().updateDataSources()
-                ContentView()
+                //                PurpleAirViewModel().getPurpleAir()
+                //                WAQIViewModel().getWAQI()
+                // Call the publisher
+                if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
+                    ContentView().wAQIViewModel.objectWillChange.send()
+                }
+                
+                if ProfileEditor().AirQualityDataSource == "PurpleAir"{
+                    ContentView().purpleAirViewModel.objectWillChange.send()
+                }
+                ContentView().updateListEntry()
             })
-
-            Text("Electricty Consumption data: \((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
-            Text("Aircraft Overhead data: \((ProfileEditor().AircraftDataWanted) ? "On": "Off" )")
-            Text("1 Hour Forecast: \((ProfileEditor().OneHourForecastDataWanted) ? "On": "Off" )")
-            Text("Notifications: \((ProfileEditor().NotificationsWanted) ? "On": "Off" )")
+            HStack{
+                Text("Electricty Consumption data:")
+                Spacer()
+                Text("\((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
+            }
+            HStack{
+                Text("Aircraft Overhead data:")
+                Spacer()
+                Text("\((ProfileEditor().AircraftDataWanted) ? "On": "Off" )")
+            }
+            HStack{
+                Text("1 Hour Forecast:")
+                Spacer()
+                Text("\((ProfileEditor().OneHourForecastDataWanted) ? "On": "Off" )")
+            }
+            //            HStack{
+            //                Text("Notifications:")
+            //                Spacer()
+            //                Text("\((ProfileEditor().NotificationsWanted) ? "On": "Off" )")
+            //            }
             Link("Review / Suggestions for Miasma", destination: URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
             Link("About Miasma", destination: URL(string: "https://miasma.app")!)
             HStack{
-            Text("Version:")
+                Text("Version:")
                 Spacer()
                 Text("\((nsObject.self ?? 1.00 as AnyObject) as! String)")
             }

@@ -8,12 +8,8 @@
 
 import SwiftUI
 
-
-
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        
-        updateDataSources()
         
         return true
         
@@ -21,30 +17,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
     
-    
-    
-    
-    // Triggered by the menu's refresh button
-    func updateDataSources(){
-        
-        ContentView()
-        
-//        switch (ProfileEditor().AirQualityDataSource) {
-//
-//        case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
-////            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
-//            WAQIViewModel().getWAQI()
-//
-//        case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
-//            PurpleAirViewModel().getPurpleAir()
-//
-//        default:
-//            WAQIViewModel().getWAQI()
-//            
-//        }
-        
-
-    }
 }
 
 

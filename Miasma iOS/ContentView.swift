@@ -18,6 +18,8 @@ public struct ContentView: View {
     
     @State var showingProfile = false
     
+    @State var ProgressIndicatorShown = true
+    
     // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.3412
     @State var sensorLongitude: Double = -6.2507
@@ -60,12 +62,7 @@ public struct ContentView: View {
             
             List
             {
-                
-                Button("Refresh", action: {
-                  // Call the publisher
-                  self.purpleAirViewModel.objectWillChange.send()
-                })
-                    
+                                    
                 switch (ProfileEditor().AirQualityDataSource) {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
                     
@@ -193,6 +190,9 @@ public struct ContentView: View {
                 {
                     
                     VStack{
+                        if ProgressIndicatorShown == true{
+                        ProgressView()
+                        }
                         Link("Electricity Consumption (CO₂ Signal) ⇀",
                              destination: URL(string: "https://www.electricitymap.org/")!)
                             .padding(.top, 8.0)
@@ -227,6 +227,9 @@ public struct ContentView: View {
                 {
                     
                     VStack{
+                        if ProgressIndicatorShown == true{
+                        ProgressView()
+                        }
                         Link("Aircraft Overhead (OpenSky) ⇀",
                              destination: URL(string: "https://opensky-network.org/")!)
                             .padding(.top, 8.0)
@@ -251,6 +254,9 @@ public struct ContentView: View {
                 {
                     
                     VStack{
+                        if ProgressIndicatorShown == true{
+                        ProgressView()
+                        }
                         Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
                              destination: URL(string: "https://www.climacell.co/consumer-app/")!)
                             .padding(.top, 8.0)
@@ -289,7 +295,6 @@ public struct ContentView: View {
                     }
                     
                 }
-                
             }
             .sheet(isPresented: $showingProfile) {
                 ProfileHost()
@@ -358,6 +363,8 @@ public struct ContentView: View {
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 print("updating +10s list entries")
+                
+                ProgressIndicatorShown = false
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {

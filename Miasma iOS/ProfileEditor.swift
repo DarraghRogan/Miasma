@@ -48,9 +48,9 @@ struct ProfileEditor: View {
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }
-            Toggle(isOn: $NotificationsWanted) {
-                Text("Enable Notifications")
-            }
+//            Toggle(isOn: $NotificationsWanted) {
+//                Text("Enable Notifications")
+//            }
             
             .padding(.top)
             
