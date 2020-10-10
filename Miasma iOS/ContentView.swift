@@ -82,20 +82,15 @@ public struct ContentView: View {
                             Text(wAQIViewModel.wAQIdata.city?.name ?? "0")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
+                        
                         HStack {
                             Text("📜")
                             Spacer()
                             Text(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            
-                            
                         }
-                        
                         
                         HStack {
                             Text("☁️")
@@ -103,39 +98,31 @@ public struct ContentView: View {
                             Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0))")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
+                        
                         HStack {
                             Text("🎯")
                             Spacer()
                             Text("Dominant Pollutant is \(wAQIViewModel.wAQIdata.dominentpol ?? "0")")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+                            
                         }
+                        
                         HStack {
                             Text("🌡")
                             Spacer()
                             Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
+                        
                         HStack {
                             Text("📅")
                             Spacer()
                             Text("Taken: \(String(wAQIViewModel.wAQIdata.time?.tz ?? "0"))")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
                         
                     }
@@ -154,61 +141,49 @@ public struct ContentView: View {
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                         }
+                        
+                        HStack {
+                            Text("☁️")
+                            Spacer()
+                            Text("US EPA PM₂.₅  is \(purpleAirViewModel.purpleAirdata.pm25_A ?? 0)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                        }
+                        
+                        HStack {
+                            Text("🌡")
+                            Spacer()
+                            Text("\(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                        }
+                        
+                        HStack {
+                            Text("💧")
+                            Spacer()
+                            Text("\(String((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4))% Relative Humidity")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                        }
+                        
+                        HStack {
+                            Text("🌬️")
+                            Spacer()
+                            Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                        }
+                        
+                        HStack {
+                            Text("📅")
+                            Spacer()
+                            Text("Taken: \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old at Miasma refresh time")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                        }
                     }
-                //                        HStack {
-                //                            Text("📜")
-                //                            Spacer()
-                //                            Text("\(wAQIAttribution)")
-                //                                .font(.footnote)
-                //                                .lineLimit(1)
-                //                                .padding(.top, 5.0)
-                //                                .onAppear() {
-                //                                    self.updateListEntry()
-                //                                }
-                //                        }
-                //                        HStack {
-                //                            Text("☁️")
-                //                            Spacer()
-                //                            Text("US EPA PM₂.₅ AQI is \(wAQIAQI)")
-                //                                .font(.footnote)
-                //                                .padding(.top, 5.0)
-                //                                .onAppear() {
-                //                                    self.updateListEntry()
-                //                                }
-                //                        }
-                //                        HStack {
-                //                            Text("🎯")
-                //                            Spacer()
-                //                            Text("Dominant Pollutant is \(wAQIDominentPol)")
-                //                                .font(.footnote)
-                //                                .padding(.top, 5.0)
-                //                                .onAppear() {
-                //                                    self.updateListEntry()
-                //                                }
-                //                        }
-                //                        HStack {
-                //                            Text("🌡")
-                //                            Spacer()
-                //                            Text("\(String(wAQITemperature))℃")
-                //                                .font(.footnote)
-                //                                .padding(.top, 5.0)
-                //                                .onAppear() {
-                //                                    self.updateListEntry()
-                //                                }
-                //                        }
-                //                        HStack {
-                //                            Text("📅")
-                //                            Spacer()
-                //                            Text("Taken: \(wAQITime)")
-                //                                .font(.footnote)
-                //                                .padding(.top, 5.0)
-                //                                .onAppear() {
-                //                                    self.updateListEntry()
-                //                                }
-                //                        }
-                //
-                //                    }
-                
+                    
+                    
                 default:
                     Link("Air Quality (WAQI) ⇀",
                          destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
