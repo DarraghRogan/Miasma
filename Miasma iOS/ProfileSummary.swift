@@ -18,8 +18,8 @@ struct ProfileSummary: View {
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
             Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
-                //                PurpleAirViewModel().getPurpleAir()
-                //                WAQIViewModel().getWAQI()
+                PurpleAirViewModel().getPurpleAir()
+                WAQIViewModel().getWAQI()
                 // Call the publisher
                 if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
                     ContentView().wAQIViewModel.objectWillChange.send()

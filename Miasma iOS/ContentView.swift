@@ -12,7 +12,7 @@ import CoreLocation
 public struct ContentView: View {
     
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
-
+    
     @ObservedObject var wAQIViewModel = WAQIViewModel()
     @ObservedObject var purpleAirViewModel = PurpleAirViewModel()
     
@@ -62,7 +62,7 @@ public struct ContentView: View {
             
             List
             {
-                                    
+                
                 switch (ProfileEditor().AirQualityDataSource) {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
                     
@@ -191,7 +191,7 @@ public struct ContentView: View {
                     
                     VStack{
                         if ProgressIndicatorShown == true{
-                        ProgressView()
+                            ProgressView()
                         }
                         Link("Electricity Consumption (CO₂ Signal) ⇀",
                              destination: URL(string: "https://www.electricitymap.org/")!)
@@ -228,7 +228,7 @@ public struct ContentView: View {
                     
                     VStack{
                         if ProgressIndicatorShown == true{
-                        ProgressView()
+                            ProgressView()
                         }
                         Link("Aircraft Overhead (OpenSky) ⇀",
                              destination: URL(string: "https://opensky-network.org/")!)
@@ -255,7 +255,7 @@ public struct ContentView: View {
                     
                     VStack{
                         if ProgressIndicatorShown == true{
-                        ProgressView()
+                            ProgressView()
                         }
                         Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
                              destination: URL(string: "https://www.climacell.co/consumer-app/")!)
@@ -295,6 +295,11 @@ public struct ContentView: View {
                     }
                     
                 }
+                Button("🔄", action: {
+                    purpleAirViewModel.objectWillChange.send()
+                    updateListEntry()
+                })
+                .frame(maxWidth: .infinity, alignment: .center)
             }
             .sheet(isPresented: $showingProfile) {
                 ProfileHost()
@@ -311,10 +316,15 @@ public struct ContentView: View {
     
     public func updateListEntry() {
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.05) { // sort of URL session task
+        ProgressIndicatorShown = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("running +5s data loaders")
+                print("running +3s data loaders")
+                
+                ProgressIndicatorShown = true
+                
                 
                 switch (ProfileEditor().AirQualityDataSource) {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
@@ -359,10 +369,10 @@ public struct ContentView: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 10.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +10s list entries")
+                print("updating +6s list entries")
                 
                 ProgressIndicatorShown = false
                 

@@ -28,6 +28,7 @@ class PurpleAirViewModel: ObservableObject {
     
     init() {
         getPurpleAir()
+        
     }
     
 }
@@ -44,7 +45,6 @@ extension PurpleAirViewModel {
                   receiveValue: {
                     self.purpleAirdata = $0.purpleAirdata
                   })
-
     }
 }
 
