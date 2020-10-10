@@ -21,33 +21,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
     
+    
+    
+    
+    // Triggered by the menu's refresh button
     func updateDataSources(){
         switch (ProfileEditor().AirQualityDataSource) {
         
         case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
 //            DataLoaderWAQI().loadWAQIData(id: "\(ProfileEditor().SensorID)")
-//            WAQIViewModel().getWAQI()
-            print("called for the WAQI data loader")
+            WAQIViewModel().getWAQI()
             
         case _ where ProfileEditor().AirQualityDataSource == "PurpleAir" :
-            DataLoaderPurpleAir().loadPurpleAirData(id: "\(ProfileEditor().SensorID)")
+            PurpleAirViewModel().getPurpleAir()
             
         default:
-            DataLoaderWAQI().loadWAQIData(id: "here")
+            WAQIViewModel().getWAQI()
             
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.05) { // sort of URL session task
-            
-            print("called for the other data loaders")
 
-            DataLoaderCO2().loadCO2Data(lat: String(ContentView().sensorLatitude), lon: String(ContentView().sensorLongitude))
-            
-            DataLoaderOpenSky().loadOpenSkyData(lamin: ((ContentView().sensorLatitude )-1), lomin: ((ContentView().sensorLongitude )-1), lamax: ((ContentView().sensorLatitude)+1), lomax: ((ContentView().sensorLongitude)+1))
-            
-            DataLoaderClimaCell().loadClimaCellData(lat: ContentView().sensorLatitude, lon: ContentView().sensorLongitude)
-            
-        }
     }
 }
 
@@ -61,6 +54,7 @@ struct Miasma_iOSApp: App {
     var body: some Scene {
         WindowGroup {
             
+            // this is where I should have a reload function to allow the user change their station ID in the app preferences
             ContentView()
             
         }

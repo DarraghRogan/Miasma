@@ -11,11 +11,13 @@ import Combine
 
 struct WAQIResponse: Codable {
     let wAQIdata: WAQIDataClass
-
+    
     enum CodingKeys: String, CodingKey {
         case wAQIdata = "data"
     }
 }
+
+
 
 class WAQIViewModel: ObservableObject {
     
@@ -23,15 +25,17 @@ class WAQIViewModel: ObservableObject {
     
     var wAQICancellationToken: AnyCancellable?
     
+    
     init() {
         getWAQI()
     }
+    
 }
 
 extension WAQIViewModel {
     
     func getWAQI() {
-        wAQICancellationToken = WAQIDB.request(.here)
+        wAQICancellationToken = WAQIDB.request(.city)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
@@ -40,6 +44,8 @@ extension WAQIViewModel {
                   receiveValue: {
                     self.wAQIdata = $0.wAQIdata
                   })
+//        print(ProfileEditor().SensorID)
+//        print(_wAQIdata)
     }
 }
 
@@ -57,10 +63,12 @@ struct WAQIAPIClient {
             .tryMap { result -> Response<T> in
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
-                                                     return Response(value: value, response: result.response)
+//                print(Response<Any>.self)
+                return Response(value: value, response: result.response)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+        
     }
 }
 
@@ -70,7 +78,7 @@ enum WAQIDB {
 }
 
 enum WAQIAPIPath: String {
-    case here = "/"
+    case city = "/"
 }
 
 extension WAQIDB {
@@ -86,6 +94,7 @@ extension WAQIDB {
         print(request)
         
         return apiClient.run(request)
+            
             .map(\.value)
             .eraseToAnyPublisher()
     }
@@ -105,14 +114,14 @@ struct WAQIDataClass: Codable {
     var dominentpol: String?
     var iaqi: WAQIIaqi?
     var time: WAQITime?
-////    var forecast: WAQIForecast
-//    var debug: WAQIDebug
+    ////    var forecast: WAQIForecast
+    //    var debug: WAQIDebug
 }
 
 struct WAQIAttribution: Codable {
     var url: String
     var name: String
-//    var logo: String?
+    //    var logo: String?
 }
 
 struct WAQICity: Codable {
@@ -155,7 +164,7 @@ struct WAQICo: Codable {
 struct WAQITime: Codable {
     var s, tz: String
     var v: Int
-//    var iso: Date
+    //    var iso: Date
 }
 
 
@@ -164,19 +173,19 @@ struct WAQITime: Codable {
 // define an instance of the data that can be filled by the data loader and read by the menu
 var wAQIData = WAQIDataStructure()
 
- public class DataLoaderWAQI {
-
+public class DataLoaderWAQI {
+    
     
     func loadWAQIData(id:String) {
-
+        
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.waqi.info/feed/\(id)/?token=\(APIKeyWAQI)")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
+                                                        "https://api.waqi.info/feed/\(id)/?token=\(APIKeyWAQI)")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         
         
         request.httpMethod = "GET"
-
+        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -184,26 +193,26 @@ var wAQIData = WAQIDataStructure()
             } else {
                 let httpResponse = response as? HTTPURLResponse
                 print("Received from the WAQI API")
-//                if let data = data,
-//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
+                //                if let data = data,
+                //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                //                    print(urlContent)
+                //                } else {
+                //                    print("error with printing string encoded data")
+                //                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
                     let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
                     wAQIData = dataFromWAQI
-
+                    
                 }
                 catch {
                     print("Error in WAQI JSON parsing")
-//                    print(purpleAirData)
+                    //                    print(purpleAirData)
                 }
             }
         })
-
+        
         dataTask.resume()
     }
- }
+}

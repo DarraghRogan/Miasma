@@ -7,6 +7,106 @@
 //
 
 import Foundation
+import Combine
+
+struct PurpleAirResponse: Codable {
+    let purpleAirdata: Sensor
+    
+    enum CodingKeys: String, CodingKey {
+        case purpleAirdata = "sensor"
+    }
+}
+
+
+
+class PurpleAirViewModel: ObservableObject {
+    
+    @Published var purpleAirdata: Sensor = Sensor()
+    
+    var purpleAirCancellationToken: AnyCancellable?
+    
+    
+    init() {
+        getPurpleAir()
+    }
+    
+}
+
+extension PurpleAirViewModel {
+    
+    func getPurpleAir() {
+        purpleAirCancellationToken = PurpleAirDB.request(.station)
+            .mapError({ (error) -> Error in
+                print(error)
+                return error
+            })
+            .sink(receiveCompletion: { _ in },
+                  receiveValue: {
+                    self.purpleAirdata = $0.purpleAirdata
+                  })
+
+    }
+}
+
+struct PurpleAirAPIClient {
+    
+    struct Response<T> {
+        let value: T
+        let response: URLResponse
+    }
+    
+    func run<T: Decodable>(_ request: URLRequest) ->
+    AnyPublisher<Response<T>, Error> {
+        return URLSession.shared
+            .dataTaskPublisher(for: request)
+            .tryMap { result -> Response<T> in
+                let value = try JSONDecoder().decode(
+                    T.self, from: result.data)
+//                print(Response<Any>.self)
+                return Response(value: value, response: result.response)
+            }
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+        
+    }
+}
+
+enum PurpleAirDB {
+    static let apiClient = PurpleAirAPIClient()
+    static let baseUrl = URL(string: "https://api.purpleair.com/v1/sensors/\(ProfileEditor().SensorID)")!
+}
+
+enum PurpleAirAPIPath: String {
+    case station = ""
+}
+
+extension PurpleAirDB {
+    
+    static func request(_ path: PurpleAirAPIPath) -> AnyPublisher<PurpleAirResponse, Error> {
+        
+        guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
+        else { fatalError("Couldn't create URL Components")}
+//        components.queryItems = [URLQueryItem(name: "X-API-Key", value: APIKeyPurpleAirNewAPI)]
+        
+        
+        var request = URLRequest(url: components.url!)
+        request.httpMethod = "GET"
+
+        let headers = ["X-API-Key": APIKeyPurpleAirNewAPI]
+
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
+        
+        print(request)
+        
+        return apiClient.run(request)
+            
+            .map(\.value)
+            .eraseToAnyPublisher()
+    }
+}
+
 
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
@@ -186,70 +286,3 @@ struct Sensor: Codable {
 ////        case parentID = "ParentID"
 //    }
 //}
-
-
-
-
-// define an instance of the data that can be filled by the data loader and read by the menu
-var purpleAirData = PurpleAirDataStructure()
-
-public class DataLoaderPurpleAir {
-    
-    
-    func loadPurpleAirData(id:String) {
-        
-        
-        //        let headers = [
-        //            "Accept": "application/json"
-        //        ]
-        //
-        //        let request = NSMutableURLRequest(url: NSURL(string:
-        //         "https://www.purpleair.com/json?key=\(APIKeyPurpleAir)&show=\(id)")! as URL,
-        //                                                cachePolicy: .useProtocolCachePolicy,
-        //                                                timeoutInterval: 10.0)
-        
-        let headers = [
-            "Accept": "application/json",
-            "X-API-Key": "\(APIKeyPurpleAirNewAPI)"
-        ]
-        
-        let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.purpleair.com/v1/sensors/\(id)")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        
-        
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = headers
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
-                print("Received from the Purple Air API")
-//                if let data = data,
-//                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
-                //Parse JSON
-                let decoder = JSONDecoder()
-                do {
-                    let dataFromPurpleAir = try decoder.decode(PurpleAirDataStructure.self, from: data!)
-                    purpleAirData = dataFromPurpleAir
-                    //                    print(purpleAirData.results?[0].deviceLocationtype)
-                    
-                }
-                catch {
-                    print("Error in Purple Air JSON parsing")
-                    //                    print(purpleAirData)
-                }
-            }
-        })
-        
-        dataTask.resume()
-    }
-}
