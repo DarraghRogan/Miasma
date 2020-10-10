@@ -12,6 +12,7 @@ import CoreLocation
 public struct ContentView: View {
     
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
+
     @ObservedObject var wAQIViewModel = WAQIViewModel()
     @ObservedObject var purpleAirViewModel = PurpleAirViewModel()
     
@@ -59,6 +60,12 @@ public struct ContentView: View {
             
             List
             {
+                
+                Button("Refresh", action: {
+                  // Call the publisher
+                  self.purpleAirViewModel.objectWillChange.send()
+                })
+                    
                 switch (ProfileEditor().AirQualityDataSource) {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
                     
@@ -176,8 +183,8 @@ public struct ContentView: View {
                     
                     
                 default:
-                    Link("Air Quality (WAQI) ⇀",
-                         destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
+                    Link("Miasma ⇀",
+                         destination: URL(string: "https://miasma.app")!)
                         .font(.headline)
                 }
                 
