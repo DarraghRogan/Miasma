@@ -50,6 +50,9 @@ public struct ContentView: View {
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
     
+    // Defining VARs for CO2 Signal
+    @State var fossilFuelPercentage_visual: String = "[__________]"
+    
     // Defining VARs for ClimaCell
     @State var windDirection_acronymn: String = "___"
     
@@ -234,7 +237,7 @@ public struct ContentView: View {
                         HStack {
                             Text("⚡️")
                             Spacer()
-                            Text("\(String(format: "%.1f", locale: Locale.current,fossilFuelPercentage))% High Carbon in Energy mix")
+                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low Carbon in mix \(self.fossilFuelPercentage_visual)")
                                 .font(.footnote)
                                 .lineLimit(1)
                                 .padding(.top, 5.0)
@@ -433,7 +436,7 @@ public struct ContentView: View {
                 self.celciusForDisplay = calculateCelsius(fahrenheit: fahrenheitForCalculation)
                 
                 // Determine pressure visual
-                var pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0)
+                let pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0)
                 // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                 switch (pressureValue) {
                 case _ where pressureValue < 1009.144:
@@ -477,7 +480,35 @@ public struct ContentView: View {
                 {
                     self.cO2Country = cO2Data.countryCode ?? ""
                     self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
+                    
                     self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    switch (fossilFuelPercentage) {
+                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
+                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
+                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
+                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
+                        self.fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
+                        self.fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
+                        self.fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 95:
+                        self.fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    default:
+                        fossilFuelPercentage_visual = "[          ]"
+                    }
+                    
                 }
                 
                 if ProfileEditor().AircraftDataWanted == true
