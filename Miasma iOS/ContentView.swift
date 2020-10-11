@@ -296,6 +296,7 @@ public struct ContentView: View {
                     
                 }
                 Button("🔄", action: {
+                    purpleAirViewModel.getPurpleAir()
                     purpleAirViewModel.objectWillChange.send()
                     updateListEntry()
                 })
