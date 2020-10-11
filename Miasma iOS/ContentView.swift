@@ -48,6 +48,7 @@ public struct ContentView: View {
     @State var aQI_CalculatedRounded: Int = 0
     @State var celciusForDisplay: String = "◌"
     @State var fahrenheitForCalculation: Double = 0
+    @State var pressure_visual: String = "[___/______/____]"
     
     public var body: some View {
         
@@ -65,13 +66,11 @@ public struct ContentView: View {
             .offset(x: -159, y: -108)
             .padding(.bottom, -32)
             .font(.title)
-            .foregroundColor(.black)
             
             Button("🔧", action: { self.showingProfile.toggle() } )
                 .offset(x: 159, y: -115)
                 .padding(.bottom, -32)
                 .font(.title)
-                .foregroundColor(.black)
             
             CircleImage()
                 .offset(x: 0, y: -122)
@@ -161,7 +160,7 @@ public struct ContentView: View {
                         HStack {
                             Text("☁️")
                             Spacer()
-                            Text("US EPA AQI PM₂.₅ is \(self.aQI_CalculatedRounded)     \(self.pM2_5ColourButton)")
+                            Text("US EPA AQI PM₂.₅ is \(self.aQI_CalculatedRounded)   \(self.pM2_5ColourButton)")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                         }
@@ -185,7 +184,7 @@ public struct ContentView: View {
                         HStack {
                             Text("🌬️")
                             Spacer()
-                            Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar")
+                            Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar  \(pressure_visual)")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                         }
@@ -429,6 +428,20 @@ public struct ContentView: View {
                     return celciusRoundedString
                 }
                 self.celciusForDisplay = calculateCelsius(fahrenheit: fahrenheitForCalculation)
+                
+                // Determine pressure visual
+                var pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0) ?? 0
+                // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                switch (pressureValue) {
+                case _ where pressureValue < 1009.144:
+                    self.pressure_visual = "[Low/______/____]"
+                case _ where pressureValue > 1009.144 && pressureValue < 1022.689:
+                    self.pressure_visual = "[___/Normal/____]"
+                case _ where pressureValue > 1022.689:
+                    self.pressure_visual = "[___/______/High]"
+                default:
+                    self.pressure_visual = ""
+                }
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
