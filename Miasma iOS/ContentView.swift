@@ -65,8 +65,14 @@ public struct ContentView: View {
                 .frame(height: 100)
             
             Button("🔄", action: {
-                purpleAirViewModel.getPurpleAir()
-                purpleAirViewModel.objectWillChange.send()
+//                if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
+//                    wAQIViewModel.getWAQI()
+//                    wAQIViewModel.objectWillChange.send()
+//                }
+//                else if ProfileEditor().AirQualityDataSource == "PurpleAir"{
+//                    purpleAirViewModel.getPurpleAir()
+//                    purpleAirViewModel.objectWillChange.send()
+//                }
                 updateListEntry()
             } )
             .offset(x: -159, y: -108)
@@ -89,6 +95,9 @@ public struct ContentView: View {
                 case _ where ProfileEditor().AirQualityDataSource == "WAQI/AQICN" :
                     
                     VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
                         Link("Air Quality (WAQI) ⇀",
                              destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                             .font(.headline)
@@ -340,6 +349,15 @@ public struct ContentView: View {
         
         ProgressIndicatorShown = true
         
+        if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
+            wAQIViewModel.getWAQI()
+            wAQIViewModel.objectWillChange.send()
+        }
+        else if ProfileEditor().AirQualityDataSource == "PurpleAir"{
+            purpleAirViewModel.getPurpleAir()
+            purpleAirViewModel.objectWillChange.send()
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
@@ -373,42 +391,42 @@ public struct ContentView: View {
                         self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 12 && pM2_5Value < 35.5:
                         self.pM2_5ColourButton = "[_🟡_____]"
                         self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 35.5 && pM2_5Value < 55.5:
                         self.pM2_5ColourButton = "[__🟠____]"
                         self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 55.5 && pM2_5Value < 150.5:
                         self.pM2_5ColourButton = "[___🔴___]"
                         aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 150.5 && pM2_5Value < 250.5:
                         self.pM2_5ColourButton = "[____🟣__]"
                         self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 250.5 && pM2_5Value < 500.5:
                         self.pM2_5ColourButton = "[_____🟤_]"
                         self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
                         self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
                         AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
-
+                        
                     case _ where pM2_5Value > 500.5:
                         self.pM2_5ColourButton = "[______🟤]"
                         self.aQI_CalculatedRounded = 500
                         AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
-
+                        
                     default:
                         self.pM2_5ColourButton = "[_______]"
                         self.aQI_CalculatedRounded = 0

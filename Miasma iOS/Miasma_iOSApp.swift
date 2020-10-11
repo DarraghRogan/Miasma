@@ -31,7 +31,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
-    
 }
 
 
