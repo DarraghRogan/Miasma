@@ -32,6 +32,8 @@
 		02ADB06D24FDA15700126F0C /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 02ADB06C24FDA15700126F0C /* .gitignore */; };
 		02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02B85173250C0B8D0048F2FD /* APIKeys.swift */; };
 		02BE00B624FBC40E0064F5B8 /* Graphics in Resources */ = {isa = PBXBuildFile; fileRef = 02BE00B524FBC40E0064F5B8 /* Graphics */; };
+		02C2C9682533A0C4005840F7 /* ContentViewPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */; };
+		02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */; };
 		02D06EC8250CB48800D81189 /* DataLoaderClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */; };
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
@@ -167,6 +169,8 @@
 		02ADB06C24FDA15700126F0C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		02B85173250C0B8D0048F2FD /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		02BE00B524FBC40E0064F5B8 /* Graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Graphics; sourceTree = "<group>"; };
+		02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewPurpleAir.swift; sourceTree = "<group>"; };
+		02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewWAQI.swift; sourceTree = "<group>"; };
 		02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderClimaCell.swift; sourceTree = "<group>"; };
 		02D5AB57252A144B007E73DC /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
@@ -213,6 +217,8 @@
 				023BBDF125251AC5006E8054 /* Assets.xcassets */,
 				02028E152526955600D9368E /* CircleImage.swift */,
 				023BBDEF25251AC3006E8054 /* ContentView.swift */,
+				02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */,
+				02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */,
 				02A740A12527263100830B35 /* DataLoaderClimaCell.swift */,
 				02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */,
 				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
@@ -462,9 +468,11 @@
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
 				02A740A22527263100830B35 /* DataLoaderClimaCell.swift in Sources */,
 				023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */,
+				02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */,
 				022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */,
 				02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */,
 				02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */,
+				02C2C9682533A0C4005840F7 /* ContentViewPurpleAir.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
