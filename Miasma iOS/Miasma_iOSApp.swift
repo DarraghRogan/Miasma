@@ -11,6 +11,21 @@ import SwiftUI
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
+        // set up user defaults for people
+        // this is where returning users should end up
+      if defaults.bool(forKey: "First Launch") == true  {
+
+     } else {
+        // default config for new users
+
+         defaults.set(true, forKey: "First Launch")
+         defaults.set("here", forKey: "SensorID")
+         defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")
+         defaults.set(true, forKey:"ElectricalConsumptionDataWanted")
+         defaults.set(true, forKey:"AircraftDataWanted")
+         defaults.set(true, forKey:"OneHourForecastDataWanted")
+     }
+        
         return true
         
     }

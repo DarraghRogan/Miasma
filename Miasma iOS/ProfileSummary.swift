@@ -17,6 +17,11 @@ struct ProfileSummary: View {
             Text("Miasma")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
+            HStack{
+                Text("\(ProfileEditor().AirQualityDataSource) Station:")
+                Spacer()
+                Text("\(ProfileEditor().SensorID)")
+            }
 //            Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
 //
 //                // Call the publisher

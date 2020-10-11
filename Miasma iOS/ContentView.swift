@@ -79,7 +79,7 @@ public struct ContentView: View {
                 .font(.title)
             
             CircleImage()
-                .offset(x: 0, y: -122)
+                .offset(x: 0, y: -124)
                 .padding(.bottom, -80)
             
             List
@@ -166,7 +166,7 @@ public struct ContentView: View {
                         HStack {
                             Text("☁️")
                             Spacer()
-                            Text("US EPA AQI PM₂.₅ is \(self.aQI_CalculatedRounded)   \(self.pM2_5ColourButton)")
+                            Text("US EPA AQI PM₂.₅ is \(aQI_CalculatedRounded)   \(pM2_5ColourButton)")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                         }
@@ -198,7 +198,7 @@ public struct ContentView: View {
                         HStack {
                             Text("📅")
                             Spacer()
-                            Text("Taken: \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old at Miasma refresh time")
+                            Text("Reading \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old at Miasma refresh time")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                         }
@@ -237,7 +237,7 @@ public struct ContentView: View {
                         HStack {
                             Text("⚡️")
                             Spacer()
-                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low Carbon in mix \(self.fossilFuelPercentage_visual)")
+                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂ \(self.fossilFuelPercentage_visual)")
                                 .font(.footnote)
                                 .lineLimit(1)
                                 .padding(.top, 5.0)
@@ -284,7 +284,7 @@ public struct ContentView: View {
                             ProgressView()
                         }
                         Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                             destination: URL(string: "https://www.climacell.co/consumer-app/")!)
+                             destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
                             .padding(.top, 8.0)
                             .font(.headline)
                         

@@ -15,7 +15,7 @@ struct ProfileEditor: View {
     
     @AppStorage("ElectricalConsumptionDataWanted") var ElectricalConsumptionDataWanted = false
     
-    @AppStorage("AircraftDataWanted") var AircraftDataWanted = false
+    @AppStorage("AircraftDataWanted") var AircraftDataWanted = true
     
     @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
     
@@ -45,6 +45,7 @@ struct ProfileEditor: View {
             Toggle(isOn: $AircraftDataWanted) {
                 Text("Enable Aircraft Overhead data")
             }
+            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }
