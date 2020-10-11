@@ -50,16 +50,28 @@ public struct ContentView: View {
                 .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
             
-            CircleImage()
-                .offset(x: 0, y: -107)
-                .padding(.bottom, -90)
+
+            Button("🔄", action: {
+                    purpleAirViewModel.getPurpleAir()
+                    purpleAirViewModel.objectWillChange.send()
+                    updateListEntry()
+            } )
+                .offset(x: -159, y: -108)
+                .padding(.bottom, -32)
+                .font(.title)
+                .foregroundColor(.black)
             
-            Button("☰", action: { self.showingProfile.toggle() } )
+            Button("🔧", action: { self.showingProfile.toggle() } )
                 .offset(x: 159, y: -115)
                 .padding(.bottom, -32)
                 .font(.title)
                 .foregroundColor(.black)
             
+            CircleImage()
+                .offset(x: 0, y: -122)
+                .padding(.bottom, -80)
+            
+
             List
             {
                 
@@ -295,12 +307,7 @@ public struct ContentView: View {
                     }
                     
                 }
-                Button("🔄", action: {
-                    purpleAirViewModel.getPurpleAir()
-                    purpleAirViewModel.objectWillChange.send()
-                    updateListEntry()
-                })
-                .frame(maxWidth: .infinity, alignment: .center)
+
             }
             .sheet(isPresented: $showingProfile) {
                 ProfileHost()
