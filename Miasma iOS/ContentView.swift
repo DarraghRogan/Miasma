@@ -50,6 +50,9 @@ public struct ContentView: View {
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
     
+    // Defining VARs for ClimaCell
+    @State var windDirection_acronymn: String = "___"
+    
     public var body: some View {
         
         VStack {
@@ -285,7 +288,7 @@ public struct ContentView: View {
                         HStack {
                             Text("🌦")
                             Spacer()
-                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \((String(format: "%.1f", locale: Locale.current, climaCellWindDirection)))° @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
+                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                                 .onAppear() {
@@ -430,7 +433,7 @@ public struct ContentView: View {
                 self.celciusForDisplay = calculateCelsius(fahrenheit: fahrenheitForCalculation)
                 
                 // Determine pressure visual
-                var pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0) ?? 0
+                var pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0)
                 // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                 switch (pressureValue) {
                 case _ where pressureValue < 1009.144:
@@ -494,6 +497,30 @@ public struct ContentView: View {
                     self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
+                    
+                    let windDirection = climaCellData[0].windDirection?.value ?? 0
+                    // directiosn from http://www.angelfire.com/space/one1/cal.html
+                    switch (windDirection) {
+                    case _ where windDirection < 45:
+                        self.windDirection_acronymn = "NNE"
+                    case _ where windDirection > 45 && windDirection < 90:
+                        self.windDirection_acronymn = "ENE"
+                    case _ where windDirection > 90 && windDirection < 135:
+                        self.windDirection_acronymn = "ESE"
+                    case _ where windDirection > 135 && windDirection < 180:
+                        self.windDirection_acronymn = "SSE"
+                    case _ where windDirection > 180 && windDirection < 225:
+                        self.windDirection_acronymn = "SSW"
+                    case _ where windDirection > 225 && windDirection < 270:
+                        self.windDirection_acronymn = "WSW"
+                    case _ where windDirection > 270 && windDirection < 315:
+                        self.windDirection_acronymn = "WNW"
+                    case _ where windDirection > 315:
+                        self.windDirection_acronymn = "NNW"
+                    default:
+                        self.windDirection_acronymn = ""
+                    }
+                    
                 }
                 
             }
