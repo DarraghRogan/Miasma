@@ -22,12 +22,16 @@ public struct ContentViewPurpleAir: View {
     @State var sensorLongitude: Double = -6.2507
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.3412, -6.2507)
     
+    // Defining VARs for CO2 Signal
+    @State var fossilFuelPercentage_visual: String = "[__________]"
     @State var cO2Country: String = "◌"
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
     
     @State var openSkyAircraftInBox: Int = 0
     
+    // Defining VARs for ClimaCell
+    @State var windDirection_acronymn: String = "___"
     @State var climaCellWeatherCode: String = "◌"
     @State var climaCellWindDirection: Double = 0.0
     @State var climaCellFeelsLike: Double = 0.0
@@ -49,11 +53,6 @@ public struct ContentViewPurpleAir: View {
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
     
-    // Defining VARs for CO2 Signal
-    @State var fossilFuelPercentage_visual: String = "[__________]"
-    
-    // Defining VARs for ClimaCell
-    @State var windDirection_acronymn: String = "___"
     
     public var body: some View {
         

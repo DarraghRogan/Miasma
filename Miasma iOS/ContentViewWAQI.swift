@@ -15,9 +15,6 @@ public struct ContentViewWAQI: View {
     
     @ObservedObject var wAQIViewModel = WAQIViewModel()
     
-    
-    @State var showingProfile = false
-    
     @State var ProgressIndicatorShown = true
     
     // the default location has top-notch food :-) (pork with fish sauce for the win)
@@ -25,12 +22,16 @@ public struct ContentViewWAQI: View {
     @State var sensorLongitude: Double = -6.2507
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.3412, -6.2507)
     
+    // Defining VARs for CO2 Signal
+    @State var fossilFuelPercentage_visual: String = "[__________]"
     @State var cO2Country: String = "◌"
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
     
     @State var openSkyAircraftInBox: Int = 0
     
+    // Defining VARs for ClimaCell
+    @State var windDirection_acronymn: String = "___"
     @State var climaCellWeatherCode: String = "◌"
     @State var climaCellWindDirection: Double = 0.0
     @State var climaCellFeelsLike: Double = 0.0
@@ -40,12 +41,13 @@ public struct ContentViewWAQI: View {
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
+    @State var fahrenheitForDisplayClimaCell: String = "0"
+
+    // Defining VARs for WAQI
+    @State var wAQIAQI: Int = 0
+    @State var wAQIAQIColourButton: String = "[______]"
+    @State var fahrenheitForDisplayWAQI: String = "0"
     
-    // Defining VARs for CO2 Signal
-    @State var fossilFuelPercentage_visual: String = "[__________]"
-    
-    // Defining VARs for ClimaCell
-    @State var windDirection_acronymn: String = "___"
     
     public var body: some View {
         
@@ -85,7 +87,7 @@ public struct ContentViewWAQI: View {
                     HStack {
                         Text("☁️")
                         Spacer()
-                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0))")
+                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0)) \(wAQIAQIColourButton)")
                             .font(.footnote)
                             .padding(.top, 5.0)
                     }
@@ -102,7 +104,7 @@ public struct ContentViewWAQI: View {
                     HStack {
                         Text("🌡")
                         Spacer()
-                        Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
+                        Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃ / \(fahrenheitForDisplayWAQI)℉")
                             .font(.footnote)
                             .padding(.top, 5.0)
                     }
@@ -198,7 +200,7 @@ public struct ContentViewWAQI: View {
                         HStack {
                             Text("🌦")
                             Spacer()
-                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(calculateFahrenheit(celcius: climaCellFeelsLike))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                                 .onAppear() {
@@ -239,7 +241,13 @@ public struct ContentViewWAQI: View {
         }
         
     }
-    
+  
+    func calculateFahrenheit(celcius: Double) -> String {
+        var fahrenheit: Double
+        fahrenheit = (celcius  * 9 / 5) + 32
+        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+        return fahrenheitRoundedString
+    }
     
     public func updateListEntry() {
         
@@ -256,7 +264,7 @@ public struct ContentViewWAQI: View {
                 
                 ProgressIndicatorShown = true
                 
-                
+                // Get Latitude & longitude to feed into other APIs
                 self.locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
                 
                 self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
@@ -266,6 +274,34 @@ public struct ContentViewWAQI: View {
                 
                 self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
                 self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
+                
+                
+                // Create AQI images
+                wAQIAQI = wAQIViewModel.wAQIdata.aqi ?? 0
+                switch (wAQIAQI) {
+                case _ where wAQIAQI > 0 && wAQIAQI < 50:
+                    wAQIAQIColourButton = "[🟢_____]"
+                    AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
+                case _ where wAQIAQI > 51 && wAQIAQI < 100:
+                    wAQIAQIColourButton = "[_🟡____]"
+                    AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
+                case _ where wAQIAQI > 101 && wAQIAQI < 200:
+                    wAQIAQIColourButton = "[__🟠___]"
+                    AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
+                case _ where wAQIAQI > 201 && wAQIAQI < 300:
+                    wAQIAQIColourButton = "[___🔴__]"
+                    AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
+                case _ where wAQIAQI > 301 && wAQIAQI < 400:
+                    wAQIAQIColourButton = "[____🟣_]"
+                    AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
+                case _ where wAQIAQI > 400:
+                    wAQIAQIColourButton = "[_____🟤]"
+                    AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
+                default:
+                    wAQIAQIColourButton = "[      ]"
+                }
+                
+                self.fahrenheitForDisplayWAQI = calculateFahrenheit(celcius: wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
@@ -368,6 +404,7 @@ public struct ContentViewWAQI: View {
                         self.windDirection_acronymn = "NNW"
                     default:
                         self.windDirection_acronymn = ""
+                        
                     }
                 }
             }
