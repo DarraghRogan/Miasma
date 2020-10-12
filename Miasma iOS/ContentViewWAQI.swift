@@ -228,7 +228,11 @@ public struct ContentViewWAQI: View {
                     }
                     
                 }
-                
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
             
             
@@ -258,10 +262,10 @@ public struct ContentViewWAQI: View {
                 self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
                 self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
                 
-                ContentView().locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
+                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
                 
-                ContentView().sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
-                ContentView().sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
+                self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
+                self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
@@ -278,7 +282,6 @@ public struct ContentViewWAQI: View {
                 {
                     DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
                 }
-                
                 
             }
         }
@@ -366,9 +369,7 @@ public struct ContentViewWAQI: View {
                     default:
                         self.windDirection_acronymn = ""
                     }
-                    
                 }
-                
             }
         }
     }

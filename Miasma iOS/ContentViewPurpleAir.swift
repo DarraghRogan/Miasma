@@ -37,6 +37,8 @@ public struct ContentViewPurpleAir: View {
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
+    @State var fahrenheitForDisplay: String = "0"
+    @State var celciusForCalculation: Double = 0
     
     // Defining VARs for PurpleAir
     @State var pM2_5Value: Double = 0
@@ -56,8 +58,8 @@ public struct ContentViewPurpleAir: View {
     public var body: some View {
         
         MapView(coordinate: locationCoordinate)
-                .edgesIgnoringSafeArea(.top)
-                .frame(height: 100)
+            .edgesIgnoringSafeArea(.top)
+            .frame(height: 100)
         
         VStack {
             
@@ -200,7 +202,7 @@ public struct ContentViewPurpleAir: View {
                         HStack {
                             Text("🌦")
                             Spacer()
-                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                 .font(.footnote)
                                 .padding(.top, 5.0)
                                 .onAppear() {
@@ -228,14 +230,14 @@ public struct ContentViewPurpleAir: View {
                                 }
                         }
                     }
-                    
                 }
-                
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
-            
-            
         }
-        
     }
     
     
@@ -243,7 +245,7 @@ public struct ContentViewPurpleAir: View {
     public func updateListEntry() {
         
         ProgressIndicatorShown = true
-
+        
         purpleAirViewModel.getPurpleAir()
         purpleAirViewModel.objectWillChange.send()
         
@@ -262,10 +264,10 @@ public struct ContentViewPurpleAir: View {
                 self.sensorLatitude = purpleAirViewModel.purpleAirdata.latitude ?? 0
                 self.sensorLongitude = purpleAirViewModel.purpleAirdata.longitude ?? 0
                 
-                ContentView().locationCoordinate = CLLocationCoordinate2DMake(purpleAirViewModel.purpleAirdata.latitude ?? 0, purpleAirViewModel.purpleAirdata.longitude ?? 0)
+                self.locationCoordinate = CLLocationCoordinate2DMake(purpleAirViewModel.purpleAirdata.latitude ?? 0, purpleAirViewModel.purpleAirdata.longitude ?? 0)
                 
-                ContentView().sensorLatitude = purpleAirViewModel.purpleAirdata.latitude ?? 0
-                ContentView().sensorLongitude = purpleAirViewModel.purpleAirdata.longitude ?? 0
+                self.sensorLatitude = purpleAirViewModel.purpleAirdata.latitude ?? 0
+                self.sensorLongitude = purpleAirViewModel.purpleAirdata.longitude ?? 0
                 
                 // Calculate AQI & create images
                 self.pM2_5Value = round(((purpleAirViewModel.purpleAirdata.pm25_A ?? 0) + (purpleAirViewModel.purpleAirdata.pm25_B ?? 0))/2)
@@ -410,7 +412,17 @@ public struct ContentViewPurpleAir: View {
                     self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
                 }
                 
-                if ProfileEditor().OneHourForecastDataWanted == true
+                
+                
+                // a little protection fro when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
+                var isIndexValid: Bool = false
+                if 2 < climaCellData.count {
+                    isIndexValid = true
+                } else {
+                    
+                }
+                
+                if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
                     
                     self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
@@ -446,6 +458,15 @@ public struct ContentViewPurpleAir: View {
                         self.windDirection_acronymn = ""
                     }
                     
+                    // Calculate Farenheit from Celcius for ClimaCell
+                    celciusForCalculation = climaCellData[0].feelsLike?.value ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius  * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    self.fahrenheitForDisplay = calculateFahrenheit(celcius: celciusForCalculation)
                 }
                 
             }

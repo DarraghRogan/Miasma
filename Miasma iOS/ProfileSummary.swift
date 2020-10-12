@@ -22,20 +22,7 @@ struct ProfileSummary: View {
                 Spacer()
                 Text("\(ProfileEditor().SensorID)")
             }
-//            Button("Refresh \(ProfileEditor().AirQualityDataSource) Station: \(ProfileEditor().SensorID)", action: {
-//
-//                // Call the publisher
-//                if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
-//                    WAQIViewModel().getWAQI()
-//                    ContentView().wAQIViewModel.objectWillChange.send()
-//                }
-//
-//                if ProfileEditor().AirQualityDataSource == "PurpleAir"{
-//                    PurpleAirViewModel().getPurpleAir()
-//                    ContentView().purpleAirViewModel.objectWillChange.send()
-//                }
-//                ContentView().updateListEntry()
-//            })
+            
             HStack{
                 Text("Electricty Consumption data:")
                 Spacer()

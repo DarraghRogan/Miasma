@@ -38,6 +38,7 @@ struct ProfileEditor: View {
                 Divider()
                 TextField("Sensor ID", text: $SensorID)
                     .disableAutocorrection(true)
+                    .autocapitalization(UITextAutocapitalizationType.none)
             }
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumption data")
