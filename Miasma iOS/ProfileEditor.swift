@@ -20,16 +20,20 @@ struct ProfileEditor: View {
     @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
     
     @AppStorage("NotificationsWanted") var NotificationsWanted = false
-
-
+    
+    
     var body: some View {
         List {
-            HStack {
+            Text("Please choose air quality data source, and enter desired station ID.")
+            Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
+            Text("For PurpleAir, please enter 4 or 5 digit sensor ID as read from PurpleAir.com Map view URL")
+            HStack{
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
                     Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
                     Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
-//                    Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
+                    //                    Button("EU Smart Citizen", action: {AppDelegate().defaults.set("EU Smart Citizen", forKey: "AirQualityDataSource")})
                 }/*@END_MENU_TOKEN@*/
+                
                 Divider()
                 Text("\(AirQualityDataSource)")
             }
@@ -50,9 +54,9 @@ struct ProfileEditor: View {
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }
-//            Toggle(isOn: $NotificationsWanted) {
-//                Text("Enable Notifications")
-//            }
+            //            Toggle(isOn: $NotificationsWanted) {
+            //                Text("Enable Notifications")
+            //            }
             
             .padding(.top)
             

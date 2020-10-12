@@ -17,6 +17,7 @@
 		0269848225251DB7002BFB88 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848125251DB7002BFB88 /* APIKeys.swift */; };
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
+		027DEB4C253501C200CF7936 /* Banner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DEB4B253501C200CF7936 /* Banner.swift */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
 		0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0283DD8C24F051BF00E4CC07 /* Assets.xcassets */; };
@@ -153,6 +154,7 @@
 		0269848125251DB7002BFB88 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
 		0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
+		027DEB4B253501C200CF7936 /* Banner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banner.swift; sourceTree = "<group>"; };
 		0283DD8524F051B700E4CC07 /* Miasma.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Miasma.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0283DD8824F051B700E4CC07 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0283DD8A24F051B700E4CC07 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
+				027DEB4B253501C200CF7936 /* Banner.swift */,
 				028E0E592526345600D03420 /* MapView.swift */,
 				023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */,
 				023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */,
@@ -531,6 +534,7 @@
 				02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */,
 				022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */,
 				02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */,
+				027DEB4C253501C200CF7936 /* Banner.swift in Sources */,
 				02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */,
 				02C2C9682533A0C4005840F7 /* ContentViewPurpleAir.swift in Sources */,
 			);
@@ -641,7 +645,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -668,7 +672,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
