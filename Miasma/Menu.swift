@@ -571,11 +571,19 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
+                    let ClimaCellCelcius = climaCellData[0].feelsLike?.value ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(climaCellData[0].epaAqi?.value ?? 0)) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData[0].pollenTree?.value ?? 0), Grass: \(climaCellData[0].pollenGrass?.value ?? 0), Weeds: \(climaCellData[0].pollenWeed?.value ?? 0)"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pollenTree?.value ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pollenGrass?.value ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData[0].pollenWeed?.value ?? 0))"
                     
                 })
             }
