@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
@@ -25,6 +26,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
          defaults.set(true, forKey:"AircraftDataWanted")
          defaults.set(false, forKey:"OneHourForecastDataWanted")
      }
+        
+        
+        // Initialise Google Ads
+        
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
         
         return true
         

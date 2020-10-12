@@ -35,6 +35,7 @@
 		02C2C9682533A0C4005840F7 /* ContentViewPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */; };
 		02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */; };
 		02D06EC8250CB48800D81189 /* DataLoaderClimaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */; };
+		02D15EBD2534F5F20064ADA3 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 02D15EBC2534F5F20064ADA3 /* Podfile */; };
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
@@ -42,6 +43,7 @@
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; };
 		02F3C77024FA54B4006ED277 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */; };
+		C8F1147075CD7F8C11D5BFD3 /* Pods_Miasma_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B82A42B0FD5F8FE3F996AD6 /* Pods_Miasma_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +174,7 @@
 		02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewPurpleAir.swift; sourceTree = "<group>"; };
 		02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewWAQI.swift; sourceTree = "<group>"; };
 		02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderClimaCell.swift; sourceTree = "<group>"; };
+		02D15EBC2534F5F20064ADA3 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		02D5AB57252A144B007E73DC /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
@@ -182,6 +185,9 @@
 		02F3C76124FA53A9006ED277 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02F3C76224FA53A9006ED277 /* MiasmaLauncher.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiasmaLauncher.entitlements; sourceTree = "<group>"; };
 		02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		6B82A42B0FD5F8FE3F996AD6 /* Pods_Miasma_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Miasma_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		86006E1E02079EBDF218BAC3 /* Pods-Miasma iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miasma iOS.debug.xcconfig"; path = "Target Support Files/Pods-Miasma iOS/Pods-Miasma iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		C147F1933793B35CCDF0319B /* Pods-Miasma iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Miasma iOS.release.xcconfig"; path = "Target Support Files/Pods-Miasma iOS/Pods-Miasma iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +195,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8F1147075CD7F8C11D5BFD3 /* Pods_Miasma_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,12 +254,14 @@
 		0283DD7C24F051B700E4CC07 = {
 			isa = PBXGroup;
 			children = (
+				02D15EBC2534F5F20064ADA3 /* Podfile */,
 				02ADB06C24FDA15700126F0C /* .gitignore */,
 				0283DD8724F051B700E4CC07 /* Miasma */,
 				02F3C75424FA53A5006ED277 /* MiasmaLauncher */,
 				023BBDEC25251AC3006E8054 /* Miasma iOS */,
 				0283DD8624F051B700E4CC07 /* Products */,
 				02F3C76724FA5487006ED277 /* Frameworks */,
+				18F3238DAF863234A8DC71A3 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -304,8 +313,18 @@
 			children = (
 				0293625724FA55B8003EA39C /* NetworkExtension.framework */,
 				02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */,
+				6B82A42B0FD5F8FE3F996AD6 /* Pods_Miasma_iOS.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18F3238DAF863234A8DC71A3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				86006E1E02079EBDF218BAC3 /* Pods-Miasma iOS.debug.xcconfig */,
+				C147F1933793B35CCDF0319B /* Pods-Miasma iOS.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -315,17 +334,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 023BBDF925251AC5006E8054 /* Build configuration list for PBXNativeTarget "Miasma iOS" */;
 			buildPhases = (
+				B5C6956D9B1A6A9C0EFCD6A3 /* [CP] Check Pods Manifest.lock */,
 				023BBDE725251AC3006E8054 /* Sources */,
 				023BBDE825251AC3006E8054 /* Frameworks */,
 				023BBDE925251AC3006E8054 /* Resources */,
+				761D19D42BAB7394909232F9 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Miasma iOS";
-			packageProductDependencies = (
-			);
 			productName = "Miasma iOS";
 			productReference = 023BBDEB25251AC3006E8054 /* Miasma iOS.app */;
 			productType = "com.apple.product-type.application";
@@ -355,8 +374,6 @@
 				0293625A24FA55BB003EA39C /* PBXTargetDependency */,
 			);
 			name = Miasma;
-			packageProductDependencies = (
-			);
 			productName = Miasma;
 			productReference = 0283DD8524F051B700E4CC07 /* Miasma.app */;
 			productType = "com.apple.product-type.application";
@@ -427,6 +444,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D15EBD2534F5F20064ADA3 /* Podfile in Resources */,
 				023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */,
 				023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */,
 			);
@@ -452,6 +470,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		761D19D42BAB7394909232F9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Miasma iOS/Pods-Miasma iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Miasma iOS/Pods-Miasma iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Miasma iOS/Pods-Miasma iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5C6956D9B1A6A9C0EFCD6A3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Miasma iOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		023BBDE725251AC3006E8054 /* Sources */ = {
@@ -575,6 +635,7 @@
 /* Begin XCBuildConfiguration section */
 		023BBDF725251AC5006E8054 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 86006E1E02079EBDF218BAC3 /* Pods-Miasma iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -601,6 +662,7 @@
 		};
 		023BBDF825251AC5006E8054 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C147F1933793B35CCDF0319B /* Pods-Miasma iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
