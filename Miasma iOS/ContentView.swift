@@ -18,49 +18,47 @@ public struct ContentView: View {
     @State var airQualityDataSource: String = ProfileEditor().AirQualityDataSource
     
     public var body: some View {
-        ZStack(alignment: .top) {
-            VStack {
+        
+        VStack {
+            
+            switch (airQualityDataSource) {
+            case _ where airQualityDataSource == "WAQI/AQICN" :
+                ContentViewWAQI()
+            case _ where airQualityDataSource == "PurpleAir" :
+                ContentViewPurpleAir()
                 
-                switch (airQualityDataSource) {
-                case _ where airQualityDataSource == "WAQI/AQICN" :
-                    ContentViewWAQI()
-                case _ where airQualityDataSource == "PurpleAir" :
-                    ContentViewPurpleAir()
-                default:
-                    Link("Miasma ⇀",
-                         destination: URL(string: "https://miasma.app")!)
-                        .font(.headline)
+            default:
+                Link("Miasma ⇀",
+                     destination: URL(string: "https://miasma.app")!)
+                    .font(.headline)
+            }
+            
+            Spacer()
+            
+            Banner()
+            
+        }
+        .overlay((CircleImage()
+                    .offset(x: 0, y: 40)), alignment: .top)
+        .overlay((Button("🔧", action: { self.showingProfile.toggle() } )
+                    .padding(EdgeInsets())
+                    .offset(x: 155, y: 35)
+                    .font(.title)), alignment: .top)
+        
+        .edgesIgnoringSafeArea(.top)
+        .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
+        .sheet(isPresented: $showingProfile,
+               onDismiss: {
+                if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
+                    airQualityDataSource = "WAQI/AQICN"
+                    ContentViewWAQI().updateListEntry()
                 }
-                
-                Button("🔧", action: { self.showingProfile.toggle() } )
-                    .offset(x: 159, y: -525)
-                    .padding(.top, -50)
-                    .font(.title)
-                
-                CircleImage()
-                    .offset(x: 0, y: -267)
-                    .padding(.top, -317)
-                
-                
-                Spacer()
-                
-                Banner()
-                
-            }
-                    .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
-            .sheet(isPresented: $showingProfile,
-                   onDismiss: {
-                    if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
-                        airQualityDataSource = "WAQI/AQICN"
-                        ContentViewWAQI().updateListEntry()
-                    }
-                    else if ProfileEditor().AirQualityDataSource == "PurpleAir"{
-                        airQualityDataSource = "PurpleAir"
-                        ContentViewPurpleAir().updateListEntry()
-                    }
-                   }) {
-                ProfileHost()
-            }
+                else if ProfileEditor().AirQualityDataSource == "PurpleAir"{
+                    airQualityDataSource = "PurpleAir"
+                    ContentViewPurpleAir().updateListEntry()
+                }
+               }) {
+            ProfileHost()
         }
     }
 }
@@ -74,3 +72,4 @@ struct ContentView_Previews: PreviewProvider {
         }
     }
 }
+

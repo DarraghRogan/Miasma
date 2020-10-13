@@ -57,8 +57,8 @@ public struct ContentViewPurpleAir: View {
     public var body: some View {
         
         MapView(coordinate: locationCoordinate)
-            .edgesIgnoringSafeArea(.top)
-            .frame(height: 100)
+//            .edgesIgnoringSafeArea(.top)
+            .frame(height: 140)
         
         VStack {
             
@@ -235,6 +235,8 @@ public struct ContentViewPurpleAir: View {
                 } )
                 .font(.title)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                
+
             }
         }
     }

@@ -52,8 +52,8 @@ public struct ContentViewWAQI: View {
     public var body: some View {
         
         MapView(coordinate: locationCoordinate)
-            .edgesIgnoringSafeArea(.top)
-            .frame(height: 100)
+//            .edgesIgnoringSafeArea(.top)
+            .frame(height: 140)
         
         VStack {
             
