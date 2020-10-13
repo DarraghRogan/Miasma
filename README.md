@@ -9,7 +9,6 @@ You can click the app if you want to see pertinent metrics, and on macOS the men
 <a href="https://github.com/DarraghRogan/Miasma/releases"><img src="Miasma/Graphics/github-app-button.png" width="300" class="img-responsive" alt=""></a>
 
 The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on GitHub for interested parties to review.
-It does not have any tracking cookies, pop ups, unsolicited notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
 
 ### Source Code
 Source code is all shared here, as is, no warratnies, express or implied. APIKeys.swift is excluded, so if you are using the code, please create this file and list your own API key in it (you will see how they are referred to in the DataLoader files, in the URL section).
