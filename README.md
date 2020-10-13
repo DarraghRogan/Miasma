@@ -1,23 +1,7 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
-Miasma is an open source lightweight menu bar app for macOS that shows publicly available air quality data for your locality.
-You can click the app if you want to see pertinent metrics, and the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, WAQI/AQICN, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
-
-### Note on issues with v1.09 released on 2020-09-30
-I am aware that some users are experiencing issues with v1.09. It has been fixed, in a new version v1.10 which is available on the releases page on GitHub ( https://github.com/DarraghRogan/Miasma/releases/download/v1.10(17)/Miasma.app.zip ), and should also roll out to users after Apple App Store review do their check.
-
-What I figure happened was:
-
-- the user's local air quality is worse (higher) than 50 AQI
-- the v1.09 app (regardless whether one uses PurpleAir or WAQI for air quality data, which is why resetting user defaults won't help...) sees this bad air quality when it runs for the first, and goes into an IF statement to evaluate whether it should send you a notification (hey, air quality is bad, compared to previous state of air quality)
-- the problem is: two of the parameters for that IF statement haven't been filled in to the location I use for the parameters (namely the previous state of air quality, and the Climbing threshold) as this is the first time the v1.09 app has run (see one of these lines in code here: https://github.com/DarraghRogan/Miasma/blob/6ef03a6bcf298eee327879968d304be4ebfa4686/Miasma/Menu.swift#L349 )
-
-- the v1.10(17) build I have uploaded to github now & have submitted to Apple App Store review attempts to fill in those at app first run time if they're not present (see how here in the code: https://github.com/DarraghRogan/Miasma/blob/6ef03a6bcf298eee327879968d304be4ebfa4686/Miasma/AppDelegate.swift#L70 )
-
-How this happened:
-I am in the fortunate position (until every starts burning their wood stoves!) that the WAQI default location that loads when I run a fresh install of the app chooses a station which has an AQI less than 50, so my app at first instance never gets to the stage it wants to try raise a notification (or if it does, it is after it has gone through a few refreshes, which fills in the two parameters the notification function needs)...but if you're in an area where WAQI has a higher than 50 AQI this issue will present itself.
-
-Apologies for this, and many thanks to Alan F. & Aaron T. for reaching out to test out the fixes.
+Miasma is an open source lightweight menu bar app for macOS & lightweight app for iOS that shows publicly available air quality data for your locality.
+You can click the app if you want to see pertinent metrics, and on macOS the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, WAQI/AQICN, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
 
 ### Download
 <a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
@@ -25,14 +9,14 @@ Apologies for this, and many thanks to Alan F. & Aaron T. for reaching out to te
 <a href="https://github.com/DarraghRogan/Miasma/releases"><img src="Miasma/Graphics/github-app-button.png" width="300" class="img-responsive" alt=""></a>
 
 The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on GitHub for interested parties to review.
-It does not have any tracking cookies, advertising codes, pop ups, notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
+It does not have any tracking cookies, pop ups, unsolicited notifications or any requirement for users to divulge passwords. I'm not interested in selling your browsing habits!
 
 ### Source Code
 Source code is all shared here, as is, no warratnies, express or implied. APIKeys.swift is excluded, so if you are using the code, please create this file and list your own API key in it (you will see how they are referred to in the DataLoader files, in the URL section).
 Project should open in Xcode.
 
 ### Data Sources
-All data requests are sent directly, using HTTPS, to the data providers from your Mac. Note that the data providers can see the ID of PurpleAir sensor you're interested in or the resultant coordinates, and your Mac's public IP address which can be unique to you depending on network configuration.
+All data requests are sent directly, using HTTPS, to the data providers from your Mac or iPhone / iPad. Note that the data providers can see the ID of PurpleAir sensor you're interested in or the resultant coordinates, and your device's public IP address which can be unique to you depending on network configuration.
 
 ### Support
 Please email me on miasma@kissengineering.ie - this is a side project for me so understand it may take me a couple of days to get back.
@@ -87,10 +71,11 @@ https://www2.purpleair.com/policies/privacy-policy
 https://www.electricitymap.org/faq
 https://opensky-network.org/index.php/about/privacy-policy
 https://www.climacell.co/legal/product-privacy-policy/
+https://support.google.com/ads/answer/1660762?visit_id=637382194546523804-3476093341&rd=1&co=GENIE.Platform%3DiOS&oco=0
 
 
 4 IS YOUR INFORMATION TRANSFERRED INTERNATIONALLY?
-In Short:  We may transfer, store, and process your information in countries other than your own.Our servers are located in. If you are accessing our App from outside, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information (see "WILL YOUR INFORMATION BE SHARED WITH ANYONE?" above), in and other countries.If you are a resident in the European Economic Area, then these countries may not necessarily have data protection laws or other similar laws as comprehensive as those in your country. We will however take all necessary measures to protect your personal information in accordance with this privacy notice and applicable law.
+In Short:  We may transfer, store, and process your information in countries other than your own. Our servers are located around the world. If you are accessing our App from outside, please be aware that your information may be transferred to, stored, and processed by us in our facilities and by those third parties with whom we may share your personal information (see "WILL YOUR INFORMATION BE SHARED WITH ANYONE?" above), in and other countries.If you are a resident in the European Economic Area, then these countries may not necessarily have data protection laws or other similar laws as comprehensive as those in your country. We will however take all necessary measures to protect your personal information in accordance with this privacy notice and applicable law.
 
 5 HOW LONG DO WE KEEP YOUR INFORMATION?
 In Short:  We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law.We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period is required or permitted by law (such as tax, accounting or other legal requirements). No purpose in this notice will require us keeping your personal information for longer than 90 days.When we have no ongoing legitimate business need to process your personal information, we will either delete or anonymize such information, or, if this is not possible (for example, because your personal information has been stored in backup archives), then we will securely store your personal information and isolate it from any further processing until deletion is possible.
