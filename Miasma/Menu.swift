@@ -83,6 +83,11 @@ class menuFunctions: NSObject {
     }()
     
     
+    var smartCitizenInfo : NSMenuItem = {
+        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+    }()
+    
+    
     var cO2Country : NSMenuItem = {
         return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
     }()
@@ -271,6 +276,8 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(openSkyAircraftInBox)
                 
+                menu.addItem(smartCitizenInfo)
+                
             }
             
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
@@ -291,7 +298,13 @@ class menuFunctions: NSObject {
             
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
             
+DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                self.smartCitizenInfo.title = "🌍: \(String(smartCitizenData.data?.sensors?[0].name ?? "0")), \(String(smartCitizenData.data?.sensors?[0].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[1].name ?? "0")), \(String(smartCitizenData.data?.sensors?[1].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[2].name ?? "0")), \(String(smartCitizenData.data?.sensors?[2].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[3].name ?? "0")), \(String(smartCitizenData.data?.sensors?[3].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[4].name ?? "0")), \(String(smartCitizenData.data?.sensors?[4].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[5].name ?? "0")), \(String(smartCitizenData.data?.sensors?[5].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[6].name ?? "0")), \(String(smartCitizenData.data?.sensors?[6].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[7].name ?? "0")), \(String(smartCitizenData.data?.sensors?[7].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[8].name ?? "0")), \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[9].name ?? "0")), \(String(smartCitizenData.data?.sensors?[9].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[10].name ?? "0")), \(String(smartCitizenData.data?.sensors?[10].value ?? 0))"
+
+                
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(purpleAirData.sensor?.latitude ?? 0), lon: String(purpleAirData.sensor?.longitude ?? 0))
