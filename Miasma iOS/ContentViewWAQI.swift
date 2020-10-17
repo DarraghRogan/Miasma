@@ -279,22 +279,22 @@ public struct ContentViewWAQI: View {
                 // Create AQI images
                 wAQIAQI = wAQIViewModel.wAQIdata.aqi ?? 0
                 switch (wAQIAQI) {
-                case _ where wAQIAQI > 0 && wAQIAQI < 50:
+                case _ where wAQIAQI >= 0 && wAQIAQI < 50:
                     wAQIAQIColourButton = "[🟢_____]"
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI > 51 && wAQIAQI < 100:
+                case _ where wAQIAQI >= 51 && wAQIAQI < 100:
                     wAQIAQIColourButton = "[_🟡____]"
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI > 101 && wAQIAQI < 200:
+                case _ where wAQIAQI >= 101 && wAQIAQI < 200:
                     wAQIAQIColourButton = "[__🟠___]"
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI > 201 && wAQIAQI < 300:
+                case _ where wAQIAQI >= 201 && wAQIAQI < 300:
                     wAQIAQIColourButton = "[___🔴__]"
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI > 301 && wAQIAQI < 400:
+                case _ where wAQIAQI >= 301 && wAQIAQI < 400:
                     wAQIAQIColourButton = "[____🟣_]"
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI > 400:
+                case _ where wAQIAQI >= 400:
                     wAQIAQIColourButton = "[_____🟤]"
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                 default:

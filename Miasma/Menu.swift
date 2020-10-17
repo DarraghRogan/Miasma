@@ -327,7 +327,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                 let aQI_CalculatedDouble: Double
                 var aQI_CalculatedRounded: Int = 0
                 switch (pM2_5Value) {
-                case _ where pM2_5Value > 0 && pM2_5Value < 12:
+                case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                     pM2_5ColourButton = "[🟢_____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟢"
                     aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
@@ -343,7 +343,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 12 && pM2_5Value < 35.5:
+                case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
                     pM2_5ColourButton = "[_🟡_____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟡"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -366,7 +366,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 35.5 && pM2_5Value < 55.5:
+                case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
                     pM2_5ColourButton = "[__🟠____]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟠"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -388,7 +388,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 55.5 && pM2_5Value < 150.5:
+                case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
                     pM2_5ColourButton = "[___🔴___]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🔴"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -410,7 +410,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set(self.purpleAirPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 150.5 && pM2_5Value < 250.5:
+                case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
                     pM2_5ColourButton = "[____🟣__]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟣"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -432,7 +432,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set(self.purpleAirPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 250.5 && pM2_5Value < 500.5:
+                case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
                     pM2_5ColourButton = "[_____🟤_]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟤"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -454,7 +454,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     AppDelegate().defaults.set(self.purpleAirPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
 
                     
-                case _ where pM2_5Value > 500.5:
+                case _ where pM2_5Value >= 500.5:
                     pM2_5ColourButton = "[______🟤]"
                     self.purpleAirPM2_5StatusBarIcon.title = "🟤"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
@@ -696,7 +696,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                     var wAQIAQI = wAQIData.data?.aqi ?? 0
                     let wAQIAQIColourButton: String
                     switch (wAQIAQI) {
-                    case _ where wAQIAQI > 0 && wAQIAQI < 50:
+                    case _ where wAQIAQI >= 0 && wAQIAQI < 50:
                         wAQIAQIColourButton = "[🟢_____]"
                         self.wAQIAQIColourButton.title = "🟢"
                         AppDelegate().defaults.set(self.wAQIAQIColourButton.title, forKey: "PreviousStateForNotification")
@@ -710,7 +710,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                             statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                         }
                         
-                    case _ where wAQIAQI > 51 && wAQIAQI < 100:
+                    case _ where wAQIAQI >= 51 && wAQIAQI < 100:
                         wAQIAQIColourButton = "[_🟡____]"
                         self.wAQIAQIColourButton.title = "🟡"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
@@ -731,7 +731,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                         AppDelegate().defaults.set(self.wAQIAQIColourButton.title, forKey: "PreviousStateForNotification")
 
                         
-                    case _ where wAQIAQI > 101 && wAQIAQI < 200:
+                    case _ where wAQIAQI >= 101 && wAQIAQI < 200:
                         wAQIAQIColourButton = "[__🟠___]"
                         self.wAQIAQIColourButton.title = "🟠"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
@@ -752,7 +752,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                         AppDelegate().defaults.set(self.wAQIAQIColourButton.title, forKey: "PreviousStateForNotification")
 
                         
-                    case _ where wAQIAQI > 201 && wAQIAQI < 300:
+                    case _ where wAQIAQI >= 201 && wAQIAQI < 300:
                         wAQIAQIColourButton = "[___🔴__]"
                         self.wAQIAQIColourButton.title = "🔴"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
@@ -773,7 +773,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
                         AppDelegate().defaults.set(self.wAQIAQIColourButton.title, forKey: "PreviousStateForNotification")
 
                         
-                    case _ where wAQIAQI > 301 && wAQIAQI < 400:
+                    case _ where wAQIAQI >= 301 && wAQIAQI < 400:
                         wAQIAQIColourButton = "[____🟣_]"
                         self.wAQIAQIColourButton.title = "🟣"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
@@ -795,7 +795,7 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
 
                         
                     
-                    case _ where wAQIAQI > 400:
+                    case _ where wAQIAQI >= 400:
                         wAQIAQIColourButton = "[_____🟤]"
                         self.wAQIAQIColourButton.title = "🟤"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
