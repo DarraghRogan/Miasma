@@ -1,0 +1,99 @@
+//
+//  Location.swift
+//  MapKitDemoN
+//
+//  Created by Nayem on 7/11/17.
+//  Copyright © 2017 Mufakkharul Islam Nayem. All rights reserved.
+//
+
+import Foundation
+import MapKit
+
+enum PLISTError: String, Error  {
+    case NoData = "ERROR: No Data"
+    case ConversionFailed = "ERROR: Conversion form plist failed"
+}
+
+class Location: NSObject, MKAnnotation {
+    
+    var title: String?
+    var subtitle: String?
+    var coordinate: CLLocationCoordinate2D
+    
+    init(title: String?, subtitle: String?, coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.subtitle = subtitle
+        self.coordinate = coordinate
+    }
+    
+     static func loadLocations() -> [Location] {
+        guard let fileURL = Bundle.main.url(forResource: "Locations", withExtension: "plist") else {
+            print("No file named Mountains in Main Bundle")
+            return []
+        }
+        
+        do {
+            
+            guard let data = try? Data(contentsOf: fileURL) else {
+                throw PLISTError.NoData
+            }
+            
+            guard let locations = try PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [[String:Any]] else {
+                throw PLISTError.ConversionFailed
+            }
+            
+            let result = locations.map({ (location) -> Location in
+                
+                let title = location["title"] as? String
+                let subtitle = location["description"] as? String
+                let latitude = location["latitude"] as? Double ?? 0, longitude = location["longitude"] as? Double ?? 0
+                let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+                
+                return Location(title: title, subtitle: subtitle, coordinate: coordinate)
+            })
+            return result
+            
+        } catch let error as PLISTError {
+            print(error.rawValue)
+            return []
+        } catch let error as NSError {
+            print(error.debugDescription)
+            return []
+        }
+    }
+    
+    static var locations: [Location] {
+        get {
+            return loadLocations()
+        }
+    }
+    
+    class func createViewAnnotationForMapView(_ mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView {
+        // try to dequeue an existing pin view first
+        var returnedAnnotationView =
+        mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: Location.self))
+        if returnedAnnotationView == nil {
+            returnedAnnotationView =
+                MKPinAnnotationView(annotation: annotation, reuseIdentifier: String(describing: Location.self))
+            
+            let pinAnnotationView = returnedAnnotationView as! MKPinAnnotationView
+            if #available(OSX 10.11, *) {
+                pinAnnotationView.pinTintColor = MKPinAnnotationView.greenPinColor()
+            }
+            pinAnnotationView.animatesDrop = true
+            pinAnnotationView.canShowCallout = true
+            
+            let rightButton = NSButton(frame: NSMakeRect(0.0, 0.0, 100.0, 80.0))
+            rightButton.title = "Choose"
+            rightButton.target = self
+            rightButton.action = #selector(ViewController.locationChooseAction(_:))
+            rightButton.bezelStyle = .shadowlessSquare
+            returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+            
+            
+        }
+        
+        return returnedAnnotationView!
+    }
+
+}

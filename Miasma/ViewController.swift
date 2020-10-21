@@ -1,16 +1,16 @@
-//
-//  ViewController.swift
-//  Miasma
-//
-//  Created by Darragh Rogan on 21/08/2020.
-//  Copyright © 2020 Darragh Rogan. All rights reserved.
-//
-
-import Cocoa
-import ServiceManagement
-
-
-class ViewController: NSViewController {
+ //
+ //  ViewController.swift
+ //  Miasma
+ //
+ //  Created by Darragh Rogan on 21/08/2020.
+ //  Copyright © 2020 Darragh Rogan. All rights reserved.
+ //
+ 
+ import Cocoa
+ import ServiceManagement
+ import MapKit
+ 
+ class ViewController: NSViewController {
     
     // Invoke RegEx Extension for each account type
     let validityTypePurpleAir: String.ValidityType = .purpleAirID
@@ -59,7 +59,7 @@ class ViewController: NSViewController {
     }
     
     @IBOutlet weak var MiasmaVersionLabel: NSTextField!
-
+    
     
     @IBOutlet weak var PurpleAirRadioOutlet: NSButton!
     
@@ -255,7 +255,7 @@ class ViewController: NSViewController {
         AppDelegate().defaults.set(ClimbingAQINotificationTriggerSliderOutlet.intValue.self, forKey: "ClimbingAQINotificationsTrigger")
         AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
         receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//        print(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+        //        print(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
         CLimbingAQITriggerReadoutOutlet.stringValue.self = String(ClimbingAQINotificationTriggerSliderOutlet.intValue.self)
         
     }
@@ -276,14 +276,30 @@ class ViewController: NSViewController {
     @IBOutlet weak var ShowAQIinMenubarButtonOutlet: NSButton!
     
     
+    @IBOutlet var mapView: MKMapView!
+    
+    var mapAnnotations: [MKAnnotation] = []
+    
+
+
     
     let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+
         
+        self.mapAnnotations = []
+        
+        let locationsAnnotation = Location.locations
+        self.mapAnnotations.append(contentsOf: locationsAnnotation)
+
+        
+        self.mapView.addAnnotations(self.mapAnnotations)
+        self.mapView.showsZoomControls = true
         
         
         //        print(CO2SignalButtonOutlet.isOn)
@@ -296,7 +312,7 @@ class ViewController: NSViewController {
             receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
             ClimbingAQINotificationTriggerSliderOutlet.intValue.self = Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
             CLimbingAQITriggerReadoutOutlet.stringValue.self = String(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
-
+            
         }
         
         
@@ -338,7 +354,34 @@ class ViewController: NSViewController {
             // Update the view, if already loaded.
         }
     }
-    
-    
-}
 
+    
+    @IBAction func locationChooseAction(_ targetButton: NSButton) {
+
+        print("hello")
+    }
+    
+ }
+ 
+ extension ViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        var returnedAnnotationView: MKAnnotationView? = nil
+        guard !(annotation is MKUserLocation) else {
+            return nil
+        }
+        returnedAnnotationView = Location.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+
+        // add a detail disclosure button to the callout which will open a popover for the bridge
+        let rightButton = NSButton(frame: NSMakeRect(0.0, 0.0, 100.0, 80.0))
+        rightButton.title = "Choose"
+        rightButton.target = self
+        rightButton.action = #selector(self.locationChooseAction(_:))
+        rightButton.bezelStyle = .shadowlessSquare
+        returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+
+        return returnedAnnotationView
+    }
+ }
+
+ 

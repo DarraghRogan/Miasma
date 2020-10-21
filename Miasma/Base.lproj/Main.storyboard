@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1265,6 +1266,13 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <mapView fixedFrame="YES" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42N-fV-Xpm">
+                                <rect key="frame" x="546" y="334" width="484" height="315"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="Wsq-a3-G3T"/>
+                                </connections>
+                            </mapView>
                         </subviews>
                     </view>
                     <connections>
@@ -1286,6 +1294,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                         <outlet property="WAQISaveButtonOutlet" destination="YZv-hX-fwv" id="VcU-bB-X9C"/>
                         <outlet property="WAQISavedIDLabel" destination="VqV-xm-FGg" id="6gc-Vs-3Ko"/>
                         <outlet property="autoRunAtStartup" destination="lwP-qa-jNJ" id="mtO-An-oat"/>
+                        <outlet property="mapView" destination="42N-fV-Xpm" id="xbN-dP-v62"/>
                         <outlet property="receiveNotificationsButtonOutlet" destination="g0f-Nh-1l5" id="17S-Pa-V8g"/>
                     </connections>
                 </viewController>
