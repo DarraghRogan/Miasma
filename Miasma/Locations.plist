@@ -3,34 +3,40 @@
 <plist version="1.0">
 <array>
 	<dict>
+		<key>stationName</key>
+		<string>Churchtown</string>
 		<key>title</key>
-		<string>New York</string>
+		<string>PurpleAir</string>
 		<key>description</key>
-		<string>Welcome to New York City!</string>
+		<string>59111</string>
 		<key>latitude</key>
-		<real>40.7128</real>
+		<real>53.30047</real>
 		<key>longitude</key>
-		<real>-74.0059</real>
+		<real>-6.258454</real>
 	</dict>
 	<dict>
+		<key>stationName</key>
+		<string>Rathmines</string>
 		<key>title</key>
-		<string>San Francisco</string>
+		<string>WAQI</string>
 		<key>description</key>
-		<string>Welcome to San Francisco!</string>
+		<string>Rathmines</string>
 		<key>latitude</key>
-		<real>37.7749</real>
+		<real>53.3218816</real>
 		<key>longitude</key>
-		<real>-122.4194</real>
+		<real>-6.2655052</real>
 	</dict>
 	<dict>
+		<key>stationName</key>
+		<string>Dublin</string>
 		<key>title</key>
-		<string>Los Angeles</string>
+		<string>SmartCitizen</string>
 		<key>description</key>
-		<string>Welcome to Los Angeles!</string>
+		<string>10507</string>
 		<key>latitude</key>
-		<real>34.0522</real>
+		<real>53.4435160335123</real>
 		<key>longitude</key>
-		<real>-118.2437</real>
+		<real>-6.34649276733398</real>
 	</dict>
 </array>
 </plist>
