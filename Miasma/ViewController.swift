@@ -294,7 +294,7 @@
         
         self.mapAnnotations = []
         
-        let locationsAnnotation = Location.locations
+        let locationsAnnotation = LocationWAQI.loadLocationsWAQI()
         self.mapAnnotations.append(contentsOf: locationsAnnotation)
         
         
@@ -427,7 +427,7 @@
         guard !(annotation is MKUserLocation) else {
             return nil
         }
-        returnedAnnotationView = Location.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+        returnedAnnotationView = LocationWAQI.createViewAnnotationForMapView(self.mapView, annotation: annotation)
         
         // add a detail disclosure button to the callout which will open a popover for the bridge
         let rightButton = NSButton(frame: NSMakeRect(0.0, 0.0, 100.0, 80.0))

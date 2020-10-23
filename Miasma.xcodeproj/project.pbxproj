@@ -15,7 +15,7 @@
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
 		023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF425251AC5006E8054 /* Preview Assets.xcassets */; };
 		0241630C253B577200441270 /* Locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0241630B253B577100441270 /* Locations.plist */; };
-		02416311253B57A900441270 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02416310253B57A900441270 /* Location.swift */; };
+		02416311253B57A900441270 /* StationLocationWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02416310253B57A900441270 /* StationLocationWAQI.swift */; };
 		0269848225251DB7002BFB88 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848125251DB7002BFB88 /* APIKeys.swift */; };
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
@@ -155,7 +155,7 @@
 		023BBDF625251AC5006E8054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Miasma iOS.entitlements"; sourceTree = "<group>"; };
 		0241630B253B577100441270 /* Locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Locations.plist; sourceTree = "<group>"; };
-		02416310253B57A900441270 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		02416310253B57A900441270 /* StationLocationWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLocationWAQI.swift; sourceTree = "<group>"; };
 		0269848125251DB7002BFB88 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 		0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
 		0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderCO2Signal.swift; sourceTree = "<group>"; };
@@ -288,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				0241630B253B577100441270 /* Locations.plist */,
-				02416310253B57A900441270 /* Location.swift */,
 				02B85173250C0B8D0048F2FD /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
@@ -298,6 +297,7 @@
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
+				02416310253B57A900441270 /* StationLocationWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				02BE00B524FBC40E0064F5B8 /* Graphics */,
 				0283DD9124F051BF00E4CC07 /* Info.plist */,
@@ -564,7 +564,7 @@
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 				02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */,
 				029BD3842536E99500C743A7 /* DataLoaderSmartCitizen.swift in Sources */,
-				02416311253B57A900441270 /* Location.swift in Sources */,
+				02416311253B57A900441270 /* StationLocationWAQI.swift in Sources */,
 				0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,7 @@ enum PLISTError: String, Error  {
     case ConversionFailed = "ERROR: Conversion form plist failed"
 }
 
-class Location: NSObject, MKAnnotation {
+class LocationWAQI: NSObject, MKAnnotation {
     
     var title: String?
     var subtitle: String?
@@ -28,7 +28,7 @@ class Location: NSObject, MKAnnotation {
         self.coordinate = coordinate
     }
     
-     static func loadLocations() -> [Location] {
+     static func loadLocationsWAQI() -> [LocationWAQI] {
         guard let fileURL = Bundle.main.url(forResource: "Locations", withExtension: "plist") else {
             print("No file named Mountains in Main Bundle")
             return []
@@ -44,7 +44,7 @@ class Location: NSObject, MKAnnotation {
                 throw PLISTError.ConversionFailed
             }
             
-            let result = locations.map({ (location) -> Location in
+            let result = locations.map({ (location) -> LocationWAQI in
                 
                 let title = location["title"] as? String
                 let subtitle = location["description"] as? String
@@ -52,7 +52,7 @@ class Location: NSObject, MKAnnotation {
                 let latitude = location["latitude"] as? Double ?? 0, longitude = location["longitude"] as? Double ?? 0
                 let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
                 
-                return Location(title: title, subtitle: subtitle, provider: provider, coordinate: coordinate)
+                return LocationWAQI(title: title, subtitle: subtitle, provider: provider, coordinate: coordinate)
             })
             return result
             
@@ -65,19 +65,19 @@ class Location: NSObject, MKAnnotation {
         }
     }
     
-    static var locations: [Location] {
+    static var locationsWAQI: [LocationWAQI] {
         get {
-            return loadLocations()
+            return loadLocationsWAQI()
         }
     }
     
     class func createViewAnnotationForMapView(_ mapView: MKMapView, annotation: MKAnnotation) -> MKAnnotationView {
         // try to dequeue an existing pin view first
         var returnedAnnotationView =
-        mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: Location.self))
+        mapView.dequeueReusableAnnotationView(withIdentifier: String(describing: LocationWAQI.self))
         if returnedAnnotationView == nil {
             returnedAnnotationView =
-                MKPinAnnotationView(annotation: annotation, reuseIdentifier: String(describing: Location.self))
+                MKPinAnnotationView(annotation: annotation, reuseIdentifier: String(describing: LocationWAQI.self))
             
             let pinAnnotationView = returnedAnnotationView as! MKPinAnnotationView
             if #available(OSX 10.11, *) {
