@@ -19,10 +19,12 @@ extension String {
     enum ValidityType {
         case purpleAirID
         case wAQICity
+        case smartCitizenStationID
     }
     
     enum Regex: String {
         case purpleAirID = "[0-9]{4,5}"
+        case smartCitizenStationID = "[0-9]{3,5}"
         case wAQICity = "^[a-zA-Z]*$"
     }
     
@@ -35,6 +37,8 @@ extension String {
             regex = Regex.purpleAirID.rawValue
         case .wAQICity:
             regex = Regex.wAQICity.rawValue
+        case .smartCitizenStationID:
+            regex = Regex.smartCitizenStationID.rawValue
         }
         
         return NSPredicate(format: format, regex).evaluate(with: self)

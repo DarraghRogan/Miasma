@@ -1153,6 +1153,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="SmartCitizenMapButton:" target="XfG-lQ-9wD" id="Ndr-AH-zKW"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kom-8I-eB0">
                                 <rect key="frame" x="132" y="457" width="135" height="18"/>
@@ -1161,6 +1164,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="SmartCitizenRadioAction:" target="XfG-lQ-9wD" id="Ywq-VN-AAK"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bvd-r1-rCV">
                                 <rect key="frame" x="150" y="433" width="17" height="16"/>
@@ -1208,6 +1214,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="SmartCitizenIDSaveButton:" target="XfG-lQ-9wD" id="ebY-9P-UD6"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="acj-Pb-nQC">
                                 <rect key="frame" x="322" y="344" width="201" height="16"/>
@@ -1239,6 +1248,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
+                                <connections>
+                                    <action selector="SmartCitizenIDField:" target="XfG-lQ-9wD" id="iD6-vu-QMP"/>
+                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRP-Sc-lhV">
                                 <rect key="frame" x="448" y="423" width="96" height="32"/>
@@ -1247,6 +1259,9 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="SmartCitizenCheckButton:" target="XfG-lQ-9wD" id="iIU-c2-xnS"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcq-9r-sY0">
                                 <rect key="frame" x="934" y="20" width="98" height="16"/>
@@ -1288,6 +1303,11 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                         <outlet property="PurpleAirRadioOutlet" destination="dNg-47-2VM" id="YPN-09-bPM"/>
                         <outlet property="PurpleAirSavedIDLabel" destination="lSN-T0-4a0" id="0wV-9T-dJg"/>
                         <outlet property="ShowAQIinMenubarButtonOutlet" destination="9Wr-dH-MEn" id="5ge-Wr-8fE"/>
+                        <outlet property="SmartCitizenCheckedLabel" destination="Ydp-if-5lH" id="hys-1x-whX"/>
+                        <outlet property="SmartCitizenIDField" destination="gXk-tZ-6hX" id="P3k-c9-COn"/>
+                        <outlet property="SmartCitizenIDSaveButton" destination="bYh-Cc-Sch" id="wbA-ef-EGe"/>
+                        <outlet property="SmartCitizenRadioOutlet" destination="kom-8I-eB0" id="roA-rk-Ksy"/>
+                        <outlet property="SmartCitizenSavedIDLabel" destination="acj-Pb-nQC" id="Qkg-7C-lNf"/>
                         <outlet property="WAQICheckedLabel" destination="h1W-co-EyU" id="VUh-I6-MGF"/>
                         <outlet property="WAQIComboBoxOutlet" destination="RFf-fi-NMR" id="z1Q-7t-Plz"/>
                         <outlet property="WAQIRadioOutlet" destination="5rd-Ce-8fv" id="s1a-gP-ozt"/>

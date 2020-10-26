@@ -14,7 +14,7 @@ struct SmartCitizenDataStructure: Codable {
     var id: Int?
     var uuid, name, welcomeDescription, state: String?
     var hardwareInfo: HardwareInfo?
-    var systemTags, userTags: [String]?
+//    var systemTags, userTags: [String]?
     var isPrivate, notifyLowBattery, notifyStoppedPublishing: Bool?
     var lastReadingAt, addedAt, updatedAt: Date?
     var macAddress: String?
@@ -27,8 +27,8 @@ struct SmartCitizenDataStructure: Codable {
         case welcomeDescription
         case state
         case hardwareInfo
-        case systemTags
-        case userTags
+//        case systemTags
+//        case userTags
         case isPrivate
         case notifyLowBattery
         case notifyStoppedPublishing
@@ -85,8 +85,8 @@ extension SmartCitizenDataStructure {
             welcomeDescription: welcomeDescription ?? self.welcomeDescription,
             state: state ?? self.state,
             hardwareInfo: hardwareInfo ?? self.hardwareInfo,
-            systemTags: systemTags ?? self.systemTags,
-            userTags: userTags ?? self.userTags,
+//            systemTags: systemTags ?? self.systemTags,
+//            userTags: userTags ?? self.userTags,
             isPrivate: isPrivate ?? self.isPrivate,
             notifyLowBattery: notifyLowBattery ?? self.notifyLowBattery,
             notifyStoppedPublishing: notifyStoppedPublishing ?? self.notifyStoppedPublishing,
