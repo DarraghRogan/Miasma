@@ -1266,8 +1266,8 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <mapView fixedFrame="YES" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42N-fV-Xpm">
-                                <rect key="frame" x="546" y="334" width="484" height="315"/>
+                            <mapView hidden="YES" fixedFrame="YES" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42N-fV-Xpm">
+                                <rect key="frame" x="722" y="334" width="308" height="315"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="Wsq-a3-G3T"/>

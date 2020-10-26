@@ -14,8 +14,6 @@
 		023BBDF025251AC3006E8054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDEF25251AC3006E8054 /* ContentView.swift */; };
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
 		023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF425251AC5006E8054 /* Preview Assets.xcassets */; };
-		0241630C253B577200441270 /* Locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0241630B253B577100441270 /* Locations.plist */; };
-		02416311253B57A900441270 /* StationLocationWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02416310253B57A900441270 /* StationLocationWAQI.swift */; };
 		0269848225251DB7002BFB88 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848125251DB7002BFB88 /* APIKeys.swift */; };
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
@@ -287,7 +285,6 @@
 		0283DD8724F051B700E4CC07 /* Miasma */ = {
 			isa = PBXGroup;
 			children = (
-				0241630B253B577100441270 /* Locations.plist */,
 				02B85173250C0B8D0048F2FD /* APIKeys.swift */,
 				0283DD8824F051B700E4CC07 /* AppDelegate.swift */,
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
@@ -295,15 +292,16 @@
 				0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */,
 				02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
-				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
-				02416310253B57A900441270 /* StationLocationWAQI.swift */,
+				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				02BE00B524FBC40E0064F5B8 /* Graphics */,
 				0283DD9124F051BF00E4CC07 /* Info.plist */,
+				0241630B253B577100441270 /* Locations.plist */,
 				0283DD8E24F051BF00E4CC07 /* Main.storyboard */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
 				0283DD9224F051BF00E4CC07 /* Miasma.entitlements */,
+				02416310253B57A900441270 /* StationLocationWAQI.swift */,
 				0283DD8A24F051B700E4CC07 /* ViewController.swift */,
 			);
 			path = Miasma;
@@ -469,7 +467,6 @@
 				02ADB06D24FDA15700126F0C /* .gitignore in Resources */,
 				02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */,
 				02BE00B624FBC40E0064F5B8 /* Graphics in Resources */,
-				0241630C253B577200441270 /* Locations.plist in Resources */,
 				0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */,
 				0283DD9024F051BF00E4CC07 /* Main.storyboard in Resources */,
 			);
@@ -564,7 +561,6 @@
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 				02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */,
 				029BD3842536E99500C743A7 /* DataLoaderSmartCitizen.swift in Sources */,
-				02416311253B57A900441270 /* StationLocationWAQI.swift in Sources */,
 				0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
