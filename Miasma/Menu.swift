@@ -83,7 +83,15 @@ class menuFunctions: NSObject {
     }()
     
     
-    var smartCitizenInfo : NSMenuItem = {
+    var smartCitizenInfo1 : NSMenuItem = {
+        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var smartCitizenInfo2 : NSMenuItem = {
+        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var smartCitizenInfo3 : NSMenuItem = {
         return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
     }()
     
@@ -114,7 +122,6 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
     }()
     
-//    var previousStateForNotificationBefore: String
     
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
@@ -139,19 +146,7 @@ class menuFunctions: NSObject {
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
         
-        // Read in current state of AQI from either PA or WAQI to faciliate sending notifications if there are serious climbs detected
-//        if  AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1
-//        {
-//            PublicVariables().previousStateForNotification = purpleAirPM2_5StatusBarIcon.title
-//        }
-//        if  AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1
-//        {
-//            PublicVariables().previousStateForNotification = wAQIAQIColourButton.title
-//        }
-//        else
-//        {
-//
-//        }
+
         menu.removeAllItems()
         menuLoadOptionals()
         menuLoadNonOptionals()
@@ -276,7 +271,11 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(openSkyAircraftInBox)
                 
-                menu.addItem(smartCitizenInfo)
+                menu.addItem(smartCitizenInfo1)
+                
+                menu.addItem(smartCitizenInfo2)
+                
+                menu.addItem(smartCitizenInfo3)
                 
             }
             
@@ -302,7 +301,11 @@ DataLoaderSmartCitizen().loadSmartCitizenData(id: "10507")
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                self.smartCitizenInfo.title = "🌍: \(String(smartCitizenData.data?.sensors?[0].name ?? "0")), \(String(smartCitizenData.data?.sensors?[0].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[1].name ?? "0")), \(String(smartCitizenData.data?.sensors?[1].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[2].name ?? "0")), \(String(smartCitizenData.data?.sensors?[2].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[3].name ?? "0")), \(String(smartCitizenData.data?.sensors?[3].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[4].name ?? "0")), \(String(smartCitizenData.data?.sensors?[4].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[5].name ?? "0")), \(String(smartCitizenData.data?.sensors?[5].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[6].name ?? "0")), \(String(smartCitizenData.data?.sensors?[6].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[7].name ?? "0")), \(String(smartCitizenData.data?.sensors?[7].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[8].name ?? "0")), \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[9].name ?? "0")), \(String(smartCitizenData.data?.sensors?[9].value ?? 0)) / \(String(smartCitizenData.data?.sensors?[10].name ?? "0")), \(String(smartCitizenData.data?.sensors?[10].value ?? 0))"
+                self.smartCitizenInfo1.title = "🌍: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0)) \(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO2 \(String(smartCitizenData.data?.sensors?[1].value ?? 0)) \(String(smartCitizenData.data?.sensors?[1].unit ?? "0")) / Ambient Light \(String(smartCitizenData.data?.sensors?[2].value ?? 0)) \(String(smartCitizenData.data?.sensors?[2].unit ?? "0")) / Custom Circuit \(String(smartCitizenData.data?.sensors?[3].value ?? 0)) \(String(smartCitizenData.data?.sensors?[3].unit ?? "0")) "
+                
+                self.smartCitizenInfo2.title = "🌍: Noise \(String(smartCitizenData.data?.sensors?[4].value ?? 0)) \(String(smartCitizenData.data?.sensors?[4].unit ?? "0")) / Pressure \(String(smartCitizenData.data?.sensors?[5].value ?? 0)) \(String(smartCitizenData.data?.sensors?[5].unit ?? "0")) / PM1 \(String(smartCitizenData.data?.sensors?[6].value ?? 0)) \(String(smartCitizenData.data?.sensors?[6].unit ?? "0")) / PM10 \(String(smartCitizenData.data?.sensors?[7].value ?? 0)) \(String(smartCitizenData.data?.sensors?[7].unit ?? "0"))"
+                
+                self.smartCitizenInfo3.title = "🌍: PM2.5 \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) \(String(smartCitizenData.data?.sensors?[8].unit ?? "0")) / Humidity \(String(smartCitizenData.data?.sensors?[9].value ?? 0))  \(String(smartCitizenData.data?.sensors?[9].unit ?? "0")) / Temperature \(String(smartCitizenData.data?.sensors?[10].value ?? 0))  \(String(smartCitizenData.data?.sensors?[10].unit ?? "0"))"
 
                 
                 
