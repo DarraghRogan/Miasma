@@ -1058,7 +1058,7 @@ class menuFunctions: NSObject {
                         
                     case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
                         pM2_5ColourButton = "[_🟡_____]"
-                        self.purpleAirPM2_5StatusBarIcon.title = "🟡"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟡"
                         statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                         aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
                         aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))

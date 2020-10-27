@@ -11,304 +11,98 @@ import Foundation
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
 struct SmartCitizenDataStructure: Codable {
-    var id: Int?
-    var uuid, name, welcomeDescription, state: String?
-    var hardwareInfo: HardwareInfo?
-//    var systemTags, userTags: [String]?
-    var isPrivate, notifyLowBattery, notifyStoppedPublishing: Bool?
-    var lastReadingAt, addedAt, updatedAt: Date?
-    var macAddress: String?
+    //    var id: Int?
+    //    var uuid,
+    var name: String?
+    //       var welcomeDescription, state: String?
+    //    var hardwareInfo: HardwareInfo?
+    //    var systemTags, userTags: [String]?
+    //    var isPrivate, notifyLowBattery, notifyStoppedPublishing: Bool?
+    //    var lastReadingAt, addedAt, updatedAt: Date?
+    //    var macAddress: String?
     var owner: Owner?
-    var data: DataClass?
-    var kit: Kit?
-
+    var data: SmartCitizenDataClass?
+    //    var kit: Kit?
+    
     enum CodingKeys: String, CodingKey {
-        case id, uuid, name
-        case welcomeDescription
-        case state
-        case hardwareInfo
-//        case systemTags
-//        case userTags
-        case isPrivate
-        case notifyLowBattery
-        case notifyStoppedPublishing
-        case lastReadingAt
-        case addedAt
-        case updatedAt
-        case macAddress
-        case owner, data, kit
-    }
-}
-
-// MARK: Welcome convenience initializers and mutators
-
-extension SmartCitizenDataStructure {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(SmartCitizenDataStructure.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: Int?? = nil,
-        uuid: String?? = nil,
-        name: String?? = nil,
-        welcomeDescription: String?? = nil,
-        state: String?? = nil,
-        hardwareInfo: HardwareInfo?? = nil,
-        systemTags: [String]?? = nil,
-        userTags: [String]?? = nil,
-        isPrivate: Bool?? = nil,
-        notifyLowBattery: Bool?? = nil,
-        notifyStoppedPublishing: Bool?? = nil,
-        lastReadingAt: Date?? = nil,
-        addedAt: Date?? = nil,
-        updatedAt: Date?? = nil,
-        macAddress: String?? = nil,
-        owner: Owner?? = nil,
-        data: DataClass?? = nil,
-        kit: Kit?? = nil
-    ) -> SmartCitizenDataStructure {
-        return SmartCitizenDataStructure(
-            id: id ?? self.id,
-            uuid: uuid ?? self.uuid,
-            name: name ?? self.name,
-            welcomeDescription: welcomeDescription ?? self.welcomeDescription,
-            state: state ?? self.state,
-            hardwareInfo: hardwareInfo ?? self.hardwareInfo,
-//            systemTags: systemTags ?? self.systemTags,
-//            userTags: userTags ?? self.userTags,
-            isPrivate: isPrivate ?? self.isPrivate,
-            notifyLowBattery: notifyLowBattery ?? self.notifyLowBattery,
-            notifyStoppedPublishing: notifyStoppedPublishing ?? self.notifyStoppedPublishing,
-            lastReadingAt: lastReadingAt ?? self.lastReadingAt,
-            addedAt: addedAt ?? self.addedAt,
-            updatedAt: updatedAt ?? self.updatedAt,
-            macAddress: macAddress ?? self.macAddress,
-            owner: owner ?? self.owner,
-            data: data ?? self.data,
-            kit: kit ?? self.kit
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        //        case id
+        //        case uuid
+        case name
+        //        case welcomeDescription = "description"
+        //        case state
+        //        case hardwareInfo = "hardware_info"
+        //        case systemTags = "system_tags"
+        //        case userTags = "user_tags"
+        //        case isPrivate = "is_private"
+        //        case notifyLowBattery = "notify_low_battery"
+        //        case notifyStoppedPublishing = "notify_stopped_publishing"
+        //        case lastReadingAt = "last_reading_at"
+        //        case addedAt = "added_at"
+        //        case updatedAt = "updated_at"
+        //        case macAddress = "mac_address"
+        case owner, data
+        //             case kit
     }
 }
 
 // MARK: - DataClass
-struct DataClass: Codable {
-    var recordedAt, addedAt: Date?
+struct SmartCitizenDataClass: Codable {
+    //    var recordedAt, addedAt: Date?
     var location: DataLocation?
     var sensors: [SmartCitizenSensor]?
-
+    
     enum CodingKeys: String, CodingKey {
-        case recordedAt
-        case addedAt
-        case location, sensors
-    }
-}
-
-// MARK: DataClass convenience initializers and mutators
-
-extension DataClass {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(DataClass.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        recordedAt: Date?? = nil,
-        addedAt: Date?? = nil,
-        location: DataLocation?? = nil,
-        sensors: [SmartCitizenSensor]?? = nil
-    ) -> DataClass {
-        return DataClass(
-            recordedAt: recordedAt ?? self.recordedAt,
-            addedAt: addedAt ?? self.addedAt,
-            location: location ?? self.location,
-            sensors: sensors ?? self.sensors
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        //        case recordedAt = "recorded_at"
+        //        case addedAt = "added_at"
+        case location
+        case sensors
     }
 }
 
 // MARK: - DataLocation
 struct DataLocation: Codable {
-    var ip: JSONNull?
+    //    var ip: JSONNull?
     var exposure: String?
-    var elevation: JSONNull?
+    //    var elevation: JSONNull?
     var latitude, longitude: Double?
-    var geohash, city, countryCode, country: String?
-
+    //    var geohash: String?
+    var city, countryCode, country: String?
+    
     enum CodingKeys: String, CodingKey {
-        case ip, exposure, elevation, latitude, longitude, geohash, city
-        case countryCode
+        //        case ip
+        case exposure
+        //                  case elevation
+        case latitude, longitude
+        //                  case geohash
+        case city
+        case countryCode = "country_code"
         case country
-    }
-}
-
-// MARK: DataLocation convenience initializers and mutators
-
-extension DataLocation {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(DataLocation.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        ip: JSONNull?? = nil,
-        exposure: String?? = nil,
-        elevation: JSONNull?? = nil,
-        latitude: Double?? = nil,
-        longitude: Double?? = nil,
-        geohash: String?? = nil,
-        city: String?? = nil,
-        countryCode: String?? = nil,
-        country: String?? = nil
-    ) -> DataLocation {
-        return DataLocation(
-            ip: ip ?? self.ip,
-            exposure: exposure ?? self.exposure,
-            elevation: elevation ?? self.elevation,
-            latitude: latitude ?? self.latitude,
-            longitude: longitude ?? self.longitude,
-            geohash: geohash ?? self.geohash,
-            city: city ?? self.city,
-            countryCode: countryCode ?? self.countryCode,
-            country: country ?? self.country
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
     }
 }
 
 // MARK: - Sensor
 struct SmartCitizenSensor: Codable {
-    var id: Int?
-    var ancestry: String?
+    //    var id: Int?
+    //    var ancestry: String?
     var name, sensorDescription, unit: String?
-    var createdAt, updatedAt: Date?
+    //    var createdAt, updatedAt: Date?
     var measurementID: Int?
-    var uuid: String?
+    //    var uuid: String?
     var value, rawValue, prevValue, prevRawValue: Double?
-
+    
     enum CodingKeys: String, CodingKey {
-        case id, ancestry, name
-        case sensorDescription
+        //        case id, ancestry
+        case name
+        case sensorDescription = "description"
         case unit
-        case createdAt
-        case updatedAt
-        case measurementID
-        case uuid, value
-        case rawValue
-        case prevValue
-        case prevRawValue
-    }
-}
-
-// MARK: Sensor convenience initializers and mutators
-
-extension SmartCitizenSensor {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(SmartCitizenSensor.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: Int?? = nil,
-        ancestry: String?? = nil,
-        name: String?? = nil,
-        sensorDescription: String?? = nil,
-        unit: String?? = nil,
-        createdAt: Date?? = nil,
-        updatedAt: Date?? = nil,
-        measurementID: Int?? = nil,
-        uuid: String?? = nil,
-        value: Double?? = nil,
-        rawValue: Double?? = nil,
-        prevValue: Double?? = nil,
-        prevRawValue: Double?? = nil
-    ) -> SmartCitizenSensor {
-        return SmartCitizenSensor(
-            id: id ?? self.id,
-            ancestry: ancestry ?? self.ancestry,
-            name: name ?? self.name,
-            sensorDescription: sensorDescription ?? self.sensorDescription,
-            unit: unit ?? self.unit,
-            createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt,
-            measurementID: measurementID ?? self.measurementID,
-            uuid: uuid ?? self.uuid,
-            value: value ?? self.value,
-            rawValue: rawValue ?? self.rawValue,
-            prevValue: prevValue ?? self.prevValue,
-            prevRawValue: prevRawValue ?? self.prevRawValue
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        //        case createdAt = "created_at"
+        //        case updatedAt = "updated_at"
+        case measurementID = "measurement_id"
+        //        case uuid
+        case value
+        case rawValue = "raw_value"
+        case prevValue = "prev_value"
+        case prevRawValue = "prev_raw_value"
     }
 }
 
@@ -319,63 +113,14 @@ struct HardwareInfo: Codable {
     var espBd, hwVer: String?
     var samBd: Date?
     var espVer, samVer: String?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, mac, time
-        case espBd
-        case hwVer
-        case samBd
-        case espVer
-        case samVer
-    }
-}
-
-// MARK: HardwareInfo convenience initializers and mutators
-
-extension HardwareInfo {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(HardwareInfo.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: String?? = nil,
-        mac: String?? = nil,
-        time: Date?? = nil,
-        espBd: String?? = nil,
-        hwVer: String?? = nil,
-        samBd: Date?? = nil,
-        espVer: String?? = nil,
-        samVer: String?? = nil
-    ) -> HardwareInfo {
-        return HardwareInfo(
-            id: id ?? self.id,
-            mac: mac ?? self.mac,
-            time: time ?? self.time,
-            espBd: espBd ?? self.espBd,
-            hwVer: hwVer ?? self.hwVer,
-            samBd: samBd ?? self.samBd,
-            espVer: espVer ?? self.espVer,
-            samVer: samVer ?? self.samVer
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        case espBd = "esp_bd"
+        case hwVer = "hw_ver"
+        case samBd = "sam_bd"
+        case espVer = "esp_ver"
+        case samVer = "sam_ver"
     }
 }
 
@@ -384,221 +129,69 @@ struct Kit: Codable {
     var id: Int?
     var uuid, slug, name, kitDescription: String?
     var createdAt, updatedAt: Date?
-
+    
     enum CodingKeys: String, CodingKey {
         case id, uuid, slug, name
-        case kitDescription
-        case createdAt
-        case updatedAt
-    }
-}
-
-// MARK: Kit convenience initializers and mutators
-
-extension Kit {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(Kit.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: Int?? = nil,
-        uuid: String?? = nil,
-        slug: String?? = nil,
-        name: String?? = nil,
-        kitDescription: String?? = nil,
-        createdAt: Date?? = nil,
-        updatedAt: Date?? = nil
-    ) -> Kit {
-        return Kit(
-            id: id ?? self.id,
-            uuid: uuid ?? self.uuid,
-            slug: slug ?? self.slug,
-            name: name ?? self.name,
-            kitDescription: kitDescription ?? self.kitDescription,
-            createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+        case kitDescription = "description"
+        case createdAt = "created_at"
+        case updatedAt = "updated_at"
     }
 }
 
 // MARK: - Owner
 struct Owner: Codable {
-    var id: Int?
-    var uuid, username: String?
-    var avatar: String?
-    var url: JSONNull?
-    var joinedAt: Date?
+//    var id: Int?
+//    var uuid, username: String?
+//    var avatar: String?
+    //    var url: JSONNull?
+//    var joinedAt: Date?
     var location: OwnerLocation?
-    var deviceIDS: [JSONAny]?
-
+//    var deviceIDS: [JSONAny]?
+    
     enum CodingKeys: String, CodingKey {
-        case id, uuid, username, avatar, url
-        case joinedAt
+//        case id, uuid, username, avatar
+//        //        case url
+//        case joinedAt = "joined_at"
         case location
-        case deviceIDS
-    }
-}
-
-// MARK: Owner convenience initializers and mutators
-
-extension Owner {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(Owner.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        id: Int?? = nil,
-        uuid: String?? = nil,
-        username: String?? = nil,
-        avatar: String?? = nil,
-        url: JSONNull?? = nil,
-        joinedAt: Date?? = nil,
-        location: OwnerLocation?? = nil,
-        deviceIDS: [JSONAny]?? = nil
-    ) -> Owner {
-        return Owner(
-            id: id ?? self.id,
-            uuid: uuid ?? self.uuid,
-            username: username ?? self.username,
-            avatar: avatar ?? self.avatar,
-            url: url ?? self.url,
-            joinedAt: joinedAt ?? self.joinedAt,
-            location: location ?? self.location,
-            deviceIDS: deviceIDS ?? self.deviceIDS
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
+//        case deviceIDS = "device_ids"
     }
 }
 
 // MARK: - OwnerLocation
 struct OwnerLocation: Codable {
-    var city, country, countryCode: JSONNull?
-
+    var city, country, countryCode: String?
+    
     enum CodingKeys: String, CodingKey {
         case city, country
-        case countryCode
+        case countryCode = "country_code"
     }
-}
-
-// MARK: OwnerLocation convenience initializers and mutators
-
-extension OwnerLocation {
-    init(data: Data) throws {
-        self = try newJSONDecoder().decode(OwnerLocation.self, from: data)
-    }
-
-    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
-        guard let data = json.data(using: encoding) else {
-            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
-        }
-        try self.init(data: data)
-    }
-
-    init(fromURL url: URL) throws {
-        try self.init(data: try Data(contentsOf: url))
-    }
-
-    func with(
-        city: JSONNull?? = nil,
-        country: JSONNull?? = nil,
-        countryCode: JSONNull?? = nil
-    ) -> OwnerLocation {
-        return OwnerLocation(
-            city: city ?? self.city,
-            country: country ?? self.country,
-            countryCode: countryCode ?? self.countryCode
-        )
-    }
-
-    func jsonData() throws -> Data {
-        return try newJSONEncoder().encode(self)
-    }
-
-    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
-        return String(data: try self.jsonData(), encoding: encoding)
-    }
-}
-
-// MARK: - Helper functions for creating encoders and decoders
-
-func newJSONDecoder() -> JSONDecoder {
-    let decoder = JSONDecoder()
-    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
-        decoder.dateDecodingStrategy = .iso8601
-    }
-    return decoder
-}
-
-func newJSONEncoder() -> JSONEncoder {
-    let encoder = JSONEncoder()
-    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
-        encoder.dateEncodingStrategy = .iso8601
-    }
-    return encoder
 }
 
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
-
+    
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
     }
-
+    
     public var hashValue: Int {
         return 0
     }
-
+    
     public func hash(into hasher: inout Hasher) {
         // No-op
     }
-
+    
     public init() {}
-
+    
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if !container.decodeNil() {
             throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
@@ -607,38 +200,38 @@ class JSONNull: Codable, Hashable {
 
 class JSONCodingKey: CodingKey {
     let key: String
-
+    
     required init?(intValue: Int) {
         return nil
     }
-
+    
     required init?(stringValue: String) {
         key = stringValue
     }
-
+    
     var intValue: Int? {
         return nil
     }
-
+    
     var stringValue: String {
         return key
     }
 }
 
 class JSONAny: Codable {
-
+    
     let value: Any
-
+    
     static func decodingError(forCodingPath codingPath: [CodingKey]) -> DecodingError {
         let context = DecodingError.Context(codingPath: codingPath, debugDescription: "Cannot decode JSONAny")
         return DecodingError.typeMismatch(JSONAny.self, context)
     }
-
+    
     static func encodingError(forValue value: Any, codingPath: [CodingKey]) -> EncodingError {
         let context = EncodingError.Context(codingPath: codingPath, debugDescription: "Cannot encode JSONAny")
         return EncodingError.invalidValue(value, context)
     }
-
+    
     static func decode(from container: SingleValueDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -657,7 +250,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-
+    
     static func decode(from container: inout UnkeyedDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -684,7 +277,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-
+    
     static func decode(from container: inout KeyedDecodingContainer<JSONCodingKey>, forKey key: JSONCodingKey) throws -> Any {
         if let value = try? container.decode(Bool.self, forKey: key) {
             return value
@@ -711,7 +304,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-
+    
     static func decodeArray(from container: inout UnkeyedDecodingContainer) throws -> [Any] {
         var arr: [Any] = []
         while !container.isAtEnd {
@@ -720,7 +313,7 @@ class JSONAny: Codable {
         }
         return arr
     }
-
+    
     static func decodeDictionary(from container: inout KeyedDecodingContainer<JSONCodingKey>) throws -> [String: Any] {
         var dict = [String: Any]()
         for key in container.allKeys {
@@ -729,7 +322,7 @@ class JSONAny: Codable {
         }
         return dict
     }
-
+    
     static func encode(to container: inout UnkeyedEncodingContainer, array: [Any]) throws {
         for value in array {
             if let value = value as? Bool {
@@ -753,7 +346,7 @@ class JSONAny: Codable {
             }
         }
     }
-
+    
     static func encode(to container: inout KeyedEncodingContainer<JSONCodingKey>, dictionary: [String: Any]) throws {
         for (key, value) in dictionary {
             let key = JSONCodingKey(stringValue: key)!
@@ -778,7 +371,7 @@ class JSONAny: Codable {
             }
         }
     }
-
+    
     static func encode(to container: inout SingleValueEncodingContainer, value: Any) throws {
         if let value = value as? Bool {
             try container.encode(value)
@@ -794,7 +387,7 @@ class JSONAny: Codable {
             throw encodingError(forValue: value, codingPath: container.codingPath)
         }
     }
-
+    
     public required init(from decoder: Decoder) throws {
         if var arrayContainer = try? decoder.unkeyedContainer() {
             self.value = try JSONAny.decodeArray(from: &arrayContainer)
@@ -805,7 +398,7 @@ class JSONAny: Codable {
             self.value = try JSONAny.decode(from: container)
         }
     }
-
+    
     public func encode(to encoder: Encoder) throws {
         if let arr = self.value as? [Any] {
             var container = encoder.unkeyedContainer()
@@ -824,22 +417,23 @@ class JSONAny: Codable {
 
 
 
+
 // define an instance of the data that can be filled by the data loader and read by the menu
 var smartCitizenData = SmartCitizenDataStructure()
 
- public class DataLoaderSmartCitizen {
-
+public class DataLoaderSmartCitizen {
+    
     
     func loadSmartCitizenData(id:String) {
-
+        
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.smartcitizen.me/v0/devices/\(id)")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         
         
         request.httpMethod = "GET"
-
+        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
@@ -848,7 +442,7 @@ var smartCitizenData = SmartCitizenDataStructure()
                 let httpResponse = response as? HTTPURLResponse
                 print("Received from the SmartCitizen API")
                 if let data = data,
-                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
                     print(urlContent)
                 } else {
                     print("error with printing string encoded data")
@@ -858,15 +452,15 @@ var smartCitizenData = SmartCitizenDataStructure()
                 do {
                     let dataFromSmartCitizen = try decoder.decode(SmartCitizenDataStructure.self, from: data!)
                     smartCitizenData = dataFromSmartCitizen
-
+                    
                 }
                 catch {
                     print("Error in SmartCitizen JSON parsing")
-//                    print(purpleAirData)
+                    //                    print(purpleAirData)
                 }
             }
         })
-
+        
         dataTask.resume()
     }
- }
+}
