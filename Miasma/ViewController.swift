@@ -8,7 +8,7 @@
  
  import Cocoa
  import ServiceManagement
-// import MapKit
+ import MapKit
  
  class ViewController: NSViewController {
     
@@ -124,6 +124,8 @@
         AppDelegate().defaults.set(PurpleAirIDField.stringValue, forKey: "PurpleAirStationID")
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
@@ -236,6 +238,8 @@
         AppDelegate().defaults.set(SmartCitizenIDField.stringValue, forKey: "SmartCitizenStationID")
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"SmartCitizenInUse")
         AppDelegate().defaults.set(0, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
