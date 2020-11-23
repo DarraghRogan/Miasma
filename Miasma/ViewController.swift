@@ -314,9 +314,18 @@
     @IBAction func autoRunAtStartup(_ sender: Any) {
         let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
         
-        let isAuto = (sender as AnyObject).state == .on
+//        let isAuto = (sender as AnyObject).state == .on
+//
+//        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
         
-        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
+        if autoRunAtStartup.state.self.rawValue == 0{
+             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
+            SMLoginItemSetEnabled(launcherAppId as CFString, false)
+        }
+        else if autoRunAtStartup.state.self.rawValue == 1{
+            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
+                        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+        }
         
 //        if autoRunAtStartup.state == NSControl.StateValue.off {
 //            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
