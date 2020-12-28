@@ -509,7 +509,7 @@ class menuFunctions: NSObject {
                     self.purpleAirPM2_5StatusBarIcon.title = "⚪"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                 }
-                self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                 
                 // note including -8F & +4% corrections to temp & RH per: https://www.reddit.com/r/PurpleAir/comments/j14qln/temperature_reported_from_web_map_vs_api_mismatch/
                 
@@ -863,7 +863,7 @@ class menuFunctions: NSObject {
                         self.wAQIAQIColourButton.title = "⚪"
                         statusItem.button?.title = "M \(self.wAQIAQIColourButton.title)"
                     }
-                    self.wAQIAQI.title = "☁️: \(String(wAQIData.data?.aqi ?? 0)) AQI (US EPA, Current)                                                   \(wAQIAQIColourButton)"
+                    self.wAQIAQI.title = "☁️: \(String(wAQIData.data?.aqi ?? 0)) US EPA AQI PM₂.₅ (Current)                                                   \(wAQIAQIColourButton)"
                     
                     self.wAQIDominentPol.title = "🎯: Dominant Pollutant: \(String(wAQIData.data?.dominentpol ?? "0"))"
                     
@@ -957,7 +957,15 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
+                    let ClimaCellCelcius = climaCellData[0].feelsLike?.value ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(climaCellData[0].epaAqi?.value ?? 0)) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
@@ -1223,7 +1231,7 @@ class menuFunctions: NSObject {
                         self.smartCitizenPM2_5StatusBarIcon.title = "⚪"
                         statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
                     }
-                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ (Current)                                          \(pM2_5ColourButton)"
+                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO2 \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
@@ -1245,7 +1253,7 @@ class menuFunctions: NSObject {
                     default:
                         pressure_visual = ""
                     }
-                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenData.data?.sensors?[5].value ?? 0))kilopascal                                                      \(pressure_visual)"
+                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
                     
                     
                     self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenData.data?.sensors?[4].value ?? 0))\(String(smartCitizenData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenData.data?.sensors?[2].value ?? 0))\(String(smartCitizenData.data?.sensors?[2].unit ?? "0"))"
@@ -1338,7 +1346,15 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), feel like \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃, with wind from \(windDirection_acronymn)° @ \(String(format: "%.1f", locale: Locale.current, climaCellData[0].windSpeed?.value ?? 0))m/s"
+                    let ClimaCellCelcius = climaCellData[0].feelsLike?.value ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData[0].weatherCode?.value ?? ""), \(String(format: "%.1f", locale: Locale.current, climaCellData[0].feelsLike?.value ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData[0].windSpeed?.value ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(climaCellData[0].epaAqi?.value ?? 0)) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData[0].epaPrimaryPollutant?.value ?? "")"
                     
