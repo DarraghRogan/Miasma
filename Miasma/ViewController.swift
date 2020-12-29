@@ -267,6 +267,25 @@
     @IBOutlet weak var SmartCitizenSavedIDLabel: NSTextField!
     
     
+    @IBAction func TelraamButton(_ sender: Any) {
+        if TelraamButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(false, forKey: "TelraamInUse")
+            
+        }
+        if TelraamButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(true, forKey: "TelraamInUse")
+            
+        }
+    }
+    
+    @IBOutlet weak var TelraamButtonOutlet: NSButton!
+    
+    @IBAction func TelraamSegmentIDLabel(_ sender: Any) {
+        AppDelegate().defaults.set(TelraamSegmentIDOutlet.stringValue, forKey: "TelraamSegmentID")
+
+    }
+    
+    @IBOutlet weak var TelraamSegmentIDOutlet: NSTextField!
     
     
     @IBAction func CO2SignalButton(_ sender: Any) {
@@ -418,6 +437,7 @@
         }
         
         
+        TelraamButtonOutlet.state = AppDelegate().defaults.object(forKey:"TelraamInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         CO2SignalButtonOutlet.state = AppDelegate().defaults.object(forKey:"CO2SignalInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
@@ -441,6 +461,7 @@
         
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
         
+        TelraamSegmentIDOutlet.stringValue = AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()
         
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)

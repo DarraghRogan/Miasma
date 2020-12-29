@@ -139,6 +139,15 @@ class menuFunctions: NSObject {
     }()
     
     
+    var telraamRoadUsers : NSMenuItem = {
+        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var telraamDataTime : NSMenuItem = {
+        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+    }()
+    
+    
     var climaCellWeather : NSMenuItem = {
         return NSMenuItem(title: "🌦: ", action: nil, keyEquivalent: "")
     }()
@@ -171,6 +180,10 @@ class menuFunctions: NSObject {
     
     @objc func openOpenSky(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://opensky-network.org/")!)
+    }
+    
+    @objc func openTelraam(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://www.telraam.net/en")!)
     }
     
     @objc func openClimaCell(_ sender: NSMenuItem){
@@ -587,7 +600,7 @@ class menuFunctions: NSObject {
                     }
                     
                     self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
-                
+                    
                     
                 })
             }
@@ -1231,7 +1244,7 @@ class menuFunctions: NSObject {
                         self.smartCitizenPM2_5StatusBarIcon.title = "⚪"
                         statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
                     }
-                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO2 \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
@@ -1364,6 +1377,35 @@ class menuFunctions: NSObject {
                 
             }
         }
-        DataLoaderTelraam().loadTelraamData(segmentID:9000000534)
+        
+        if AppDelegate().defaults.integer(forKey:"TelraamInUse") == 1 {
+            
+            menu.addItem(NSMenuItem.separator())
+            
+            let telraam = NSMenuItem(
+                title: "Road Traffic (Telraam)...",
+                action: #selector(menuFunctions.openTelraam(_:)),
+                keyEquivalent: "t"
+            )
+            telraam.target = self
+            menu.addItem(telraam)
+            
+            menu.addItem(telraamRoadUsers)
+            menu.addItem(telraamDataTime)
+            
+            DataLoaderTelraam().loadTelraamData(segmentID:(AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+//                if telraamData.type == "FeatureCollection" {
+                    
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.lorry ?? 0))"
+                    
+                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
+                    
+//                }
+            })
+            
+        }
     }
 }
