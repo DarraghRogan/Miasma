@@ -15,6 +15,7 @@
 		0218A77F256DBBD700B2D684 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0218A77E256DBBD700B2D684 /* Assets.xcassets */; };
 		0218A783256DBBD700B2D684 /* Miasma WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0218A776256DBBD500B2D684 /* Miasma WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */; };
+		022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */; };
 		023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */; };
 		023BBDF025251AC3006E8054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDEF25251AC3006E8054 /* ContentView.swift */; };
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
@@ -174,6 +175,7 @@
 		0218A77E256DBBD700B2D684 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0218A780256DBBD700B2D684 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
+		022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTelraam.swift; sourceTree = "<group>"; };
 		023BBDEB25251AC3006E8054 /* Miasma iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Miasma iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miasma_iOSApp.swift; sourceTree = "<group>"; };
 		023BBDEF25251AC3006E8054 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -340,6 +342,7 @@
 				0283DD8C24F051BF00E4CC07 /* Assets.xcassets */,
 				02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */,
 				0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */,
+				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
 				02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
@@ -647,6 +650,7 @@
 				0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */,
 				0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */,
 				02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */,
+				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,

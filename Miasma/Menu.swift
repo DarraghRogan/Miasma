@@ -1364,6 +1364,6 @@ class menuFunctions: NSObject {
                 
             }
         }
-        
+        DataLoaderTelraam().loadTelraamData(segmentID:9000000534)
     }
 }

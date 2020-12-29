@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="17506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -687,11 +687,11 @@
             <objects>
                 <viewController title="Miasma Preferences" storyboardIdentifier="PreferencesStoryboard" id="XfG-lQ-9wD" customClass="ViewController" customModule="Miasma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1082" height="878"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1082" height="1042"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ND2-AO-lfk">
-                                <rect key="frame" x="18" y="842" width="160" height="19"/>
+                                <rect key="frame" x="18" y="1006" width="160" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Local Air Quality Data" id="Q7H-pg-MSl">
                                     <font key="font" metaFont="system" size="16"/>
@@ -700,7 +700,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vfv-MY-HG1">
-                                <rect key="frame" x="150" y="790" width="122" height="16"/>
+                                <rect key="frame" x="150" y="954" width="122" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="PurpleAir Sensor ID" id="WWi-W8-VW4">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -709,7 +709,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField hidden="YES" horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qWi-6W-Wlh">
-                                <rect key="frame" x="150" y="758" width="151" height="16"/>
+                                <rect key="frame" x="150" y="922" width="151" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Private Device Read Key" id="4ff-LQ-pSI">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -718,7 +718,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fM-sq-1wJ">
-                                <rect key="frame" x="148" y="671" width="163" height="16"/>
+                                <rect key="frame" x="148" y="835" width="163" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Saved PurpleAir Sensor ID" id="lFx-1e-Klv">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -727,7 +727,7 @@
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="73Y-KW-Zia">
-                                <rect key="frame" x="148" y="724" width="165" height="16"/>
+                                <rect key="frame" x="148" y="888" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="D2u-lD-rgC">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -736,7 +736,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZW1-X2-lTG">
-                                <rect key="frame" x="350" y="809" width="174" height="32"/>
+                                <rect key="frame" x="350" y="973" width="174" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Open PurpleAir Map" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1mv-d9-6AL">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -747,7 +747,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SMM-pO-AHf">
-                                <rect key="frame" x="350" y="614" width="176" height="32"/>
+                                <rect key="frame" x="350" y="778" width="176" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Open WAQI Map Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0ys-iL-kCJ">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -758,7 +758,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FPd-ko-3zN">
-                                <rect key="frame" x="553" y="671" width="159" height="166"/>
+                                <rect key="frame" x="553" y="835" width="159" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="UiA-qh-nNp">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -770,7 +770,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8R-2h-NA4">
-                                <rect key="frame" x="718" y="671" width="272" height="166"/>
+                                <rect key="frame" x="718" y="835" width="272" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PurpleAirWebpageSample" id="D5H-E1-FCY"/>
                                 <connections>
@@ -778,7 +778,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </imageView>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rd-Ce-8fv">
-                                <rect key="frame" x="132" y="623" width="195" height="18"/>
+                                <rect key="frame" x="132" y="787" width="195" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="From World Air Quality Index" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="vjk-ap-k8q">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -789,7 +789,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kij-pn-ZcW">
-                                <rect key="frame" x="150" y="599" width="83" height="16"/>
+                                <rect key="frame" x="150" y="763" width="83" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="City / Station" id="PXD-at-IxH">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -798,7 +798,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ED6-Fz-uYk">
-                                <rect key="frame" x="553" y="500" width="159" height="144"/>
+                                <rect key="frame" x="553" y="664" width="159" height="144"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="eX7-Bn-7OB">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -808,7 +808,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <comboBox verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFf-fi-NMR">
-                                <rect key="frame" x="324" y="593" width="217" height="25"/>
+                                <rect key="frame" x="324" y="757" width="217" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="Zg8-1E-aWn">
                                     <font key="font" metaFont="system"/>
@@ -825,7 +825,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </comboBox>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3U-Nm-BIN">
-                                <rect key="frame" x="151" y="510" width="160" height="16"/>
+                                <rect key="frame" x="151" y="674" width="160" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Saved WAQI City / Station" id="w2x-HY-jCQ">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -834,7 +834,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zrk-t2-bra">
-                                <rect key="frame" x="151" y="563" width="165" height="16"/>
+                                <rect key="frame" x="151" y="727" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="TgJ-F8-Upg">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -843,7 +843,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZv-hX-fwv">
-                                <rect key="frame" x="319" y="527" width="225" height="32"/>
+                                <rect key="frame" x="319" y="691" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Save WAQI City / Station" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kGs-ow-l9D">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -854,7 +854,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VqV-xm-FGg">
-                                <rect key="frame" x="322" y="510" width="201" height="16"/>
+                                <rect key="frame" x="322" y="674" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="izM-Eb-JEY">
                                     <font key="font" metaFont="system"/>
@@ -863,7 +863,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h1W-co-EyU">
-                                <rect key="frame" x="322" y="563" width="201" height="16"/>
+                                <rect key="frame" x="322" y="727" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="JoL-Tk-TAB">
                                     <font key="font" metaFont="system"/>
@@ -872,7 +872,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ij3-Vr-ptz">
-                                <rect key="frame" x="325" y="787" width="122" height="21"/>
+                                <rect key="frame" x="325" y="951" width="122" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="9dE-KE-xoA">
                                     <font key="font" metaFont="system"/>
@@ -884,7 +884,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </textField>
                             <textField hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sIf-vU-jZn">
-                                <rect key="frame" x="325" y="755" width="212" height="21"/>
+                                <rect key="frame" x="325" y="919" width="212" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kqk-jH-IOB">
                                     <font key="font" metaFont="system"/>
@@ -893,7 +893,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UsL-kp-Bh7">
-                                <rect key="frame" x="449" y="780" width="96" height="32"/>
+                                <rect key="frame" x="449" y="944" width="96" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Validate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="708-pu-5Ko">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -904,7 +904,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0PM-AC-O5j">
-                                <rect key="frame" x="319" y="688" width="225" height="32"/>
+                                <rect key="frame" x="319" y="852" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Save PurpleAir ID" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="XsP-Wu-iZs">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -915,7 +915,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lSN-T0-4a0">
-                                <rect key="frame" x="322" y="671" width="168" height="16"/>
+                                <rect key="frame" x="322" y="835" width="168" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="3lh-8m-sd7">
                                     <font key="font" metaFont="system"/>
@@ -924,7 +924,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HhU-L0-Tvd">
-                                <rect key="frame" x="322" y="724" width="201" height="16"/>
+                                <rect key="frame" x="322" y="888" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="elL-8h-8rm">
                                     <font key="font" metaFont="system"/>
@@ -933,15 +933,15 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ouk-EH-Ag6">
-                                <rect key="frame" x="131" y="660" width="868" height="5"/>
+                                <rect key="frame" x="131" y="824" width="868" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Vwz-kN-nnc">
-                                <rect key="frame" x="20" y="328" width="979" height="5"/>
+                                <rect key="frame" x="20" y="492" width="979" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hFa-O5-a4P">
-                                <rect key="frame" x="18" y="303" width="182" height="19"/>
+                                <rect key="frame" x="18" y="467" width="182" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Local Consumption Data" id="f6y-AR-zZR">
                                     <font key="font" metaFont="system" size="16"/>
@@ -950,7 +950,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2M-5l-BYI">
-                                <rect key="frame" x="130" y="279" width="351" height="18"/>
+                                <rect key="frame" x="130" y="443" width="351" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Electricity Consumption Fossil stats (from CO2 Signal)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="lSh-ld-bDS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -961,7 +961,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3l-fb-Zew">
-                                <rect key="frame" x="131" y="257" width="351" height="18"/>
+                                <rect key="frame" x="131" y="421" width="351" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Aviation nearby (from OpenSky)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zBE-dA-FdK">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -972,11 +972,11 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="vk4-SD-1Dc">
-                                <rect key="frame" x="20" y="51" width="979" height="5"/>
+                                <rect key="frame" x="20" y="191" width="979" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fxj-ZF-qYt">
-                                <rect key="frame" x="18" y="146" width="137" height="19"/>
+                                <rect key="frame" x="18" y="310" width="137" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="App Configuration" id="ovd-sJ-lLU">
                                     <font key="font" metaFont="system" size="16"/>
@@ -985,11 +985,11 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="08G-Gq-ol2">
-                                <rect key="frame" x="20" y="171" width="979" height="5"/>
+                                <rect key="frame" x="20" y="335" width="979" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3ox-Vy-2lB">
-                                <rect key="frame" x="18" y="20" width="623" height="25"/>
+                                <rect key="frame" x="18" y="160" width="623" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Please choose Refresh from M ⚪ menu when preferences configuration is complete" id="2ym-07-W0I">
                                     <font key="font" metaFont="system" size="16"/>
@@ -998,7 +998,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lwP-qa-jNJ">
-                                <rect key="frame" x="130" y="62" width="212" height="18"/>
+                                <rect key="frame" x="130" y="202" width="212" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Autorun Miasma at Mac startup" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Iyh-NB-hqN">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1009,18 +1009,18 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g0f-Nh-1l5">
-                                <rect key="frame" x="130" y="102" width="513" height="18"/>
+                                <rect key="frame" x="130" y="266" width="528" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Receive Notifications when AQI climbs to higher Level of Health Concern; trigger:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="7XY-Ob-Ywt">
+                                <buttonCell key="cell" type="check" title="⬆ Receive Notifications when AQI climbs to higher Level of Health Concern; trigger:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="7XY-Ob-Ywt">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" size="13" name=".HiraKakuInterface-W3"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="receiveNotificationsButtonAction:" target="XfG-lQ-9wD" id="dRb-wG-aay"/>
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Wr-dH-MEn">
-                                <rect key="frame" x="130" y="82" width="209" height="18"/>
+                                <rect key="frame" x="130" y="222" width="209" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Show AQI numbers in Menubar" bezelStyle="regularSquare" imagePosition="left" inset="2" id="ZTe-Gz-219">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1031,7 +1031,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rXt-ZK-UqV">
-                                <rect key="frame" x="975" y="104" width="29" height="16"/>
+                                <rect key="frame" x="975" y="268" width="29" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="000" id="K63-mv-Zzf">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1040,7 +1040,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Jc-xi-a4p">
-                                <rect key="frame" x="18" y="216" width="104" height="19"/>
+                                <rect key="frame" x="18" y="380" width="104" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Weather Data" id="YFy-Km-KPO">
                                     <font key="font" metaFont="system" size="16"/>
@@ -1049,11 +1049,11 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Kos-gS-oS5">
-                                <rect key="frame" x="20" y="241" width="475" height="5"/>
+                                <rect key="frame" x="20" y="405" width="475" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rkG-ht-MDd">
-                                <rect key="frame" x="130" y="192" width="276" height="18"/>
+                                <rect key="frame" x="130" y="356" width="276" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="check" title="Nearcast 1 hour Forecast (from ClimaCell)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kT-JR-afS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1064,7 +1064,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqm-uh-k6W">
-                                <rect key="frame" x="501" y="212" width="426" height="48"/>
+                                <rect key="frame" x="501" y="376" width="426" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="aDs-2S-5Cv">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1074,7 +1074,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbJ-gY-LjZ">
-                                <rect key="frame" x="645" y="129" width="23" height="19"/>
+                                <rect key="frame" x="645" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🟢" id="Bc6-xk-IIG">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1083,7 +1083,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BHq-s0-2zs">
-                                <rect key="frame" x="681" y="129" width="23" height="19"/>
+                                <rect key="frame" x="681" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🟡" id="lYB-KT-YBr">
                                     <font key="font" metaFont="system"/>
@@ -1092,7 +1092,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gYC-Ie-2c8">
-                                <rect key="frame" x="720" y="129" width="23" height="19"/>
+                                <rect key="frame" x="720" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🟠" id="kWo-Fd-Cny">
                                     <font key="font" metaFont="system"/>
@@ -1101,7 +1101,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c4h-gO-bQQ">
-                                <rect key="frame" x="796" y="129" width="23" height="19"/>
+                                <rect key="frame" x="796" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🔴" id="0gi-Vv-ILD">
                                     <font key="font" metaFont="system"/>
@@ -1110,7 +1110,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dD-Yr-ibV">
-                                <rect key="frame" x="872" y="129" width="23" height="19"/>
+                                <rect key="frame" x="872" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🟣" id="5dq-37-1eu">
                                     <font key="font" metaFont="system"/>
@@ -1119,7 +1119,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oSp-MZ-b2p">
-                                <rect key="frame" x="949" y="129" width="23" height="19"/>
+                                <rect key="frame" x="949" y="293" width="23" height="19"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" title="🟤" id="a7D-EK-YmW">
                                     <font key="font" metaFont="system"/>
@@ -1128,7 +1128,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8bv-io-tXn">
-                                <rect key="frame" x="682" y="101" width="289" height="24"/>
+                                <rect key="frame" x="682" y="265" width="289" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" state="on" alignment="left" minValue="50" maxValue="400" doubleValue="50" tickMarkPosition="above" numberOfTickMarks="8" allowsTickMarkValuesOnly="YES" sliderType="linear" id="OCT-Gs-sNN"/>
                                 <connections>
@@ -1136,7 +1136,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </slider>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dNg-47-2VM">
-                                <rect key="frame" x="132" y="817" width="113" height="18"/>
+                                <rect key="frame" x="132" y="981" width="113" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="From PurpleAir" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="bJw-cj-Cpj">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1147,7 +1147,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e19-gP-txV">
-                                <rect key="frame" x="323" y="453" width="231" height="32"/>
+                                <rect key="frame" x="323" y="617" width="231" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Open SmartCitizen Map Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7Hr-vz-L41">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1158,7 +1158,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kom-8I-eB0">
-                                <rect key="frame" x="132" y="462" width="135" height="18"/>
+                                <rect key="frame" x="132" y="626" width="135" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="radio" title="From SmartCitizen" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="0Sw-Vv-lDv">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -1169,7 +1169,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bvd-r1-rCV">
-                                <rect key="frame" x="150" y="438" width="17" height="16"/>
+                                <rect key="frame" x="150" y="602" width="17" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="ID" id="mf4-PN-FjN">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1178,7 +1178,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91r-e3-BDt">
-                                <rect key="frame" x="553" y="339" width="159" height="160"/>
+                                <rect key="frame" x="553" y="503" width="159" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="FTg-Vb-QIZ">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1190,7 +1190,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cDm-R0-ZwU">
-                                <rect key="frame" x="151" y="349" width="140" height="16"/>
+                                <rect key="frame" x="151" y="513" width="140" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Saved SmartCitizen ID" id="oTa-P2-jtB">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1199,7 +1199,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhd-2A-hTs">
-                                <rect key="frame" x="151" y="402" width="165" height="16"/>
+                                <rect key="frame" x="151" y="566" width="165" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="YVc-Lz-RNx">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1208,7 +1208,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bYh-Cc-Sch">
-                                <rect key="frame" x="319" y="366" width="225" height="32"/>
+                                <rect key="frame" x="319" y="530" width="225" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Save SmartCitizen ID" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="upc-Mk-R3S">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1219,7 +1219,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="acj-Pb-nQC">
-                                <rect key="frame" x="322" y="349" width="201" height="16"/>
+                                <rect key="frame" x="322" y="513" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="X7A-5p-gHL">
                                     <font key="font" metaFont="system"/>
@@ -1228,7 +1228,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ydp-if-5lH">
-                                <rect key="frame" x="322" y="402" width="201" height="16"/>
+                                <rect key="frame" x="322" y="566" width="201" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" id="yYQ-kR-VyT">
                                     <font key="font" metaFont="system"/>
@@ -1237,11 +1237,11 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="zVj-0Q-aLu">
-                                <rect key="frame" x="131" y="499" width="868" height="5"/>
+                                <rect key="frame" x="131" y="663" width="868" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
                             <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gXk-tZ-6hX">
-                                <rect key="frame" x="324" y="435" width="122" height="21"/>
+                                <rect key="frame" x="324" y="599" width="122" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="qzy-jw-WwI">
                                     <font key="font" metaFont="system"/>
@@ -1253,7 +1253,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rRP-Sc-lhV">
-                                <rect key="frame" x="448" y="428" width="96" height="32"/>
+                                <rect key="frame" x="448" y="592" width="96" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Validate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5op-ed-Ecn">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1264,7 +1264,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hcq-9r-sY0">
-                                <rect key="frame" x="934" y="25" width="98" height="16"/>
+                                <rect key="frame" x="934" y="165" width="98" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Miasma version" id="Qei-xh-kF2">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1273,7 +1273,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zr-hR-aKv">
-                                <rect key="frame" x="1032" y="25" width="32" height="16"/>
+                                <rect key="frame" x="1032" y="165" width="32" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="0.00" id="sFz-zI-yy1">
                                     <font key="font" usesAppearanceFont="YES"/>
@@ -1282,12 +1282,34 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                 </textFieldCell>
                             </textField>
                             <mapView hidden="YES" fixedFrame="YES" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42N-fV-Xpm">
-                                <rect key="frame" x="722" y="339" width="308" height="315"/>
+                                <rect key="frame" x="722" y="503" width="308" height="315"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="Wsq-a3-G3T"/>
                                 </connections>
                             </mapView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVR-hd-RTw">
+                                <rect key="frame" x="130" y="244" width="514" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="⬇ Receive Notifications when AQI drops to lower Level of Health Concern; trigger:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Xlg-hg-ewp">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" size="13" name=".HiraKakuInterface-W3"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAJ-ud-gke">
+                                <rect key="frame" x="975" y="246" width="29" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="000" id="b9U-WU-gQd">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w4b-8V-sd4">
+                                <rect key="frame" x="682" y="243" width="289" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <sliderCell key="cell" state="on" alignment="left" minValue="50" maxValue="400" doubleValue="50" tickMarkPosition="below" numberOfTickMarks="8" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uGQ-df-5K9"/>
+                            </slider>
                         </subviews>
                     </view>
                     <connections>
@@ -1320,7 +1342,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="376" y="959"/>
+            <point key="canvasLocation" x="376" y="1041"/>
         </scene>
     </scenes>
     <resources>
