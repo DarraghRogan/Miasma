@@ -89,12 +89,21 @@
             TelraamCheckedLabel.stringValue = "Loading (5s)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                if telraamData.features?[0].properties?.oidn == nil {
-                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
-                } else {
+                if telraamData.features?.count ?? 0 > 0 {
+                    
                     self.TelraamCheckedLabel.stringValue = String(telraamData.features?[0].properties?.oidn ?? 0)
                     self.TelraamSaveButton.isEnabled = true
+                    
+                } else {
+                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
                 }
+                
+//                if telraamData.features?[0].properties?.oidn == nil {
+//                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
+//                } else {
+//                    self.TelraamCheckedLabel.stringValue = String(telraamData.features?[0].properties?.oidn ?? 0)
+//                    self.TelraamSaveButton.isEnabled = true
+//                }
             })
             TelraamSegmentIDOutlet.layer?.borderWidth = 0.0
         } else {
@@ -331,6 +340,7 @@
         AppDelegate().defaults.set(TelraamSegmentIDOutlet.stringValue, forKey: "TelraamSegmentID")
         AppDelegate().defaults.set(true, forKey: "TelraamInUse")
         TelraamButtonOutlet.state.self = NSControl.StateValue.on
+        TelraamSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()
     }
     
     @IBOutlet weak var TelraamSaveButton: NSButton!

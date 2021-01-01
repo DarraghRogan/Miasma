@@ -768,7 +768,7 @@
                                 </textFieldCell>
                             </textField>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y8R-2h-NA4">
-                                <rect key="frame" x="405" y="471" width="134" height="81"/>
+                                <rect key="frame" x="405" y="478" width="134" height="81"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="PurpleAirWebpageSample" id="D5H-E1-FCY"/>
                                 <connections>
@@ -1008,10 +1008,6 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ouk-EH-Ag6">
-                                <rect key="frame" x="131" y="549" width="868" height="5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </box>
                             <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="Vwz-kN-nnc">
                                 <rect key="frame" x="20" y="468" width="1429" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1139,6 +1135,10 @@
                                 <rect key="frame" x="20" y="247" width="475" height="5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </box>
+                            <box verticalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="bLK-t1-TcG">
+                                <rect key="frame" x="148" y="308" width="399" height="5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rkG-ht-MDd">
                                 <rect key="frame" x="130" y="198" width="276" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1251,17 +1251,6 @@
                                 <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="ID" id="mf4-PN-FjN">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91r-e3-BDt">
-                                <rect key="frame" x="1052" y="479" width="399" height="69"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="FTg-Vb-QIZ">
-                                    <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">Please find the ID for the sensor you are interested in from the SmartCitizen website map.
-It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in.</string>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
@@ -1394,12 +1383,31 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <outlet property="delegate" destination="XfG-lQ-9wD" id="Wsq-a3-G3T"/>
                                 </connections>
                             </mapView>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="cvI-aq-gbq">
+                                <rect key="frame" x="550" y="479" width="5" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="0Ix-Pm-Gc5">
+                                <rect key="frame" x="992" y="479" width="5" height="224"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nqm-uh-k6W">
-                                <rect key="frame" x="511" y="188" width="130" height="128"/>
+                                <rect key="frame" x="501" y="196" width="168" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="aDs-2S-5Cv">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">These data sources are customised according to the location (by Latitude &amp; Longitude) recorded for the Air Quality sensor you choose.</string>
+                                    <string key="title">These data sources are customised automatically according to the location (by Latitude &amp; Longitude) recorded for the Air Quality sensor you choose.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="91r-e3-BDt">
+                                <rect key="frame" x="1025" y="479" width="399" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="FTg-Vb-QIZ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">Please find the ID for the sensor you are interested in from the SmartCitizen website map.
+It is a 4 or 5 digit number in the URL web address after clicking the sensor you are interested in.</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
