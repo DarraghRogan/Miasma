@@ -16,7 +16,8 @@
     let validityTypePurpleAir: String.ValidityType = .purpleAirID
     let validityTypeWAQI: String.ValidityType = .wAQICity
     let validityTypeSmartCitizen: String.ValidityType = .smartCitizenStationID
-
+    let validityTypeTelraam: String.ValidityType = .telraamSegmentID
+    
     
     @objc fileprivate func handleTextChangePurpleAir() {
         guard let text = PurpleAirIDField?.stringValue else { return }
@@ -81,6 +82,27 @@
         }
     }
     
+    @objc fileprivate func handleTextChangeTelraam() {
+        guard let text = TelraamSegmentIDOutlet?.stringValue else { return }
+        if text.isValid(validityTypeTelraam) {
+            DataLoaderTelraam().loadTelraamData(segmentID: TelraamSegmentIDOutlet.stringValue)
+            TelraamCheckedLabel.stringValue = "Loading (5s)"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                if telraamData.features?[0].properties?.oidn == nil {
+                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
+                } else {
+                    self.TelraamCheckedLabel.stringValue = String(telraamData.features?[0].properties?.oidn ?? 0)
+                    self.TelraamSaveButton.isEnabled = true
+                }
+            })
+            TelraamSegmentIDOutlet.layer?.borderWidth = 0.0
+        } else {
+            TelraamSegmentIDOutlet.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
+            TelraamSegmentIDOutlet.layer?.borderWidth = 2.0
+        }
+    }
+    
     
     @IBOutlet weak var MiasmaVersionLabel: NSTextField!
     
@@ -98,6 +120,12 @@
     @IBAction func WAQIMapButton(_ sender: Any) {
         NSWorkspace.shared.open(URL(string: "https://aqicn.org/city/all/")!)
     }
+    
+    @IBAction func TelraamMapButton(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://www.telraam.net/en")!)
+        
+    }
+    
     
     @IBOutlet weak var PurpleAirIDField: NSTextField!
     
@@ -267,25 +295,50 @@
     @IBOutlet weak var SmartCitizenSavedIDLabel: NSTextField!
     
     
+    
     @IBAction func TelraamButton(_ sender: Any) {
-        if TelraamButtonOutlet.state == NSControl.StateValue.off {
+        
+        
+        if TelraamSavedIDLabel.stringValue == ""{
             AppDelegate().defaults.set(false, forKey: "TelraamInUse")
-            
         }
-        if TelraamButtonOutlet.state == NSControl.StateValue.on {
-            AppDelegate().defaults.set(true, forKey: "TelraamInUse")
-            
+        else{
+            if TelraamButtonOutlet.state == NSControl.StateValue.off {
+                AppDelegate().defaults.set(false, forKey: "TelraamInUse")
+            }
+            if TelraamButtonOutlet.state == NSControl.StateValue.on {
+                AppDelegate().defaults.set(true, forKey: "TelraamInUse")
+            }
         }
     }
     
     @IBOutlet weak var TelraamButtonOutlet: NSButton!
     
     @IBAction func TelraamSegmentIDLabel(_ sender: Any) {
-        AppDelegate().defaults.set(TelraamSegmentIDOutlet.stringValue, forKey: "TelraamSegmentID")
-
+        //        AppDelegate().defaults.set(TelraamSegmentIDOutlet.stringValue, forKey: "TelraamSegmentID")
+        handleTextChangeTelraam()
     }
     
     @IBOutlet weak var TelraamSegmentIDOutlet: NSTextField!
+    
+    @IBAction func TelraamCheckButton(_ sender: Any) {
+        handleTextChangeTelraam()
+    }
+    
+    @IBOutlet weak var TelraamCheckedLabel: NSTextField!
+    
+    @IBAction func TelraamSaveButton(_ sender: Any) {
+        AppDelegate().defaults.set(TelraamSegmentIDOutlet.stringValue, forKey: "TelraamSegmentID")
+        AppDelegate().defaults.set(true, forKey: "TelraamInUse")
+        TelraamButtonOutlet.state.self = NSControl.StateValue.on
+    }
+    
+    @IBOutlet weak var TelraamSaveButton: NSButton!
+    
+    @IBOutlet weak var TelraamSavedIDLabel: NSTextField!
+    
+    
+    
     
     
     @IBAction func CO2SignalButton(_ sender: Any) {
@@ -333,25 +386,25 @@
     @IBAction func autoRunAtStartup(_ sender: Any) {
         let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
         
-//        let isAuto = (sender as AnyObject).state == .on
-//
-//        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
+        //        let isAuto = (sender as AnyObject).state == .on
+        //
+        //        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
         
         if autoRunAtStartup.state.self.rawValue == 0{
-             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
+            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
             SMLoginItemSetEnabled(launcherAppId as CFString, false)
         }
         else if autoRunAtStartup.state.self.rawValue == 1{
             AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
-                        SMLoginItemSetEnabled(launcherAppId as CFString, true)
+            SMLoginItemSetEnabled(launcherAppId as CFString, true)
         }
         
-//        if autoRunAtStartup.state == NSControl.StateValue.off {
-//            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
-//        }
-//        if autoRunAtStartup.state == NSControl.StateValue.on {
-//            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
-//        }
+        //        if autoRunAtStartup.state == NSControl.StateValue.off {
+        //            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
+        //        }
+        //        if autoRunAtStartup.state == NSControl.StateValue.on {
+        //            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
+        //        }
     }
     
     
@@ -394,9 +447,9 @@
     @IBOutlet weak var ShowAQIinMenubarButtonOutlet: NSButton!
     
     
-//    @IBOutlet var mapView: MKMapView!
-//
-//    var mapAnnotations: [MKAnnotation] = []
+    //    @IBOutlet var mapView: MKMapView!
+    //
+    //    var mapAnnotations: [MKAnnotation] = []
     
     
     
@@ -410,16 +463,16 @@
         // Do any additional setup after loading the view.
         
         
-//        self.mapAnnotations = []
-//
-//        let locationsAnnotation = LocationWAQI.loadLocationsWAQI()
-//        self.mapAnnotations.append(contentsOf: locationsAnnotation)
-//
-//
-//        self.mapView.addAnnotations(self.mapAnnotations)
-//        self.mapView.showsZoomControls = true
+        //        self.mapAnnotations = []
+        //
+        //        let locationsAnnotation = LocationWAQI.loadLocationsWAQI()
+        //        self.mapAnnotations.append(contentsOf: locationsAnnotation)
+        //
+        //
+        //        self.mapView.addAnnotations(self.mapAnnotations)
+        //        self.mapView.showsZoomControls = true
         
-                
+        
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
         autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
@@ -461,7 +514,7 @@
         
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
         
-        TelraamSegmentIDOutlet.stringValue = AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()
+        TelraamSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()
         
         if AppDelegate().defaults.integer(forKey:"WAQIInUse") == 1 {
             WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
@@ -480,79 +533,79 @@
     }
     
     
-//        @IBAction func locationChooseAction(_ targetButton: NSButton) {
-//
-//
-//            var title = mapView.selectedAnnotations[0].title
-//
-//            // directiosn from http://www.angelfire.com/space/one1/cal.html
-//            switch (title) {
-//            case _ where title == "PurpleAir":
-//                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "PurpleAirStationID")
-//                PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
-//                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//                AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
-//                AppDelegate().defaults.set(0, forKey: "WAQIInUse")
-//                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-//
-//
-//                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
-//                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
-//                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//
-//            case _ where title == "WAQI":
-//                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "WAQICity")
-//                WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
-//                AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-//                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//
-//                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-//                AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-//                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
-//                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
-//                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//
-//            case _ where title == "SmartCitizen":
-//                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "SmartCityID")
-//
-//
-//            default:
-//                AppDelegate().defaults.set("here", forKey: "WAQICity")
-//                WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
-//                AppDelegate().defaults.set(1, forKey: "WAQIInUse")
-//                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//
-//                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
-//                AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-//                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
-//                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
-//                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
-//                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)            }
-//
-//    }
+    //        @IBAction func locationChooseAction(_ targetButton: NSButton) {
+    //
+    //
+    //            var title = mapView.selectedAnnotations[0].title
+    //
+    //            // directiosn from http://www.angelfire.com/space/one1/cal.html
+    //            switch (title) {
+    //            case _ where title == "PurpleAir":
+    //                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "PurpleAirStationID")
+    //                PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
+    //                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //                AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
+    //                AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+    //                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+    //
+    //
+    //                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+    //                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+    //                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //
+    //            case _ where title == "WAQI":
+    //                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "WAQICity")
+    //                WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
+    //                AppDelegate().defaults.set(1, forKey: "WAQIInUse")
+    //                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //
+    //                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+    //                AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+    //                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+    //                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+    //                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //
+    //            case _ where title == "SmartCitizen":
+    //                AppDelegate().defaults.set(mapView.selectedAnnotations[0].subtitle, forKey: "SmartCityID")
+    //
+    //
+    //            default:
+    //                AppDelegate().defaults.set("here", forKey: "WAQICity")
+    //                WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
+    //                AppDelegate().defaults.set(1, forKey: "WAQIInUse")
+    //                WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //
+    //                PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+    //                AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+    //                AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+    //                CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+    //                AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+    //                OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)            }
+    //
+    //    }
     
  }
  
-// extension ViewController: MKMapViewDelegate {
-//
-//    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-//        var returnedAnnotationView: MKAnnotationView? = nil
-//        guard !(annotation is MKUserLocation) else {
-//            return nil
-//        }
-//        returnedAnnotationView = LocationWAQI.createViewAnnotationForMapView(self.mapView, annotation: annotation)
-//
-//        // add a detail disclosure button to the callout which will open a popover for the bridge
-//        let rightButton = NSButton(frame: NSMakeRect(0.0, 0.0, 100.0, 80.0))
-//        rightButton.title = "Choose Station"
-//        rightButton.target = self
-//        rightButton.action = #selector(self.locationChooseAction(_:))
-//        rightButton.bezelStyle = .shadowlessSquare
-//        returnedAnnotationView!.rightCalloutAccessoryView = rightButton
-//        return returnedAnnotationView
-//    }
-// }
+ // extension ViewController: MKMapViewDelegate {
+ //
+ //    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+ //        var returnedAnnotationView: MKAnnotationView? = nil
+ //        guard !(annotation is MKUserLocation) else {
+ //            return nil
+ //        }
+ //        returnedAnnotationView = LocationWAQI.createViewAnnotationForMapView(self.mapView, annotation: annotation)
+ //
+ //        // add a detail disclosure button to the callout which will open a popover for the bridge
+ //        let rightButton = NSButton(frame: NSMakeRect(0.0, 0.0, 100.0, 80.0))
+ //        rightButton.title = "Choose Station"
+ //        rightButton.target = self
+ //        rightButton.action = #selector(self.locationChooseAction(_:))
+ //        rightButton.bezelStyle = .shadowlessSquare
+ //        returnedAnnotationView!.rightCalloutAccessoryView = rightButton
+ //        return returnedAnnotationView
+ //    }
+ // }
  
  

@@ -183,7 +183,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openTelraam(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://www.telraam.net/en")!)
+        NSWorkspace.shared.open(URL(string: "https://www.telraam.net/en/location/\(AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String())")!)
     }
     
     @objc func openClimaCell(_ sender: NSMenuItem){
@@ -1397,9 +1397,9 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-//                if telraamData.type == "FeatureCollection" {
+//                if (telraamData.features?[]) != nil {
                     
-                    self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features![0].properties?.lorry ?? 0))"
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.lorry ?? 0))"
                     
                     self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
                     

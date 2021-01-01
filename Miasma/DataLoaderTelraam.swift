@@ -27,7 +27,7 @@ struct Geometry: Codable {
 }
 
 struct Properties: Codable {
-    var oidn: Int?
+    var oidn: Int? = 0
     var firstDataPackage, lastDataPackage: String?
     var speed: Int?
     var oneway: Bool?
