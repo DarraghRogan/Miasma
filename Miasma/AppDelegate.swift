@@ -88,6 +88,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(1, forKey:"OpenSkyInUse")
             defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
             defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
+            defaults.set(1, forKey:"FallingAQINotificationsWanted")
+            defaults.set(50, forKey:"FallingAQINotificationsTrigger")
             defaults.set("🟢", forKey: "PreviousStateForNotification")
         }
         
