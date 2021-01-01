@@ -1357,10 +1357,13 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tVR-hd-RTw">
                                 <rect key="frame" x="130" y="104" width="514" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="⬇ Receive Notifications when AQI drops to lower Level of Health Concern; trigger:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Xlg-hg-ewp">
+                                <buttonCell key="cell" type="check" title="⬇ Receive Notifications when AQI falls to lower Level of Health Concern; trigger:" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Xlg-hg-ewp">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
+                                    <font key="font" size="13" name=".HiraKakuInterface-W3"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="receiveFallingNotificationsButtonAction:" target="XfG-lQ-9wD" id="9TX-zo-FoY"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAJ-ud-gke">
                                 <rect key="frame" x="975" y="106" width="29" height="16"/>
@@ -1375,6 +1378,9 @@
                                 <rect key="frame" x="682" y="103" width="289" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <sliderCell key="cell" state="on" alignment="left" minValue="50" maxValue="400" doubleValue="50" tickMarkPosition="below" numberOfTickMarks="8" allowsTickMarkValuesOnly="YES" sliderType="linear" id="uGQ-df-5K9"/>
+                                <connections>
+                                    <action selector="FallingAQINotificationTriggerSliderAction:" target="XfG-lQ-9wD" id="7R0-tN-cGn"/>
+                                </connections>
                             </slider>
                             <mapView hidden="YES" fixedFrame="YES" mapType="standard" showsCompass="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42N-fV-Xpm">
                                 <rect key="frame" x="1046" y="208" width="403" height="247"/>
@@ -1419,6 +1425,8 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                         <outlet property="CO2SignalButtonOutlet" destination="y2M-5l-BYI" id="Qh2-vA-we7"/>
                         <outlet property="ClimaCellButtonOutlet" destination="rkG-ht-MDd" id="Zv7-Kz-PgQ"/>
                         <outlet property="ClimbingAQINotificationTriggerSliderOutlet" destination="8bv-io-tXn" id="Cdx-tD-Ymd"/>
+                        <outlet property="FallingAQINotificationTriggerSliderOutlet" destination="w4b-8V-sd4" id="5UF-dH-aqg"/>
+                        <outlet property="FallingAQITriggerReadoutOutlet" destination="zAJ-ud-gke" id="lsB-Cg-QfN"/>
                         <outlet property="MiasmaVersionLabel" destination="3zr-hR-aKv" id="nNv-ZG-dmB"/>
                         <outlet property="OpenSkyButtonOutlet" destination="K3l-fb-Zew" id="ahk-MA-9gw"/>
                         <outlet property="PurpleAirCheckedLabel" destination="HhU-L0-Tvd" id="bI0-mM-yMM"/>
@@ -1444,6 +1452,7 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                         <outlet property="WAQISavedIDLabel" destination="VqV-xm-FGg" id="6gc-Vs-3Ko"/>
                         <outlet property="autoRunAtStartup" destination="lwP-qa-jNJ" id="mtO-An-oat"/>
                         <outlet property="mapView" destination="42N-fV-Xpm" id="xbN-dP-v62"/>
+                        <outlet property="receiveFallingNotificationsButtonOutlet" destination="tVR-hd-RTw" id="8HM-Tu-QSY"/>
                         <outlet property="receiveNotificationsButtonOutlet" destination="g0f-Nh-1l5" id="17S-Pa-V8g"/>
                     </connections>
                 </viewController>

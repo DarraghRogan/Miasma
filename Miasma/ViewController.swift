@@ -421,6 +421,7 @@
     
     @IBOutlet weak var receiveNotificationsButtonOutlet: NSButton!
     
+    @IBOutlet weak var receiveFallingNotificationsButtonOutlet: NSButton!
     
     @IBAction func receiveNotificationsButtonAction(_ sender: Any) {
         if receiveNotificationsButtonOutlet.state == NSControl.StateValue.off {
@@ -430,6 +431,16 @@
             AppDelegate().defaults.set(1, forKey: "ClimbingAQINotificationsWanted")
         }
     }
+    
+    @IBAction func receiveFallingNotificationsButtonAction(_ sender: Any) {
+        if receiveNotificationsButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(0, forKey: "FallingAQINotificationsWanted")
+        }
+        if receiveNotificationsButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(1, forKey: "FallingAQINotificationsWanted")
+        }
+    }
+    
     
     @IBAction func ClimbingAQINotificationTriggerSliderAction(_ sender: Any) {
         
@@ -441,9 +452,22 @@
         
     }
     
+    @IBAction func FallingAQINotificationTriggerSliderAction(_ sender: Any) {
+        AppDelegate().defaults.set(ClimbingAQINotificationTriggerSliderOutlet.intValue.self, forKey: "FallingAQINotificationsTrigger")
+        AppDelegate().defaults.set(1, forKey: "FallingQINotificationsWanted")
+        receiveFallingNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        FallingAQITriggerReadoutOutlet.stringValue.self = String(FallingAQINotificationTriggerSliderOutlet.intValue.self)
+    }
+    
     @IBOutlet weak var ClimbingAQINotificationTriggerSliderOutlet: NSSlider!
     
+    @IBOutlet weak var FallingAQINotificationTriggerSliderOutlet: NSSlider!
+    
     @IBOutlet weak var CLimbingAQITriggerReadoutOutlet: NSTextField!
+    
+    @IBOutlet weak var FallingAQITriggerReadoutOutlet: NSTextField!
+    
+    
     
     @IBAction func ShowAQIinMenubarButtonAction(_ sender: Any) {
         if ShowAQIinMenubarButtonOutlet.state == NSControl.StateValue.off {
@@ -491,6 +515,13 @@
             receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
             ClimbingAQINotificationTriggerSliderOutlet.intValue.self = Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
             CLimbingAQITriggerReadoutOutlet.stringValue.self = String(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+            
+        }
+        
+        if AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1{
+            receiveFallingNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+            FallingAQINotificationTriggerSliderOutlet.intValue.self = Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+            FallingAQITriggerReadoutOutlet.stringValue.self = String(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
             
         }
         
