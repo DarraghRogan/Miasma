@@ -14,6 +14,7 @@ extension Notification.Name {
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+
     @objc func terminate() {
         NSApp.terminate(nil)
     }
@@ -24,6 +25,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let mainAppIdentifier = "Darragh-Rogan.Miasma"
         let runningApps = NSWorkspace.shared.runningApplications
         let isRunning = !runningApps.filter { $0.bundleIdentifier == mainAppIdentifier }.isEmpty
+        
+        print("got this far")
         
         if !isRunning {
             DistributedNotificationCenter.default().addObserver(self, selector: #selector(self.terminate), name: .killLauncher, object: mainAppIdentifier)
