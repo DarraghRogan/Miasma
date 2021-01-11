@@ -67,7 +67,7 @@ var telraamData = TelraamDataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://telraam-api.net/v0/segments/id/\(segmentID)")! as URL,
+            "https://telraam-api.net/v1/segments/id/\(segmentID)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         

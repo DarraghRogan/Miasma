@@ -39,7 +39,7 @@ public struct ContentView: View {
             
         }
         .overlay((CircleImage()
-                    .offset(x: 0, y: 40)), alignment: .top)
+                    .offset(x: 0, y: 0)), alignment: .center)
         .overlay((Button("🔧", action: { self.showingProfile.toggle() } )
                     .padding(EdgeInsets())
                     .offset(x: 155, y: 35)

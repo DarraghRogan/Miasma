@@ -400,11 +400,11 @@
         //
         //        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
         
-        if autoRunAtStartup.state == NSControl.StateValue.off{
+        if autoRunAtStartup.state.self == NSControl.StateValue.off{
             AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
             SMLoginItemSetEnabled(launcherAppId as CFString, false)
         }
-        else if autoRunAtStartup.state == NSControl.StateValue.on{
+        else if autoRunAtStartup.state.self == NSControl.StateValue.on{
             AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
             SMLoginItemSetEnabled(launcherAppId as CFString, true)
         }

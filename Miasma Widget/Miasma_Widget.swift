@@ -44,6 +44,7 @@ struct Miasma_WidgetEntryView : View {
 
     var body: some View {
         Text(entry.date, style: .time)
+        Text("Hello")
     }
 }
 

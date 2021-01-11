@@ -1474,7 +1474,7 @@ class menuFunctions: NSObject {
             menu.addItem(NSMenuItem.separator())
             
             let telraam = NSMenuItem(
-                title: "Road Traffic (Telraam)...",
+                title: "Road Traffic in previous full hour (daylight only) (Telraam)...",
                 action: #selector(menuFunctions.openTelraam(_:)),
                 keyEquivalent: "t"
             )
@@ -1488,11 +1488,18 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                //                if (telraamData.features?[]) != nil {
+                if telraamData.features?.count ?? 0 > 0 {
+                    
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.lorry ?? 0))"
+                    
+                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
+                    
+                } else {
+                    self.telraamRoadUsers.title = "Error. Check Telraam Connectivity"
+                    self.telraamDataTime.title = "Error. Check Telraam Connectivity"
+                }
                 
-                self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.lorry ?? 0))"
-                
-                self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
+
                 
                 //                }
             })
