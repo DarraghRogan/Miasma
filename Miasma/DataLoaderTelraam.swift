@@ -24,38 +24,37 @@ struct TelraamDataStructure: Codable {
 // MARK: - Feature
 struct Feature: Codable {
     var type: String?
-    var geometry: Geometry?
+//    var geometry: Geometry?
     var properties: Properties?
 }
 
 // MARK: - Geometry
-struct Geometry: Codable {
-    var type: String?
-    var coordinates: [[[Double]]]?
-}
+//struct Geometry: Codable {
+//    var type: String?
+//    var coordinates: [[[Double]]]?
+//}
 
 // MARK: - Properties
 struct Properties: Codable {
-    var oidn: Int? = 0
+    var oidn: Int?
     var firstDataPackage, lastDataPackage: String?
-    var speed: Int?
-    var oneway: Bool?
-    var roadType, roadSpeed: String?
-    var pedestrian, bike, car: Double?
-    var lorry: Int?
-    var speedHistogram: [Double]?
-    var speedBuckets: [Int]?
+//    var speed: Int?
+//    var oneway: Bool?
+//    var roadType, roadSpeed: String?
+    var pedestrian, bike, car, lorry: Double?
+//    var speedHistogram: [Double]?
+//    var speedBuckets: [Int]?
 
     enum CodingKeys: String, CodingKey {
         case oidn
         case firstDataPackage = "first_data_package"
         case lastDataPackage = "last_data_package"
-        case speed, oneway
-        case roadType = "road_type"
-        case roadSpeed = "road_speed"
+//        case speed, oneway
+//        case roadType = "road_type"
+//        case roadSpeed = "road_speed"
         case pedestrian, bike, car, lorry
-        case speedHistogram = "speed_histogram"
-        case speedBuckets = "speed_buckets"
+//        case speedHistogram = "speed_histogram"
+//        case speedBuckets = "speed_buckets"
     }
 }
 
@@ -90,13 +89,13 @@ var telraamData = TelraamDataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print("Received from the Telraam API")
-                if let data = data,
-                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                    print(urlContent)
-                } else {
-                    print("error with printing string encoded data")
-                }
+//                print("Received from the Telraam API")
+//                if let data = data,
+//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {

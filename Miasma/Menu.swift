@@ -1490,9 +1490,11 @@ class menuFunctions: NSObject {
                 
                 if telraamData.features?.count ?? 0 > 0 {
                     
-                    self.telraamRoadUsers.title = "📊: 🚶: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.pedestrian ?? 0)), 🚲: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.bike ?? 0)), 🚗: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.car ?? 0)), 🚚: \(String(format: "%U", locale: Locale.current, telraamData.features?[0].properties?.lorry ?? 0))"
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.features?[0].properties?.pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.features?[0].properties?.bike ?? 0)))), 🚗: \(String(Int(round(telraamData.features?[0].properties?.car ?? 0)))), 🚚: \(String(Int(round(telraamData.features?[0].properties?.lorry ?? 0))))"
                     
                     self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
+                    
+//                    print(telraamData.features?[0].properties?.car)
                     
                 } else {
                     self.telraamRoadUsers.title = "Error. Check Telraam Connectivity"
