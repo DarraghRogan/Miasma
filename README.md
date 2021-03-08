@@ -1,7 +1,10 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
 
-Miasma is an open source lightweight menu bar app for macOS & lightweight app for iOS that shows publicly available air quality data for your locality.
-You can click the app if you want to see pertinent metrics, and on macOS the menu bar icon changes colour to match current PM₂.₅ conditions. The app updates its metrics every 10 minutes when you are online. Data sourced from PurpleAir, WAQI/AQICN, SmartCitizen, CO2 Signal by TomorrowCo, OpenSky & ClimaCell.
+Miasma is an open source lightweight menu bar app for macOS & lightweight app for iOS that shows publicly available air quality data & potential pollution sources for your locality.
+You can click the app if you want to see pertinent metrics, and on macOS the menu bar icon changes colour to match current PM₂.₅ conditions. 
+The app updates its metrics every 20 minutes when you are online. 
+The intention is that the user, by becoming periodically familar with how the data changes will become to see how different pollution sources interplay (weather, traffic, electrical generation, air quality etc.) - the user is the big data processor!
+Data sourced from PurpleAir, WAQI/AQICN, SmartCitizen, CO2 Signal by TomorrowCo, OpenSky, ClimaCell & Telraam.
 
 ### Download
 <a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
@@ -25,13 +28,11 @@ Miasma is an obselete medical theory that bad vapours in the air caused sickness
 
 ### Roadmap
 #### Info
-- Add road traffic data
-- Try include global CO2 targets
+- Create a screensaver
+- Bring all fuctionality to iOS app
 
 #### Platform
 - Widget for Mac OS
-- Compile for Apple Silicon
-- Create for iOS
 - Expand to Android & Windows
 
 ### Privacy Policy
