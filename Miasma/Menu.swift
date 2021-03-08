@@ -645,7 +645,7 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-                    var windDirection = climaCellData.data?.timelines?[0].intervals?[0].values?.windDirection ?? 0
+                    var windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     let windDirection_acronymn: String
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
                     switch (windDirection) {
@@ -669,7 +669,7 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0
+                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius * 9 / 5) + 32
@@ -677,11 +677,11 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[0].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*2.23694))mph"
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[0].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[0].values?.epaPrimaryPollutant ?? 0)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.weedIndex ?? 0))"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                 })
             }
@@ -1007,7 +1007,7 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-                    var windDirection = climaCellData.data?.timelines?[0].intervals?[0].values?.windDirection ?? 0
+                    var windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     let windDirection_acronymn: String
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
                     switch (windDirection) {
@@ -1031,7 +1031,7 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0
+                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius * 9 / 5) + 32
@@ -1039,11 +1039,11 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[0].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*2.23694))mph"
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[0].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[0].values?.epaPrimaryPollutant ?? 0)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.weedIndex ?? 0))"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                 })
                 
@@ -1426,7 +1426,7 @@ class menuFunctions: NSObject {
             if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
                     
-                    var windDirection = climaCellData.data?.timelines?[0].intervals?[0].values?.windDirection ?? 0
+                    var windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     let windDirection_acronymn: String
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
                     switch (windDirection) {
@@ -1450,7 +1450,7 @@ class menuFunctions: NSObject {
                         windDirection_acronymn = ""
                     }
                     
-                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0
+                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius * 9 / 5) + 32
@@ -1458,11 +1458,11 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[0].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[0].values?.windSpeed ?? 0)*2.23694))mph"
+                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[0].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[0].values?.epaPrimaryPollutant ?? 0)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[0].values?.weedIndex ?? 0))"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                 })
                 

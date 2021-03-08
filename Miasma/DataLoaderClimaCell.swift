@@ -22,20 +22,20 @@ struct DataClass: Codable {
 
 // MARK: - Timeline
 struct Timeline: Codable {
-    var timestep: String?
-    var startTime, endTime: Date?
+//    var timestep: String?
+//    var startTime, endTime: Date?
     var intervals: [Interval]?
 }
 
 // MARK: - Interval
 struct Interval: Codable {
-    var startTime: Date?
+//    var startTime: Date?
     var values: Values?
 }
 
 // MARK: - Values
 struct Values: Codable {
-    var treeIndex, grassIndex, weedIndex: Int?
+    var treeIndex, grassIndex, weedIndex: Double?
     var temperatureApparent: Double?
     var weatherCode: Int?
     var windDirection, windSpeed: Double?
