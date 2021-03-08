@@ -677,11 +677,90 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    let ClimaCellWeatherCode = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    var ClimaCellWeatherCodeText: String
+                    switch ClimaCellWeatherCode {
+                    case _ where ClimaCellWeatherCode == 1000:
+                        ClimaCellWeatherCodeText = "Clear"
+                    case _ where ClimaCellWeatherCode == 1001:
+                        ClimaCellWeatherCodeText = "Cloudy"
+                    case _ where ClimaCellWeatherCode == 1100:
+                        ClimaCellWeatherCodeText = "Mostly Clear"
+                    case _ where ClimaCellWeatherCode == 1101:
+                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                    case _ where ClimaCellWeatherCode == 1102:
+                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                    case _ where ClimaCellWeatherCode == 2000:
+                        ClimaCellWeatherCodeText = "Fog"
+                    case _ where ClimaCellWeatherCode == 2100:
+                        ClimaCellWeatherCodeText = "Light Fog"
+                    case _ where ClimaCellWeatherCode == 3000:
+                        ClimaCellWeatherCodeText = "Light Wind"
+                    case _ where ClimaCellWeatherCode == 3001:
+                        ClimaCellWeatherCodeText = "Wind"
+                    case _ where ClimaCellWeatherCode == 3002:
+                        ClimaCellWeatherCodeText = "Strong Wind"
+                    case _ where ClimaCellWeatherCode == 4000:
+                        ClimaCellWeatherCodeText = "Drizzle"
+                    case _ where ClimaCellWeatherCode == 4001:
+                        ClimaCellWeatherCodeText = "Rain"
+                    case _ where ClimaCellWeatherCode == 4200:
+                        ClimaCellWeatherCodeText = "Light Rain"
+                    case _ where ClimaCellWeatherCode == 4201:
+                        ClimaCellWeatherCodeText = "Heavy Rain"
+                    case _ where ClimaCellWeatherCode == 5000:
+                        ClimaCellWeatherCodeText = "Snow"
+                    case _ where ClimaCellWeatherCode == 5001:
+                        ClimaCellWeatherCodeText = "Flurries"
+                    case _ where ClimaCellWeatherCode == 5100:
+                        ClimaCellWeatherCodeText = "Light Snow"
+                    case _ where ClimaCellWeatherCode == 5101:
+                        ClimaCellWeatherCodeText = "Heavy Snow"
+                    case _ where ClimaCellWeatherCode == 6000:
+                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                    case _ where ClimaCellWeatherCode == 6001:
+                        ClimaCellWeatherCodeText = "Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6200:
+                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6201:
+                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 7000:
+                        ClimaCellWeatherCodeText = "Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7101:
+                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7102:
+                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 8000:
+                        ClimaCellWeatherCodeText = "Thunderstorm"
+                    default:
+                        ClimaCellWeatherCodeText = "Unknown"
+                    }
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
+                    let ClimaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
+                    var ClimaCellPrimaryPollutantText: String
+                    switch ClimaCellPrimaryPollutant {
+                    case _ where ClimaCellPrimaryPollutant == 0:
+                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                    case _ where ClimaCellWeatherCode == 1:
+                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                    case _ where ClimaCellWeatherCode == 2:
+                        ClimaCellPrimaryPollutantText = "O₃"
+                    case _ where ClimaCellWeatherCode == 3:
+                        ClimaCellPrimaryPollutantText = "NO₂"
+                    case _ where ClimaCellWeatherCode == 4:
+                        ClimaCellPrimaryPollutantText = "CO"
+                    case _ where ClimaCellWeatherCode == 5:
+                        ClimaCellPrimaryPollutantText = "SO₂"
+                    default:
+                        ClimaCellPrimaryPollutantText = "Unknown"
+                    }
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
                     
                 })
             }
@@ -1039,11 +1118,90 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    let ClimaCellWeatherCode = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    var ClimaCellWeatherCodeText: String
+                    switch ClimaCellWeatherCode {
+                    case _ where ClimaCellWeatherCode == 1000:
+                        ClimaCellWeatherCodeText = "Clear"
+                    case _ where ClimaCellWeatherCode == 1001:
+                        ClimaCellWeatherCodeText = "Cloudy"
+                    case _ where ClimaCellWeatherCode == 1100:
+                        ClimaCellWeatherCodeText = "Mostly Clear"
+                    case _ where ClimaCellWeatherCode == 1101:
+                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                    case _ where ClimaCellWeatherCode == 1102:
+                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                    case _ where ClimaCellWeatherCode == 2000:
+                        ClimaCellWeatherCodeText = "Fog"
+                    case _ where ClimaCellWeatherCode == 2100:
+                        ClimaCellWeatherCodeText = "Light Fog"
+                    case _ where ClimaCellWeatherCode == 3000:
+                        ClimaCellWeatherCodeText = "Light Wind"
+                    case _ where ClimaCellWeatherCode == 3001:
+                        ClimaCellWeatherCodeText = "Wind"
+                    case _ where ClimaCellWeatherCode == 3002:
+                        ClimaCellWeatherCodeText = "Strong Wind"
+                    case _ where ClimaCellWeatherCode == 4000:
+                        ClimaCellWeatherCodeText = "Drizzle"
+                    case _ where ClimaCellWeatherCode == 4001:
+                        ClimaCellWeatherCodeText = "Rain"
+                    case _ where ClimaCellWeatherCode == 4200:
+                        ClimaCellWeatherCodeText = "Light Rain"
+                    case _ where ClimaCellWeatherCode == 4201:
+                        ClimaCellWeatherCodeText = "Heavy Rain"
+                    case _ where ClimaCellWeatherCode == 5000:
+                        ClimaCellWeatherCodeText = "Snow"
+                    case _ where ClimaCellWeatherCode == 5001:
+                        ClimaCellWeatherCodeText = "Flurries"
+                    case _ where ClimaCellWeatherCode == 5100:
+                        ClimaCellWeatherCodeText = "Light Snow"
+                    case _ where ClimaCellWeatherCode == 5101:
+                        ClimaCellWeatherCodeText = "Heavy Snow"
+                    case _ where ClimaCellWeatherCode == 6000:
+                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                    case _ where ClimaCellWeatherCode == 6001:
+                        ClimaCellWeatherCodeText = "Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6200:
+                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6201:
+                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 7000:
+                        ClimaCellWeatherCodeText = "Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7101:
+                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7102:
+                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 8000:
+                        ClimaCellWeatherCodeText = "Thunderstorm"
+                    default:
+                        ClimaCellWeatherCodeText = "Unknown"
+                    }
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
+                    let ClimaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
+                    var ClimaCellPrimaryPollutantText: String
+                    switch ClimaCellPrimaryPollutant {
+                    case _ where ClimaCellPrimaryPollutant == 0:
+                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                    case _ where ClimaCellWeatherCode == 1:
+                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                    case _ where ClimaCellWeatherCode == 2:
+                        ClimaCellPrimaryPollutantText = "O₃"
+                    case _ where ClimaCellWeatherCode == 3:
+                        ClimaCellPrimaryPollutantText = "NO₂"
+                    case _ where ClimaCellWeatherCode == 4:
+                        ClimaCellPrimaryPollutantText = "CO"
+                    case _ where ClimaCellWeatherCode == 5:
+                        ClimaCellPrimaryPollutantText = "SO₂"
+                    default:
+                        ClimaCellPrimaryPollutantText = "Unknown"
+                    }
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
                     
                 })
                 
@@ -1458,11 +1616,90 @@ class menuFunctions: NSObject {
                         return fahrenheitRoundedString
                     }
                     
-                    self.climaCellWeather.title = "🌦: Will be \(climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    let ClimaCellWeatherCode = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    var ClimaCellWeatherCodeText: String
+                    switch ClimaCellWeatherCode {
+                    case _ where ClimaCellWeatherCode == 1000:
+                        ClimaCellWeatherCodeText = "Clear"
+                    case _ where ClimaCellWeatherCode == 1001:
+                        ClimaCellWeatherCodeText = "Cloudy"
+                    case _ where ClimaCellWeatherCode == 1100:
+                        ClimaCellWeatherCodeText = "Mostly Clear"
+                    case _ where ClimaCellWeatherCode == 1101:
+                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                    case _ where ClimaCellWeatherCode == 1102:
+                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                    case _ where ClimaCellWeatherCode == 2000:
+                        ClimaCellWeatherCodeText = "Fog"
+                    case _ where ClimaCellWeatherCode == 2100:
+                        ClimaCellWeatherCodeText = "Light Fog"
+                    case _ where ClimaCellWeatherCode == 3000:
+                        ClimaCellWeatherCodeText = "Light Wind"
+                    case _ where ClimaCellWeatherCode == 3001:
+                        ClimaCellWeatherCodeText = "Wind"
+                    case _ where ClimaCellWeatherCode == 3002:
+                        ClimaCellWeatherCodeText = "Strong Wind"
+                    case _ where ClimaCellWeatherCode == 4000:
+                        ClimaCellWeatherCodeText = "Drizzle"
+                    case _ where ClimaCellWeatherCode == 4001:
+                        ClimaCellWeatherCodeText = "Rain"
+                    case _ where ClimaCellWeatherCode == 4200:
+                        ClimaCellWeatherCodeText = "Light Rain"
+                    case _ where ClimaCellWeatherCode == 4201:
+                        ClimaCellWeatherCodeText = "Heavy Rain"
+                    case _ where ClimaCellWeatherCode == 5000:
+                        ClimaCellWeatherCodeText = "Snow"
+                    case _ where ClimaCellWeatherCode == 5001:
+                        ClimaCellWeatherCodeText = "Flurries"
+                    case _ where ClimaCellWeatherCode == 5100:
+                        ClimaCellWeatherCodeText = "Light Snow"
+                    case _ where ClimaCellWeatherCode == 5101:
+                        ClimaCellWeatherCodeText = "Heavy Snow"
+                    case _ where ClimaCellWeatherCode == 6000:
+                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                    case _ where ClimaCellWeatherCode == 6001:
+                        ClimaCellWeatherCodeText = "Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6200:
+                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6201:
+                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 7000:
+                        ClimaCellWeatherCodeText = "Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7101:
+                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7102:
+                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 8000:
+                        ClimaCellWeatherCodeText = "Thunderstorm"
+                    default:
+                        ClimaCellWeatherCodeText = "Unknown"
+                    }
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of: \(climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0)"
+                    let ClimaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
+                    var ClimaCellPrimaryPollutantText: String
+                    switch ClimaCellPrimaryPollutant {
+                    case _ where ClimaCellPrimaryPollutant == 0:
+                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                    case _ where ClimaCellWeatherCode == 1:
+                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                    case _ where ClimaCellWeatherCode == 2:
+                        ClimaCellPrimaryPollutantText = "O₃"
+                    case _ where ClimaCellWeatherCode == 3:
+                        ClimaCellPrimaryPollutantText = "NO₂"
+                    case _ where ClimaCellWeatherCode == 4:
+                        ClimaCellPrimaryPollutantText = "CO"
+                    case _ where ClimaCellWeatherCode == 5:
+                        ClimaCellPrimaryPollutantText = "SO₂"
+                    default:
+                        ClimaCellPrimaryPollutantText = "Unknown"
+                    }
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
                     
                 })
                 
@@ -1494,14 +1731,14 @@ class menuFunctions: NSObject {
                     
                     self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
                     
-//                    print(telraamData.features?[0].properties?.car)
+                    //                    print(telraamData.features?[0].properties?.car)
                     
                 } else {
                     self.telraamRoadUsers.title = "Error. Check Telraam Connectivity"
                     self.telraamDataTime.title = "Error. Check Telraam Connectivity"
                 }
                 
-
+                
                 
                 //                }
             })
