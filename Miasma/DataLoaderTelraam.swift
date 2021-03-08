@@ -70,7 +70,7 @@ var telraamData = TelraamDataStructure()
         
         let headers = [
             "Accept": "application/json",
-//            "auth-token": "\(APIKeyTelraam)"
+            "X-Api-Key": "\(APIKeyTelraam)"
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:

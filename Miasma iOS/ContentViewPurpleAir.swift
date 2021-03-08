@@ -89,6 +89,8 @@ public struct ContentViewPurpleAir: View {
                                 Text("US EPA AQI PM₂.₅ is \(aQI_CalculatedRounded)   \(pM2_5ColourButton)")
                                     .font(.footnote)
                                     .padding(.top, 5.0)
+                                ProgressView("AQI", value: 100, total: 500)
+
                             }
                             
                             HStack {
