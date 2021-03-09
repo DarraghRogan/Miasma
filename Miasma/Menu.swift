@@ -160,6 +160,10 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
     }()
     
+    var climaCellSolarGHI : NSMenuItem = {
+        return NSMenuItem(title: "☀️: ", action: nil, keyEquivalent: "")
+    }()
+    
     
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
@@ -334,6 +338,8 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellWeather)
                 menu.addItem(climaCellAirQuality)
                 menu.addItem(climaCellPollen)
+                menu.addItem(climaCellSolarGHI)
+
             }
             
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
@@ -756,11 +762,43 @@ class menuFunctions: NSObject {
                     }
                     
                     
+                    var solarGHI = climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0
+                    let solarGHI_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (solarGHI) {
+                    case _ where solarGHI > 0 && solarGHI < 100:
+                        solarGHI_visual = "[☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 100 && solarGHI < 200:
+                        solarGHI_visual = "[☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 200 && solarGHI < 300:
+                        solarGHI_visual = "[☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 300 && solarGHI < 400:
+                        solarGHI_visual = "[☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 400 && solarGHI < 500:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 500 && solarGHI < 600:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 600 && solarGHI < 700:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚]"
+                    case _ where solarGHI > 700 && solarGHI < 800:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚]"
+                    case _ where solarGHI > 800 && solarGHI < 900:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚]"
+                    case _ where solarGHI > 900 && solarGHI < 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚]"
+                    case _ where solarGHI > 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️]"
+                    default:
+                        solarGHI_visual = "[🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    }
+                    
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+
+                    self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)  \(solarGHI_visual)"
                     
                 })
             }
@@ -834,6 +872,8 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellWeather)
                 menu.addItem(climaCellAirQuality)
                 menu.addItem(climaCellPollen)
+                menu.addItem(climaCellSolarGHI)
+
             }
             
             DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
@@ -1197,11 +1237,43 @@ class menuFunctions: NSObject {
                     }
                     
                     
+                    var solarGHI = climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0
+                    let solarGHI_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (solarGHI) {
+                    case _ where solarGHI > 0 && solarGHI < 100:
+                        solarGHI_visual = "[☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 100 && solarGHI < 200:
+                        solarGHI_visual = "[☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 200 && solarGHI < 300:
+                        solarGHI_visual = "[☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 300 && solarGHI < 400:
+                        solarGHI_visual = "[☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 400 && solarGHI < 500:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 500 && solarGHI < 600:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 600 && solarGHI < 700:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚]"
+                    case _ where solarGHI > 700 && solarGHI < 800:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚]"
+                    case _ where solarGHI > 800 && solarGHI < 900:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚]"
+                    case _ where solarGHI > 900 && solarGHI < 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚]"
+                    case _ where solarGHI > 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️]"
+                    default:
+                        solarGHI_visual = "[🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    }
+                    
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+
+                    self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
                 })
                 
@@ -1277,6 +1349,7 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellWeather)
                 menu.addItem(climaCellAirQuality)
                 menu.addItem(climaCellPollen)
+                menu.addItem(climaCellSolarGHI)
             }
             
             DataLoaderSmartCitizen().loadSmartCitizenData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
@@ -1497,7 +1570,7 @@ class menuFunctions: NSObject {
                     
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
-                    ze
+                    
                     self.smartCitizenTemperature.title = "🌡: \(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃"
                     
                     self.smartCitizenHumidity.title = "💧: \(String(smartCitizenData.data?.sensors?[9].value ?? 0))%"
@@ -1694,12 +1767,43 @@ class menuFunctions: NSObject {
                         ClimaCellPrimaryPollutantText = "Unknown"
                     }
                     
+                    var solarGHI = climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0
+                    let solarGHI_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (solarGHI) {
+                    case _ where solarGHI > 0 && solarGHI < 100:
+                        solarGHI_visual = "[☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 100 && solarGHI < 200:
+                        solarGHI_visual = "[☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 200 && solarGHI < 300:
+                        solarGHI_visual = "[☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 300 && solarGHI < 400:
+                        solarGHI_visual = "[☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 400 && solarGHI < 500:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 500 && solarGHI < 600:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 600 && solarGHI < 700:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚]"
+                    case _ where solarGHI > 700 && solarGHI < 800:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚]"
+                    case _ where solarGHI > 800 && solarGHI < 900:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚]"
+                    case _ where solarGHI > 900 && solarGHI < 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚]"
+                    case _ where solarGHI > 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️]"
+                    default:
+                        solarGHI_visual = "[🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    }
                     
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+
+                    self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
                 })
                 
