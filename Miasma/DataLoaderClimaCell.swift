@@ -22,14 +22,14 @@ struct DataClass: Codable {
 
 // MARK: - Timeline
 struct Timeline: Codable {
-//    var timestep: String?
-//    var startTime, endTime: Date?
+    //    var timestep: String?
+    //    var startTime, endTime: Date?
     var intervals: [Interval]?
 }
 
 // MARK: - Interval
 struct Interval: Codable {
-//    var startTime: Date?
+    //    var startTime: Date?
     var values: Values?
 }
 
@@ -40,6 +40,7 @@ struct Values: Codable {
     var weatherCode: Int?
     var windDirection, windSpeed: Double?
     var epaIndex, epaPrimaryPollutant: Int?
+    var solarGHI: Double?
 }
 
 
@@ -60,7 +61,7 @@ public class DataLoaderClimaCell {
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://data.climacell.co/v4/timelines?location=\(lat),\(lon)&fields=treeIndex,grassIndex,weedIndex,temperatureApparent,weatherCode,windDirection,windSpeed,epaIndex,epaPrimaryPollutant&apikey=\(APIKeyClimaCellV4)")! as URL,
+                                                        "https://data.climacell.co/v4/timelines?location=\(lat),\(lon)&fields=treeIndex,grassIndex,weedIndex,temperatureApparent,weatherCode,windDirection,windSpeed,epaIndex,epaPrimaryPollutant,solarGHI&apikey=\(APIKeyClimaCellV4)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         
@@ -78,7 +79,7 @@ public class DataLoaderClimaCell {
                 let httpResponse = response as? HTTPURLResponse
                 print("Received from the ClimaCell API")
                 if let data = data,
-                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
                     print(urlContent)
                 } else {
                     print("error with printing string encoded data")

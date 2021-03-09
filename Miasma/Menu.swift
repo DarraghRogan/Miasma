@@ -741,15 +741,15 @@ class menuFunctions: NSObject {
                     switch ClimaCellPrimaryPollutant {
                     case _ where ClimaCellPrimaryPollutant == 0:
                         ClimaCellPrimaryPollutantText = "PM₂.₅"
-                    case _ where ClimaCellWeatherCode == 1:
+                    case _ where ClimaCellPrimaryPollutant == 1:
                         ClimaCellPrimaryPollutantText = "PM₁₀"
-                    case _ where ClimaCellWeatherCode == 2:
+                    case _ where ClimaCellPrimaryPollutant == 2:
                         ClimaCellPrimaryPollutantText = "O₃"
-                    case _ where ClimaCellWeatherCode == 3:
+                    case _ where ClimaCellPrimaryPollutant == 3:
                         ClimaCellPrimaryPollutantText = "NO₂"
-                    case _ where ClimaCellWeatherCode == 4:
+                    case _ where ClimaCellPrimaryPollutant == 4:
                         ClimaCellPrimaryPollutantText = "CO"
-                    case _ where ClimaCellWeatherCode == 5:
+                    case _ where ClimaCellPrimaryPollutant == 5:
                         ClimaCellPrimaryPollutantText = "SO₂"
                     default:
                         ClimaCellPrimaryPollutantText = "Unknown"
@@ -1182,15 +1182,15 @@ class menuFunctions: NSObject {
                     switch ClimaCellPrimaryPollutant {
                     case _ where ClimaCellPrimaryPollutant == 0:
                         ClimaCellPrimaryPollutantText = "PM₂.₅"
-                    case _ where ClimaCellWeatherCode == 1:
+                    case _ where ClimaCellPrimaryPollutant == 1:
                         ClimaCellPrimaryPollutantText = "PM₁₀"
-                    case _ where ClimaCellWeatherCode == 2:
+                    case _ where ClimaCellPrimaryPollutant == 2:
                         ClimaCellPrimaryPollutantText = "O₃"
-                    case _ where ClimaCellWeatherCode == 3:
+                    case _ where ClimaCellPrimaryPollutant == 3:
                         ClimaCellPrimaryPollutantText = "NO₂"
-                    case _ where ClimaCellWeatherCode == 4:
+                    case _ where ClimaCellPrimaryPollutant == 4:
                         ClimaCellPrimaryPollutantText = "CO"
-                    case _ where ClimaCellWeatherCode == 5:
+                    case _ where ClimaCellPrimaryPollutant == 5:
                         ClimaCellPrimaryPollutantText = "SO₂"
                     default:
                         ClimaCellPrimaryPollutantText = "Unknown"
@@ -1496,7 +1496,7 @@ class menuFunctions: NSObject {
                     self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
                     
-                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO2 \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
+                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
                     
                     self.smartCitizenTemperature.title = "🌡: \(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃"
                     
@@ -1680,15 +1680,15 @@ class menuFunctions: NSObject {
                     switch ClimaCellPrimaryPollutant {
                     case _ where ClimaCellPrimaryPollutant == 0:
                         ClimaCellPrimaryPollutantText = "PM₂.₅"
-                    case _ where ClimaCellWeatherCode == 1:
+                    case _ where ClimaCellPrimaryPollutant == 1:
                         ClimaCellPrimaryPollutantText = "PM₁₀"
-                    case _ where ClimaCellWeatherCode == 2:
+                    case _ where ClimaCellPrimaryPollutant == 2:
                         ClimaCellPrimaryPollutantText = "O₃"
-                    case _ where ClimaCellWeatherCode == 3:
+                    case _ where ClimaCellPrimaryPollutant == 3:
                         ClimaCellPrimaryPollutantText = "NO₂"
-                    case _ where ClimaCellWeatherCode == 4:
+                    case _ where ClimaCellPrimaryPollutant == 4:
                         ClimaCellPrimaryPollutantText = "CO"
-                    case _ where ClimaCellWeatherCode == 5:
+                    case _ where ClimaCellPrimaryPollutant == 5:
                         ClimaCellPrimaryPollutantText = "SO₂"
                     default:
                         ClimaCellPrimaryPollutantText = "Unknown"
