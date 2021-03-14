@@ -191,7 +191,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openClimaCell(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://www.climacell.co/consumer-app/")!)
+        NSWorkspace.shared.open(URL(string: "https://www.climacell.co/weather/")!)
     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -328,7 +328,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let OpenClimaCell = NSMenuItem(
-                    title: "1 Hour Forecast (ClimaCell Nearcast)...",
+                    title: "1 Hour Forecast (ClimaCell Timeline)...",
                     action: #selector(menuFunctions.openClimaCell(_:)),
                     keyEquivalent: "c"
                 )
@@ -636,7 +636,7 @@ class menuFunctions: NSObject {
                         fossilFuelPercentage_visual = ""
                     }
                     
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
                     
                     
                 })
@@ -862,7 +862,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let OpenClimaCell = NSMenuItem(
-                    title: "1 Hour Forecast (ClimaCell Nearcast)...",
+                    title: "1 Hour Forecast (ClimaCell Timeline)...",
                     action: #selector(menuFunctions.openClimaCell(_:)),
                     keyEquivalent: "c"
                 )
@@ -1112,7 +1112,7 @@ class menuFunctions: NSObject {
                         fossilFuelPercentage_visual = ""
                     }
                     
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
                     
                 })
             }
@@ -1339,7 +1339,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let OpenClimaCell = NSMenuItem(
-                    title: "1 Hour Forecast (ClimaCell Nearcast)...",
+                    title: "1 Hour Forecast (ClimaCell Timeline)...",
                     action: #selector(menuFunctions.openClimaCell(_:)),
                     keyEquivalent: "c"
                 )
@@ -1643,7 +1643,7 @@ class menuFunctions: NSObject {
                         fossilFuelPercentage_visual = ""
                     }
                     
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix: \(fossilFuelPercentage_visual)"
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
                     
                 })
             }
