@@ -24,7 +24,7 @@ extension String {
     }
     
     enum Regex: String {
-        case purpleAirID = "[0-9]{4,5}"
+        case purpleAirID = "[0-9]{4,6}"
         case smartCitizenStationID = "[0-9]{3,5}"
         case telraamSegmentID = "[0-9]{5,10}"
         case wAQICity = "^[a-zA-Z]*$"
