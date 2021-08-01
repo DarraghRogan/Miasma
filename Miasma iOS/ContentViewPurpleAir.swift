@@ -130,12 +130,12 @@ public struct ContentViewPurpleAir: View {
                     HStack {
                         ProgressView("🌡 \(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉", value: ((Float16(purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8)), total: 100)
                             .accentColor(.purple)
-
+                        
                         Spacer()
                         ProgressView("💧 \((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)% ʀᴇʟ. ʜᴜᴍ.", value: Float16(purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4, total: 100)
                             .padding(.bottom, 2.0)
                             .accentColor(.purple)
-
+                            
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -180,20 +180,20 @@ public struct ContentViewPurpleAir: View {
                         
                         
                         HStack {
-                            ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
+                            ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴏ₂ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .onAppear() {
                                     self.updateListEntry()
                                 }
                         }
-
+                        
                         HStack {
                             Spacer()
                             Text("(CO₂ Signal) ⇀")
                                 .font(.footnote)
                                 .padding(.bottom, 5.0)
-
+                            
                         }
                         
                     }
@@ -202,10 +202,10 @@ public struct ContentViewPurpleAir: View {
                 }
                 
                 
-                
-                HStack{
-                    if ProfileEditor().AircraftDataWanted == true
-                    {
+                if ProfileEditor().AircraftDataWanted == true
+                {
+                    VStack{
+                        
                         
                         VStack{
                             if ProgressIndicatorShown == true{
@@ -225,56 +225,7 @@ public struct ContentViewPurpleAir: View {
                                     .onAppear() {
                                         self.updateListEntry()
                                     }
-                    
-                            }
-                        }
-                        //                            .background(Color.gray.opacity(0.5))
-                        .ignoresSafeArea()
-                        
-                    }
-                    
-                    
-                    
-                    if ProfileEditor().OneHourForecastDataWanted == true
-                    {
-                        VStack{
-                            if ProgressIndicatorShown == true{
-                                ProgressView()
-                            }
-                            Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                                 destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
-                                .padding(.top, 8.0)
-                                .font(.headline)
-                            
-                            HStack {
-                                Text("🌦")
-                                Spacer()
-                                Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
-                            }
-                            HStack {
-                                Text("☁️")
-                                Spacer()
-                                Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
-                            }
-                            HStack {
-                                Text("🌳")
-                                Spacer()
-                                Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
+                                
                             }
                         }
                         //                            .background(Color.gray.opacity(0.5))
@@ -282,6 +233,56 @@ public struct ContentViewPurpleAir: View {
                         
                     }
                 }
+                
+                
+                
+                if ProfileEditor().OneHourForecastDataWanted == true
+                {
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
+                             destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
+                            .padding(.top, 8.0)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("🌦")
+                            Spacer()
+                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("☁️")
+                            Spacer()
+                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("🌳")
+                            Spacer()
+                            Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                    }
+                    //                            .background(Color.gray.opacity(0.5))
+                    .ignoresSafeArea()
+                    
+                }
+                
                 //                    .frame(alignment: .bottom)
                 //                    .opacity(0.7)
                 Button("🔄", action: {
@@ -539,4 +540,5 @@ public struct ContentViewPurpleAir: View {
             }
         }
     }
+    
 }
