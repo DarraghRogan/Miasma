@@ -53,6 +53,38 @@ public struct ContentViewPurpleAir: View {
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
     
+    // Defining the Progress Bar Styles
+    struct aQIProgressBarStyle: ProgressViewStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            
+            if let fractionCompleted = configuration.fractionCompleted{
+                switch fractionCompleted {
+                case 0..<0.1:
+                    ProgressView(configuration)
+                        .accentColor(.green)
+                case 0.1..<0.2:
+                    ProgressView(configuration)
+                        .accentColor(.yellow)
+                case 0.2..<0.3:
+                    ProgressView(configuration)
+                        .accentColor(.orange)
+                case 0.3..<0.4:
+                    ProgressView(configuration)
+                        .accentColor(.red)
+                case 0.4..<0.6:
+                    ProgressView(configuration)
+                        .accentColor(.purple)
+                case 0.6..<1:
+                    ProgressView(configuration)
+                        .accentColor(.black)
+                default:
+                    ProgressView(configuration)
+                        .accentColor(.gray)
+                }
+            }
+        }
+    }
+    
     
     public var body: some View {
         
@@ -68,7 +100,7 @@ public struct ContentViewPurpleAir: View {
         {
             
             MapView(coordinate: locationCoordinate)
-//                .edgesIgnoringSafeArea(.top)
+                //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
                 .opacity(0.7)
                 .overlay((CircleImage()
@@ -92,6 +124,9 @@ public struct ContentViewPurpleAir: View {
                     
                     HStack {
                         ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
+                            //                            .accentColor(.red)
+                            //                            .foregroundColor(.green)
+                            .progressViewStyle(aQIProgressBarStyle())
                     }
                     
                     HStack {
@@ -143,7 +178,7 @@ public struct ContentViewPurpleAir: View {
                     .ignoresSafeArea()
                     
                 }
-
+                
                 
                 
                 HStack{
@@ -272,48 +307,49 @@ public struct ContentViewPurpleAir: View {
                 self.pM2_5Value = round(((purpleAirViewModel.purpleAirdata.pm25_A ?? 0) + (purpleAirViewModel.purpleAirdata.pm25_B ?? 0))/2)
                 switch (pM2_5Value) {
                 case _ where pM2_5Value >= 0 && pM2_5Value < 12:
-//                    self.pM2_5ColourButton = "[🟢_____]"
+                    
+                    //                    self.pM2_5ColourButton = "[🟢_____]"
                     self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
-//                    self.pM2_5ColourButton = "[_🟡_____]"
+                    //                    self.pM2_5ColourButton = "[_🟡_____]"
                     self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
-//                    self.pM2_5ColourButton = "[__🟠____]"
+                    //                    self.pM2_5ColourButton = "[__🟠____]"
                     self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
-//                    self.pM2_5ColourButton = "[___🔴___]"
+                    //                    self.pM2_5ColourButton = "[___🔴___]"
                     aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
-//                    self.pM2_5ColourButton = "[____🟣__]"
+                    //                    self.pM2_5ColourButton = "[____🟣__]"
                     self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
-//                    self.pM2_5ColourButton = "[_____🟤_]"
+                    //                    self.pM2_5ColourButton = "[_____🟤_]"
                     self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 500.5:
-//                    self.pM2_5ColourButton = "[______🟤]"
+                    //                    self.pM2_5ColourButton = "[______🟤]"
                     self.aQI_CalculatedRounded = 500
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 default:
-//                    self.pM2_5ColourButton = "[_______]"
+                    //                    self.pM2_5ColourButton = "[_______]"
                     self.aQI_CalculatedRounded = 0
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
