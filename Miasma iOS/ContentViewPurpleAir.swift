@@ -163,77 +163,86 @@ public struct ContentViewPurpleAir: View {
                 }
                 .ignoresSafeArea()
                 
-                if ProfileEditor().ElectricalConsumptionDataWanted == true
-                {
-                    
-                    VStack{
-                        if ProgressIndicatorShown == true{
-                            ProgressView()
-                        }
-                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏɴsᴜᴍᴘᴛɪᴏɴ",
-                             destination: URL(string: "https://www.electricitymap.org/")!)
-                            .padding(.top, 5.0)
-                            .font(.headline)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                        
-                        
-                        HStack {
-                            ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴏ₂ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
-                                .accentColor(.green)
-                                .padding(.top, 0.5)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                        
-                        HStack {
-                            Spacer()
-                            Text("(CO₂ Signal) ⇀")
-                                .font(.footnote)
-                                .padding(.bottom, 5.0)
-                            
-                        }
-                        
-                    }
-                    .ignoresSafeArea()
-                    
-                }
-                
-                
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    VStack{
-                        
+                HStack{
+                    if ProfileEditor().ElectricalConsumptionDataWanted == true
+                    {
                         
                         VStack{
                             if ProgressIndicatorShown == true{
                                 ProgressView()
                             }
-                            Link("Aircraft Overhead (OpenSky) ⇀",
-                                 destination: URL(string: "https://opensky-network.org/")!)
-                                .padding(.top, 8.0)
+                            Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏɴsᴜᴍᴘᴛɪᴏɴ",
+                                 destination: URL(string: "https://www.electricitymap.org/")!)
+                                .padding(.top, 5.0)
                                 .font(.headline)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                            
                             
                             HStack {
-                                Text("✈️")
-                                Spacer()
-                                Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
+                                ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴏ₂ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
+                                    .accentColor(.green)
+                                    .padding(.top, 0.5)
                                     .onAppear() {
                                         self.updateListEntry()
                                     }
+                            }
+                            
+                            HStack {
+                                Spacer()
+                                Text("(CO₂ Signal) ⇀")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5.0)
                                 
                             }
+                            
                         }
-                        //                            .background(Color.gray.opacity(0.5))
                         .ignoresSafeArea()
                         
                     }
+                    
+                    
+                    if ProfileEditor().AircraftDataWanted == true
+                    {
+                        
+                        VStack{
+                            if ProgressIndicatorShown == true{
+                                ProgressView()
+                            }
+                            Link("ᴀɪʀᴄʀᴀғᴛ ᴏᴠᴇʀʜᴇᴀᴅ",
+                                 destination: URL(string: "https://opensky-network.org/")!)
+                                .padding(.top, 5.0)
+                                .font(.headline)
+                            
+                            HStack {
+                                ProgressView("✈️ \(openSkyAircraftInBox) ᴀɪʀᴄʀᴀғᴛ ±1° ᴏᴠᴇʀ ᴀɪʀ ǫᴜᴀʟɪᴛʏ sᴇɴsᴏʀ", value: Float16(openSkyAircraftInBox), total: 5)
+                                    .padding(.top, 0.5)
+                                    .accentColor(.purple)
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
+                                //                                Text("✈️")
+                                //                                Spacer()
+                                //                                Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
+                                //                                    .font(.footnote)
+                                //                                    .padding(.top, 5.0)
+                                //                                    .onAppear() {
+                                //                                        self.updateListEntry()
+                                //                                    }
+                            }
+                            
+                            HStack {
+                                Spacer()
+                                Text("(OpenSky) ⇀")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5.0)
+                                
+                            }
+                        }
+                        .ignoresSafeArea()
+                    }
                 }
-                
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
