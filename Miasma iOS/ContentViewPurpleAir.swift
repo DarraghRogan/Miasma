@@ -111,33 +111,55 @@ public struct ContentViewPurpleAir: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("Chosen Sensor (PurpleAir) ⇀",
+                    Link("\(purpleAirViewModel.purpleAirdata.name ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(ProfileEditor().SensorID)")!)
                         .font(.headline)
-                    
-                    HStack {
-                        Spacer()
-                        Text("\(purpleAirViewModel.purpleAirdata.name ?? "0"); \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                    }
-                    
+                        .padding(.top, 5.0)
                     HStack {
                         ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
                             //                            .accentColor(.red)
                             //                            .foregroundColor(.green)
                             .progressViewStyle(aQIProgressBarStyle())
+                            .padding(.top, 0.5)
+                            .padding(.bottom, 2.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                     }
                     
                     HStack {
-                        ProgressView("🌡 \(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉", value: ((Float16(purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8)), total: 140)
+                        ProgressView("🌡 \(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉", value: ((Float16(purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8)), total: 100)
+                            .accentColor(.purple)
+
                         Spacer()
                         ProgressView("💧 \((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)% ʀᴇʟ. ʜᴜᴍ.", value: Float16(purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4, total: 100)
+                            .padding(.bottom, 2.0)
+                            .accentColor(.purple)
+
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                     }
                     
                     HStack {
                         ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 995)-995), total: 35)
+                            .padding(.bottom, 1.0)
+                            .accentColor(.purple)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                     }
+                    
+                    HStack {
+                        Spacer()
+                        Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
+                            .font(.footnote)
+                            .padding(.bottom, 5.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+                    
                 }
                 .ignoresSafeArea()
                 
@@ -148,32 +170,32 @@ public struct ContentViewPurpleAir: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("Electricity Consumption (CO₂ Signal) ⇀",
+                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏɴsᴜᴍᴘᴛɪᴏɴ",
                              destination: URL(string: "https://www.electricitymap.org/")!)
-                            .padding(.top, 8.0)
+                            .padding(.top, 5.0)
                             .font(.headline)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                        
                         
                         HStack {
-                            Text("🌍")
-                            Spacer()
-                            Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
+                            ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
+                                .accentColor(.green)
+                                .padding(.top, 0.5)
                                 .onAppear() {
                                     self.updateListEntry()
                                 }
                         }
+
                         HStack {
-                            Text("⚡️")
                             Spacer()
-                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂ \(self.fossilFuelPercentage_visual)")
+                            Text("(CO₂ Signal) ⇀")
                                 .font(.footnote)
-                                .lineLimit(1)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+                                .padding(.bottom, 5.0)
+
                         }
+                        
                     }
                     .ignoresSafeArea()
                     
@@ -203,6 +225,7 @@ public struct ContentViewPurpleAir: View {
                                     .onAppear() {
                                         self.updateListEntry()
                                     }
+                    
                             }
                         }
                         //                            .background(Color.gray.opacity(0.5))
