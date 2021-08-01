@@ -48,7 +48,7 @@ public struct ContentViewPurpleAir: View {
     @State var pM2_5Value: Double = 0
     @State var pM2_5ColourButton: String = "[______]"
     @State var aQI_CalculatedDouble: Double = 0
-    @State var aQI_CalculatedRounded: Int = 0
+    @State var aQI_CalculatedRounded: Double = 0
     @State var celciusForDisplay: String = "◌"
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
@@ -56,214 +56,188 @@ public struct ContentViewPurpleAir: View {
     
     public var body: some View {
         
-        GeometryReader { geometry in
+        //        GeometryReader { geometry in
+        
+        //            ZStack {
+        //
+        //                MapView(coordinate: locationCoordinate)
+        //                //            .edgesIgnoringSafeArea(.top)
+        //                //            .frame(height: 140)
+        
+        VStack
+        {
             
-            ZStack {
+            MapView(coordinate: locationCoordinate)
+//                .edgesIgnoringSafeArea(.top)
+                .frame(height: 100)
+                .opacity(0.7)
+                .overlay((CircleImage()
+                            .offset(x: 0, y: 0)), alignment: .center)
+            
+            List{
+                VStack{
+                    if ProgressIndicatorShown == true{
+                        ProgressView()
+                    }
+                    Link("Chosen Sensor (PurpleAir) ⇀",
+                         destination: URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(ProfileEditor().SensorID)")!)
+                        .font(.headline)
+                    
+                    HStack {
+                        Spacer()
+                        Text("\(purpleAirViewModel.purpleAirdata.name ?? "0"); \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old")
+                            .font(.footnote)
+                            .padding(.top, 5.0)
+                    }
+                    
+                    HStack {
+                        ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
+                    }
+                    
+                    HStack {
+                        ProgressView("🌡 \(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉", value: ((Float16(purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8)), total: 140)
+                        Spacer()
+                        ProgressView("💧 \((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)% ʀᴇʟ. ʜᴜᴍ.", value: Float16(purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4, total: 100)
+                    }
+                    
+                    HStack {
+                        ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 995)-995), total: 35)
+                    }
+                }
+                .ignoresSafeArea()
                 
-                MapView(coordinate: locationCoordinate)
-                //            .edgesIgnoringSafeArea(.top)
-                //            .frame(height: 140)
-                
-                List
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
-                    HStack{
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("Electricity Consumption (CO₂ Signal) ⇀",
+                             destination: URL(string: "https://www.electricitymap.org/")!)
+                            .padding(.top, 8.0)
+                            .font(.headline)
+                        
+                        HStack {
+                            Text("🌍")
+                            Spacer()
+                            Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
+                                .font(.footnote)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                        HStack {
+                            Text("⚡️")
+                            Spacer()
+                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂ \(self.fossilFuelPercentage_visual)")
+                                .font(.footnote)
+                                .lineLimit(1)
+                                .padding(.top, 5.0)
+                                .onAppear() {
+                                    self.updateListEntry()
+                                }
+                        }
+                    }
+                    .ignoresSafeArea()
+                    
+                }
+
+                
+                
+                HStack{
+                    if ProfileEditor().AircraftDataWanted == true
+                    {
+                        
                         VStack{
                             if ProgressIndicatorShown == true{
                                 ProgressView()
                             }
-                            Link("Air Quality (PurpleAir) ⇀",
-                                 destination: URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(ProfileEditor().SensorID)")!)
+                            Link("Aircraft Overhead (OpenSky) ⇀",
+                                 destination: URL(string: "https://opensky-network.org/")!)
+                                .padding(.top, 8.0)
                                 .font(.headline)
                             
                             HStack {
-                                Text("🌍")
+                                Text("✈️")
                                 Spacer()
-                                Text("\(purpleAirViewModel.purpleAirdata.name ?? "0")")
+                                Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
                                     .font(.footnote)
                                     .padding(.top, 5.0)
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
                             }
+                        }
+                        //                            .background(Color.gray.opacity(0.5))
+                        .ignoresSafeArea()
+                        
+                    }
+                    
+                    
+                    
+                    if ProfileEditor().OneHourForecastDataWanted == true
+                    {
+                        VStack{
+                            if ProgressIndicatorShown == true{
+                                ProgressView()
+                            }
+                            Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
+                                 destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
+                                .padding(.top, 8.0)
+                                .font(.headline)
                             
+                            HStack {
+                                Text("🌦")
+                                Spacer()
+                                Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                                    .font(.footnote)
+                                    .padding(.top, 5.0)
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
+                            }
                             HStack {
                                 Text("☁️")
                                 Spacer()
-                                Text("US EPA AQI PM₂.₅ is \(aQI_CalculatedRounded)   \(pM2_5ColourButton)")
+                                Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
                                     .font(.footnote)
                                     .padding(.top, 5.0)
-                                ProgressView("AQI", value: 100, total: 500)
-
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
                             }
-                            
                             HStack {
-                                Text("🌡")
+                                Text("🌳")
                                 Spacer()
-                                Text("\(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
+                                Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
                                     .font(.footnote)
                                     .padding(.top, 5.0)
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
                             }
-                            
-                            HStack {
-                                Text("💧")
-                                Spacer()
-                                Text("\(String((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4))% Relative Humidity")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                            }
-                            
-                            HStack {
-                                Text("🌬️")
-                                Spacer()
-                                Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar  \(pressure_visual)")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                            }
-                            
-                            HStack {
-                                Text("📅")
-                                Spacer()
-                                Text("Reading \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old at Miasma refresh time")
-                                    .font(.footnote)
-                                    .padding(.top, 5.0)
-                            }
-                            
                         }
-                        .background(Color.gray.opacity(0.5))
+                        //                            .background(Color.gray.opacity(0.5))
                         .ignoresSafeArea()
                         
-                        if ProfileEditor().ElectricalConsumptionDataWanted == true
-                        {
-                            
-                            VStack{
-                                if ProgressIndicatorShown == true{
-                                    ProgressView()
-                                }
-                                Link("Electricity Consumption (CO₂ Signal) ⇀",
-                                     destination: URL(string: "https://www.electricitymap.org/")!)
-                                    .padding(.top, 8.0)
-                                    .font(.headline)
-                                
-                                HStack {
-                                    Text("🌍")
-                                    Spacer()
-                                    Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
-                                        .font(.footnote)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                                HStack {
-                                    Text("⚡️")
-                                    Spacer()
-                                    Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂ \(self.fossilFuelPercentage_visual)")
-                                        .font(.footnote)
-                                        .lineLimit(1)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                            }
-                            .background(Color.gray.opacity(0.5))
-                            .ignoresSafeArea()
-                            .frame(height: geometry.size.height / 2)
-                            
-                        }
-
                     }
-
-                    
-                    HStack{
-                        if ProfileEditor().AircraftDataWanted == true
-                        {
-                            
-                            VStack{
-                                if ProgressIndicatorShown == true{
-                                    ProgressView()
-                                }
-                                Link("Aircraft Overhead (OpenSky) ⇀",
-                                     destination: URL(string: "https://opensky-network.org/")!)
-                                    .padding(.top, 8.0)
-                                    .font(.headline)
-                                
-                                HStack {
-                                    Text("✈️")
-                                    Spacer()
-                                    Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                                        .font(.footnote)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                            }
-                            .background(Color.gray.opacity(0.5))
-                            .ignoresSafeArea()
-                            
-                        }
-                        
-                        
-                        
-                        if ProfileEditor().OneHourForecastDataWanted == true
-                        {
-                            VStack{
-                                if ProgressIndicatorShown == true{
-                                    ProgressView()
-                                }
-                                Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                                     destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
-                                    .padding(.top, 8.0)
-                                    .font(.headline)
-                                
-                                HStack {
-                                    Text("🌦")
-                                    Spacer()
-                                    Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                        .font(.footnote)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                                HStack {
-                                    Text("☁️")
-                                    Spacer()
-                                    Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                                        .font(.footnote)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                                HStack {
-                                    Text("🌳")
-                                    Spacer()
-                                    Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
-                                        .font(.footnote)
-                                        .padding(.top, 5.0)
-                                        .onAppear() {
-                                            self.updateListEntry()
-                                        }
-                                }
-                            }
-                            .background(Color.gray.opacity(0.5))
-                            .ignoresSafeArea()
-                            
-                        }
-                    }
-                    .frame(alignment: .bottom)
-                    .opacity(0.7)
-                    //                Button("🔄", action: {
-                    //                    updateListEntry()
-                    //                } )
-                    //                .font(.title)
-                    //                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                    
                 }
-                .opacity(0.7)
+                //                    .frame(alignment: .bottom)
+                //                    .opacity(0.7)
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                
             }
-
+            //                .opacity(0.7)
         }
+        
     }
+    //    }
     
     
     
@@ -298,48 +272,48 @@ public struct ContentViewPurpleAir: View {
                 self.pM2_5Value = round(((purpleAirViewModel.purpleAirdata.pm25_A ?? 0) + (purpleAirViewModel.purpleAirdata.pm25_B ?? 0))/2)
                 switch (pM2_5Value) {
                 case _ where pM2_5Value >= 0 && pM2_5Value < 12:
-                    self.pM2_5ColourButton = "[🟢_____]"
+//                    self.pM2_5ColourButton = "[🟢_____]"
                     self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
-                    self.pM2_5ColourButton = "[_🟡_____]"
+//                    self.pM2_5ColourButton = "[_🟡_____]"
                     self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
-                    self.pM2_5ColourButton = "[__🟠____]"
+//                    self.pM2_5ColourButton = "[__🟠____]"
                     self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
-                    self.pM2_5ColourButton = "[___🔴___]"
+//                    self.pM2_5ColourButton = "[___🔴___]"
                     aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
-                    self.pM2_5ColourButton = "[____🟣__]"
+//                    self.pM2_5ColourButton = "[____🟣__]"
                     self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
-                    self.pM2_5ColourButton = "[_____🟤_]"
+//                    self.pM2_5ColourButton = "[_____🟤_]"
                     self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
-                    self.aQI_CalculatedRounded = Int(round(self.aQI_CalculatedDouble))
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 500.5:
-                    self.pM2_5ColourButton = "[______🟤]"
+//                    self.pM2_5ColourButton = "[______🟤]"
                     self.aQI_CalculatedRounded = 500
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 default:
-                    self.pM2_5ColourButton = "[_______]"
+//                    self.pM2_5ColourButton = "[_______]"
                     self.aQI_CalculatedRounded = 0
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }

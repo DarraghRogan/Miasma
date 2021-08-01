@@ -17,7 +17,7 @@ struct CircleImage: View {
                 .overlay(
                     Circle().stroke(Color.white, lineWidth: 4))
                 .shadow(radius: 10)
-                .opacity(0.7)
+//                .opacity(0.7)
         }
     }
 }

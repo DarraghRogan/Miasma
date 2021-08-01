@@ -38,14 +38,14 @@ public struct ContentView: View {
             Banner()
             
         }
-        .overlay((CircleImage()
-                    .offset(x: 0, y: 0)), alignment: .center)
+//        .overlay((CircleImage()
+//                    .offset(x: 0, y: 0)), alignment: .center)
         .overlay((Button("🔧", action: { self.showingProfile.toggle() } )
                     .padding(EdgeInsets())
                     .offset(x: 155, y: 35)
                     .font(.title)), alignment: .top)
         
-        .edgesIgnoringSafeArea(.top)
+//        .edgesIgnoringSafeArea(.top)
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
         .sheet(isPresented: $showingProfile,
                onDismiss: {

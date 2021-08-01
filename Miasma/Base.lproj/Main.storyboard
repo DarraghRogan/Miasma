@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -762,7 +762,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" id="UiA-qh-nNp">
                                     <font key="font" usesAppearanceFont="YES"/>
-                                    <string key="title">Please find the ID for the sensor you are interested in from the PurpleAir website map. It is a 4 or 5 digit number in the URL web address after clicking the sensor -&gt;</string>
+                                    <string key="title">Please find the ID for the sensor you are interested in from the PurpleAir website map. It is a 4 to 6 digit number in the URL web address after clicking the sensor -&gt;</string>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
@@ -1142,7 +1142,7 @@
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rkG-ht-MDd">
                                 <rect key="frame" x="178" y="166" width="276" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Nearcast 1 hour Forecast (from ClimaCell)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kT-JR-afS">
+                                <buttonCell key="cell" type="check" title="1 hour Forecast (from Tomorrow.io)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="9kT-JR-afS">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
