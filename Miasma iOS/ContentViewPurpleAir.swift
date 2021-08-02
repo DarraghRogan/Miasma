@@ -105,7 +105,7 @@ public struct ContentViewPurpleAir: View {
                 .opacity(0.7)
                 .overlay((CircleImage()
                             .offset(x: 0, y: 0)), alignment: .center)
-                .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
+                .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
                             .font(.largeTitle)
                             )
             
@@ -124,7 +124,7 @@ public struct ContentViewPurpleAir: View {
                             //                            .foregroundColor(.green)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
-                            .padding(.bottom, 2.0)
+                            .padding(.bottom, 7.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -133,10 +133,11 @@ public struct ContentViewPurpleAir: View {
                     HStack {
                         ProgressView("🌡 \(self.celciusForDisplay)℃ / \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉", value: ((Float16(purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8)), total: 100)
                             .accentColor(.purple)
+                            .padding(.bottom, 7.0)
                         
                         Spacer()
                         ProgressView("💧 \((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)% ʀᴇʟ. ʜᴜᴍ.", value: Float16(purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4, total: 100)
-                            .padding(.bottom, 2.0)
+                            .padding(.bottom, 7.0)
                             .accentColor(.purple)
                             
                             .onAppear() {
@@ -146,7 +147,7 @@ public struct ContentViewPurpleAir: View {
                     
                     HStack {
                         ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 995)-995), total: 35)
-                            .padding(.bottom, 1.0)
+                            .padding(.bottom, 4.0)
                             .accentColor(.purple)
                             .onAppear() {
                                 self.updateListEntry()
@@ -157,7 +158,7 @@ public struct ContentViewPurpleAir: View {
                         Spacer()
                         Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
                             .font(.footnote)
-                            .padding(.bottom, 5.0)
+                            .padding(.bottom, 10.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
@@ -187,6 +188,7 @@ public struct ContentViewPurpleAir: View {
                                 ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh", value: 100-(fossilFuelPercentage), total: 100)
                                     .accentColor(.green)
                                     .padding(.top, 0.5)
+                                    .padding(.bottom, 4.0)
                                     .onAppear() {
                                         self.updateListEntry()
                                     }
@@ -221,6 +223,7 @@ public struct ContentViewPurpleAir: View {
                             HStack {
                                 ProgressView("✈️ \(openSkyAircraftInBox) ±1° ᴏᴠᴇʀʜᴇᴀᴅ", value: Float16(openSkyAircraftInBox), total: 20)
                                     .padding(.top, 0.5)
+                                    .padding(.bottom, 4.0)
                                     .accentColor(.purple)
                                     .onAppear() {
                                         self.updateListEntry()
