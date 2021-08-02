@@ -12,7 +12,7 @@ struct CircleImage: View {
 
         VStack {
 
-            Image("80")
+            Image("iconForiOSBanner")
                 .clipShape(Circle())
                 .overlay(
                     Circle().stroke(Color.white, lineWidth: 4))

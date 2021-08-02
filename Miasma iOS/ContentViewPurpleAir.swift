@@ -105,6 +105,9 @@ public struct ContentViewPurpleAir: View {
                 .opacity(0.7)
                 .overlay((CircleImage()
                             .offset(x: 0, y: 0)), alignment: .center)
+                .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
+                            .font(.largeTitle)
+                            )
             
             List{
                 VStack{
@@ -142,7 +145,7 @@ public struct ContentViewPurpleAir: View {
                     }
                     
                     HStack {
-                        ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0)) millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 995)-995), total: 35)
+                        ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 995)-995), total: 35)
                             .padding(.bottom, 1.0)
                             .accentColor(.purple)
                             .onAppear() {
@@ -171,7 +174,7 @@ public struct ContentViewPurpleAir: View {
                             if ProgressIndicatorShown == true{
                                 ProgressView()
                             }
-                            Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏɴsᴜᴍᴘᴛɪᴏɴ",
+                            Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                                  destination: URL(string: "https://www.electricitymap.org/")!)
                                 .padding(.top, 5.0)
                                 .font(.headline)
@@ -181,7 +184,7 @@ public struct ContentViewPurpleAir: View {
                             
                             
                             HStack {
-                                ProgressView("⚡️ \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴏ₂ ɪɴᴛᴇɴsɪᴛʏ", value: 100-fossilFuelPercentage, total: 100)
+                                ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh", value: 100-(fossilFuelPercentage), total: 100)
                                     .accentColor(.green)
                                     .padding(.top, 0.5)
                                     .onAppear() {
@@ -216,20 +219,13 @@ public struct ContentViewPurpleAir: View {
                                 .font(.headline)
                             
                             HStack {
-                                ProgressView("✈️ \(openSkyAircraftInBox) ᴀɪʀᴄʀᴀғᴛ ±1° ᴏᴠᴇʀ ᴀɪʀ ǫᴜᴀʟɪᴛʏ sᴇɴsᴏʀ", value: Float16(openSkyAircraftInBox), total: 5)
+                                ProgressView("✈️ \(openSkyAircraftInBox) ±1° ᴏᴠᴇʀʜᴇᴀᴅ", value: Float16(openSkyAircraftInBox), total: 20)
                                     .padding(.top, 0.5)
                                     .accentColor(.purple)
                                     .onAppear() {
                                         self.updateListEntry()
                                     }
-                                //                                Text("✈️")
-                                //                                Spacer()
-                                //                                Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                                //                                    .font(.footnote)
-                                //                                    .padding(.top, 5.0)
-                                //                                    .onAppear() {
-                                //                                        self.updateListEntry()
-                                //                                    }
+
                             }
                             
                             HStack {
