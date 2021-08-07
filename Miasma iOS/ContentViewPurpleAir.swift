@@ -60,23 +60,47 @@ public struct ContentViewPurpleAir: View {
             if let fractionCompleted = configuration.fractionCompleted{
                 switch fractionCompleted {
                 case 0..<0.1:
-                    ProgressView(configuration)
-                        .accentColor(.green)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.green)
+                        Spacer()
+                        Text("Good")
+                    }
                 case 0.1..<0.2:
-                    ProgressView(configuration)
-                        .accentColor(.yellow)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.yellow)
+                        Spacer()
+                        Text("Moderate")
+                    }
                 case 0.2..<0.3:
-                    ProgressView(configuration)
-                        .accentColor(.orange)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.orange)
+                        Spacer()
+                        Text("Unhealthy for Sensitive Groups")
+                    }
                 case 0.3..<0.4:
-                    ProgressView(configuration)
-                        .accentColor(.red)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.red)
+                        Spacer()
+                        Text("Unhealthy")
+                    }
                 case 0.4..<0.6:
-                    ProgressView(configuration)
-                        .accentColor(.purple)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.purple)
+                        Spacer()
+                        Text("Very Unhealthy")
+                    }
                 case 0.6..<1:
-                    ProgressView(configuration)
-                        .accentColor(.black)
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.black)
+                        Spacer()
+                        Text("Hazardous")
+                    }
                 default:
                     ProgressView(configuration)
                         .accentColor(.gray)
@@ -87,12 +111,17 @@ public struct ContentViewPurpleAir: View {
     
     struct GaugeProgressStyle: ProgressViewStyle {
         var strokeColor = Color.purple
+        var nonStrokeColor = (Color(.systemGray5))
         var strokeWidth = 5.0
         
         func makeBody(configuration: Configuration) -> some View {
             let fractionCompleted = configuration.fractionCompleted ?? 0
             
             return ZStack {
+                Circle()
+                    .trim(from: 0, to: 100)
+                    .stroke(nonStrokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
+                    .rotationEffect(.degrees(-90))
                 Circle()
                     .trim(from: 0, to: CGFloat(fractionCompleted))
                     .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
@@ -136,15 +165,13 @@ public struct ContentViewPurpleAir: View {
                         .padding(.top, 5.0)
                     HStack {
                         ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
-                            //                            .accentColor(.red)
-                            //                            .foregroundColor(.green)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
-                        
+
                     }
                     
                     HStack {
@@ -153,15 +180,11 @@ public struct ContentViewPurpleAir: View {
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                .padding(.bottom, 7.0)
-                            //                                .offset(x: 0, y: 0, alignment: .center)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
-                                //                                    .offset(x: 0, y: 0, alignment: .center)
                                 Text("\(self.celciusForDisplay)℃ ")
-                                //                                    .offset(x: 0, y: 0, alignment: .center)
                                 Text("/ \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
-                                //                                    .offset(x: 0, y: 0, alignment: .center)
                             }
                         }
                         .onAppear() {
@@ -171,18 +194,14 @@ public struct ContentViewPurpleAir: View {
                         Spacer()
                         ZStack{
                             ProgressView("💧 \((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)% ʀᴇʟ. ʜᴜᴍ.", value: Float16(purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4, total: 100)
-                                .padding(.bottom, 7.0)
+                                .padding(.bottom, 4.0)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                            //                                    .offset(x: 0, y: 0, alignment: .center)
                             VStack{
                                 Text("💧")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
                                 Text("\((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)%")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
                             }
                         }
                         .onAppear() {
@@ -190,19 +209,15 @@ public struct ContentViewPurpleAir: View {
                         }
                         Spacer()
                         ZStack{
-                            ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 980)-980), total: 40)
-                                .padding(.bottom, 7.0)
+                            ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 980)-980), total: 50)
+                                .padding(.bottom, 4.0)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                            //                                    .offset(x: 0, y: 0, alignment: .center)
                             VStack{
                                 Text("🌬️")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
-                                Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))mbar")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
-                                Text("ᴀᴛᴍᴏs. ᴘʀᴇs.")
-                                //                                        .offset(x: 0, y: 0, alignment: .center)
+                                Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))mb")
+                                Text("ᴘʀᴇs.")
                             }
                         }
                         .onAppear() {
@@ -212,14 +227,6 @@ public struct ContentViewPurpleAir: View {
                         
                     }
                     
-                    //                        HStack {
-                    //                            ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 980)-980), total: 40)
-                    //                                .padding(.bottom, 4.0)
-                    //                                .accentColor(.purple)
-                    //                                .onAppear() {
-                    //                                    self.updateListEntry()
-                    //                                }
-                    //                        }
                     
                     HStack {
                         Spacer()
@@ -252,7 +259,7 @@ public struct ContentViewPurpleAir: View {
                             
                             
                             HStack {
-                                ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh", value: 100-(fossilFuelPercentage), total: 100)
+                                ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
                                     .accentColor(.green)
                                     .padding(.top, 0.5)
                                     .padding(.bottom, 4.0)
@@ -275,39 +282,39 @@ public struct ContentViewPurpleAir: View {
                     }
                     
                     
-                    if ProfileEditor().AircraftDataWanted == true
-                    {
-                        
-                        VStack{
-                            if ProgressIndicatorShown == true{
-                                ProgressView()
-                            }
-                            Link("ᴀɪʀᴄʀᴀғᴛ ᴏᴠᴇʀʜᴇᴀᴅ",
-                                 destination: URL(string: "https://opensky-network.org/")!)
-                                .padding(.top, 5.0)
-                                .font(.headline)
-                            
-                            HStack {
-                                ProgressView("✈️ \(openSkyAircraftInBox) ±1° ᴏᴠᴇʀʜᴇᴀᴅ", value: Float16(openSkyAircraftInBox), total: 20)
-                                    .padding(.top, 0.5)
-                                    .padding(.bottom, 4.0)
-                                    .accentColor(.purple)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
-                                
-                            }
-                            
-                            HStack {
-                                Spacer()
-                                Text("(OpenSky) ⇀")
-                                    .font(.footnote)
-                                    .padding(.bottom, 5.0)
-                                
-                            }
-                        }
-                        .ignoresSafeArea()
-                    }
+//                    if ProfileEditor().AircraftDataWanted == true
+//                    {
+//
+//                        VStack{
+//                            if ProgressIndicatorShown == true{
+//                                ProgressView()
+//                            }
+//                            Link("ᴀɪʀᴄʀᴀғᴛ ᴏᴠᴇʀʜᴇᴀᴅ",
+//                                 destination: URL(string: "https://opensky-network.org/")!)
+//                                .padding(.top, 5.0)
+//                                .font(.headline)
+//
+//                            HStack {
+//                                ProgressView("✈️ \(openSkyAircraftInBox) ±1° ᴏᴠᴇʀʜᴇᴀᴅ", value: Float16(openSkyAircraftInBox), total: 20)
+//                                    .padding(.top, 0.5)
+//                                    .padding(.bottom, 4.0)
+//                                    .accentColor(.purple)
+//                                    .onAppear() {
+//                                        self.updateListEntry()
+//                                    }
+//
+//                            }
+//
+//                            HStack {
+//                                Spacer()
+//                                Text("(OpenSky) ⇀")
+//                                    .font(.footnote)
+//                                    .padding(.bottom, 5.0)
+//
+//                            }
+//                        }
+//                        .ignoresSafeArea()
+//                    }
                 }
                 
                 
@@ -317,41 +324,143 @@ public struct ContentViewPurpleAir: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                             destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
+                        Link("1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
+                             destination: URL(string: "https://www.tomorrow.io/weather/")!)
                             .padding(.top, 8.0)
                             .font(.headline)
                         
+//                        HStack {
+//                            Text("🌦")
+//                            Spacer()
+//                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+//                        HStack {
+//                            Text("☁️")
+//                            Spacer()
+//                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+//                                .font(.footnote)
+//                                .padding(.top, 5.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+//                        }
+
                         HStack {
-                            Text("🌦")
-                            Spacer()
-                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
+                            ZStack{
+                                ProgressView("", value: Float16(fahrenheitForDisplay), total: 100)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌡")
+                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉")
+                                    Text("Apparent")
                                 }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🪁")
+                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                                    Text("\(windDirection_acronymn)")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("☁️")
+                                    Text("\(climaCellEPAAQI) AQI")
+                                    Text("\(climaCellEPAPrimaryPollutant)")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                         }
+                        
                         HStack {
-                            Text("☁️")
-                            Spacer()
-                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenTree), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌳")
+                                    Text("\(climaCellPollenTree)")
+                                    Text("Tree")
                                 }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌱")
+                                    Text("\(climaCellPollenGrass)")
+                                    Text("Grass")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("💐")
+                                    Text("\(climaCellPollenWeed)")
+                                    Text("Weed")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                         }
+                        
                         HStack {
-                            Text("🌳")
                             Spacer()
-                            Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                            Text("(Tomorrow.io) ⇀")
                                 .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+                                .padding(.bottom, 5.0)
+                            
                         }
+                        
+                        
                     }
                     //                            .background(Color.gray.opacity(0.5))
                     .ignoresSafeArea()
