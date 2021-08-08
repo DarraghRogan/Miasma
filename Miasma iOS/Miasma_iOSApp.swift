@@ -23,7 +23,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
          defaults.set("here", forKey: "SensorID")
          defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")
          defaults.set(true, forKey:"ElectricalConsumptionDataWanted")
-         defaults.set(true, forKey:"AircraftDataWanted")
+//         defaults.set(true, forKey:"AircraftDataWanted")
          defaults.set(false, forKey:"OneHourForecastDataWanted")
      }
         

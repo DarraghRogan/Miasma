@@ -23,7 +23,7 @@ public struct ContentViewPurpleAir: View {
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.3412, -6.2507)
     
     // Defining VARs for CO2 Signal
-    @State var fossilFuelPercentage_visual: String = "[__________]"
+//    @State var fossilFuelPercentage_visual: String = "[__________]"
     @State var cO2Country: String = "◌"
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
@@ -175,6 +175,7 @@ public struct ContentViewPurpleAir: View {
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
+                                    .font(.title)
                                 Text("\(self.celciusForDisplay)℃ ")
                                 Text("/ \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
                             }
@@ -192,6 +193,7 @@ public struct ContentViewPurpleAir: View {
                                 .contentShape(Rectangle())
                             VStack{
                                 Text("💧")
+                                    .font(.title)
                                 Text("\((purpleAirViewModel.purpleAirdata.humidityA ?? 0)+4)%")
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
@@ -208,6 +210,7 @@ public struct ContentViewPurpleAir: View {
                                 .contentShape(Rectangle())
                             VStack{
                                 Text("🌬️")
+                                    .font(.title)
                                 Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))mb")
                                 Text("ᴘʀᴇs.")
                             }
@@ -295,6 +298,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌡")
+                                        .font(.title)
                                     Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
                                     Text("/ \(fahrenheitForDisplay)℉")
                                 }
@@ -312,6 +316,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🪁")
+                                        .font(.title)
                                     Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                         .font(.caption)
                                     Text("ғʀᴏᴍ \(windDirection_acronymn)")
@@ -330,6 +335,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("☁️")
+                                        .font(.title)
                                     Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
                                         .font(.caption)
                                     Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
@@ -350,7 +356,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌳")
-                                    Text("Tree")
+                                        .font(.title)
                                     Text("Pollen")
                                 }
                             }
@@ -367,7 +373,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌱")
-                                    Text("Grass")
+                                        .font(.title)
                                     Text("Pollen")
                                 }
                             }
@@ -383,7 +389,7 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("💐")
-                                    Text("Weed")
+                                        .font(.title)
                                     Text("Pollen")
                                 }
                             }

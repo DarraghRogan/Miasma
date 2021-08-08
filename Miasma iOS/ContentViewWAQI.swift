@@ -23,12 +23,12 @@ public struct ContentViewWAQI: View {
     @State var locationCoordinate = CLLocationCoordinate2DMake(53.3412, -6.2507)
     
     // Defining VARs for CO2 Signal
-    @State var fossilFuelPercentage_visual: String = "[__________]"
+    //    @State var fossilFuelPercentage_visual: String = "[__________]"
     @State var cO2Country: String = "◌"
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
     
-    @State var openSkyAircraftInBox: Int = 0
+    //    @State var openSkyAircraftInBox: Int = 0
     
     // Defining VARs for ClimaCell
     @State var windDirection_acronymn: String = "___"
@@ -42,20 +42,105 @@ public struct ContentViewWAQI: View {
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
     @State var fahrenheitForDisplayClimaCell: String = "0"
+    @State var celciusForCalculationClimaCell: Double = 0
 
+    
     // Defining VARs for WAQI
     @State var wAQIAQI: Int = 0
     @State var wAQIAQIColourButton: String = "[______]"
     @State var fahrenheitForDisplayWAQI: String = "0"
     
+    // Defining the Progress Bar Styles
+    struct aQIProgressBarStyle: ProgressViewStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            
+            if let fractionCompleted = configuration.fractionCompleted{
+                switch fractionCompleted {
+                case 0..<0.1:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.green)
+                        Spacer()
+                        Text("Good")
+                    }
+                case 0.1..<0.2:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.yellow)
+                        Spacer()
+                        Text("Moderate")
+                    }
+                case 0.2..<0.3:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.orange)
+                        Spacer()
+                        Text("Unhealthy for Sensitive Groups")
+                    }
+                case 0.3..<0.4:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.red)
+                        Spacer()
+                        Text("Unhealthy")
+                    }
+                case 0.4..<0.6:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.purple)
+                        Spacer()
+                        Text("Very Unhealthy")
+                    }
+                case 0.6..<1:
+                    HStack{
+                        ProgressView(configuration)
+                            .accentColor(.black)
+                        Spacer()
+                        Text("Hazardous")
+                    }
+                default:
+                    ProgressView(configuration)
+                        .accentColor(.gray)
+                }
+            }
+        }
+    }
+    
+    struct GaugeProgressStyle: ProgressViewStyle {
+        var strokeColor = Color.purple
+        var nonStrokeColor = (Color(.systemGray5))
+        var strokeWidth = 5.0
+        
+        func makeBody(configuration: Configuration) -> some View {
+            let fractionCompleted = configuration.fractionCompleted ?? 0
+            
+            return ZStack {
+                Circle()
+                    .trim(from: 0, to: 100)
+                    .stroke(nonStrokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+                Circle()
+                    .trim(from: 0, to: CGFloat(fractionCompleted))
+                    .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+            }
+        }
+    }
     
     public var body: some View {
         
-        MapView(coordinate: locationCoordinate)
-//            .edgesIgnoringSafeArea(.top)
-            .frame(height: 140)
-        
-        VStack {
+        VStack
+        {
+            
+            MapView(coordinate: locationCoordinate)
+                //                .edgesIgnoringSafeArea(.top)
+                .frame(height: 100)
+                .opacity(0.7)
+                .overlay((CircleImage()
+                            .offset(x: 0, y: 0)), alignment: .center)
+                .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
+                            .font(.largeTitle)
+                )
             
             List
             {
@@ -64,33 +149,38 @@ public struct ContentViewWAQI: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("Air Quality (WAQI) ⇀",
+                    Link("\(wAQIViewModel.wAQIdata.city?.name ?? "◌")",
                          destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                         .font(.headline)
                     
-                    HStack {
-                        Text("🌍")
-                        Spacer()
-                        Text(wAQIViewModel.wAQIdata.city?.name ?? "0")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                    }
+//                    HStack {
+//                        Text("🌍")
+//                        Spacer()
+//                        Text(wAQIViewModel.wAQIdata.city?.name ?? "0")
+//                            .font(.footnote)
+//                            .padding(.top, 5.0)
+//                    }
+                    
+
                     
                     HStack {
-                        Text("📜")
-                        Spacer()
-                        Text(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
+                        ProgressView("☁️ \(wAQIViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ", value: Float16(wAQIViewModel.wAQIdata.aqi ?? 0), total: 500)
+                            .progressViewStyle(aQIProgressBarStyle())
+                            .padding(.top, 0.5)
+                            .padding(.bottom, 7.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+
                     }
                     
-                    HStack {
-                        Text("☁️")
-                        Spacer()
-                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0)) \(wAQIAQIColourButton)")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                    }
+//                    HStack {
+//                        Text("☁️")
+//                        Spacer()
+//                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0)) \(wAQIAQIColourButton)")
+//                            .font(.footnote)
+//                            .padding(.top, 5.0)
+//                    }
                     
                     HStack {
                         Text("🎯")
@@ -110,126 +200,319 @@ public struct ContentViewWAQI: View {
                     }
                     
                     HStack {
-                        Text("📅")
                         Spacer()
-                        Text("Taken: \(String(wAQIViewModel.wAQIdata.time?.s ?? "0")) \(String(wAQIViewModel.wAQIdata.time?.tz ?? "0"))")
+                        Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0"), \(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0"); User Selected Station (WAQI) ⇀")
                             .font(.footnote)
-                            .padding(.top, 5.0)
+                            .padding(.bottom, 10.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                     }
+                    
+//                    HStack {
+//                        Text("📅")
+//                        Spacer()
+//                        Text("Taken: \(String(wAQIViewModel.wAQIdata.time?.s ?? "0")) \(String(wAQIViewModel.wAQIdata.time?.tz ?? "0"))")
+//                            .font(.footnote)
+//                            .padding(.top, 5.0)
+//                    }
+//
+//                    HStack {
+//                        Text("📜")
+//                        Spacer()
+//                        Text(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")
+//                            .font(.footnote)
+//                            .padding(.top, 5.0)
+//                    }
                     
                 }
                 
-                
-                
-                if ProfileEditor().ElectricalConsumptionDataWanted == true
-                {
-                    
-                    VStack{
-                        if ProgressIndicatorShown == true{
-                            ProgressView()
-                        }
-                        Link("Electricity Consumption (CO₂ Signal) ⇀",
-                             destination: URL(string: "https://www.electricitymap.org/")!)
-                            .padding(.top, 8.0)
-                            .font(.headline)
+                HStack{
+                    if ProfileEditor().ElectricalConsumptionDataWanted == true
+                    {
                         
-                        HStack {
-                            Text("🌍")
-                            Spacer()
-                            Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
-                                .font(.footnote)
+                        VStack{
+                            if ProgressIndicatorShown == true{
+                                ProgressView()
+                            }
+                            Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                                 destination: URL(string: "https://www.electricitymap.org/")!)
                                 .padding(.top, 5.0)
+                                .font(.headline)
                                 .onAppear() {
                                     self.updateListEntry()
                                 }
+                            
+                            
+                            HStack {
+                                ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                                    .accentColor(.green)
+                                    .padding(.top, 0.5)
+                                    .padding(.bottom, 4.0)
+                                    .onAppear() {
+                                        self.updateListEntry()
+                                    }
+                            }
+                            
+                            HStack {
+                                Spacer()
+                                Text("(CO₂ Signal) ⇀")
+                                    .font(.footnote)
+                                    .padding(.bottom, 5.0)
+                                
+                            }
+                            
                         }
-                        HStack {
-                            Text("⚡️")
-                            Spacer()
-                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂ \(self.fossilFuelPercentage_visual)")
-                                .font(.footnote)
-                                .lineLimit(1)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
-                    }
-                    
-                }
-                
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    
-                    VStack{
-                        if ProgressIndicatorShown == true{
-                            ProgressView()
-                        }
-                        Link("Aircraft Overhead (OpenSky) ⇀",
-                             destination: URL(string: "https://opensky-network.org/")!)
-                            .padding(.top, 8.0)
-                            .font(.headline)
-                        
-                        HStack {
-                            Text("✈️")
-                            Spacer()
-                            Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
-                        }
+                        .ignoresSafeArea()
                         
                     }
-                    
                 }
+                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
-                    
                     VStack{
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
-                             destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
+                        Link("1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
+                             destination: URL(string: "https://www.tomorrow.io/weather/")!)
                             .padding(.top, 8.0)
                             .font(.headline)
                         
                         HStack {
-                            Text("🌦")
-                            Spacer()
-                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(calculateFahrenheit(celcius: climaCellFeelsLike))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
+                            ZStack{
+                                ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌡")
+                                        .font(.title)
+                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
+                                    Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🪁")
+                                        .font(.title)
+                                    Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                                        .font(.caption)
+                                    Text("ғʀᴏᴍ \(windDirection_acronymn)")
+                                        .font(.caption)
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("☁️")
+                                        .font(.title)
+                                    Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
+                                        .font(.caption)
+                                    Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
+                                        .font(.caption)
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                         }
+                        
                         HStack {
-                            Text("☁️")
-                            Spacer()
-                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-                                .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenTree), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌳")
+                                        .font(.title)
+                                    Text("Pollen")
                                 }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌱")
+                                        .font(.title)
+                                    Text("Pollen")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 100, height: 100)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("💐")
+                                        .font(.title)
+                                    Text("Pollen")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                         }
+                        
                         HStack {
-                            Text("🌳")
                             Spacer()
-                            Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                            Text("(Tomorrow.io) ⇀")
                                 .font(.footnote)
-                                .padding(.top, 5.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+                                .padding(.bottom, 5.0)
+                            
                         }
+                        
+                        
                     }
+                    .ignoresSafeArea()
                     
                 }
+                
+                
+                //                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                //                {
+                //
+                //                    VStack{
+                //                        if ProgressIndicatorShown == true{
+                //                            ProgressView()
+                //                        }
+                //                        Link("Electricity Consumption (CO₂ Signal) ⇀",
+                //                             destination: URL(string: "https://www.electricitymap.org/")!)
+                //                            .padding(.top, 8.0)
+                //                            .font(.headline)
+                //
+                //                        HStack {
+                //                            Text("🌍")
+                //                            Spacer()
+                //                            Text("\(cO2Country) Carbon Intensity is \(String(format: "%.1f", locale: Locale.current, carbonIntensity))gCO₂eq/kWh")
+                //                                .font(.footnote)
+                //                                .padding(.top, 5.0)
+                //                                .onAppear() {
+                //                                    self.updateListEntry()
+                //                                }
+                //                        }
+                //                        HStack {
+                //                            Text("⚡️")
+                //                            Spacer()
+                //                            Text("\(String(format: "%.1f", locale: Locale.current,(100-fossilFuelPercentage)))% Low CO₂")
+                //                                .font(.footnote)
+                //                                .lineLimit(1)
+                //                                .padding(.top, 5.0)
+                //                                .onAppear() {
+                //                                    self.updateListEntry()
+                //                                }
+                //                        }
+                //                    }
+                //
+                //                }
+                //
+                //                //                if ProfileEditor().AircraftDataWanted == true
+                //                //                {
+                //                //
+                //                //                    VStack{
+                //                //                        if ProgressIndicatorShown == true{
+                //                //                            ProgressView()
+                //                //                        }
+                //                //                        Link("Aircraft Overhead (OpenSky) ⇀",
+                //                //                             destination: URL(string: "https://opensky-network.org/")!)
+                //                //                            .padding(.top, 8.0)
+                //                //                            .font(.headline)
+                //                //
+                //                //                        HStack {
+                //                //                            Text("✈️")
+                //                //                            Spacer()
+                //                //                            Text("\(openSkyAircraftInBox) aircraft ±1° over Air Quality sensor")
+                //                //                                .font(.footnote)
+                //                //                                .padding(.top, 5.0)
+                //                //                                .onAppear() {
+                //                //                                    self.updateListEntry()
+                //                //                                }
+                //                //                        }
+                //                //
+                //                //                    }
+                //                //
+                //                //                }
+                //
+                //                if ProfileEditor().OneHourForecastDataWanted == true
+                //                {
+                //
+                //                    VStack{
+                //                        if ProgressIndicatorShown == true{
+                //                            ProgressView()
+                //                        }
+                //                        Link("1 Hour Forecast (ClimaCell Nearcast)⇀",
+                //                             destination: URL(string: "itms-apps://itunes.apple.com/app/id1443325509")!)
+                //                            .padding(.top, 8.0)
+                //                            .font(.headline)
+                //
+                //                        HStack {
+                //                            Text("🌦")
+                //                            Spacer()
+                //                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(calculateFahrenheit(celcius: climaCellFeelsLike))℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                //                                .font(.footnote)
+                //                                .padding(.top, 5.0)
+                //                                .onAppear() {
+                //                                    self.updateListEntry()
+                //                                }
+                //                        }
+                //                        HStack {
+                //                            Text("☁️")
+                //                            Spacer()
+                //                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
+                //                                .font(.footnote)
+                //                                .padding(.top, 5.0)
+                //                                .onAppear() {
+                //                                    self.updateListEntry()
+                //                                }
+                //                        }
+                //                        HStack {
+                //                            Text("🌳")
+                //                            Spacer()
+                //                            Text("Pollen Index [0-5] will be: Trees: \(climaCellPollenTree), Grass: \(climaCellPollenGrass), Weeds: \(climaCellPollenWeed)")
+                //                                .font(.footnote)
+                //                                .padding(.top, 5.0)
+                //                                .onAppear() {
+                //                                    self.updateListEntry()
+                //                                }
+                //                        }
+                //                    }
+                //
+                //                }
                 Button("🔄", action: {
                     updateListEntry()
                 } )
@@ -241,7 +524,9 @@ public struct ContentViewWAQI: View {
         }
         
     }
-  
+    
+    
+    
     func calculateFahrenheit(celcius: Double) -> String {
         var fahrenheit: Double
         fahrenheit = (celcius  * 9 / 5) + 32
@@ -309,23 +594,24 @@ public struct ContentViewWAQI: View {
                     DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 }
                 
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: sensorLatitude-1, lomin: sensorLongitude-1, lamax: sensorLatitude+1, lomax: sensorLongitude+1)
-                }
+                //                if ProfileEditor().AircraftDataWanted == true
+                //                {
+                //                    DataLoaderOpenSky().loadOpenSkyData(lamin: sensorLatitude-1, lomin: sensorLongitude-1, lamax: sensorLatitude+1, lomax: sensorLongitude+1)
+                //                }
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
                     DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
+//                    print("requested ClimaCell")
                 }
                 
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +6s list entries")
+                print("updating +7s list entries")
                 
                 ProgressIndicatorShown = false
                 
@@ -335,41 +621,49 @@ public struct ContentViewWAQI: View {
                     self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
                     
                     self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        self.fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        self.fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        self.fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = "[          ]"
-                    }
+                    //                switch (fossilFuelPercentage) {
+                    //                case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
+                    //                case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
+                    //                case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
+                    //                    self.fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
+                    //                    self.fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    //                case _ where fossilFuelPercentage > 95:
+                    //                    self.fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    //                default:
+                    //                    fossilFuelPercentage_visual = "[          ]"
+                    //                }
+                    
+                }
+                //
+                //                if ProfileEditor().AircraftDataWanted == true
+                //                {
+                //                    self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
+                //                }
+                
+                // a little protection fro when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
+                var isIndexValid: Bool = false
+                if 2 < climaCellData.count {
+                    isIndexValid = true
+                } else {
                     
                 }
                 
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
-                }
-                
-                if ProfileEditor().OneHourForecastDataWanted == true
+                if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
                     
                     
@@ -406,6 +700,17 @@ public struct ContentViewWAQI: View {
                         self.windDirection_acronymn = ""
                         
                     }
+                    
+                    // Calculate Farenheit from Celcius for ClimaCell
+                    celciusForCalculationClimaCell = climaCellData[0].feelsLike?.value ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius  * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    self.fahrenheitForDisplayClimaCell = calculateFahrenheit(celcius: celciusForCalculationClimaCell)
+                    
                 }
             }
         }
@@ -420,4 +725,5 @@ public struct ContentViewWAQI: View {
             }
         }
     }
+    
 }

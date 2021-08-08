@@ -15,7 +15,7 @@ struct ProfileEditor: View {
     
     @AppStorage("ElectricalConsumptionDataWanted") var ElectricalConsumptionDataWanted = false
     
-    @AppStorage("AircraftDataWanted") var AircraftDataWanted = true
+//    @AppStorage("AircraftDataWanted") var AircraftDataWanted = true
     
     @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
     
@@ -25,8 +25,11 @@ struct ProfileEditor: View {
     var body: some View {
         List {
             Text("Please choose air quality data source, and enter desired station ID.")
+                .font(.caption)
             Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
+                .font(.caption)
             Text("For PurpleAir, please enter 4 or 5 digit sensor ID as read from PurpleAir.com Map view URL")
+            
             HStack{
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
                     Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
@@ -47,9 +50,9 @@ struct ProfileEditor: View {
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumption data")
             }
-            Toggle(isOn: $AircraftDataWanted) {
-                Text("Enable Aircraft Overhead data")
-            }
+//            Toggle(isOn: $AircraftDataWanted) {
+//                Text("Enable Aircraft Overhead data")
+//            }
             .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
