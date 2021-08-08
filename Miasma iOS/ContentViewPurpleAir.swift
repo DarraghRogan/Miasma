@@ -28,7 +28,7 @@ public struct ContentViewPurpleAir: View {
     @State var carbonIntensity: Double = 0.0
     @State var fossilFuelPercentage: Double = 0.0
     
-    @State var openSkyAircraftInBox: Int = 0
+//    @State var openSkyAircraftInBox: Int = 0
     
     // Defining VARs for ClimaCell
     @State var windDirection_acronymn: String = "___"
@@ -132,14 +132,6 @@ public struct ContentViewPurpleAir: View {
     
     
     public var body: some View {
-        
-        //        GeometryReader { geometry in
-        
-        //            ZStack {
-        //
-        //                MapView(coordinate: locationCoordinate)
-        //                //            .edgesIgnoringSafeArea(.top)
-        //                //            .frame(height: 140)
         
         VStack
         {
@@ -280,41 +272,6 @@ public struct ContentViewPurpleAir: View {
                         .ignoresSafeArea()
                         
                     }
-                    
-                    
-//                    if ProfileEditor().AircraftDataWanted == true
-//                    {
-//
-//                        VStack{
-//                            if ProgressIndicatorShown == true{
-//                                ProgressView()
-//                            }
-//                            Link("ᴀɪʀᴄʀᴀғᴛ ᴏᴠᴇʀʜᴇᴀᴅ",
-//                                 destination: URL(string: "https://opensky-network.org/")!)
-//                                .padding(.top, 5.0)
-//                                .font(.headline)
-//
-//                            HStack {
-//                                ProgressView("✈️ \(openSkyAircraftInBox) ±1° ᴏᴠᴇʀʜᴇᴀᴅ", value: Float16(openSkyAircraftInBox), total: 20)
-//                                    .padding(.top, 0.5)
-//                                    .padding(.bottom, 4.0)
-//                                    .accentColor(.purple)
-//                                    .onAppear() {
-//                                        self.updateListEntry()
-//                                    }
-//
-//                            }
-//
-//                            HStack {
-//                                Spacer()
-//                                Text("(OpenSky) ⇀")
-//                                    .font(.footnote)
-//                                    .padding(.bottom, 5.0)
-//
-//                            }
-//                        }
-//                        .ignoresSafeArea()
-//                    }
                 }
                 
                 
@@ -328,27 +285,6 @@ public struct ContentViewPurpleAir: View {
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
                             .padding(.top, 8.0)
                             .font(.headline)
-                        
-//                        HStack {
-//                            Text("🌦")
-//                            Spacer()
-//                            Text("Will be \(climaCellWeatherCode), feel like \(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉, with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-//                                .font(.footnote)
-//                                .padding(.top, 5.0)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
-//                        }
-//                        HStack {
-//                            Text("☁️")
-//                            Spacer()
-//                            Text("Air Quality will be \(climaCellEPAAQI) US EPA PM₂.₅ AQI, with primary pollutant of: \(climaCellEPAPrimaryPollutant)")
-//                                .font(.footnote)
-//                                .padding(.top, 5.0)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
-//                        }
 
                         HStack {
                             ZStack{
@@ -359,8 +295,8 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌡")
-                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃ / \(fahrenheitForDisplay)℉")
-                                    Text("Apparent")
+                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
+                                    Text("/ \(fahrenheitForDisplay)℉")
                                 }
                             }
                             .onAppear() {
@@ -376,8 +312,10 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🪁")
-                                    Text("\(String(format: "%.1f", locale: Locale.current, climaCellWindSpeed))m/s / \(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                    Text("\(windDirection_acronymn)")
+                                    Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
+                                        .font(.caption)
+                                    Text("ғʀᴏᴍ \(windDirection_acronymn)")
+                                        .font(.caption)
                                 }
                             }
                             .onAppear() {
@@ -392,8 +330,10 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("☁️")
-                                    Text("\(climaCellEPAAQI) AQI")
-                                    Text("\(climaCellEPAPrimaryPollutant)")
+                                    Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
+                                        .font(.caption)
+                                    Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
+                                        .font(.caption)
                                 }
                             }
                             .onAppear() {
@@ -410,8 +350,8 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌳")
-                                    Text("\(climaCellPollenTree)")
                                     Text("Tree")
+                                    Text("Pollen")
                                 }
                             }
                             .onAppear() {
@@ -427,8 +367,8 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌱")
-                                    Text("\(climaCellPollenGrass)")
                                     Text("Grass")
+                                    Text("Pollen")
                                 }
                             }
                             .onAppear() {
@@ -443,8 +383,8 @@ public struct ContentViewPurpleAir: View {
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("💐")
-                                    Text("\(climaCellPollenWeed)")
                                     Text("Weed")
+                                    Text("Pollen")
                                 }
                             }
                             .onAppear() {
@@ -462,13 +402,11 @@ public struct ContentViewPurpleAir: View {
                         
                         
                     }
-                    //                            .background(Color.gray.opacity(0.5))
                     .ignoresSafeArea()
                     
                 }
                 
-                //                    .frame(alignment: .bottom)
-                //                    .opacity(0.7)
+
                 Button("🔄", action: {
                     updateListEntry()
                 } )
@@ -476,11 +414,9 @@ public struct ContentViewPurpleAir: View {
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 
             }
-            //                .opacity(0.7)
         }
         
     }
-    //    }
     
     
     
@@ -516,48 +452,40 @@ public struct ContentViewPurpleAir: View {
                 switch (pM2_5Value) {
                 case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                     
-                    //                    self.pM2_5ColourButton = "[🟢_____]"
                     self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
-                    //                    self.pM2_5ColourButton = "[_🟡_____]"
                     self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
-                    //                    self.pM2_5ColourButton = "[__🟠____]"
                     self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
-                    //                    self.pM2_5ColourButton = "[___🔴___]"
                     aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
-                    //                    self.pM2_5ColourButton = "[____🟣__]"
                     self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
-                    //                    self.pM2_5ColourButton = "[_____🟤_]"
                     self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 500.5:
-                    //                    self.pM2_5ColourButton = "[______🟤]"
                     self.aQI_CalculatedRounded = 500
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
                 default:
-                    //                    self.pM2_5ColourButton = "[_______]"
                     self.aQI_CalculatedRounded = 0
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
@@ -576,17 +504,6 @@ public struct ContentViewPurpleAir: View {
                 
                 // Determine pressure visual
                 let pressureValue = Double(purpleAirViewModel.purpleAirdata.pressureA ?? 0)
-                // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                switch (pressureValue) {
-                case _ where pressureValue < 1009.144:
-                    self.pressure_visual = "[Low/______/____]"
-                case _ where pressureValue > 1009.144 && pressureValue < 1022.689:
-                    self.pressure_visual = "[___/Normal/____]"
-                case _ where pressureValue > 1022.689:
-                    self.pressure_visual = "[___/______/High]"
-                default:
-                    self.pressure_visual = ""
-                }
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
@@ -594,10 +511,6 @@ public struct ContentViewPurpleAir: View {
                     DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 }
                 
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: sensorLatitude-1, lomin: sensorLongitude-1, lamax: sensorLatitude+1, lomax: sensorLongitude+1)
-                }
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -608,10 +521,10 @@ public struct ContentViewPurpleAir: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 7.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +6s list entries")
+                print("updating +7s list entries")
                 
                 ProgressIndicatorShown = false
                 
@@ -621,38 +534,7 @@ public struct ContentViewPurpleAir: View {
                     self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
                     
                     self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        self.fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        self.fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        self.fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        self.fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = "[          ]"
-                    }
                     
-                }
-                
-                if ProfileEditor().AircraftDataWanted == true
-                {
-                    self.openSkyAircraftInBox = openSkyData.states?.count ?? 0
                 }
                 
                 
