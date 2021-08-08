@@ -29,7 +29,7 @@ struct ProfileEditor: View {
             Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
                 .font(.caption)
             Text("For PurpleAir, please enter 4 or 5 digit sensor ID as read from PurpleAir.com Map view URL")
-            
+                .font(.caption)
             HStack{
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
                     Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})

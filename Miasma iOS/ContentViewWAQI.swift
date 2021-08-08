@@ -152,19 +152,9 @@ public struct ContentViewWAQI: View {
                     Link("\(wAQIViewModel.wAQIdata.city?.name ?? "◌")",
                          destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                         .font(.headline)
-                    
-//                    HStack {
-//                        Text("🌍")
-//                        Spacer()
-//                        Text(wAQIViewModel.wAQIdata.city?.name ?? "0")
-//                            .font(.footnote)
-//                            .padding(.top, 5.0)
-//                    }
-                    
 
-                    
                     HStack {
-                        ProgressView("☁️ \(wAQIViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ", value: Float16(wAQIViewModel.wAQIdata.aqi ?? 0), total: 500)
+                        ProgressView("☁️ \(wAQIViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴘʀɪᴍᴀʀɪʟʏ \(wAQIViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIViewModel.wAQIdata.aqi ?? 0), total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
@@ -174,56 +164,76 @@ public struct ContentViewWAQI: View {
 
                     }
                     
-//                    HStack {
-//                        Text("☁️")
-//                        Spacer()
-//                        Text("US EPA PM₂.₅ AQI is \(String(wAQIViewModel.wAQIdata.aqi ?? 0)) \(wAQIAQIColourButton)")
-//                            .font(.footnote)
-//                            .padding(.top, 5.0)
-//                    }
+                    HStack {
+                        ZStack{
+                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)+17.78, total: 60)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("🌡")
+                                    .font(.title)
+                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
+                                Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                        Spacer()
+                        ZStack{
+                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("💧")
+                                    .font(.title)
+                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0))%")
+                                Text("ʀᴇʟ. ʜᴜᴍ.")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                        Spacer()
+                        ZStack{
+                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("🌬️")
+                                    .font(.title)
+                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
+                                Text("ᴘʀᴇs.")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                }
                     
                     HStack {
-                        Text("🎯")
                         Spacer()
-                        Text("Dominant Pollutant is \(wAQIViewModel.wAQIdata.dominentpol ?? "0")")
+                        Text("\(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")")
                             .font(.footnote)
-                            .padding(.top, 5.0)
-                        
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
                     }
-                    
-                    HStack {
-                        Text("🌡")
-                        Spacer()
-                        Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃ / \(fahrenheitForDisplayWAQI)℉")
-                            .font(.footnote)
-                            .padding(.top, 5.0)
-                    }
-                    
                     HStack {
                         Spacer()
-                        Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0"), \(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0"); User Selected Station (WAQI) ⇀")
+                        Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0"); User Selected Station (WAQI) ⇀")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
                     }
-                    
-//                    HStack {
-//                        Text("📅")
-//                        Spacer()
-//                        Text("Taken: \(String(wAQIViewModel.wAQIdata.time?.s ?? "0")) \(String(wAQIViewModel.wAQIdata.time?.tz ?? "0"))")
-//                            .font(.footnote)
-//                            .padding(.top, 5.0)
-//                    }
-//
-//                    HStack {
-//                        Text("📜")
-//                        Spacer()
-//                        Text(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")
-//                            .font(.footnote)
-//                            .padding(.top, 5.0)
-//                    }
                     
                 }
                 
@@ -275,7 +285,7 @@ public struct ContentViewWAQI: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
+                        Link("ᴏɴᴇ ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
                             .padding(.top, 8.0)
                             .font(.headline)
@@ -608,10 +618,10 @@ public struct ContentViewWAQI: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +7s list entries")
+                print("updating +8s list entries")
                 
                 ProgressIndicatorShown = false
                 
