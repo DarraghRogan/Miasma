@@ -9,11 +9,11 @@
 import SwiftUI
 import CoreLocation
 
-public struct ContentViewWAQI: View {
+public struct ContentViewSmartCitizen: View {
     
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
     
-    @ObservedObject var wAQIViewModel = WAQIViewModel()
+    @ObservedObject var smartCitizenViewModel = SmartCitizenViewModel()
     
     @State var ProgressIndicatorShown = true
     
@@ -46,8 +46,8 @@ public struct ContentViewWAQI: View {
 
     
     // Defining VARs for WAQI
-    @State var wAQIAQI: Int = 0
-    @State var fahrenheitForDisplayWAQI: String = "0"
+    @State var smartCitizenAQI: Int = 0
+    @State var fahrenheitForDisplaySmartCitizen: String = "0"
     
     // Defining the Progress Bar Styles
     struct aQIProgressBarStyle: ProgressViewStyle {
@@ -148,12 +148,12 @@ public struct ContentViewWAQI: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("\(wAQIViewModel.wAQIdata.city?.name ?? "◌")",
-                         destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
+                    Link("\(smartCitizenData.data?.location?.city ?? "◌")",
+                         destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
                         .font(.headline)
 
                     HStack {
-                        ProgressView("☁️ \(wAQIViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴘʀɪᴍᴀʀɪʟʏ \(wAQIViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIViewModel.wAQIdata.aqi ?? 0), total: 500)
+                        ProgressView("☁️ \(smartCitizenData.data?.sensors?[8].value ?? 0) PM2.5", value: Float16(smartCitizenData.data?.sensors?[8].value ?? 0), total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
@@ -165,7 +165,7 @@ public struct ContentViewWAQI: View {
                     
                     HStack {
                         ZStack{
-                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)+17.78, total: 57)
+                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[10].value ?? 0)+17.78, total: 57)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
@@ -173,8 +173,8 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌡")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
-                                Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                                Text("\(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃")
+                                Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                             }
                         }
                         .onAppear() {
@@ -182,7 +182,7 @@ public struct ContentViewWAQI: View {
                         }
                         Spacer()
                         ZStack{
-                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
+                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[9].value ?? 0), total: 100)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
@@ -190,7 +190,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("💧")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0))%")
+                                Text("\(String(smartCitizenData.data?.sensors?[9].value ?? 0))%")
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
@@ -199,7 +199,7 @@ public struct ContentViewWAQI: View {
                         }
                         Spacer()
                         ZStack{
-                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
+                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[5].value ?? 980)-980, total: 50)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
@@ -207,7 +207,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
+                                Text("\(String(smartCitizenData.data?.sensors?[5].value ?? 0))mb")
                                 Text("ᴘʀᴇs.")
                             }
                         }
@@ -216,17 +216,10 @@ public struct ContentViewWAQI: View {
                         }
                 }
                     
+
                     HStack {
                         Spacer()
-                        Text("\(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")")
-                            .font(.footnote)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-                    }
-                    HStack {
-                        Spacer()
-                        Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0"); User Selected Station (WAQI) ⇀")
+                        Text("User Selected Station (SmartCitizen) ⇀")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
                             .onAppear() {
@@ -437,8 +430,8 @@ public struct ContentViewWAQI: View {
         
         ProgressIndicatorShown = true
         
-        wAQIViewModel.getWAQI()
-        wAQIViewModel.objectWillChange.send()
+        smartCitizenViewModel.getSmartCitizen()
+        smartCitizenViewModel.objectWillChange.send()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
@@ -449,37 +442,33 @@ public struct ContentViewWAQI: View {
                 ProgressIndicatorShown = true
                 
                 // Get Latitude & longitude to feed into other APIs
-                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
+                self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenData.data?.location?.latitude ?? 0, smartCitizenData.data?.location?.longitude ?? 0)
                 
-                self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
-                self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
+                self.sensorLatitude = smartCitizenData.data?.location?.latitude ?? 0
+                self.sensorLongitude = smartCitizenData.data?.location?.longitude ?? 0
                 
-                self.locationCoordinate = CLLocationCoordinate2DMake(wAQIViewModel.wAQIdata.city?.geo[0] ?? 0, wAQIViewModel.wAQIdata.city?.geo[1] ?? 0)
-                
-                self.sensorLatitude = wAQIViewModel.wAQIdata.city?.geo[0] ?? 0
-                self.sensorLongitude = wAQIViewModel.wAQIdata.city?.geo[1] ?? 0
                 
                 
                 // Create AQI images
-                wAQIAQI = wAQIViewModel.wAQIdata.aqi ?? 0
-                switch (wAQIAQI) {
-                case _ where wAQIAQI >= 0 && wAQIAQI < 50:
+                smartCitizenAQI = Int(smartCitizenData.data?.sensors?[8].value ?? 0)
+                switch (smartCitizenAQI) {
+                case _ where smartCitizenAQI >= 0 && smartCitizenAQI < 50:
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI >= 51 && wAQIAQI < 100:
+                case _ where smartCitizenAQI >= 51 && smartCitizenAQI < 100:
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI >= 101 && wAQIAQI < 200:
+                case _ where smartCitizenAQI >= 101 && smartCitizenAQI < 200:
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI >= 201 && wAQIAQI < 300:
+                case _ where smartCitizenAQI >= 201 && smartCitizenAQI < 300:
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI >= 301 && wAQIAQI < 400:
+                case _ where smartCitizenAQI >= 301 && smartCitizenAQI < 400:
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
-                case _ where wAQIAQI >= 400:
+                case _ where smartCitizenAQI >= 400:
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                 default:
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
                 
-                self.fahrenheitForDisplayWAQI = calculateFahrenheit(celcius: wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)
+                self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: smartCitizenData.data?.sensors?[10].value ?? 0)
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true

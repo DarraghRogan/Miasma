@@ -26,7 +26,8 @@ public struct ContentView: View {
                 ContentViewWAQI()
             case _ where airQualityDataSource == "PurpleAir" :
                 ContentViewPurpleAir()
-                
+            case _ where airQualityDataSource == "SmartCitizen" :
+                ContentViewSmartCitizen()
             default:
                 Link("Miasma ⇀",
                      destination: URL(string: "https://miasma.app")!)

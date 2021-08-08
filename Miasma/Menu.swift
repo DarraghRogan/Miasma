@@ -1571,7 +1571,7 @@ class menuFunctions: NSObject {
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
                     
-                    self.smartCitizenTemperature.title = "🌡: \(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃"
+                    self.smartCitizenTemperature.title = "🌡: \(String())℃"smartCitizenData.data?.sensors?[10].value ?? 0
                     
                     self.smartCitizenHumidity.title = "💧: \(String(smartCitizenData.data?.sensors?[9].value ?? 0))%"
                     
