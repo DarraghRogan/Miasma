@@ -32,11 +32,12 @@ struct Sensor: Codable {
     var lastSeen: Int?
 //    var lastModified, sensorPrivate: Int?
 //    var channelState, channelFlagsManual,
-    var humidityA, temperatureA: Int?
-    var pressureA: Double?
+    var humidity, temperature: Int?
+    var pressure: Double?
 //    var pm10_A, pm10_B: Double?
     var pm25_A: Double?
     var pm25_B: Double?
+    var pm25_cf_1: Double?
 //    var pm100_A, pm100_B: Double?
 //    var the03_UmCountA: Int?
 //    var the03_UmCountB, the05_UmCountA, the05_UmCountB, the10_UmCountA: Double?
@@ -69,13 +70,14 @@ struct Sensor: Codable {
 //        case sensorPrivate = "private"
 //        case channelState = "channel_state"
 //        case channelFlagsManual = "channel_flags_manual"
-        case humidityA = "humidity_a"
-        case temperatureA = "temperature_a"
-        case pressureA = "pressure_a"
+        case humidity = "humidity"
+        case temperature = "temperature"
+        case pressure = "pressure"
 //        case pm10_A = "pm1.0_a"
 //        case pm10_B = "pm1.0_b"
         case pm25_A = "pm2.5_a"
         case pm25_B = "pm2.5_b"
+        case pm25_cf_1 = "pm2.5_cf_1"
 //        case pm100_A = "pm10.0_a"
 //        case pm100_B = "pm10.0_b"
 //        case the03_UmCountA = "0.3_um_count_a"

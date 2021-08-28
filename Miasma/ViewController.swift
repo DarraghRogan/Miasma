@@ -190,6 +190,22 @@
     
     @IBOutlet weak var PurpleAirSavedIDLabel: NSTextField!
     
+    @IBAction func PurpleAirConversionEPAButtonAction(_ sender: Any) {
+        if PurpleAirConversionEPAButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(0, forKey: "PurpleAirConversionFactorEPAInUse")
+        }
+        if PurpleAirConversionEPAButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(1, forKey: "PurpleAirConversionFactorEPAInUse")
+        }
+    }
+    
+    @IBOutlet weak var PurpleAirConversionEPAButtonOutlet: NSButton!
+    
+    @IBAction func PurpleAirConversionEPAMoreInfoButton(_ sender: Any) {
+        NSWorkspace.shared.open(URL(string: "https://www2.purpleair.com/community/faq#hc-should-i-use-the-conversion-factors-on-the-purpleair-map-1")!)
+
+    }
+    
     
     
     @IBOutlet weak var WAQIRadioOutlet: NSButton!
@@ -554,6 +570,7 @@
         
         ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
+        PurpleAirConversionEPAButtonOutlet.state = AppDelegate().defaults.object(forKey:"PurpleAirConversionFactorEPAInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         if AppDelegate().defaults.double(forKey:"RefreshIntervalSeconds") == 600.0{
             RefreshIntervalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)

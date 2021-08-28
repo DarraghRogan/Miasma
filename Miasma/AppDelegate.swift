@@ -74,12 +74,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set("🟢", forKey: "PreviousStateForNotification")
             
             
-            // this is where users should end up and allows population of the RefreshInterval feature introduced in 1.21
-        } else if (defaults.bool(forKey: "First Launch") == true && isKeyPresentInUserDefaults(key: "RefreshIntervalSeconds") == false ) {
+            // this is where users should end up, and allows population of the RefreshInterval & PurpleAir EPA conversion factor features introduced in 1.21
+        } else if (defaults.bool(forKey: "First Launch") == true && isKeyPresentInUserDefaults(key: "RefreshIntervalSeconds") == false ) && isKeyPresentInUserDefaults(key: "PurpleAirConversionFactorEPAInUse") == false {
             
             defaults.set("🟢", forKey: "PreviousStateForNotification")
             defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
-            
+            defaults.set(0, forKey: "PurpleAirConversionFactorEPAInUse")
+
             
             // this is where most returning users should end up and they need an initial state for the notifications
         } else if defaults.bool(forKey: "First Launch") == true  {
@@ -100,6 +101,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(50, forKey:"FallingAQINotificationsTrigger")
             defaults.set("🟢", forKey: "PreviousStateForNotification")
             defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
+            defaults.set(0, forKey: "PurpleAirConversionFactorEPAInUse")
+
         }
         
         // Launching automatically at startup from tutorial: https://theswiftdev.com/how-to-launch-a-macos-app-at-login/

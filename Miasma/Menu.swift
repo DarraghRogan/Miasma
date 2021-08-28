@@ -370,7 +370,20 @@ class menuFunctions: NSObject {
                 
                 // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                 
-                var pM2_5Value = round(((purpleAirData.sensor?.pm25_A ?? 0) + (purpleAirData.sensor?.pm25_B ?? 0))/2)
+                var pM2_5Value: Double
+                var conversionFactorInUse: String
+                
+                if AppDelegate().defaults.integer(forKey:"PurpleAirConversionFactorEPAInUse") == 1 {
+                    let pM2_5_CF = purpleAirData.sensor?.pm25_cf_1 ?? 0
+                    let relativeHumidity = (purpleAirData.sensor?.humidity ?? 0)+4
+                    
+                    pM2_5Value = round((0.52*pM2_5_CF) - (0.085 * Double(relativeHumidity)) + 5.71)
+                    conversionFactorInUse = "🔥"
+                } else {
+                    pM2_5Value = round(((purpleAirData.sensor?.pm25_A ?? 0) + (purpleAirData.sensor?.pm25_B ?? 0))/2)
+                    conversionFactorInUse = ""
+                }
+                
                 let pM2_5ColourButton: String
                 let aQI_CalculatedDouble: Double
                 var aQI_CalculatedRounded: Int = 0
@@ -559,11 +572,11 @@ class menuFunctions: NSObject {
                     self.purpleAirPM2_5StatusBarIcon.title = "⚪"
                     statusItem.button?.title = "M \(self.purpleAirPM2_5StatusBarIcon.title)"
                 }
-                self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                self.purpleAirPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(pM2_5Value)) μg/m³ PM₂.₅ (Current) \(conversionFactorInUse)                       \(pM2_5ColourButton)"
                 
                 // note including -8F & +4% corrections to temp & RH per: https://www.reddit.com/r/PurpleAir/comments/j14qln/temperature_reported_from_web_map_vs_api_mismatch/
                 
-                let PurpleAirFahrenheit = (purpleAirData.sensor?.temperatureA ?? 0)-8
+                let PurpleAirFahrenheit = (purpleAirData.sensor?.temperature ?? 0)-8
                 func calculateCelsius(fahrenheit: Double) -> String {
                     var celsius: Double
                     celsius = (fahrenheit - 32) * 5 / 9
@@ -572,9 +585,9 @@ class menuFunctions: NSObject {
                 }
                 self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉"
                 
-                self.purpleAirHumidity.title = "💧: \(String((purpleAirData.sensor?.humidityA ?? 0)+4))% Relative Humidity"
+                self.purpleAirHumidity.title = "💧: \(String((purpleAirData.sensor?.humidity ?? 0)+4))% Relative Humidity"
                 
-                var pressureValue = Double(purpleAirData.sensor?.pressureA ?? 0) ?? 0
+                var pressureValue = Double(purpleAirData.sensor?.pressure ?? 0) ?? 0
                 let pressure_visual: String
                 // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                 switch (pressureValue) {
@@ -587,7 +600,7 @@ class menuFunctions: NSObject {
                 default:
                     pressure_visual = ""
                 }
-                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.sensor?.pressureA ?? 0)) millibar                                                      \(pressure_visual)"
+                self.purpleAirPressure.title = "🌬️: \(String(purpleAirData.sensor?.pressure ?? 0)) millibar                                                           \(pressure_visual)"
                 self.purpleAirReadingAge.title = "⏳: \(String(Int((NSDate().timeIntervalSince1970))-(purpleAirData.sensor?.lastSeen ?? 0))) seconds old at Miasma refresh time"
             })
             
@@ -636,7 +649,7 @@ class menuFunctions: NSObject {
                         fossilFuelPercentage_visual = ""
                     }
                     
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:                 \(fossilFuelPercentage_visual)"
                     
                     
                 })
