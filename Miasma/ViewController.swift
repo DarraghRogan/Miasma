@@ -389,6 +389,21 @@
     
     @IBOutlet weak var ClimaCellButtonOutlet: NSButton!
     
+    @IBAction func RefreshIntervalButtonAction(_ sender: Any) {
+        if RefreshIntervalButtonOutlet.state == NSControl.StateValue.off {
+            AppDelegate().defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
+            ClimaCellButtonOutlet.isEnabled.self = true
+        }
+        if RefreshIntervalButtonOutlet.state == NSControl.StateValue.on {
+            AppDelegate().defaults.set(600.0, forKey: "RefreshIntervalSeconds")
+            AppDelegate().defaults.set(false, forKey: "ClimaCellInUse")
+            ClimaCellButtonOutlet.isEnabled.self = false
+            ClimaCellButtonOutlet.state.self = NSControl.StateValue.off
+
+        }
+    }
+    
+    @IBOutlet weak var RefreshIntervalButtonOutlet: NSButton!
     
     
     @IBOutlet weak var autoRunAtStartup: NSButton!
@@ -538,6 +553,12 @@
         OpenSkyButtonOutlet.state = AppDelegate().defaults.object(forKey:"OpenSkyInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        
+        
+        if AppDelegate().defaults.double(forKey:"RefreshIntervalSeconds") == 600.0{
+            RefreshIntervalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+            ClimaCellButtonOutlet.isEnabled.self = false
+        }
         
         
         if AppDelegate().defaults.integer(forKey:"PurpleAirInUse") == 1{

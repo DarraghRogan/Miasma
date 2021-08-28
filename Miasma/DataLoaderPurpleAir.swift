@@ -228,7 +228,7 @@ public class DataLoaderPurpleAir {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the Purple Air API")
+                print("Miasma received from the Purple Air API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

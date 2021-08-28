@@ -153,7 +153,7 @@ public struct ContentViewSmartCitizen: View {
                         .font(.headline)
 
                     HStack {
-                        ProgressView("☁️ \(smartCitizenData.data?.sensors?[8].value ?? 0) PM2.5", value: Float16(smartCitizenData.data?.sensors?[8].value ?? 0), total: 500)
+                        ProgressView("☁️ \(String(smartCitizenViewModel.sensors[8].value ?? 0))PM2.5", value: Float16(smartCitizenViewModel.Welcome.sensors[8].value ?? 0.0), total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)

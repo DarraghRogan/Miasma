@@ -73,11 +73,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")
             defaults.set("🟢", forKey: "PreviousStateForNotification")
             
-           // this is where most returning users should end up and they need an initial state for the notifications
-        } else if defaults.bool(forKey: "First Launch") == true  {
-
+            
+            // this is where users should end up and allows population of the RefreshInterval feature introduced in 1.21
+        } else if (defaults.bool(forKey: "First Launch") == true && isKeyPresentInUserDefaults(key: "RefreshIntervalSeconds") == false ) {
+            
             defaults.set("🟢", forKey: "PreviousStateForNotification")
-
+            defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
+            
+            
+            // this is where most returning users should end up and they need an initial state for the notifications
+        } else if defaults.bool(forKey: "First Launch") == true  {
+            
+            defaults.set("🟢", forKey: "PreviousStateForNotification")
+            
             // default config for new users
         } else {
             
@@ -91,6 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(1, forKey:"FallingAQINotificationsWanted")
             defaults.set(50, forKey:"FallingAQINotificationsTrigger")
             defaults.set("🟢", forKey: "PreviousStateForNotification")
+            defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
         }
         
         // Launching automatically at startup from tutorial: https://theswiftdev.com/how-to-launch-a-macos-app-at-login/
@@ -100,7 +109,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
         
         SMLoginItemSetEnabled(launcherAppId as CFString, self.defaults.bool(forKey: "AutorunAtStartup"))
-
+        
         if isRunning {
             DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)
         }
@@ -113,7 +122,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         //        menuFunctions().menuRefresh(NSMenuItem)
         
         // periodically update the menu
-        _ = Timer.scheduledTimer(withTimeInterval: 1200.0, repeats: true) { timer in
+        _ = Timer.scheduledTimer(withTimeInterval: (AppDelegate().defaults.object(forKey:"RefreshIntervalSeconds") as? Double ?? Double()), repeats: true) { timer in
             self.statusBarItemController = menuFunctions()        }
         
     }

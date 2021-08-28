@@ -10,18 +10,18 @@ import Foundation
 import Combine
 
 struct SmartCitizenResponse: Codable {
-    let smartCitizendata: SmartCitizenDataClass
+    let smartCitizendata: Welcome
     
-    enum CodingKeys: String, CodingKey {
-        case smartCitizendata = "data"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case smartCitizendata = "/"
+//    }
 }
 
 
 
 class SmartCitizenViewModel: ObservableObject {
     
-    @Published var smartCitizendata: SmartCitizenDataClass = SmartCitizenDataClass()
+    @Published var smartCitizendata: Welcome = Welcome()
     
     var smartCitizenCancellationToken: AnyCancellable?
     
@@ -35,7 +35,7 @@ class SmartCitizenViewModel: ObservableObject {
 extension SmartCitizenViewModel {
     
     func getSmartCitizen() {
-        smartCitizenCancellationToken = SmartCitizenDB.request(.city)
+        smartCitizenCancellationToken = SmartCitizenDB.request(.station)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
@@ -44,7 +44,7 @@ extension SmartCitizenViewModel {
                   receiveValue: {
                     self.smartCitizendata = $0.smartCitizendata
                   })
-        print(ProfileEditor().SensorID)
+//        print(ProfileEditor().SensorID)
         print(smartCitizendata)
     }
 }
@@ -63,11 +63,16 @@ struct SmartCitizenAPIClient {
             .tryMap { result -> Response<T> in
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
+                
 //                print(Response<Any>.self)
+                print(result.response)
+                
                 return Response(value: value, response: result.response)
+                
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
+        
         
     }
 }
@@ -78,7 +83,7 @@ enum SmartCitizenDB {
 }
 
 enum SmartCitizenAPIPath: String {
-    case city = "/"
+    case station = ""
 }
 
 extension SmartCitizenDB {
@@ -87,7 +92,7 @@ extension SmartCitizenDB {
         
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
-        components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
+//        components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
         
         let request = URLRequest(url: components.url!)
         
@@ -97,6 +102,7 @@ extension SmartCitizenDB {
             
             .map(\.value)
             .eraseToAnyPublisher()
+        
     }
 }
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
@@ -112,7 +118,7 @@ struct SmartCitizenDataStructure: Codable {
     //    var lastReadingAt, addedAt, updatedAt: Date?
     //    var macAddress: String?
     var owner: Owner?
-    var data: SmartCitizenDataClass?
+    var data: Welcome?
     //    var kit: Kit?
     
     enum CodingKeys: String, CodingKey {
@@ -137,7 +143,7 @@ struct SmartCitizenDataStructure: Codable {
 }
 
 // MARK: - DataClass
-struct SmartCitizenDataClass: Codable {
+struct Welcome: Codable {
     //    var recordedAt, addedAt: Date?
     var location: DataLocation?
     var sensors: [SmartCitizenSensor]?
@@ -512,25 +518,25 @@ class JSONAny: Codable {
 // define an instance of the data that can be filled by the data loader and read by the menu
 var smartCitizenData = SmartCitizenDataStructure()
 
-public class DataLoaderSmartCitizen {
-    
-    
-    func loadSmartCitizenData(id:String) {
-        
-        let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.smartcitizen.me/v0/devices/\(id)")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        
-        
-        request.httpMethod = "GET"
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
+//public class DataLoaderSmartCitizen {
+//
+//
+//    func loadSmartCitizenData(id:String) {
+//
+//        let request = NSMutableURLRequest(url: NSURL(string:
+//                                                        "https://api.smartcitizen.me/v0/devices/\(id)")! as URL,
+//                                          cachePolicy: .useProtocolCachePolicy,
+//                                          timeoutInterval: 10.0)
+//
+//
+//        request.httpMethod = "GET"
+//
+//        let session = URLSession.shared
+//        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+//            if (error != nil) {
+//                print(error)
+//            } else {
+//                let httpResponse = response as? HTTPURLResponse
 //                print("Received from the SmartCitizen API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -538,20 +544,20 @@ public class DataLoaderSmartCitizen {
 //                } else {
 //                    print("error with printing string encoded data")
 //                }
-                //Parse JSON
-                let decoder = JSONDecoder()
-                do {
-                    let dataFromSmartCitizen = try decoder.decode(SmartCitizenDataStructure.self, from: data!)
-                    smartCitizenData = dataFromSmartCitizen
-                    
-                }
-                catch {
-                    print("Error in SmartCitizen JSON parsing")
-                    //                    print(purpleAirData)
-                }
-            }
-        })
-        
-        dataTask.resume()
-    }
-}
+//                //Parse JSON
+//                let decoder = JSONDecoder()
+//                do {
+//                    let dataFromSmartCitizen = try decoder.decode(SmartCitizenDataStructure.self, from: data!)
+//                    smartCitizenData = dataFromSmartCitizen
+//
+//                }
+//                catch {
+//                    print("Error in SmartCitizen JSON parsing")
+//                    //                    print(purpleAirData)
+//                }
+//            }
+//        })
+//
+//        dataTask.resume()
+//    }
+//}

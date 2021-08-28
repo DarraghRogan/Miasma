@@ -232,7 +232,7 @@ class menuFunctions: NSObject {
         )
         
         let menuRefresh = NSMenuItem(
-            title: "Refresh (automatically every 20 mins)",
+            title: "Refresh (automatically every \((AppDelegate().defaults.object(forKey:"RefreshIntervalSeconds") as? Double ?? Double())/60) mins)",
             action: #selector(menuFunctions.menuRefresh(_:)),
             keyEquivalent: "r"
         )
@@ -1571,7 +1571,7 @@ class menuFunctions: NSObject {
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
                     
-                    self.smartCitizenTemperature.title = "🌡: \(String())℃"smartCitizenData.data?.sensors?[10].value ?? 0
+                    self.smartCitizenTemperature.title = "🌡: \(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃"
                     
                     self.smartCitizenHumidity.title = "💧: \(String(smartCitizenData.data?.sensors?[9].value ?? 0))%"
                     
