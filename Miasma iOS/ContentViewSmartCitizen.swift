@@ -148,12 +148,12 @@ public struct ContentViewSmartCitizen: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("\(smartCitizenViewModel.smartCitizendata.data?.location?.city ?? "◌")",
+                    Link("\(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌")",
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
                         .font(.headline)
 
                     HStack {
-                        ProgressView("☁️ \(String(smartCitizenViewModel.smartCitizendata.data?.sensors?[8].value ?? 0))PM2.5", value: smartCitizenViewModel.smartCitizendata.data?.sensors?[8].value ?? 0, total: 500)
+                        ProgressView("☁️ \(String(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))PM2.5", value: smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0, total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
@@ -442,15 +442,15 @@ public struct ContentViewSmartCitizen: View {
                 ProgressIndicatorShown = true
                 
                 // Get Latitude & longitude to feed into other APIs
-                self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenViewModel.smartCitizendata.data?.location?.latitude ?? 0, smartCitizenViewModel.smartCitizendata.data?.location?.longitude ?? 0)
+                self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0, smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0)
                 
-                self.sensorLatitude = smartCitizenViewModel.smartCitizendata.data?.location?.latitude ?? 0
-                self.sensorLongitude = smartCitizenViewModel.smartCitizendata.data?.location?.longitude ?? 0
+                self.sensorLatitude = smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0
+                self.sensorLongitude = smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0
                 
                 
                 
                 // Create AQI images
-                smartCitizenAQI = Int(smartCitizenViewModel.smartCitizendata.data?.sensors?[8].value ?? 0)
+                smartCitizenAQI = Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0)
                 switch (smartCitizenAQI) {
                 case _ where smartCitizenAQI >= 0 && smartCitizenAQI < 50:
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
@@ -468,7 +468,7 @@ public struct ContentViewSmartCitizen: View {
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
                 
-                self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: smartCitizenViewModel.smartCitizendata.data?.sensors?[10].value ?? 0)
+                self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
