@@ -162,71 +162,71 @@ public struct ContentViewSmartCitizen: View {
                             }
 
                     }
-//
-//                    HStack {
-//                        ZStack{
-//                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[10].value ?? 0)+17.78, total: 57)
-//                                .progressViewStyle(GaugeProgressStyle())
-//                                .frame(width: 100, height: 100)
-//                                .contentShape(Rectangle())
-//                                                        .padding(.bottom, 4.0)
-//                            VStack{
-//                                Text("🌡")
-//                                    .font(.title)
-//                                Text("\(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃")
-//                                Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
-//                            }
-//                        }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
-//                        Spacer()
-//                        ZStack{
-//                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[9].value ?? 0), total: 100)
-//                                .progressViewStyle(GaugeProgressStyle())
-//                                .frame(width: 100, height: 100)
-//                                .contentShape(Rectangle())
-//                                                        .padding(.bottom, 4.0)
-//                            VStack{
-//                                Text("💧")
-//                                    .font(.title)
-//                                Text("\(String(smartCitizenData.data?.sensors?[9].value ?? 0))%")
-//                                Text("ʀᴇʟ. ʜᴜᴍ.")
-//                            }
-//                        }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
-//                        Spacer()
-//                        ZStack{
-//                            ProgressView("", value: Float16(smartCitizenData.data?.sensors?[5].value ?? 980)-980, total: 50)
-//                                .progressViewStyle(GaugeProgressStyle())
-//                                .frame(width: 100, height: 100)
-//                                .contentShape(Rectangle())
-//                                                        .padding(.bottom, 4.0)
-//                            VStack{
-//                                Text("🌬️")
-//                                    .font(.title)
-//                                Text("\(String(smartCitizenData.data?.sensors?[5].value ?? 0))mb")
-//                                Text("ᴘʀᴇs.")
-//                            }
-//                        }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
-//                }
-//
-//
-//                    HStack {
-//                        Spacer()
-//                        Text("User Selected Station (SmartCitizen) ⇀")
-//                            .font(.footnote)
-//                            .padding(.bottom, 10.0)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-//                    }
-//
+
+                    HStack {
+                        ZStack{
+                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)+17.78, total: 57)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("🌡")
+                                    .font(.title)
+                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0))℃")
+                                Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                        Spacer()
+                        ZStack{
+                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0), total: 100)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("💧")
+                                    .font(.title)
+                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0))%")
+                                Text("ʀᴇʟ. ʜᴜᴍ.")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                        Spacer()
+                        ZStack{
+                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 980)-980, total: 50)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 100, height: 100)
+                                .contentShape(Rectangle())
+                                                        .padding(.bottom, 4.0)
+                            VStack{
+                                Text("🌬️")
+                                    .font(.title)
+                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0))mb")
+                                Text("ᴘʀᴇs.")
+                            }
+                        }
+                        .onAppear() {
+                            self.updateListEntry()
+                        }
+                }
+
+
+                    HStack {
+                        Spacer()
+                        Text("User Selected Station (SmartCitizen) ⇀")
+                            .font(.footnote)
+                            .padding(.bottom, 10.0)
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                    }
+
                 }
                 
                 HStack{
