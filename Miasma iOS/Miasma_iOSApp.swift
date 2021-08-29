@@ -12,7 +12,8 @@ import AppTrackingTransparency
 import AdSupport
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
+                        [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // set up user defaults for people
         // this is where returning users should end up
@@ -32,20 +33,17 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         // Initialise Google Ads
         
-        func requestIDFA() {
-          ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-            // Tracking authorization completed. Start loading ads here.
-            // loadAd()
-          })
-        }
-        
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+            GADMobileAds.sharedInstance().start(completionHandler: nil)
+        })
         
         return true
         
     }
     // Define the User Defaults to hold settings
     public let defaults = UserDefaults.standard
+    
+    
 }
 
 
