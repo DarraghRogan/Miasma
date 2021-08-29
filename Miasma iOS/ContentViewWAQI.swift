@@ -37,7 +37,7 @@ public struct ContentViewWAQI: View {
     @State var climaCellFeelsLike: Double = 0.0
     @State var climaCellWindSpeed: Double = 0.0
     @State var climaCellEPAAQI: Int = 0
-    @State var climaCellEPAPrimaryPollutant: String = "◌"
+    @State var climaCellPrimaryPollutant: String = "◌"
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
@@ -343,7 +343,7 @@ public struct ContentViewWAQI: View {
                                         .font(.title)
                                     Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
                                         .font(.caption)
-                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
+                                    Text("ᴍᴀɪɴʟʏ \(self.climaCellPrimaryPollutant)")
                                         .font(.caption)
                                 }
                             }
@@ -519,9 +519,9 @@ public struct ContentViewWAQI: View {
                 }
 
                 
-                // a little protection fro when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
+                // a little protection from when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
                 var isIndexValid: Bool = false
-                if 2 < climaCellData.count {
+                if 2 < climaCellData.data?.timelines?[0].intervals?.count ?? 0 {
                     isIndexValid = true
                 } else {
                     
@@ -529,19 +529,19 @@ public struct ContentViewWAQI: View {
                 
                 if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
+
                     
+//                    self.climaCellWeatherCode = ClimaCellWeatherCodeText
+                    self.climaCellWindDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
+                    self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
+                    self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
+                    self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0
+//                    self.climaCellEPAPrimaryPollutant = ClimaCellPrimaryPollutant
+                    self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
+                    self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
+                    self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)
                     
-                    self.climaCellWeatherCode = climaCellData[0].weatherCode?.value ?? "0"
-                    self.climaCellWindDirection = climaCellData[0].windDirection?.value ?? 0
-                    self.climaCellFeelsLike = climaCellData[0].feelsLike?.value ?? 0
-                    self.climaCellWindSpeed = climaCellData[0].windSpeed?.value ?? 0
-                    self.climaCellEPAAQI = Int(round(climaCellData[0].epaAqi?.value ?? 0))
-                    self.climaCellEPAPrimaryPollutant = climaCellData[0].epaPrimaryPollutant?.value ?? "0"
-                    self.climaCellPollenTree = Int(climaCellData[0].pollenTree?.value ?? 0)
-                    self.climaCellPollenGrass = Int(climaCellData[0].pollenGrass?.value ?? 0)
-                    self.climaCellPollenWeed = Int(climaCellData[0].pollenWeed?.value ?? 0)
-                    
-                    let windDirection = climaCellData[0].windDirection?.value ?? 0
+                    let windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
                     switch (windDirection) {
                     case _ where windDirection < 45:
@@ -562,11 +562,89 @@ public struct ContentViewWAQI: View {
                         self.windDirection_acronymn = "NNW"
                     default:
                         self.windDirection_acronymn = ""
-                        
+                    }
+                    
+                    let climaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
+                    var ClimaCellPrimaryPollutantText: String
+                    switch climaCellPrimaryPollutant {
+                    case _ where climaCellPrimaryPollutant == 0:
+                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                    case _ where climaCellPrimaryPollutant == 1:
+                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                    case _ where climaCellPrimaryPollutant == 2:
+                        ClimaCellPrimaryPollutantText = "O₃"
+                    case _ where climaCellPrimaryPollutant == 3:
+                        ClimaCellPrimaryPollutantText = "NO₂"
+                    case _ where climaCellPrimaryPollutant == 4:
+                        ClimaCellPrimaryPollutantText = "CO"
+                    case _ where climaCellPrimaryPollutant == 5:
+                        ClimaCellPrimaryPollutantText = "SO₂"
+                    default:
+                        ClimaCellPrimaryPollutantText = "Unknown"
+                    }
+                    
+                    
+                    let climaCellWeatherCodeNumeric = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    var ClimaCellWeatherCodeText: String
+                    switch climaCellWeatherCodeNumeric {
+                    case _ where climaCellWeatherCodeNumeric == 1000:
+                        climaCellWeatherCode = "Clear"
+                    case _ where climaCellWeatherCodeNumeric == 1001:
+                        ClimaCellWeatherCodeText = "Cloudy"
+                    case _ where climaCellWeatherCodeNumeric == 1100:
+                        ClimaCellWeatherCodeText = "Mostly Clear"
+                    case _ where climaCellWeatherCodeNumeric == 1101:
+                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                    case _ where climaCellWeatherCodeNumeric == 1102:
+                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                    case _ where climaCellWeatherCodeNumeric == 2000:
+                        ClimaCellWeatherCodeText = "Fog"
+                    case _ where climaCellWeatherCodeNumeric == 2100:
+                        ClimaCellWeatherCodeText = "Light Fog"
+                    case _ where climaCellWeatherCodeNumeric == 3000:
+                        ClimaCellWeatherCodeText = "Light Wind"
+                    case _ where climaCellWeatherCodeNumeric == 3001:
+                        ClimaCellWeatherCodeText = "Wind"
+                    case _ where climaCellWeatherCodeNumeric == 3002:
+                        ClimaCellWeatherCodeText = "Strong Wind"
+                    case _ where climaCellWeatherCodeNumeric == 4000:
+                        ClimaCellWeatherCodeText = "Drizzle"
+                    case _ where climaCellWeatherCodeNumeric == 4001:
+                        ClimaCellWeatherCodeText = "Rain"
+                    case _ where climaCellWeatherCodeNumeric == 4200:
+                        ClimaCellWeatherCodeText = "Light Rain"
+                    case _ where climaCellWeatherCodeNumeric == 4201:
+                        ClimaCellWeatherCodeText = "Heavy Rain"
+                    case _ where climaCellWeatherCodeNumeric == 5000:
+                        ClimaCellWeatherCodeText = "Snow"
+                    case _ where climaCellWeatherCodeNumeric == 5001:
+                        ClimaCellWeatherCodeText = "Flurries"
+                    case _ where climaCellWeatherCodeNumeric == 5100:
+                        ClimaCellWeatherCodeText = "Light Snow"
+                    case _ where climaCellWeatherCodeNumeric == 5101:
+                        ClimaCellWeatherCodeText = "Heavy Snow"
+                    case _ where climaCellWeatherCodeNumeric == 6000:
+                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                    case _ where climaCellWeatherCodeNumeric == 6001:
+                        ClimaCellWeatherCodeText = "Freezing Rain"
+                    case _ where climaCellWeatherCodeNumeric == 6200:
+                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                    case _ where climaCellWeatherCodeNumeric == 6201:
+                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                    case _ where climaCellWeatherCodeNumeric == 7000:
+                        ClimaCellWeatherCodeText = "Ice Pellets"
+                    case _ where climaCellWeatherCodeNumeric == 7101:
+                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                    case _ where climaCellWeatherCodeNumeric == 7102:
+                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                    case _ where climaCellWeatherCodeNumeric == 8000:
+                        ClimaCellWeatherCodeText = "Thunderstorm"
+                    default:
+                        ClimaCellWeatherCodeText = "Unknown"
                     }
                     
                     // Calculate Farenheit from Celcius for ClimaCell
-                    celciusForCalculationClimaCell = climaCellData[0].feelsLike?.value ?? 0
+                    celciusForCalculationClimaCell = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius  * 9 / 5) + 32
