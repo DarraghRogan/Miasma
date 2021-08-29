@@ -24,11 +24,10 @@ struct ProfileEditor: View {
     
     var body: some View {
         List {
+            Text("Miasma Preferences")
+                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .font(.title)
             Text("Please choose air quality data source, and enter desired station ID.")
-                .font(.caption)
-            Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
-                .font(.caption)
-            Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
                 .font(.caption)
             HStack{
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
@@ -47,8 +46,12 @@ struct ProfileEditor: View {
                     .disableAutocorrection(true)
                     .autocapitalization(UITextAutocapitalizationType.none)
             }
+            Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
+                .font(.caption)
+            Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
+                .font(.caption)
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
-                Text("Enable Electricty Consumption data")
+                Text("Enable Electricty Consumpt. data")
             }
             //            Toggle(isOn: $AircraftDataWanted) {
             //                Text("Enable Aircraft Overhead data")

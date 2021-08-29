@@ -14,13 +14,14 @@ struct ProfileSummary: View {
     
     var body: some View {
         List {
-            Text("Miasma")
+            Text("Miasma Preferences")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
             HStack{
-                Text("\(ProfileEditor().AirQualityDataSource) Station:")
+                Text("Air Quality data:")
                 Spacer()
-                Text("\(ProfileEditor().SensorID)")
+                Text("\(ProfileEditor().AirQualityDataSource)")
+                Text("(\(ProfileEditor().SensorID))")
             }
             
             HStack{
@@ -28,11 +29,11 @@ struct ProfileSummary: View {
                 Spacer()
                 Text("\((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
             }
-//            HStack{
-//                Text("Aircraft Overhead data:")
-//                Spacer()
-//                Text("\((ProfileEditor().AircraftDataWanted) ? "On": "Off" )")
-//            }
+            //            HStack{
+            //                Text("Aircraft Overhead data:")
+            //                Spacer()
+            //                Text("\((ProfileEditor().AircraftDataWanted) ? "On": "Off" )")
+            //            }
             HStack{
                 Text("1 Hour Forecast:")
                 Spacer()
@@ -43,8 +44,16 @@ struct ProfileSummary: View {
             //                Spacer()
             //                Text("\((ProfileEditor().NotificationsWanted) ? "On": "Off" )")
             //            }
-            Link("Review / Suggestions for Miasma", destination: URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
-            Link("About Miasma", destination: URL(string: "https://miasma.app")!)
+            HStack{
+                Text("Review / Feedback for Miasma")
+                Spacer()
+                Link("⇀", destination: URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
+            }
+            HStack{
+                Text("About Miasma")
+                Spacer()
+                Link("⇀", destination: URL(string: "https://miasma.app")!)
+            }
             HStack{
                 Text("Version:")
                 Spacer()
