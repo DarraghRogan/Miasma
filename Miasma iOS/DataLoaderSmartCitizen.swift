@@ -65,7 +65,7 @@ struct SmartCitizenAPIClient {
                     T.self, from: result.data)
                 
                 //                print(Response<Any>.self)
-                print(result.response)
+//                print(result.response)
                 
                 return Response(value: value, response: result.response)
                 
@@ -96,7 +96,7 @@ extension SmartCitizenDB {
         
         let request = URLRequest(url: components.url!)
         
-        print(request)
+//        print(request)
         
         return apiClient.run(request)
             

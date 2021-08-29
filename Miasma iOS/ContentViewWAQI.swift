@@ -61,6 +61,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.green)
                         Spacer()
                         Text("Good")
+                            .italic()
                     }
                 case 0.1..<0.2:
                     HStack{
@@ -68,6 +69,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.yellow)
                         Spacer()
                         Text("Moderate")
+                            .italic()
                     }
                 case 0.2..<0.3:
                     HStack{
@@ -75,6 +77,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.orange)
                         Spacer()
                         Text("Unhealthy for Sensitive Groups")
+                            .italic()
                     }
                 case 0.3..<0.4:
                     HStack{
@@ -82,6 +85,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.red)
                         Spacer()
                         Text("Unhealthy")
+                            .italic()
                     }
                 case 0.4..<0.6:
                     HStack{
@@ -89,6 +93,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.purple)
                         Spacer()
                         Text("Very Unhealthy")
+                            .italic()
                     }
                 case 0.6..<1:
                     HStack{
@@ -96,6 +101,7 @@ public struct ContentViewWAQI: View {
                             .accentColor(.black)
                         Spacer()
                         Text("Hazardous")
+                            .italic()
                     }
                 default:
                     ProgressView(configuration)
@@ -173,7 +179,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌡")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
+                                Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)))℃")
                                 Text("/ \(self.fahrenheitForDisplayWAQI)℉")
                             }
                         }
@@ -190,7 +196,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("💧")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0))%")
+                                Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0)))%")
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
@@ -207,7 +213,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.title)
-                                Text("\(String(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
+                                Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0)))mb")
                                 Text("ᴘʀᴇs.")
                             }
                         }
@@ -236,7 +242,7 @@ public struct ContentViewWAQI: View {
                     
                 }
                 
-                HStack{
+
                     if ProfileEditor().ElectricalConsumptionDataWanted == true
                     {
                         
@@ -275,7 +281,6 @@ public struct ContentViewWAQI: View {
                         .ignoresSafeArea()
                         
                     }
-                }
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
@@ -319,7 +324,7 @@ public struct ContentViewWAQI: View {
                                         .font(.title)
                                     Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                         .font(.caption)
-                                    Text("ғʀᴏᴍ \(windDirection_acronymn)")
+                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
                                         .font(.caption)
                                 }
                             }
@@ -336,9 +341,9 @@ public struct ContentViewWAQI: View {
                                 VStack{
                                     Text("☁️")
                                         .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
                                         .font(.caption)
-                                    Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
+                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
                                         .font(.caption)
                                 }
                             }

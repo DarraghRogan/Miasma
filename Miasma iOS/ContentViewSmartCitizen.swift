@@ -43,10 +43,12 @@ public struct ContentViewSmartCitizen: View {
     @State var climaCellPollenWeed: Int = 0
     @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
-
     
-    // Defining VARs for WAQI
-    @State var smartCitizenAQI: Int = 0
+    
+    // Defining VARs for SmartCitizen
+    @State var pM2_5Value: Double = 0
+    @State var aQI_CalculatedDouble: Double = 0
+    @State var aQI_CalculatedRounded: Double = 0
     @State var fahrenheitForDisplaySmartCitizen: String = "0"
     
     // Defining the Progress Bar Styles
@@ -61,6 +63,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.green)
                         Spacer()
                         Text("Good")
+                            .italic()
                     }
                 case 0.1..<0.2:
                     HStack{
@@ -68,6 +71,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.yellow)
                         Spacer()
                         Text("Moderate")
+                            .italic()
                     }
                 case 0.2..<0.3:
                     HStack{
@@ -75,6 +79,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.orange)
                         Spacer()
                         Text("Unhealthy for Sensitive Groups")
+                            .italic()
                     }
                 case 0.3..<0.4:
                     HStack{
@@ -82,6 +87,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.red)
                         Spacer()
                         Text("Unhealthy")
+                            .italic()
                     }
                 case 0.4..<0.6:
                     HStack{
@@ -89,6 +95,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.purple)
                         Spacer()
                         Text("Very Unhealthy")
+                            .italic()
                     }
                 case 0.6..<1:
                     HStack{
@@ -96,6 +103,7 @@ public struct ContentViewSmartCitizen: View {
                             .accentColor(.black)
                         Spacer()
                         Text("Hazardous")
+                            .italic()
                     }
                 default:
                     ProgressView(configuration)
@@ -148,32 +156,32 @@ public struct ContentViewSmartCitizen: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("\(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌")",
+                    Link("\(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
                         .font(.headline)
-
+                    
                     HStack {
-                        ProgressView("☁️ \(String(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))PM2.5", value: smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0, total: 500)
+                        ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
                             .onAppear() {
                                 self.updateListEntry()
                             }
-
+                        
                     }
-
+                    
                     HStack {
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)+17.78, total: 57)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
                                     .font(.title)
-                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0))℃")
+                                Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)))℃")
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                             }
                         }
@@ -186,11 +194,11 @@ public struct ContentViewSmartCitizen: View {
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("💧")
                                     .font(.title)
-                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0))%")
+                                Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0)))%")
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
@@ -199,24 +207,24 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Spacer()
                         ZStack{
-                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 980)-980, total: 50)
+                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 98)-98, total: 5)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌬️")
                                     .font(.title)
-                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0))mb")
+                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0))kPa")
                                 Text("ᴘʀᴇs.")
                             }
                         }
                         .onAppear() {
                             self.updateListEntry()
                         }
-                }
-
-
+                    }
+                    
+                    
                     HStack {
                         Spacer()
                         Text("User Selected Station (SmartCitizen) ⇀")
@@ -226,49 +234,48 @@ public struct ContentViewSmartCitizen: View {
                                 self.updateListEntry()
                             }
                     }
-
+                    
                 }
                 
-                HStack{
-                    if ProfileEditor().ElectricalConsumptionDataWanted == true
-                    {
-                        
-                        VStack{
-                            if ProgressIndicatorShown == true{
-                                ProgressView()
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                             destination: URL(string: "https://www.electricitymap.org/")!)
+                            .padding(.top, 5.0)
+                            .font(.headline)
+                            .onAppear() {
+                                self.updateListEntry()
                             }
-                            Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
-                                 destination: URL(string: "https://www.electricitymap.org/")!)
-                                .padding(.top, 5.0)
-                                .font(.headline)
+                        
+                        
+                        HStack {
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                                .accentColor(.green)
+                                .padding(.top, 0.5)
+                                .padding(.bottom, 4.0)
                                 .onAppear() {
                                     self.updateListEntry()
                                 }
-                            
-                            
-                            HStack {
-                                ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
-                                    .accentColor(.green)
-                                    .padding(.top, 0.5)
-                                    .padding(.bottom, 4.0)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
-                            }
-                            
-                            HStack {
-                                Spacer()
-                                Text("(CO₂ Signal) ⇀")
-                                    .font(.footnote)
-                                    .padding(.bottom, 5.0)
-                                
-                            }
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Text("(CO₂ Signal) ⇀")
+                                .font(.footnote)
+                                .padding(.bottom, 5.0)
                             
                         }
-                        .ignoresSafeArea()
                         
                     }
+                    .ignoresSafeArea()
+                    
                 }
+                
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
@@ -312,7 +319,7 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.title)
                                     Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                         .font(.caption)
-                                    Text("ғʀᴏᴍ \(windDirection_acronymn)")
+                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
                                         .font(.caption)
                                 }
                             }
@@ -329,9 +336,9 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("☁️")
                                         .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
                                         .font(.caption)
-                                    Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
+                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
                                         .font(.caption)
                                 }
                             }
@@ -449,22 +456,46 @@ public struct ContentViewSmartCitizen: View {
                 
                 
                 
-                // Create AQI images
-                smartCitizenAQI = Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0)
-                switch (smartCitizenAQI) {
-                case _ where smartCitizenAQI >= 0 && smartCitizenAQI < 50:
+                // Calculate AQI & create images
+                self.pM2_5Value = round((smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0.0))
+                switch (pM2_5Value) {
+                case _ where pM2_5Value >= 0 && pM2_5Value < 12:
+                    
+                    self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
-                case _ where smartCitizenAQI >= 51 && smartCitizenAQI < 100:
+                    
+                case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
+                    self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
-                case _ where smartCitizenAQI >= 101 && smartCitizenAQI < 200:
+                    
+                case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
+                    self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
-                case _ where smartCitizenAQI >= 201 && smartCitizenAQI < 300:
+                    
+                case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
+                    aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
-                case _ where smartCitizenAQI >= 301 && smartCitizenAQI < 400:
+                    
+                case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
+                    self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
-                case _ where smartCitizenAQI >= 400:
+                    
+                case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
+                    self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
+                    self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
+                    
+                case _ where pM2_5Value >= 500.5:
+                    self.aQI_CalculatedRounded = 500
+                    AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
+                    
                 default:
+                    self.aQI_CalculatedRounded = 0
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
                 
@@ -476,7 +507,7 @@ public struct ContentViewSmartCitizen: View {
                     DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 }
                 
-
+                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -499,9 +530,9 @@ public struct ContentViewSmartCitizen: View {
                     self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
                     
                     self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-
+                    
                 }
-
+                
                 
                 // a little protection fro when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
                 var isIndexValid: Bool = false

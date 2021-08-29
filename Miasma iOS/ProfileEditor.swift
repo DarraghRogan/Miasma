@@ -28,7 +28,7 @@ struct ProfileEditor: View {
                 .font(.caption)
             Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
                 .font(.caption)
-            Text("For PurpleAir, please enter 4 to 6 digit sensor ID as read from PurpleAir.com Map view URL")
+            Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
                 .font(.caption)
             HStack{
                 Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
@@ -53,7 +53,7 @@ struct ProfileEditor: View {
             //            Toggle(isOn: $AircraftDataWanted) {
             //                Text("Enable Aircraft Overhead data")
             //            }
-            .disabled(/*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
+            .disabled(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }

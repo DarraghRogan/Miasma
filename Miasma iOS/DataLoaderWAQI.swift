@@ -91,7 +91,7 @@ extension WAQIDB {
         
         let request = URLRequest(url: components.url!)
         
-        print(request)
+//        print(request)
         
         return apiClient.run(request)
             

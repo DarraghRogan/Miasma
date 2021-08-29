@@ -65,6 +65,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.green)
                         Spacer()
                         Text("Good")
+                            .italic()
                     }
                 case 0.1..<0.2:
                     HStack{
@@ -72,6 +73,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.yellow)
                         Spacer()
                         Text("Moderate")
+                            .italic()
                     }
                 case 0.2..<0.3:
                     HStack{
@@ -79,6 +81,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.orange)
                         Spacer()
                         Text("Unhealthy for Sensitive Groups")
+                            .italic()
                     }
                 case 0.3..<0.4:
                     HStack{
@@ -86,6 +89,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.red)
                         Spacer()
                         Text("Unhealthy")
+                            .italic()
                     }
                 case 0.4..<0.6:
                     HStack{
@@ -93,6 +97,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.purple)
                         Spacer()
                         Text("Very Unhealthy")
+                            .italic()
                     }
                 case 0.6..<1:
                     HStack{
@@ -100,6 +105,7 @@ public struct ContentViewPurpleAir: View {
                             .accentColor(.black)
                         Spacer()
                         Text("Hazardous")
+                            .italic()
                     }
                 default:
                     ProgressView(configuration)
@@ -236,7 +242,6 @@ public struct ContentViewPurpleAir: View {
                 }
                 .ignoresSafeArea()
                 
-                HStack{
                     if ProfileEditor().ElectricalConsumptionDataWanted == true
                     {
                         
@@ -275,7 +280,6 @@ public struct ContentViewPurpleAir: View {
                         .ignoresSafeArea()
                         
                     }
-                }
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
@@ -319,7 +323,7 @@ public struct ContentViewPurpleAir: View {
                                         .font(.title)
                                     Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
                                         .font(.caption)
-                                    Text("ғʀᴏᴍ \(windDirection_acronymn)")
+                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
                                         .font(.caption)
                                 }
                             }
@@ -336,9 +340,9 @@ public struct ContentViewPurpleAir: View {
                                 VStack{
                                     Text("☁️")
                                         .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴀǫɪ ᴜs ᴇᴘᴀ")
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
                                         .font(.caption)
-                                    Text("ᴘʀɪᴍᴀʀɪʟʏ \(climaCellEPAPrimaryPollutant)")
+                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
                                         .font(.caption)
                                 }
                             }
