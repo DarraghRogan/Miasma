@@ -44,7 +44,9 @@ struct Miasma_WidgetEntryView : View {
 
     var body: some View {
         Text(entry.date, style: .time)
-        Text("Hello")
+        Text("Hello simpletons")
+//        Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
+                    .font(.largeTitle)
     }
 }
 

@@ -13,7 +13,6 @@
 		0218A77A256DBBD500B2D684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A779256DBBD500B2D684 /* SwiftUI.framework */; };
 		0218A77D256DBBD500B2D684 /* Miasma_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218A77C256DBBD500B2D684 /* Miasma_Widget.swift */; };
 		0218A77F256DBBD700B2D684 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0218A77E256DBBD700B2D684 /* Assets.xcassets */; };
-		0218A783256DBBD700B2D684 /* Miasma WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 0218A776256DBBD500B2D684 /* Miasma WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */; };
 		022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */; };
 		023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */; };
@@ -57,13 +56,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0218A781256DBBD700B2D684 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0283DD7D24F051B700E4CC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0218A775256DBBD500B2D684;
-			remoteInfo = "Miasma WidgetExtension";
-		};
 		0293625124FA54FC003EA39C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0283DD7D24F051B700E4CC07 /* Project object */;
@@ -144,17 +136,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		0218A784256DBBD700B2D684 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				0218A783256DBBD700B2D684 /* Miasma WidgetExtension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		02F3C76624FA544C006ED277 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,7 +196,7 @@
 		02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewPurpleAir.swift; sourceTree = "<group>"; };
 		02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentViewWAQI.swift; sourceTree = "<group>"; };
 		02D06EC7250CB48800D81189 /* DataLoaderClimaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderClimaCell.swift; sourceTree = "<group>"; };
-		02D15EBC2534F5F20064ADA3 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		02D15EBC2534F5F20064ADA3 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		02D5AB57252A144B007E73DC /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
@@ -427,12 +408,10 @@
 				023BBDE825251AC3006E8054 /* Frameworks */,
 				023BBDE925251AC3006E8054 /* Resources */,
 				761D19D42BAB7394909232F9 /* [CP] Embed Pods Frameworks */,
-				0218A784256DBBD700B2D684 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				0218A782256DBBD700B2D684 /* PBXTargetDependency */,
 			);
 			name = "Miasma iOS";
 			productName = "Miasma iOS";
@@ -679,11 +658,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0218A782256DBBD700B2D684 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0218A775256DBBD500B2D684 /* Miasma WidgetExtension */;
-			targetProxy = 0218A781256DBBD700B2D684 /* PBXContainerItemProxy */;
-		};
 		0293625224FA54FC003EA39C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 02F3C75224FA53A5006ED277 /* MiasmaLauncher */;
@@ -808,12 +782,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 86006E1E02079EBDF218BAC3 /* Pods-Miasma iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -837,12 +810,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C147F1933793B35CCDF0319B /* Pods-Miasma iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;

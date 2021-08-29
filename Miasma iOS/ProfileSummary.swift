@@ -21,7 +21,7 @@ struct ProfileSummary: View {
                 Text("Air Quality data:")
                 Spacer()
                 Text("\(ProfileEditor().AirQualityDataSource)")
-                Text("(\(ProfileEditor().SensorID))")
+                Text("\(ProfileEditor().SensorID)")
             }
             
             HStack{

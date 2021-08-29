@@ -58,6 +58,10 @@ public struct ContentView: View {
                     airQualityDataSource = "PurpleAir"
                     ContentViewPurpleAir().updateListEntry()
                 }
+                else if ProfileEditor().AirQualityDataSource == "SmartCitizen"{
+                    airQualityDataSource = "SmartCitizen"
+                    ContentViewPurpleAir().updateListEntry()
+                }
                }) {
             ProfileHost()
         }
