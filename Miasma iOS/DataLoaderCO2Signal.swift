@@ -62,12 +62,12 @@ var cO2Data = CO2DataStructure()
             } else {
                 let httpResponse = response as? HTTPURLResponse
                 print("Received from the CO2 API")
-//                if let data = data,
-//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
+                if let data = data,
+                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                    print(urlContent)
+                } else {
+                    print("error with printing string encoded data")
+                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
