@@ -598,62 +598,61 @@ public struct ContentViewSmartCitizen: View {
                     
                     
                     let climaCellWeatherCodeNumeric = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
-                    var ClimaCellWeatherCodeText: String
                     switch climaCellWeatherCodeNumeric {
                     case _ where climaCellWeatherCodeNumeric == 1000:
                         climaCellWeatherCode = "Clear"
                     case _ where climaCellWeatherCodeNumeric == 1001:
-                        ClimaCellWeatherCodeText = "Cloudy"
+                        climaCellWeatherCode = "Cloudy"
                     case _ where climaCellWeatherCodeNumeric == 1100:
-                        ClimaCellWeatherCodeText = "Mostly Clear"
+                        climaCellWeatherCode = "Mostly Clear"
                     case _ where climaCellWeatherCodeNumeric == 1101:
-                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                        climaCellWeatherCode = "Partly Cloudy"
                     case _ where climaCellWeatherCodeNumeric == 1102:
-                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                        climaCellWeatherCode = "Mostly Cloudy"
                     case _ where climaCellWeatherCodeNumeric == 2000:
-                        ClimaCellWeatherCodeText = "Fog"
+                        climaCellWeatherCode = "Fog"
                     case _ where climaCellWeatherCodeNumeric == 2100:
-                        ClimaCellWeatherCodeText = "Light Fog"
+                        climaCellWeatherCode = "Light Fog"
                     case _ where climaCellWeatherCodeNumeric == 3000:
-                        ClimaCellWeatherCodeText = "Light Wind"
+                        climaCellWeatherCode = "Light Wind"
                     case _ where climaCellWeatherCodeNumeric == 3001:
-                        ClimaCellWeatherCodeText = "Wind"
+                        climaCellWeatherCode = "Wind"
                     case _ where climaCellWeatherCodeNumeric == 3002:
-                        ClimaCellWeatherCodeText = "Strong Wind"
+                        climaCellWeatherCode = "Strong Wind"
                     case _ where climaCellWeatherCodeNumeric == 4000:
-                        ClimaCellWeatherCodeText = "Drizzle"
+                        climaCellWeatherCode = "Drizzle"
                     case _ where climaCellWeatherCodeNumeric == 4001:
-                        ClimaCellWeatherCodeText = "Rain"
+                        climaCellWeatherCode = "Rain"
                     case _ where climaCellWeatherCodeNumeric == 4200:
-                        ClimaCellWeatherCodeText = "Light Rain"
+                        climaCellWeatherCode = "Light Rain"
                     case _ where climaCellWeatherCodeNumeric == 4201:
-                        ClimaCellWeatherCodeText = "Heavy Rain"
+                        climaCellWeatherCode = "Heavy Rain"
                     case _ where climaCellWeatherCodeNumeric == 5000:
-                        ClimaCellWeatherCodeText = "Snow"
+                        climaCellWeatherCode = "Snow"
                     case _ where climaCellWeatherCodeNumeric == 5001:
-                        ClimaCellWeatherCodeText = "Flurries"
+                        climaCellWeatherCode = "Flurries"
                     case _ where climaCellWeatherCodeNumeric == 5100:
-                        ClimaCellWeatherCodeText = "Light Snow"
+                        climaCellWeatherCode = "Light Snow"
                     case _ where climaCellWeatherCodeNumeric == 5101:
-                        ClimaCellWeatherCodeText = "Heavy Snow"
+                        climaCellWeatherCode = "Heavy Snow"
                     case _ where climaCellWeatherCodeNumeric == 6000:
-                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                        climaCellWeatherCode = "Freezing Drizzle"
                     case _ where climaCellWeatherCodeNumeric == 6001:
-                        ClimaCellWeatherCodeText = "Freezing Rain"
+                        climaCellWeatherCode = "Freezing Rain"
                     case _ where climaCellWeatherCodeNumeric == 6200:
-                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                        climaCellWeatherCode = "Light Freezing Rain"
                     case _ where climaCellWeatherCodeNumeric == 6201:
-                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                        climaCellWeatherCode = "Heavy Freezing Rain"
                     case _ where climaCellWeatherCodeNumeric == 7000:
-                        ClimaCellWeatherCodeText = "Ice Pellets"
+                        climaCellWeatherCode = "Ice Pellets"
                     case _ where climaCellWeatherCodeNumeric == 7101:
-                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                        climaCellWeatherCode = "Heavy Ice Pellets"
                     case _ where climaCellWeatherCodeNumeric == 7102:
-                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                        climaCellWeatherCode = "Light Ice Pellets"
                     case _ where climaCellWeatherCodeNumeric == 8000:
-                        ClimaCellWeatherCodeText = "Thunderstorm"
+                        climaCellWeatherCode = "Thunderstorm"
                     default:
-                        ClimaCellWeatherCodeText = "Unknown"
+                        climaCellWeatherCode = "Unknown"
                     }
                     
                     // Calculate Farenheit from Celcius for ClimaCell
