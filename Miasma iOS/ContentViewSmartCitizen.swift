@@ -185,9 +185,9 @@ public struct ContentViewSmartCitizen: View {
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0), total: 100)
@@ -202,9 +202,9 @@ public struct ContentViewSmartCitizen: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 98)-98, total: 5)
@@ -219,9 +219,9 @@ public struct ContentViewSmartCitizen: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                     }
                     
                     
@@ -230,9 +230,9 @@ public struct ContentViewSmartCitizen: View {
                         Text("User Selected Station (SmartCitizen) ⇀")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     
                 }
@@ -248,9 +248,9 @@ public struct ContentViewSmartCitizen: View {
                              destination: URL(string: "https://www.electricitymap.org/")!)
                             .padding(.top, 5.0)
                             .font(.headline)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         
                         
                         HStack {
@@ -258,9 +258,9 @@ public struct ContentViewSmartCitizen: View {
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
                         }
                         
                         HStack {
@@ -303,9 +303,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -323,9 +323,9 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
@@ -342,9 +342,9 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {
@@ -360,9 +360,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -377,9 +377,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
@@ -393,9 +393,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {

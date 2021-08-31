@@ -186,9 +186,9 @@ public struct ContentViewPurpleAir: View {
                                 Text("/ \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         
                         Spacer()
                         ZStack{
@@ -204,9 +204,9 @@ public struct ContentViewPurpleAir: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         Spacer()
                         ZStack{
                             ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 980)-980), total: 50)
@@ -221,9 +221,9 @@ public struct ContentViewPurpleAir: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         
                         
                     }
@@ -234,9 +234,9 @@ public struct ContentViewPurpleAir: View {
                         Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     
                 }
@@ -253,9 +253,9 @@ public struct ContentViewPurpleAir: View {
                              destination: URL(string: "https://www.electricitymap.org/")!)
                             .padding(.top, 5.0)
                             .font(.headline)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         
                         
                         HStack {
@@ -263,9 +263,9 @@ public struct ContentViewPurpleAir: View {
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
                         }
                         
                         HStack {
@@ -307,9 +307,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("/ \(fahrenheitForDisplay)℉")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -327,9 +327,9 @@ public struct ContentViewPurpleAir: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
@@ -346,9 +346,9 @@ public struct ContentViewPurpleAir: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {
@@ -364,9 +364,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -381,9 +381,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
@@ -397,9 +397,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {

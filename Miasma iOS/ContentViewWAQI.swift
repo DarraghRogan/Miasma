@@ -183,9 +183,9 @@ public struct ContentViewWAQI: View {
                                 Text("/ \(self.fahrenheitForDisplayWAQI)℉")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
@@ -200,9 +200,9 @@ public struct ContentViewWAQI: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
@@ -217,27 +217,27 @@ public struct ContentViewWAQI: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-                        .onAppear() {
-                            self.updateListEntry()
-                        }
+//                        .onAppear() {
+//                            self.updateListEntry()
+//                        }
                 }
                     
                     HStack {
                         Spacer()
                         Text("\(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")")
                             .font(.footnote)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     HStack {
                         Spacer()
                         Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0"); User Selected Station (WAQI) ⇀")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                     }
                     
                 }
@@ -254,9 +254,9 @@ public struct ContentViewWAQI: View {
                                  destination: URL(string: "https://www.electricitymap.org/")!)
                                 .padding(.top, 5.0)
                                 .font(.headline)
-                                .onAppear() {
-                                    self.updateListEntry()
-                                }
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
                             
                             
                             HStack {
@@ -264,9 +264,9 @@ public struct ContentViewWAQI: View {
                                     .accentColor(.green)
                                     .padding(.top, 0.5)
                                     .padding(.bottom, 4.0)
-                                    .onAppear() {
-                                        self.updateListEntry()
-                                    }
+//                                    .onAppear() {
+//                                        self.updateListEntry()
+//                                    }
                             }
                             
                             HStack {
@@ -308,9 +308,9 @@ public struct ContentViewWAQI: View {
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -328,9 +328,9 @@ public struct ContentViewWAQI: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
@@ -347,9 +347,9 @@ public struct ContentViewWAQI: View {
                                         .font(.caption)
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {
@@ -365,9 +365,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             
                             Spacer()
                             ZStack{
@@ -382,9 +382,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
@@ -398,9 +398,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                         }
                         
                         HStack {
