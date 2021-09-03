@@ -93,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
             defaults.set(true, forKey: "First Launch")
             defaults.set("here", forKey: "WAQICity")
             defaults.set(1, forKey: "WAQIInUse")
-            defaults.set(1, forKey:"CO2SignalInUse")
+            defaults.set(0, forKey:"CO2SignalInUse")
             defaults.set(1, forKey:"OpenSkyInUse")
             defaults.set(1, forKey:"ClimbingAQINotificationsWanted")
             defaults.set(50, forKey:"ClimbingAQINotificationsTrigger")

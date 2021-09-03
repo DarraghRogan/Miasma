@@ -34,12 +34,12 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
     }()
     
-    var purpleAirTemperature : NSMenuItem = {
+    var purpleAirHumidity : NSMenuItem = {
         return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
     }()
     
-    var purpleAirHumidity : NSMenuItem = {
-        return NSMenuItem(title: "💧: ", action: nil, keyEquivalent: "")
+    var purpleAirRunningAverages : NSMenuItem = {
+        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirPressure : NSMenuItem = {
@@ -287,8 +287,8 @@ class menuFunctions: NSObject {
             
             menu.addItem(purpleAirLocation)
             menu.addItem(purpleAirPM2_5)
-            menu.addItem(purpleAirTemperature)
             menu.addItem(purpleAirHumidity)
+            menu.addItem(purpleAirRunningAverages)
             menu.addItem(purpleAirPressure)
             menu.addItem(purpleAirReadingAge)
             
@@ -344,14 +344,7 @@ class menuFunctions: NSObject {
             
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
-                
-                //                self.smartCitizenInfo1.title = "🌍: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0)) \(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO2 \(String(smartCitizenData.data?.sensors?[1].value ?? 0)) \(String(smartCitizenData.data?.sensors?[1].unit ?? "0")) / Ambient Light \(String(smartCitizenData.data?.sensors?[2].value ?? 0)) \(String(smartCitizenData.data?.sensors?[2].unit ?? "0")) / Custom Circuit \(String(smartCitizenData.data?.sensors?[3].value ?? 0)) \(String(smartCitizenData.data?.sensors?[3].unit ?? "0")) "
-                //
-                //                self.smartCitizenInfo2.title = "🌍: Noise \(String(smartCitizenData.data?.sensors?[4].value ?? 0)) \(String(smartCitizenData.data?.sensors?[4].unit ?? "0")) / Pressure \(String(smartCitizenData.data?.sensors?[5].value ?? 0)) \(String(smartCitizenData.data?.sensors?[5].unit ?? "0")) / PM1 \(String(smartCitizenData.data?.sensors?[6].value ?? 0)) \(String(smartCitizenData.data?.sensors?[6].unit ?? "0")) / PM10 \(String(smartCitizenData.data?.sensors?[7].value ?? 0)) \(String(smartCitizenData.data?.sensors?[7].unit ?? "0"))"
-                //
-                //                self.smartCitizenInfo3.title = "🌍: PM2.5 \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) \(String(smartCitizenData.data?.sensors?[8].unit ?? "0")) / Humidity \(String(smartCitizenData.data?.sensors?[9].value ?? 0))  \(String(smartCitizenData.data?.sensors?[9].unit ?? "0")) / Temperature \(String(smartCitizenData.data?.sensors?[10].value ?? 0))  \(String(smartCitizenData.data?.sensors?[10].unit ?? "0"))"
-                
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {               
                 
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
@@ -583,9 +576,9 @@ class menuFunctions: NSObject {
                     let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                     return celciusRoundedString
                 }
-                self.purpleAirTemperature.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉"
+                self.purpleAirRunningAverages.title = "📊: Running Averages: 1week \(String(purpleAirData.sensor?.stats?.pm25_1week ?? 0)) | 24hour \(String(purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) | 6hour \(String(purpleAirData.sensor?.stats?.pm25_6hour ?? 0)) | 60minute \(String(purpleAirData.sensor?.stats?.pm25_60minute ?? 0)) | 30minute \(String(purpleAirData.sensor?.stats?.pm25_30minute ?? 0)) | 10minute \(String(purpleAirData.sensor?.stats?.pm25_10minute ?? 0))"
                 
-                self.purpleAirHumidity.title = "💧: \(String((purpleAirData.sensor?.humidity ?? 0)+4))% Relative Humidity"
+                self.purpleAirHumidity.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉     |    💧: \(String((purpleAirData.sensor?.humidity ?? 0)+4))% Relative Humidity"
                 
                 var pressureValue = Double(purpleAirData.sensor?.pressure ?? 0) ?? 0
                 let pressure_visual: String

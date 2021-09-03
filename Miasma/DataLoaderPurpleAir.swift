@@ -11,13 +11,13 @@ import Foundation
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
 struct PurpleAirDataStructure: Codable {
-//    var apiVersion: String?
-//    var timeStamp: Int?
+    //    var apiVersion: String?
+    //    var timeStamp: Int?
     var sensor: Sensor?
     
     enum CodingKeys: String, CodingKey {
-//        case apiVersion = "api_version"
-//        case timeStamp = "time_stamp"
+        //        case apiVersion = "api_version"
+        //        case timeStamp = "time_stamp"
         case sensor
     }
 }
@@ -25,92 +25,113 @@ struct PurpleAirDataStructure: Codable {
 struct Sensor: Codable {
     var sensorIndex: Int?
     var name: String?
-//    var model: String?
-//    var locationType: Int?
+    //    var model: String?
+    //    var locationType: Int?
     var latitude, longitude: Double?
-//    var altitude: Int?
+    //    var altitude: Int?
     var lastSeen: Int?
-//    var lastModified, sensorPrivate: Int?
-//    var channelState, channelFlagsManual,
+    //    var lastModified, sensorPrivate: Int?
+    //    var channelState, channelFlagsManual,
     var humidity, temperature: Int?
     var pressure: Double?
-//    var pm10_A, pm10_B: Double?
+    //    var pm10_A, pm10_B: Double?
     var pm25_A: Double?
     var pm25_B: Double?
     var pm25_cf_1: Double?
-//    var pm100_A, pm100_B: Double?
-//    var the03_UmCountA: Int?
-//    var the03_UmCountB, the05_UmCountA, the05_UmCountB, the10_UmCountA: Double?
-//    var the10_UmCountB, the25_UmCountA, the25_UmCountB, the50_UmCountA: Double?
-//    var the50_UmCountB, the100_UmCountA, the100_UmCountB: Double?
-//    var statsA, statsB: [String: Double]?
-//    var analogInput: Double?
-//    var primaryIDA: Int?
-//    var primaryKeyA: String?
-//    var secondaryIDA: Int?
-//    var secondaryKeyA: String?
-//    var primaryIDB: Int?
-//    var primaryKeyB: String?
-//    var secondaryIDB: Int?
-//    var secondaryKeyB, hardware: String?
-//    var ledBrightness: Int?
-//    var firmwareUpgrade, firmwareVersion: String?
-//    var rssi, icon, confidenceManual, confidenceAuto: Int?
-//    var channelFlagsAuto: Int?
+    //    var pm100_A, pm100_B: Double?
+    //    var the03_UmCountA: Int?
+    //    var the03_UmCountB, the05_UmCountA, the05_UmCountB, the10_UmCountA: Double?
+    //    var the10_UmCountB, the25_UmCountA, the25_UmCountB, the50_UmCountA: Double?
+    //    var the50_UmCountB, the100_UmCountA, the100_UmCountB: Double?
+    //    var statsA, statsB: [String: Double]?
+    //    var analogInput: Double?
+    //    var primaryIDA: Int?
+    //    var primaryKeyA: String?
+    //    var secondaryIDA: Int?
+    //    var secondaryKeyA: String?
+    //    var primaryIDB: Int?
+    //    var primaryKeyB: String?
+    //    var secondaryIDB: Int?
+    //    var secondaryKeyB, hardware: String?
+    //    var ledBrightness: Int?
+    //    var firmwareUpgrade, firmwareVersion: String?
+    //    var rssi, icon, confidenceManual, confidenceAuto: Int?
+    //    var channelFlagsAuto: Int?
+    var stats: Stats?
     
     enum CodingKeys: String, CodingKey {
         case sensorIndex = "sensor_index"
         case name
-//        case model
-//        case locationType = "location_type"
+        //        case model
+        //        case locationType = "location_type"
         case latitude, longitude
-//        case altitude
+        //        case altitude
         case lastSeen = "last_seen"
-//        case lastModified = "last_modified"
-//        case sensorPrivate = "private"
-//        case channelState = "channel_state"
-//        case channelFlagsManual = "channel_flags_manual"
+        //        case lastModified = "last_modified"
+        //        case sensorPrivate = "private"
+        //        case channelState = "channel_state"
+        //        case channelFlagsManual = "channel_flags_manual"
         case humidity = "humidity"
         case temperature = "temperature"
         case pressure = "pressure"
-//        case pm10_A = "pm1.0_a"
-//        case pm10_B = "pm1.0_b"
+        //        case pm10_A = "pm1.0_a"
+        //        case pm10_B = "pm1.0_b"
         case pm25_A = "pm2.5_a"
         case pm25_B = "pm2.5_b"
         case pm25_cf_1 = "pm2.5_cf_1"
-//        case pm100_A = "pm10.0_a"
-//        case pm100_B = "pm10.0_b"
-//        case the03_UmCountA = "0.3_um_count_a"
-//        case the03_UmCountB = "0.3_um_count_b"
-//        case the05_UmCountA = "0.5_um_count_a"
-//        case the05_UmCountB = "0.5_um_count_b"
-//        case the10_UmCountA = "1.0_um_count_a"
-//        case the10_UmCountB = "1.0_um_count_b"
-//        case the25_UmCountA = "2.5_um_count_a"
-//        case the25_UmCountB = "2.5_um_count_b"
-//        case the50_UmCountA = "5.0_um_count_a"
-//        case the50_UmCountB = "5.0_um_count_b"
-//        case the100_UmCountA = "10.0_um_count_a"
-//        case the100_UmCountB = "10.0_um_count_b"
-//        case statsA = "stats_a"
-//        case statsB = "stats_b"
-//        case analogInput = "analog_input"
-//        case primaryIDA = "primary_id_a"
-//        case primaryKeyA = "primary_key_a"
-//        case secondaryIDA = "secondary_id_a"
-//        case secondaryKeyA = "secondary_key_a"
-//        case primaryIDB = "primary_id_b"
-//        case primaryKeyB = "primary_key_b"
-//        case secondaryIDB = "secondary_id_b"
-//        case secondaryKeyB = "secondary_key_b"
-//        case hardware
-//        case ledBrightness = "led_brightness"
-//        case firmwareUpgrade = "firmware_upgrade"
-//        case firmwareVersion = "firmware_version"
-//        case rssi, icon
-//        case confidenceManual = "confidence_manual"
-//        case confidenceAuto = "confidence_auto"
-//        case channelFlagsAuto = "channel_flags_auto"
+        //        case pm100_A = "pm10.0_a"
+        //        case pm100_B = "pm10.0_b"
+        //        case the03_UmCountA = "0.3_um_count_a"
+        //        case the03_UmCountB = "0.3_um_count_b"
+        //        case the05_UmCountA = "0.5_um_count_a"
+        //        case the05_UmCountB = "0.5_um_count_b"
+        //        case the10_UmCountA = "1.0_um_count_a"
+        //        case the10_UmCountB = "1.0_um_count_b"
+        //        case the25_UmCountA = "2.5_um_count_a"
+        //        case the25_UmCountB = "2.5_um_count_b"
+        //        case the50_UmCountA = "5.0_um_count_a"
+        //        case the50_UmCountB = "5.0_um_count_b"
+        //        case the100_UmCountA = "10.0_um_count_a"
+        //        case the100_UmCountB = "10.0_um_count_b"
+        //        case statsA = "stats_a"
+        //        case statsB = "stats_b"
+        //        case analogInput = "analog_input"
+        //        case primaryIDA = "primary_id_a"
+        //        case primaryKeyA = "primary_key_a"
+        //        case secondaryIDA = "secondary_id_a"
+        //        case secondaryKeyA = "secondary_key_a"
+        //        case primaryIDB = "primary_id_b"
+        //        case primaryKeyB = "primary_key_b"
+        //        case secondaryIDB = "secondary_id_b"
+        //        case secondaryKeyB = "secondary_key_b"
+        //        case hardware
+        //        case ledBrightness = "led_brightness"
+        //        case firmwareUpgrade = "firmware_upgrade"
+        //        case firmwareVersion = "firmware_version"
+        //        case rssi, icon
+        //        case confidenceManual = "confidence_manual"
+        //        case confidenceAuto = "confidence_auto"
+        //        case channelFlagsAuto = "channel_flags_auto"
+        case stats
+        
+    }
+    
+    struct Stats: Codable {
+        var pm25_10minute: Double?
+        var pm25_30minute: Double?
+        var pm25_60minute: Double?
+        var pm25_6hour: Double?
+        var pm25_24hour: Double?
+        var pm25_1week: Double?
+        
+        enum CodingKeys: String, CodingKey {
+            case pm25_10minute = "pm2.5_10minute"
+            case pm25_30minute = "pm2.5_30minute"
+            case pm25_60minute = "pm2.5_60minute"
+            case pm25_6hour = "pm2.5_6hour"
+            case pm25_24hour = "pm2.5_24hour"
+            case pm25_1week = "pm2.5_1week"
+        }
     }
 }
 
