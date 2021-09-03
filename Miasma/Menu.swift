@@ -576,7 +576,64 @@ class menuFunctions: NSObject {
                     let celciusRoundedString = String(format: "%.1f", locale: Locale.current, celsius)
                     return celciusRoundedString
                 }
-                self.purpleAirRunningAverages.title = "📊: Running Averages: 1week \(String(purpleAirData.sensor?.stats?.pm25_1week ?? 0)) | 24hour \(String(purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) | 6hour \(String(purpleAirData.sensor?.stats?.pm25_6hour ?? 0)) | 60minute \(String(purpleAirData.sensor?.stats?.pm25_60minute ?? 0)) | 30minute \(String(purpleAirData.sensor?.stats?.pm25_30minute ?? 0)) | 10minute \(String(purpleAirData.sensor?.stats?.pm25_10minute ?? 0))"
+                
+                func generatepurpleAirRunningAverages(pm25historical:Double) -> Int{
+                    
+                    let intermediatepM2_5Value: Double
+                    var historicalaQI_CalculatedDouble: Double
+                    
+                    if AppDelegate().defaults.integer(forKey:"PurpleAirConversionFactorEPAInUse") == 1 {
+                        let relativeHumidity = (purpleAirData.sensor?.humidity ?? 0)+4
+                        
+                        intermediatepM2_5Value = round((0.52*pm25historical) - (0.085 * Double(relativeHumidity)) + 5.71)
+                        
+                    } else {
+                        intermediatepM2_5Value = pm25historical
+                    }
+                    
+                    switch (intermediatepM2_5Value) {
+                    case _ where intermediatepM2_5Value >= 0 && intermediatepM2_5Value < 12:
+
+                        historicalaQI_CalculatedDouble = ((50-0)/(12-0))*((intermediatepM2_5Value)-0)+0
+                        return Int(round(historicalaQI_CalculatedDouble))
+                        
+                    case _ where intermediatepM2_5Value >= 12 && intermediatepM2_5Value < 35.5:
+
+                        historicalaQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((intermediatepM2_5Value)-12.1)+51
+                        return Int(round(historicalaQI_CalculatedDouble))
+
+                    case _ where intermediatepM2_5Value >= 35.5 && intermediatepM2_5Value < 55.5:
+
+                        historicalaQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((intermediatepM2_5Value)-35.5)+101
+                        return Int(round(historicalaQI_CalculatedDouble))
+
+                    case _ where intermediatepM2_5Value >= 55.5 && intermediatepM2_5Value < 150.5:
+
+                        historicalaQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((intermediatepM2_5Value)-55.5)+151
+                        return Int(round(historicalaQI_CalculatedDouble))
+
+                    case _ where intermediatepM2_5Value >= 150.5 && intermediatepM2_5Value < 250.5:
+
+                        historicalaQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((intermediatepM2_5Value)-150.5)+201
+                        return Int(round(historicalaQI_CalculatedDouble))
+
+                    case _ where intermediatepM2_5Value >= 250.5 && intermediatepM2_5Value < 500.5:
+
+                        historicalaQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((intermediatepM2_5Value)-250.5)+301
+                        return Int(round(historicalaQI_CalculatedDouble))
+
+                    case _ where intermediatepM2_5Value >= 500.5:
+
+                        return 500
+
+                    default:
+                        return 0
+                    }
+                    
+                    
+                }
+                
+                self.purpleAirRunningAverages.title = "📊: Running Averages: 1week \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_1week ?? 0)) | 24hour \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) | 6hour \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_6hour ?? 0)) | 60minute \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_60minute ?? 0)) | 30minute \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_30minute ?? 0)) | 10minute \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_10minute ?? 0))"
                 
                 self.purpleAirHumidity.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉     |    💧: \(String((purpleAirData.sensor?.humidity ?? 0)+4))% Relative Humidity"
                 
