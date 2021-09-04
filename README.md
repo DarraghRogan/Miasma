@@ -1,4 +1,5 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
+<center><img src="Miasma/Graphics/SimulatorScreenShot-iPhone8Plus-2021-08-31at19.05.44.png" class="img-responsive" alt=""></center>
 
 Miasma is an open source lightweight menu bar app for macOS & lightweight app for iOS that shows publicly available air quality data & potential pollution sources for your locality.
 You can click the app if you want to see pertinent metrics, and on macOS the menu bar icon changes colour to match current PM₂.₅ conditions. 
@@ -7,7 +8,8 @@ The intention is that the user, by becoming periodically familar with how the da
 Data sourced from PurpleAir, WAQI/AQICN, SmartCitizen, CO2 Signal by TomorrowCo, OpenSky, ClimaCell & Telraam.
 
 ### Download
-<a href="https://apps.apple.com/us/app/id1529785874"><img src="Miasma/Graphics/MacAppStore-300x131.png" class="img-responsive" alt=""></a>
+
+<a href="https://apps.apple.com/us/app/id1529785874"><img src="<a href="https://apps.apple.com/us/app/miasma-local-air-quality/id1529785874?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1599523200&h=f7efbc9bb3aad9181a6dd2ed2669ad06" alt="Download on the App Store" style="border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"></a>" class="img-responsive" alt=""></a>
 
 <a href="https://github.com/DarraghRogan/Miasma/releases"><img src="Miasma/Graphics/github-app-button.png" width="300" class="img-responsive" alt=""></a>
 
