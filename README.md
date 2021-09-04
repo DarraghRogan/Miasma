@@ -9,9 +9,7 @@ Data sourced from PurpleAir, WAQI/AQICN, SmartCitizen, CO2 Signal by TomorrowCo,
 
 ### Download
 
-<a href="https://apps.apple.com/us/app/miasma-local-air-quality/id1529785874?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1599523200&h=f7efbc9bb3aad9181a6dd2ed2669ad06" alt="Download on the App Store" style="border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"></a>
-
-<a href="https://github.com/DarraghRogan/Miasma/releases"><img src="Miasma/Graphics/github-app-button.png" width="300" class="img-responsive" alt=""></a>
+<a href="https://apps.apple.com/us/app/miasma-local-air-quality/id1529785874?itsct=apps_box_badge&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83&amp;releaseDate=1599523200&h=f7efbc9bb3aad9181a6dd2ed2669ad06" alt="Download on the App Store" style="border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;"></a> <a href="https://github.com/DarraghRogan/Miasma/releases"><img src="Miasma/Graphics/github-app-button.png" width="300" class="img-responsive" alt=""></a>
 
 The app is distributed on the Apple Store (with automatic updates for when features are added), and also binaries & the source code are shared on GitHub for interested parties to review.
 
