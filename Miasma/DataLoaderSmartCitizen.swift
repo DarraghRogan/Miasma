@@ -10,7 +10,7 @@ import Foundation
 
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
-struct SmartCitizenDataStructure: Codable {
+struct SmartCitizenPresentDataStructure: Codable {
     //    var id: Int?
     //    var uuid,
     var name: String?
@@ -417,14 +417,139 @@ class JSONAny: Codable {
 
 
 
+struct SmartCitizenHistoricalDataStructure: Codable {
+    var deviceID: Int?
+    var sensorKey: String?
+    var sensorID, componentID: Int?
+    var rollup, function: String?
+    var from, to: Date?
+    var sampleSize: Int?
+    var readings: [[Reading]]?
+
+    enum CodingKeys: String, CodingKey {
+        case deviceID
+        case sensorKey
+        case sensorID
+        case componentID
+        case rollup, function, from, to
+        case sampleSize
+        case readings
+    }
+}
+
+// MARK: Welcome convenience initializers and mutators
+
+extension SmartCitizenHistoricalDataStructure {
+    init(data: Data) throws {
+        self = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
+    }
+
+    init(_ json: String, using encoding: String.Encoding = .utf8) throws {
+        guard let data = json.data(using: encoding) else {
+            throw NSError(domain: "JSONDecoding", code: 0, userInfo: nil)
+        }
+        try self.init(data: data)
+    }
+
+    init(fromURL url: URL) throws {
+        try self.init(data: try Data(contentsOf: url))
+    }
+
+    func with(
+        deviceID: Int?? = nil,
+        sensorKey: String?? = nil,
+        sensorID: Int?? = nil,
+        componentID: Int?? = nil,
+        rollup: String?? = nil,
+        function: String?? = nil,
+        from: Date?? = nil,
+        to: Date?? = nil,
+        sampleSize: Int?? = nil,
+        readings: [[Reading]]?? = nil
+    ) -> SmartCitizenHistoricalDataStructure {
+        return SmartCitizenHistoricalDataStructure(
+            deviceID: deviceID ?? self.deviceID,
+            sensorKey: sensorKey ?? self.sensorKey,
+            sensorID: sensorID ?? self.sensorID,
+            componentID: componentID ?? self.componentID,
+            rollup: rollup ?? self.rollup,
+            function: function ?? self.function,
+            from: from ?? self.from,
+            to: to ?? self.to,
+            sampleSize: sampleSize ?? self.sampleSize,
+            readings: readings ?? self.readings
+        )
+    }
+
+    func jsonData() throws -> Data {
+        return try newJSONEncoder().encode(self)
+    }
+
+    func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
+        return String(data: try self.jsonData(), encoding: encoding)
+    }
+}
+
+enum Reading: Codable {
+    case dateTime(Date)
+    case double(Double)
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(Date.self) {
+            self = .dateTime(x)
+            return
+        }
+        if let x = try? container.decode(Double.self) {
+            self = .double(x)
+            return
+        }
+        throw DecodingError.typeMismatch(Reading.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Reading"))
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .dateTime(let x):
+            try container.encode(x)
+        case .double(let x):
+            try container.encode(x)
+        }
+    }
+}
+
+// MARK: - Helper functions for creating encoders and decoders
+
+func newJSONDecoder() -> JSONDecoder {
+    let decoder = JSONDecoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        decoder.dateDecodingStrategy = .iso8601
+    }
+    return decoder
+}
+
+func newJSONEncoder() -> JSONEncoder {
+    let encoder = JSONEncoder()
+    if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+        encoder.dateEncodingStrategy = .iso8601
+    }
+    return encoder
+}
+
+
+
+
 
 // define an instance of the data that can be filled by the data loader and read by the menu
-var smartCitizenData = SmartCitizenDataStructure()
+var smartCitizenPresentData = SmartCitizenPresentDataStructure()
+
+var smartCitizenHistoricalData = SmartCitizenHistoricalDataStructure()
+
 
 public class DataLoaderSmartCitizen {
     
     
-    func loadSmartCitizenData(id:String) {
+    func loadSmartCitizenPresentData(id:String) {
         
         let request = NSMutableURLRequest(url: NSURL(string:
                                                         "https://api.smartcitizen.me/v0/devices/\(id)")! as URL,
@@ -440,7 +565,7 @@ public class DataLoaderSmartCitizen {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print("Miasma received from the SmartCitizen API")
+                print("Miasma received from the SmartCitizen Present API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
@@ -450,12 +575,12 @@ public class DataLoaderSmartCitizen {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizen = try decoder.decode(SmartCitizenDataStructure.self, from: data!)
-                    smartCitizenData = dataFromSmartCitizen
+                    let dataFromSmartCitizenPresent = try decoder.decode(SmartCitizenPresentDataStructure.self, from: data!)
+                    smartCitizenPresentData = dataFromSmartCitizenPresent
                     
                 }
                 catch {
-                    print("Error in SmartCitizen JSON parsing")
+                    print("Error in SmartCitizen Present JSON parsing")
                     //                    print(purpleAirData)
                 }
             }
@@ -463,4 +588,46 @@ public class DataLoaderSmartCitizen {
         
         dataTask.resume()
     }
+    
+    
+    func loadSmartCitizenHistoricalData(id:String) {
+        
+        let request = NSMutableURLRequest(url: NSURL(string:
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=24h&from=2021-07-29&to=2021-07-30")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+        
+        
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+                print("Miasma received from the SmartCitizen Historical API")
+                if let data = data,
+                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                    print(urlContent)
+                } else {
+                    print("error with printing string encoded data")
+                }
+                //Parse JSON
+                let decoder = JSONDecoder()
+                do {
+                    let dataFromSmartCitizenHistorical = try decoder.decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    smartCitizenHistoricalData = dataFromSmartCitizenHistorical
+                    
+                }
+                catch {
+                    print("Error in SmartCitizen Historical JSON parsing")
+                    //                    print(purpleAirData)
+                }
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
 }

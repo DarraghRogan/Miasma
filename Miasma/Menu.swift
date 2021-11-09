@@ -99,12 +99,12 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "🎤: ", action: nil, keyEquivalent: "")
     }()
     
-    var smartCitizenTemperature : NSMenuItem = {
-        return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
+    var smartCitizen24HourExposurePM25 : NSMenuItem = {
+        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
     }()
     
-    var smartCitizenHumidity : NSMenuItem = {
-        return NSMenuItem(title: "💧: ", action: nil, keyEquivalent: "")
+    var smartCitizenTemperatureHumidity : NSMenuItem = {
+        return NSMenuItem(title: "🌡: / 💧: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenPressure : NSMenuItem = {
@@ -163,7 +163,11 @@ class menuFunctions: NSObject {
     var climaCellSolarGHI : NSMenuItem = {
         return NSMenuItem(title: "☀️: ", action: nil, keyEquivalent: "")
     }()
-    
+   
+
+    var dailyAtmosphericCO2 : NSMenuItem = {
+        return NSMenuItem(title: "⛽: ", action: nil, keyEquivalent: "")
+    }()
     
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
@@ -192,6 +196,10 @@ class menuFunctions: NSObject {
     
     @objc func openClimaCell(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://www.climacell.co/weather/")!)
+    }
+    
+    @objc func openDailyAtmosphericCO2(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://gml.noaa.gov/ccgg/trends/global.html")!)
     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -343,7 +351,7 @@ class menuFunctions: NSObject {
             }
             
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
-            
+                        
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {               
                 
                 
@@ -1405,9 +1413,9 @@ class menuFunctions: NSObject {
             
             menu.addItem(smartCitizenLocationType)
             menu.addItem(smartCitizenPM2_5)
+            menu.addItem(smartCitizen24HourExposurePM25)
             menu.addItem(smartCitizenOtherPollutants)
-            menu.addItem(smartCitizenTemperature)
-            menu.addItem(smartCitizenHumidity)
+            menu.addItem(smartCitizenTemperatureHumidity)
             menu.addItem(smartCitizenPressure)
             menu.addItem(smartCitizenPhysicalProperties)
             //            menu.addItem(smartCitizenReadingAge)
@@ -1463,33 +1471,60 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellSolarGHI)
             }
             
-            DataLoaderSmartCitizen().loadSmartCitizenData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizen().loadSmartCitizenPresentData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             
+            DataLoaderSmartCitizen().loadSmartCitizenHistoricalData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+
+            if AppDelegate().defaults.integer(forKey:"DailyAtmosphericCO2InUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenDailyAtmosphericCO2 = NSMenuItem(
+                    title: "Daily Atmospheric CO2 (US NOAA)...",
+                    action: #selector(menuFunctions.openDailyAtmosphericCO2(_:)),
+                    keyEquivalent: "a"
+                )
+                OpenDailyAtmosphericCO2.target = self
+                menu.addItem(OpenDailyAtmosphericCO2)
+                
+                menu.addItem(dailyAtmosphericCO2)
+                
+            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
+
+            }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
-                    DataLoaderCO2().loadCO2Data(lat: String(smartCitizenData.data?.location?.latitude ?? 0), lon: String(smartCitizenData.data?.location?.longitude ?? 0))
+                    DataLoaderCO2().loadCO2Data(lat: String(smartCitizenPresentData.data?.location?.latitude ?? 0), lon: String(smartCitizenPresentData.data?.location?.longitude ?? 0))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((smartCitizenData.data?.location?.latitude ?? 0)-1), lomin: ((smartCitizenData.data?.location?.longitude ?? 0)-1), lamax: ((smartCitizenData.data?.location?.latitude ?? 0)+1), lomax: ((smartCitizenData.data?.location?.longitude ?? 0)+1))
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((smartCitizenPresentData.data?.location?.latitude ?? 0)-1), lomin: ((smartCitizenPresentData.data?.location?.longitude ?? 0)-1), lamax: ((smartCitizenPresentData.data?.location?.latitude ?? 0)+1), lomax: ((smartCitizenPresentData.data?.location?.longitude ?? 0)+1))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
-                    DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenData.data?.location?.latitude ?? 0, lon: smartCitizenData.data?.location?.longitude ?? 0)
+                    DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenPresentData.data?.location?.latitude ?? 0, lon: smartCitizenPresentData.data?.location?.longitude ?? 0)
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"DailyAtmosphericCO2InUse") == 1 {
+                    if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
+                        
+//                        let cO2PPMAnnualGrowth = (dailyAtmosphericCO2Data.co2?.last?.trend ?? 0.0) - (dailyAtmosphericCO2Data.co2?.last-365.trend ?? 0.0)
+//                        , \(String(cO2PPMAnnualGrowth))ppm (Annual Growth)
+                        
+                        self.dailyAtmosphericCO2.title = "⛽: \(String(lastElement ?? "0"))ppm (Cycle), \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm (Trend)"}
                 }
                 
                 if 1 == 1 {
                     
-                    self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenData.data?.location?.city ?? "0")), \(String(smartCitizenData.data?.location?.country ?? "0")) / Exposure: \(String(smartCitizenData.data?.location?.exposure ?? "0"))"
+                    self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenPresentData.data?.location?.city ?? "0")), \(String(smartCitizenPresentData.data?.location?.country ?? "0")) / Exposure: \(String(smartCitizenPresentData.data?.location?.exposure ?? "0"))"
                     
                     
                     
                     // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                     
-                    var pM2_5Value = round(smartCitizenData.data?.sensors?[8].value ?? 0)
+                    var pM2_5Value = round(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
                     let pM2_5ColourButton: String
                     let aQI_CalculatedDouble: Double
                     var aQI_CalculatedRounded: Int = 0
@@ -1510,7 +1545,7 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬇ 🟢 Good AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Air quality is considered satisfactory, and air pollution poses little or no risk.")
+                            AppDelegate().showNotification(title: "⬇ 🟢 Good AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is considered satisfactory, and air pollution poses little or no risk.")
                         }
                         
                         AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
@@ -1534,12 +1569,12 @@ class menuFunctions: NSObject {
                         
                         if AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
+                            AppDelegate().showNotification(title: "⬆ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
                         }
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬇ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
+                            AppDelegate().showNotification(title: "⬇ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
                         }
                         
                         AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
@@ -1562,12 +1597,12 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
+                            AppDelegate().showNotification(title: "⬆ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
                         }
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬇ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
+                            AppDelegate().showNotification(title: "⬇ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
                         }
                         
                         AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
@@ -1590,12 +1625,12 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
+                            AppDelegate().showNotification(title: "⬆ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
                         }
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬇ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
+                            AppDelegate().showNotification(title: "⬇ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
                         }
                         
                         AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
@@ -1618,12 +1653,12 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
+                            AppDelegate().showNotification(title: "⬆ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
                         }
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬇ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
+                            AppDelegate().showNotification(title: "⬇ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
                         }
                         
                         AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
@@ -1646,7 +1681,7 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                         }
                         AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
                         
@@ -1667,7 +1702,7 @@ class menuFunctions: NSObject {
                         
                         if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
                         {
-                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
                         }
                         AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
                         
@@ -1677,16 +1712,16 @@ class menuFunctions: NSObject {
                         self.smartCitizenPM2_5StatusBarIcon.title = "⚪"
                         statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
                     }
-                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
                     
-                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenData.data?.sensors?[0].value ?? 0))\(String(smartCitizenData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenData.data?.sensors?[1].value ?? 0))\(String(smartCitizenData.data?.sensors?[1].unit ?? "0"))"
+                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
-                    self.smartCitizenTemperature.title = "🌡: \(String(smartCitizenData.data?.sensors?[10].value ?? 0))℃"
+//                    self.smartCitizen24HourExposurePM25.title = "📊: \(String(smartCitizenHistoricalData.readings?[0][0].self ?? 0))"
                     
-                    self.smartCitizenHumidity.title = "💧: \(String(smartCitizenData.data?.sensors?[9].value ?? 0))%"
+                    self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))%"
                     
-                    var pressureValue = smartCitizenData.data?.sensors?[5].value ?? 0
+                    var pressureValue = smartCitizenPresentData.data?.sensors?[5].value ?? 0
                     let pressure_visual: String
                     // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
                     switch (pressureValue) {
@@ -1699,10 +1734,10 @@ class menuFunctions: NSObject {
                     default:
                         pressure_visual = ""
                     }
-                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
                     
                     
-                    self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenData.data?.sensors?[4].value ?? 0))\(String(smartCitizenData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenData.data?.sensors?[2].value ?? 0))\(String(smartCitizenData.data?.sensors?[2].unit ?? "0"))"
+                    self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[2].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[2].unit ?? "0"))"
                     
                     //                    self.smartCitizenReadingAge.title = "📅: \(String(smartCitizenData.lastReadingAt?. ?? 0))"
                     

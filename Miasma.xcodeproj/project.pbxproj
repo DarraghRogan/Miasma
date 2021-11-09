@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		02028E162526955600D9368E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02028E152526955600D9368E /* CircleImage.swift */; };
+		02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02038D5226E4BB5E008B4930 /* LocationViewModel.swift */; };
 		0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */; };
 		0218A778256DBBD500B2D684 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A777256DBBD500B2D684 /* WidgetKit.framework */; };
 		0218A77A256DBBD500B2D684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A779256DBBD500B2D684 /* SwiftUI.framework */; };
@@ -48,6 +49,7 @@
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
+		02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; };
@@ -150,6 +152,7 @@
 
 /* Begin PBXFileReference section */
 		02028E152526955600D9368E /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
+		02038D5226E4BB5E008B4930 /* LocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
 		0218A776256DBBD500B2D684 /* Miasma WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Miasma WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0218A777256DBBD500B2D684 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -200,6 +203,7 @@
 		02D5AB57252A144B007E73DC /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
+		02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderDailyAtmosphericCO2.swift; sourceTree = "<group>"; };
 		02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
 		02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -275,6 +279,7 @@
 				02BCC4E426C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
+				02038D5226E4BB5E008B4930 /* LocationViewModel.swift */,
 				027DEB4B253501C200CF7936 /* Banner.swift */,
 				028E0E592526345600D03420 /* MapView.swift */,
 				023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */,
@@ -333,6 +338,7 @@
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
+				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				02BE00B524FBC40E0064F5B8 /* Graphics */,
@@ -609,6 +615,7 @@
 				0269848225251DB7002BFB88 /* APIKeys.swift in Sources */,
 				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */,
+				02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */,
 				02BCC4E526C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift in Sources */,
 				02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */,
 				02028E162526955600D9368E /* CircleImage.swift in Sources */,
@@ -636,6 +643,7 @@
 				0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */,
 				0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */,
 				02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */,
+				02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,

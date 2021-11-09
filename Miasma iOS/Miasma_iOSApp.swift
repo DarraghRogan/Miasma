@@ -28,6 +28,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
          defaults.set(true, forKey:"ElectricalConsumptionDataWanted")
 //         defaults.set(true, forKey:"AircraftDataWanted")
          defaults.set(false, forKey:"OneHourForecastDataWanted")
+        defaults.set(0.0, forKey: "UserLatitude")
+        defaults.set(0.0, forKey: "UserLongitude")
+
      }
         
         

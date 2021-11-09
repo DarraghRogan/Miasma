@@ -64,14 +64,14 @@
     @objc fileprivate func handleTextChangeSmartCitizen() {
         guard let text = SmartCitizenIDField?.stringValue else { return }
         if text.isValid(validityTypeSmartCitizen) {
-            DataLoaderSmartCitizen().loadSmartCitizenData(id: SmartCitizenIDField.stringValue)
+            DataLoaderSmartCitizen().loadSmartCitizenPresentData(id: SmartCitizenIDField.stringValue)
             SmartCitizenCheckedLabel.stringValue = "Loading (5s)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                if smartCitizenData.name == nil {
+                if smartCitizenPresentData.name == nil {
                     self.SmartCitizenCheckedLabel.stringValue = "Error. Check SmartCitizen ID"
                 } else {
-                    self.SmartCitizenCheckedLabel.stringValue = String(smartCitizenData.data?.location?.city ?? "")
+                    self.SmartCitizenCheckedLabel.stringValue = String(smartCitizenPresentData.data?.location?.city ?? "")
                     self.SmartCitizenIDSaveButton.isEnabled = true
                 }
             })
@@ -418,6 +418,19 @@
 
         }
     }
+     
+     @IBAction func DailyAtmosphericCO2Action(_ sender: Any) {
+         if DailyAtmosphericCO2Outlet.state == NSControl.StateValue.off {
+             AppDelegate().defaults.set(false, forKey: "DailyAtmosphericCO2InUse")
+             
+         }
+         if DailyAtmosphericCO2Outlet.state == NSControl.StateValue.on {
+             AppDelegate().defaults.set(true, forKey: "DailyAtmosphericCO2InUse")
+         }
+     }
+     
+     @IBOutlet weak var DailyAtmosphericCO2Outlet: NSButton!
+     
     
     @IBOutlet weak var RefreshIntervalButtonOutlet: NSButton!
     
@@ -569,6 +582,8 @@
         OpenSkyButtonOutlet.state = AppDelegate().defaults.object(forKey:"OpenSkyInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        
+        DailyAtmosphericCO2Outlet.state = AppDelegate().defaults.object(forKey:"DailyAtmosphericCO2InUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         PurpleAirConversionEPAButtonOutlet.state = AppDelegate().defaults.object(forKey:"PurpleAirConversionFactorEPAInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
