@@ -1481,7 +1481,7 @@ class menuFunctions: NSObject {
                 let OpenDailyAtmosphericCO2 = NSMenuItem(
                     title: "Daily Atmospheric CO2 (US NOAA)...",
                     action: #selector(menuFunctions.openDailyAtmosphericCO2(_:)),
-                    keyEquivalent: "a"
+                    keyEquivalent: "g"
                 )
                 OpenDailyAtmosphericCO2.target = self
                 menu.addItem(OpenDailyAtmosphericCO2)
@@ -1510,10 +1510,16 @@ class menuFunctions: NSObject {
                 if AppDelegate().defaults.integer(forKey:"DailyAtmosphericCO2InUse") == 1 {
                     if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
                         
-//                        let cO2PPMAnnualGrowth = (dailyAtmosphericCO2Data.co2?.last?.trend ?? 0.0) - (dailyAtmosphericCO2Data.co2?.last-365.trend ?? 0.0)
-//                        , \(String(cO2PPMAnnualGrowth))ppm (Annual Growth)
+                        let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
+                        var dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
+                        let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
+                        let dailyAtmosphericCO2Data365DaysAgoDouble = Double(dailyAtmosphericCO2Data365DaysAgo) ?? 0.0
+                        print(dailyAtmosphericCO2Data365DaysAgoDouble)
                         
-                        self.dailyAtmosphericCO2.title = "⛽: \(String(lastElement ?? "0"))ppm (Cycle), \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm (Trend)"}
+                        let cO2PPMAnnualGrowth = Double(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") ?? 0.0 - dailyAtmosphericCO2Data365DaysAgoDouble
+                        
+                        self.dailyAtmosphericCO2.title = "⛽: \(String(lastElement ?? "0"))ppm (Cycle), \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm (Trend), \(String(cO2PPMAnnualGrowth))ppm (Annual Growth)"
+                }
                 }
                 
                 if 1 == 1 {
