@@ -1474,7 +1474,7 @@ It is a 5 or 9 digit number in the URL web address after clicking the street seg
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y6H-6S-Ah4">
                                 <rect key="frame" x="179" y="228" width="351" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="check" title="Daily Atmospheric CO2 (from US NOAA)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sb0-Gb-LNZ">
+                                <buttonCell key="cell" type="check" title="Climate Change stats (from US NOAA)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="sb0-Gb-LNZ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>

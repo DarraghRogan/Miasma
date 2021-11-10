@@ -50,6 +50,7 @@
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
 		02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
+		02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; };
@@ -204,6 +205,7 @@
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
 		02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderDailyAtmosphericCO2.swift; sourceTree = "<group>"; };
+		02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderGlobalWarming.swift; sourceTree = "<group>"; };
 		02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
 		02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiasmaLauncher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02F3C75524FA53A5006ED277 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
 				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
+				02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
 				02BE00B524FBC40E0064F5B8 /* Graphics */,
@@ -647,6 +650,7 @@
 				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
+				02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */,
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 				02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */,
 				029BD3842536E99500C743A7 /* DataLoaderSmartCitizen.swift in Sources */,

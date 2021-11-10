@@ -421,11 +421,11 @@
      
      @IBAction func DailyAtmosphericCO2Action(_ sender: Any) {
          if DailyAtmosphericCO2Outlet.state == NSControl.StateValue.off {
-             AppDelegate().defaults.set(false, forKey: "DailyAtmosphericCO2InUse")
+             AppDelegate().defaults.set(false, forKey: "ClimateChangeInUse")
              
          }
          if DailyAtmosphericCO2Outlet.state == NSControl.StateValue.on {
-             AppDelegate().defaults.set(true, forKey: "DailyAtmosphericCO2InUse")
+             AppDelegate().defaults.set(true, forKey: "ClimateChangeInUse")
          }
      }
      
@@ -583,7 +583,7 @@
         
         ClimaCellButtonOutlet.state = AppDelegate().defaults.object(forKey:"ClimaCellInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
-        DailyAtmosphericCO2Outlet.state = AppDelegate().defaults.object(forKey:"DailyAtmosphericCO2InUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        DailyAtmosphericCO2Outlet.state = AppDelegate().defaults.object(forKey:"ClimateChangeInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         
         PurpleAirConversionEPAButtonOutlet.state = AppDelegate().defaults.object(forKey:"PurpleAirConversionFactorEPAInUse") as? NSControl.StateValue ?? NSControl.StateValue(0)
         

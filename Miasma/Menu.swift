@@ -163,10 +163,14 @@ class menuFunctions: NSObject {
     var climaCellSolarGHI : NSMenuItem = {
         return NSMenuItem(title: "☀️: ", action: nil, keyEquivalent: "")
     }()
-   
-
+    
+    
     var dailyAtmosphericCO2 : NSMenuItem = {
         return NSMenuItem(title: "⛽: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var globalWarming : NSMenuItem = {
+        return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
     }()
     
     // Define how to open windows & web addresses from menu
@@ -198,8 +202,8 @@ class menuFunctions: NSObject {
         NSWorkspace.shared.open(URL(string: "https://www.climacell.co/weather/")!)
     }
     
-    @objc func openDailyAtmosphericCO2(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://gml.noaa.gov/ccgg/trends/global.html")!)
+    @objc func openClimateChangeStats(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://www.global-warming.org")!)
     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -347,12 +351,12 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellAirQuality)
                 menu.addItem(climaCellPollen)
                 menu.addItem(climaCellSolarGHI)
-
+                
             }
             
             DataLoaderPurpleAir().loadPurpleAirData(id: (AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()))
-                        
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {               
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
@@ -601,9 +605,9 @@ class menuFunctions: NSObject {
                     
                     switch (intermediatepM2_5Value) {
                     case _ where intermediatepM2_5Value >= 0 && intermediatepM2_5Value < 12:
-
+                        
                         historicalaQI_CalculatedDouble = ((50-0)/(12-0))*((intermediatepM2_5Value)-0)+0
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(Int(round(historicalaQI_CalculatedDouble)))
                         }
@@ -613,9 +617,9 @@ class menuFunctions: NSObject {
                         }
                         
                     case _ where intermediatepM2_5Value >= 12 && intermediatepM2_5Value < 35.5:
-
+                        
                         historicalaQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((intermediatepM2_5Value)-12.1)+51
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(Int(round(historicalaQI_CalculatedDouble)))
                         }
@@ -623,11 +627,11 @@ class menuFunctions: NSObject {
                         {
                             return "▂"
                         }
-
+                        
                     case _ where intermediatepM2_5Value >= 35.5 && intermediatepM2_5Value < 55.5:
-
+                        
                         historicalaQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((intermediatepM2_5Value)-35.5)+101
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(Int(round(historicalaQI_CalculatedDouble)))
                         }
@@ -635,11 +639,11 @@ class menuFunctions: NSObject {
                         {
                             return "▃"
                         }
-
+                        
                     case _ where intermediatepM2_5Value >= 55.5 && intermediatepM2_5Value < 150.5:
-
+                        
                         historicalaQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((intermediatepM2_5Value)-55.5)+151
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(Int(round(historicalaQI_CalculatedDouble)))
                         }
@@ -647,11 +651,11 @@ class menuFunctions: NSObject {
                         {
                             return "▅"
                         }
-
+                        
                     case _ where intermediatepM2_5Value >= 150.5 && intermediatepM2_5Value < 250.5:
-
+                        
                         historicalaQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((intermediatepM2_5Value)-150.5)+201
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(Int(round(historicalaQI_CalculatedDouble)))
                         }
@@ -659,9 +663,9 @@ class menuFunctions: NSObject {
                         {
                             return "▆"
                         }
-
+                        
                     case _ where intermediatepM2_5Value >= 250.5 && intermediatepM2_5Value < 500.5:
-
+                        
                         historicalaQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((intermediatepM2_5Value)-250.5)+301
                         
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
@@ -671,9 +675,9 @@ class menuFunctions: NSObject {
                         {
                             return "▇"
                         }
-
+                        
                     case _ where intermediatepM2_5Value >= 500.5:
-
+                        
                         if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
                             return String(500)
                         }
@@ -681,7 +685,7 @@ class menuFunctions: NSObject {
                         {
                             return "▉"
                         }
-
+                        
                     default:
                         return "◌"
                     }
@@ -916,7 +920,7 @@ class menuFunctions: NSObject {
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
-
+                    
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)  \(solarGHI_visual)"
                     
                 })
@@ -992,7 +996,7 @@ class menuFunctions: NSObject {
                 menu.addItem(climaCellAirQuality)
                 menu.addItem(climaCellPollen)
                 menu.addItem(climaCellSolarGHI)
-
+                
             }
             
             DataLoaderWAQI().loadWAQIData(id: (AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()))
@@ -1391,7 +1395,7 @@ class menuFunctions: NSObject {
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
-
+                    
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
                 })
@@ -1474,22 +1478,25 @@ class menuFunctions: NSObject {
             DataLoaderSmartCitizen().loadSmartCitizenPresentData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             
             DataLoaderSmartCitizen().loadSmartCitizenHistoricalData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
-
-            if AppDelegate().defaults.integer(forKey:"DailyAtmosphericCO2InUse") == 1 {
+            
+            if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
                 
                 menu.addItem(NSMenuItem.separator())
-                let OpenDailyAtmosphericCO2 = NSMenuItem(
-                    title: "Daily Atmospheric CO2 (US NOAA)...",
-                    action: #selector(menuFunctions.openDailyAtmosphericCO2(_:)),
+                let ClimateChange = NSMenuItem(
+                    title: "Climate Change stats (US NOAA, NASA)...",
+                    action: #selector(menuFunctions.openClimateChangeStats(_:)),
                     keyEquivalent: "g"
                 )
-                OpenDailyAtmosphericCO2.target = self
-                menu.addItem(OpenDailyAtmosphericCO2)
+                ClimateChange.target = self
+                menu.addItem(ClimateChange)
                 
                 menu.addItem(dailyAtmosphericCO2)
+                menu.addItem(globalWarming)
                 
-            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
-
+                DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
+                
+                DataLoaderGlobalWarming().loadGlobalWarmingData()
+                
             }
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
@@ -1507,7 +1514,8 @@ class menuFunctions: NSObject {
                     DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenPresentData.data?.location?.latitude ?? 0, lon: smartCitizenPresentData.data?.location?.longitude ?? 0)
                 }
                 
-                if AppDelegate().defaults.integer(forKey:"DailyAtmosphericCO2InUse") == 1 {
+                if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
+                    
                     if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
                         
                         let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
@@ -1516,14 +1524,17 @@ class menuFunctions: NSObject {
                         let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
                         let cO2PPMAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
                         let cO2PPMAnnualDeltaPercentage = (cO2PPMAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
-             
+                        
                         let dailyAtmosphericCO2DataArray10YearsAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-3650]
                         let dailyAtmosphericCO2Data10YearsAgo = dailyAtmosphericCO2DataArray10YearsAgo?.trend ?? "0"
                         let cO2PPMDecadeDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue
                         let cO2PPMDecadeDeltaPercentage = (cO2PPMDecadeDelta / (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue) * 100
                         
                         self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
-                }
+                    }
+                    
+                    self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean global surface temperature anomaly vs. 1951-1980"
+                    
                 }
                 
                 if 1 == 1 {
@@ -1727,7 +1738,7 @@ class menuFunctions: NSObject {
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
-//                    self.smartCitizen24HourExposurePM25.title = "📊: \(String(smartCitizenHistoricalData.readings?[0][0].self ?? 0))"
+                    //                    self.smartCitizen24HourExposurePM25.title = "📊: \(String(smartCitizenHistoricalData.readings?[0][0].self ?? 0))"
                     
                     self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))%"
                     
@@ -1958,7 +1969,7 @@ class menuFunctions: NSObject {
                     self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
                     self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
-
+                    
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
                 })
