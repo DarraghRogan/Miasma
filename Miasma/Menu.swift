@@ -1511,14 +1511,18 @@ class menuFunctions: NSObject {
                     if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
                         
                         let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
-                        var dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
+                        
+                        let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
                         let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
-                        let dailyAtmosphericCO2Data365DaysAgoDouble = Double(dailyAtmosphericCO2Data365DaysAgo) ?? 0.0
-                        print(dailyAtmosphericCO2Data365DaysAgoDouble)
+                        let cO2PPMAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
+                        let cO2PPMAnnualDeltaPercentage = (cO2PPMAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
+             
+                        let dailyAtmosphericCO2DataArray10YearsAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-3650]
+                        let dailyAtmosphericCO2Data10YearsAgo = dailyAtmosphericCO2DataArray10YearsAgo?.trend ?? "0"
+                        let cO2PPMDecadeDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue
+                        let cO2PPMDecadeDeltaPercentage = (cO2PPMDecadeDelta / (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue) * 100
                         
-                        let cO2PPMAnnualGrowth = Double(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") ?? 0.0 - dailyAtmosphericCO2Data365DaysAgoDouble
-                        
-                        self.dailyAtmosphericCO2.title = "⛽: \(String(lastElement ?? "0"))ppm (Cycle), \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm (Trend), \(String(cO2PPMAnnualGrowth))ppm (Annual Growth)"
+                        self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
                 }
                 }
                 
