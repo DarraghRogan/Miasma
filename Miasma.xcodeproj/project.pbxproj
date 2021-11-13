@@ -49,6 +49,7 @@
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
+		02D71F5527404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */; };
 		02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
@@ -204,6 +205,7 @@
 		02D5AB57252A144B007E73DC /* ProfileHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHost.swift; sourceTree = "<group>"; };
 		02D5AB58252A144B007E73DC /* ProfileSummary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileSummary.swift; sourceTree = "<group>"; };
 		02D5AB59252A144B007E73DC /* ProfileEditor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileEditor.swift; sourceTree = "<group>"; };
+		02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderSmartCitizenHistorical.swift; sourceTree = "<group>"; };
 		02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderDailyAtmosphericCO2.swift; sourceTree = "<group>"; };
 		02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderGlobalWarming.swift; sourceTree = "<group>"; };
 		02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderOpenSky.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
+				02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
 				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
 				02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */,
@@ -648,6 +651,7 @@
 				02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */,
 				02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
+				02D71F5527404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
 				02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */,

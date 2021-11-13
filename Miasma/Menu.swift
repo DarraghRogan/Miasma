@@ -1477,7 +1477,7 @@ class menuFunctions: NSObject {
             
             DataLoaderSmartCitizen().loadSmartCitizenPresentData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             
-            DataLoaderSmartCitizen().loadSmartCitizenHistoricalData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             
             if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
                 
@@ -1501,6 +1501,7 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
+                print(smartCitizenHistoricalData.readings?[0].last)
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(smartCitizenPresentData.data?.location?.latitude ?? 0), lon: String(smartCitizenPresentData.data?.location?.longitude ?? 0))
@@ -1533,7 +1534,7 @@ class menuFunctions: NSObject {
                         self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
                     }
                     
-                    self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean global surface temperature anomaly vs. 1951-1980"
+                    self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean surface temp. anomaly vs. 1951-1980"
                     
                 }
                 
