@@ -1477,27 +1477,12 @@ class menuFunctions: NSObject {
             
             DataLoaderSmartCitizen().loadSmartCitizenPresentData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             
-            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
-            
-            if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
-                
-                menu.addItem(NSMenuItem.separator())
-                let ClimateChange = NSMenuItem(
-                    title: "Climate Change stats (US NOAA, NASA)...",
-                    action: #selector(menuFunctions.openClimateChangeStats(_:)),
-                    keyEquivalent: "g"
-                )
-                ClimateChange.target = self
-                menu.addItem(ClimateChange)
-                
-                menu.addItem(dailyAtmosphericCO2)
-                menu.addItem(globalWarming)
-                
-                DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
-                
-                DataLoaderGlobalWarming().loadGlobalWarmingData()
-                
-            }
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData3d(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1w(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1M(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+            DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
+
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
@@ -1511,29 +1496,6 @@ class menuFunctions: NSObject {
                 
                 if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
                     DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenPresentData.data?.location?.latitude ?? 0, lon: smartCitizenPresentData.data?.location?.longitude ?? 0)
-                }
-                
-                if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
-                    
-                    if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
-                        
-                        let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
-                        
-                        let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
-                        let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
-                        let cO2PPMAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
-                        let cO2PPMAnnualDeltaPercentage = (cO2PPMAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
-                        
-                        let dailyAtmosphericCO2DataArray10YearsAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-3650]
-                        let dailyAtmosphericCO2Data10YearsAgo = dailyAtmosphericCO2DataArray10YearsAgo?.trend ?? "0"
-                        let cO2PPMDecadeDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue
-                        let cO2PPMDecadeDeltaPercentage = (cO2PPMDecadeDelta / (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue) * 100
-                        
-                        self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
-                    }
-                    
-                    self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean surface temp. anomaly vs. 1951-1980"
-                    
                 }
                 
                 if 1 == 1 {
@@ -1734,72 +1696,58 @@ class menuFunctions: NSObject {
                     }
                     self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
-                    var outputpm25historicalStringToday: String = ""
                     var outputpm25historicalString1d: String = ""
-                    var outputpm25historicalString2d: String = ""
                     var outputpm25historicalString3d: String = ""
-                    var outputpm25historicalString4d: String = ""
-                    var outputpm25historicalString5d: String = ""
-                    var outputpm25historicalString6d: String = ""
-                    var outputpm25historicalString7d: String = ""
+                    var outputpm25historicalString1w: String = ""
+                    var outputpm25historicalString1M: String = ""
+                    var outputpm25historicalString1y: String = ""
+                
                     
-                    if let pm25historicalStringToday = smartCitizenHistoricalData.readings?[0][1]
-                    {
-                         outputpm25historicalStringToday = String("\(pm25historicalStringToday)")
-                    }
-                    
-                    if let pm25historicalString1d = smartCitizenHistoricalData.readings?[1][1]
+                    if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
                     {
                          outputpm25historicalString1d = String("\(pm25historicalString1d)")
                     }
                     
-                    if let pm25historicalString2d = smartCitizenHistoricalData.readings?[2][1]
+                    if let pm25historicalString3d = smartCitizenHistoricalData3d.readings?[1][1]
                     {
-                         outputpm25historicalString2d = String("\(pm25historicalString2d)")
+                        outputpm25historicalString3d = String("\(pm25historicalString3d)")
                     }
                     
-                    if let pm25historicalString3d = smartCitizenHistoricalData.readings?[3][1]
+                    if let pm25historicalString1w = smartCitizenHistoricalData1w.readings?[1][1]
                     {
-                         outputpm25historicalString3d = String("\(pm25historicalString3d)")
+                         outputpm25historicalString1w = String("\(pm25historicalString1w)")
+                    }
+
+                    if let pm25historicalString1M = smartCitizenHistoricalData1M.readings?[0][1]
+                    {
+                         outputpm25historicalString1M = String("\(pm25historicalString1M)")
                     }
                     
-                    if let pm25historicalString4d = smartCitizenHistoricalData.readings?[4][1]
+                    if let pm25historicalString1y = smartCitizenHistoricalData1y.readings?[0][1]
                     {
-                         outputpm25historicalString4d = String("\(pm25historicalString4d)")
+                         outputpm25historicalString1y = String("\(pm25historicalString1y)")
                     }
                     
-                    if let pm25historicalString5d = smartCitizenHistoricalData.readings?[5][1]
-                    {
-                         outputpm25historicalString5d = String("\(pm25historicalString5d)")
-                    }
                     
-                    if let pm25historicalString6d = smartCitizenHistoricalData.readings?[6][1]
-                    {
-                         outputpm25historicalString6d = String("\(pm25historicalString6d)")
-                    }
-                    
-                    if let pm25historicalString7d = smartCitizenHistoricalData.readings?[7][1]
-                    {
-                         outputpm25historicalString7d = String("\(pm25historicalString7d)")
-                    }
-                    
-                    self.smartCitizen24HourExposurePM25.title = "📊: Average -7d | -6d | -5d | -4d | -3d | -2d | -1d | today: \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString7d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString6d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString5d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString4d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString3d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString2d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalStringToday))"
+                    self.smartCitizen24HourExposurePM25.title = "📊: Averages  1y | 1m | 1w | 3d | 1d:                          \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1y)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1M)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1w)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString3d)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1d)) μg/m³ PM₂.₅"
                     
                                         
                     func generatesmartCitizen24HourAverages(pm25historicalString:String) -> Int{
                         
                         let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
                         
-                        print(step1)
+//                        print(step1)
                         
                         let step2 = NumberFormatter().number(from: step1)?.doubleValue
                         
-                        print(step2)
+//                        print(step2)
+                        
+//                        return(step2)
                         
                         let step3:Int = Int(round(step2 ?? 0.0))
-                        
-                        print(step3)
-                        
+
+//                        print(step3)
+
                         return step3
                     }
 
@@ -2081,6 +2029,49 @@ class menuFunctions: NSObject {
                 
                 
                 //                }
+            })
+            
+        }
+        
+        if AppDelegate().defaults.integer(forKey:"ClimateChangeInUse") == 1 {
+            
+            menu.addItem(NSMenuItem.separator())
+            let ClimateChange = NSMenuItem(
+                title: "Climate Change stats (US NOAA, NASA)...",
+                action: #selector(menuFunctions.openClimateChangeStats(_:)),
+                keyEquivalent: "g"
+            )
+            ClimateChange.target = self
+            menu.addItem(ClimateChange)
+            
+            menu.addItem(dailyAtmosphericCO2)
+            menu.addItem(globalWarming)
+            
+            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
+            
+            DataLoaderGlobalWarming().loadGlobalWarmingData()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute:  {
+                
+                if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
+                    
+                    let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
+                    
+                    let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
+                    let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
+                    let cO2PPMAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
+                    let cO2PPMAnnualDeltaPercentage = (cO2PPMAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
+                    
+                    let dailyAtmosphericCO2DataArray10YearsAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-3650]
+                    let dailyAtmosphericCO2Data10YearsAgo = dailyAtmosphericCO2DataArray10YearsAgo?.trend ?? "0"
+                    let cO2PPMDecadeDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue
+                    let cO2PPMDecadeDeltaPercentage = (cO2PPMDecadeDelta / (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue) * 100
+                    
+                    self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
+                }
+                
+                self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean surface temp. anomaly vs. 1951-1980"
+                
             })
             
         }

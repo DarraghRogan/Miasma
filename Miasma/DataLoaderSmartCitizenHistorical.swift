@@ -80,17 +80,15 @@ enum Reading: Codable {
     }
 }
 
-var smartCitizenHistoricalData = SmartCitizenHistoricalDataStructure()
-
+var smartCitizenHistoricalData1d = SmartCitizenHistoricalDataStructure()
+var smartCitizenHistoricalData3d = SmartCitizenHistoricalDataStructure()
+var smartCitizenHistoricalData1w = SmartCitizenHistoricalDataStructure()
+var smartCitizenHistoricalData1M = SmartCitizenHistoricalDataStructure()
+var smartCitizenHistoricalData1y = SmartCitizenHistoricalDataStructure()
 
 public class DataLoaderSmartCitizenHistorical {
 
-
-// MARK: - Helper functions for creating encoders and decoders
-
-
-
-        func loadSmartCitizenHistoricalData(id:String) {
+        func loadSmartCitizenHistoricalData1d(id:String) {
             
             func newJSONDecoder() -> JSONDecoder {
                 let decoder = JSONDecoder()
@@ -113,7 +111,6 @@ public class DataLoaderSmartCitizenHistorical {
                                               cachePolicy: .useProtocolCachePolicy,
                                               timeoutInterval: 10.0)
     
-    
             request.httpMethod = "GET"
     
             let session = URLSession.shared
@@ -121,8 +118,8 @@ public class DataLoaderSmartCitizenHistorical {
                 if (error != nil) {
                     print(error)
                 } else {
-//                    let httpResponse = response as? HTTPURLResponse
-//                    print("Miasma received from the SmartCitizen Historical API")
+                    let httpResponse = response as? HTTPURLResponse
+//                    print("Miasma received from the SmartCitizen Historical 1d API")
 //                    if let data = data,
 //                       let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                        print(urlContent)
@@ -133,19 +130,228 @@ public class DataLoaderSmartCitizenHistorical {
 //                    let decoder = JSONDecoder()
                     do {
                         let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
-                        smartCitizenHistoricalData = dataFromSmartCitizenHistorical
-    
+                        smartCitizenHistoricalData1d = dataFromSmartCitizenHistorical
                     }
                     catch {
-                        print("Error in SmartCitizen Historical JSON parsing")
+                        print("Error in SmartCitizen Historical 1d JSON parsing")
                         //                    print(purpleAirData)
                     }
                 }
             })
-    
             dataTask.resume()
         }
     
+    func loadSmartCitizenHistoricalData3d(id:String) {
+        
+        func newJSONDecoder() -> JSONDecoder {
+            let decoder = JSONDecoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                decoder.dateDecodingStrategy = .iso8601
+            }
+            return decoder
+        }
+
+        func newJSONEncoder() -> JSONEncoder {
+            let encoder = JSONEncoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                encoder.dateEncodingStrategy = .iso8601
+            }
+            return encoder
+        }
+
+        let request = NSMutableURLRequest(url: NSURL(string:
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=72h")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+//                print("Miasma received from the SmartCitizen Historical 3 day API")
+//                if let data = data,
+//                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
+                //Parse JSON
+//                    let decoder = JSONDecoder()
+                do {
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    smartCitizenHistoricalData3d = dataFromSmartCitizenHistorical
+                }
+                catch {
+                    print("Error in SmartCitizen Historical 3 day JSON parsing")
+                    //                    print(purpleAirData)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    func loadSmartCitizenHistoricalData1w(id:String) {
+        
+        func newJSONDecoder() -> JSONDecoder {
+            let decoder = JSONDecoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                decoder.dateDecodingStrategy = .iso8601
+            }
+            return decoder
+        }
+
+        func newJSONEncoder() -> JSONEncoder {
+            let encoder = JSONEncoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                encoder.dateEncodingStrategy = .iso8601
+            }
+            return encoder
+        }
+
+        let request = NSMutableURLRequest(url: NSURL(string:
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=168h")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+//                print("Miasma received from the SmartCitizen Historical 1 Week API")
+//                if let data = data,
+//                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
+                //Parse JSON
+//                    let decoder = JSONDecoder()
+                do {
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    smartCitizenHistoricalData1w = dataFromSmartCitizenHistorical
+                }
+                catch {
+                    print("Error in SmartCitizen Historical 1 Week JSON parsing")
+                    //                    print(purpleAirData)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    func loadSmartCitizenHistoricalData1M(id:String) {
+        
+        func newJSONDecoder() -> JSONDecoder {
+            let decoder = JSONDecoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                decoder.dateDecodingStrategy = .iso8601
+            }
+            return decoder
+        }
+
+        func newJSONEncoder() -> JSONEncoder {
+            let encoder = JSONEncoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                encoder.dateEncodingStrategy = .iso8601
+            }
+            return encoder
+        }
+
+        let request = NSMutableURLRequest(url: NSURL(string:
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=1M")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+//                print("Miasma received from the SmartCitizen Historical 1 Month API")
+//                if let data = data,
+//                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
+                //Parse JSON
+//                    let decoder = JSONDecoder()
+                do {
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    smartCitizenHistoricalData1M = dataFromSmartCitizenHistorical
+                }
+                catch {
+                    print("Error in SmartCitizen Historical 1 Month JSON parsing")
+                    //                    print(purpleAirData)
+                }
+            }
+        })
+        dataTask.resume()
+    }
+    
+    func loadSmartCitizenHistoricalData1y(id:String) {
+        
+        func newJSONDecoder() -> JSONDecoder {
+            let decoder = JSONDecoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                decoder.dateDecodingStrategy = .iso8601
+            }
+            return decoder
+        }
+
+        func newJSONEncoder() -> JSONEncoder {
+            let encoder = JSONEncoder()
+            if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
+                encoder.dateEncodingStrategy = .iso8601
+            }
+            return encoder
+        }
+
+        let request = NSMutableURLRequest(url: NSURL(string:
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=1y")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
+
+        request.httpMethod = "GET"
+
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                let httpResponse = response as? HTTPURLResponse
+//                print("Miasma received from the SmartCitizen Historical 1 Year API")
+//                if let data = data,
+//                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                    print(urlContent)
+//                } else {
+//                    print("error with printing string encoded data")
+//                }
+                //Parse JSON
+//                    let decoder = JSONDecoder()
+                do {
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    smartCitizenHistoricalData1y = dataFromSmartCitizenHistorical
+                }
+                catch {
+                    print("Error in SmartCitizen Historical 1 Year JSON parsing")
+                    //                    print(purpleAirData)
+                }
+            }
+        })
+        dataTask.resume()
+    }
 }
 
 
