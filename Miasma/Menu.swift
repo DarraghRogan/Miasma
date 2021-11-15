@@ -1501,8 +1501,6 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                print(smartCitizenHistoricalData.readings?[0].last)
-                
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                     DataLoaderCO2().loadCO2Data(lat: String(smartCitizenPresentData.data?.location?.latitude ?? 0), lon: String(smartCitizenPresentData.data?.location?.longitude ?? 0))
                 }
@@ -1736,6 +1734,75 @@ class menuFunctions: NSObject {
                     }
                     self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
                     
+                    var outputpm25historicalStringToday: String = ""
+                    var outputpm25historicalString1d: String = ""
+                    var outputpm25historicalString2d: String = ""
+                    var outputpm25historicalString3d: String = ""
+                    var outputpm25historicalString4d: String = ""
+                    var outputpm25historicalString5d: String = ""
+                    var outputpm25historicalString6d: String = ""
+                    var outputpm25historicalString7d: String = ""
+                    
+                    if let pm25historicalStringToday = smartCitizenHistoricalData.readings?[0][1]
+                    {
+                         outputpm25historicalStringToday = String("\(pm25historicalStringToday)")
+                    }
+                    
+                    if let pm25historicalString1d = smartCitizenHistoricalData.readings?[1][1]
+                    {
+                         outputpm25historicalString1d = String("\(pm25historicalString1d)")
+                    }
+                    
+                    if let pm25historicalString2d = smartCitizenHistoricalData.readings?[2][1]
+                    {
+                         outputpm25historicalString2d = String("\(pm25historicalString2d)")
+                    }
+                    
+                    if let pm25historicalString3d = smartCitizenHistoricalData.readings?[3][1]
+                    {
+                         outputpm25historicalString3d = String("\(pm25historicalString3d)")
+                    }
+                    
+                    if let pm25historicalString4d = smartCitizenHistoricalData.readings?[4][1]
+                    {
+                         outputpm25historicalString4d = String("\(pm25historicalString4d)")
+                    }
+                    
+                    if let pm25historicalString5d = smartCitizenHistoricalData.readings?[5][1]
+                    {
+                         outputpm25historicalString5d = String("\(pm25historicalString5d)")
+                    }
+                    
+                    if let pm25historicalString6d = smartCitizenHistoricalData.readings?[6][1]
+                    {
+                         outputpm25historicalString6d = String("\(pm25historicalString6d)")
+                    }
+                    
+                    if let pm25historicalString7d = smartCitizenHistoricalData.readings?[7][1]
+                    {
+                         outputpm25historicalString7d = String("\(pm25historicalString7d)")
+                    }
+                    
+                    self.smartCitizen24HourExposurePM25.title = "📊: Average -7d | -6d | -5d | -4d | -3d | -2d | -1d | today: \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString7d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString6d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString5d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString4d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString3d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString2d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1d ?? "")) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalStringToday))"
+                    
+                                        
+                    func generatesmartCitizen24HourAverages(pm25historicalString:String) -> Int{
+                        
+                        let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
+                        
+                        print(step1)
+                        
+                        let step2 = NumberFormatter().number(from: step1)?.doubleValue
+                        
+                        print(step2)
+                        
+                        let step3:Int = Int(round(step2 ?? 0.0))
+                        
+                        print(step3)
+                        
+                        return step3
+                    }
+
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
@@ -1757,6 +1824,7 @@ class menuFunctions: NSObject {
                         pressure_visual = ""
                     }
                     self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    
                     
                     
                     self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[2].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[2].unit ?? "0"))"

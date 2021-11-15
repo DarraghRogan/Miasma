@@ -76,7 +76,7 @@ var cO2Data = CO2DataStructure()
 
                 }
                 catch {
-                    print("Error in CO2 JSON parsing")
+                    print("Error in CO2 Signal JSON parsing")
 //                    print(purpleAirData)
                 }
             }

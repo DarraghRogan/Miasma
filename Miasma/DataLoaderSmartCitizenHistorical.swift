@@ -109,7 +109,7 @@ public class DataLoaderSmartCitizenHistorical {
             }
     
             let request = NSMutableURLRequest(url: NSURL(string:
-                                                            "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=24h&from=2021-07-29&to=2021-07-31")! as URL,
+                                                            "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=24h")! as URL,
                                               cachePolicy: .useProtocolCachePolicy,
                                               timeoutInterval: 10.0)
     
@@ -121,16 +121,16 @@ public class DataLoaderSmartCitizenHistorical {
                 if (error != nil) {
                     print(error)
                 } else {
-                    let httpResponse = response as? HTTPURLResponse
-                    print("Miasma received from the SmartCitizen Historical API")
-                    if let data = data,
-                       let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                        print(urlContent)
-                    } else {
-                        print("error with printing string encoded data")
-                    }
+//                    let httpResponse = response as? HTTPURLResponse
+//                    print("Miasma received from the SmartCitizen Historical API")
+//                    if let data = data,
+//                       let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                        print(urlContent)
+//                    } else {
+//                        print("error with printing string encoded data")
+//                    }
                     //Parse JSON
-                    let decoder = JSONDecoder()
+//                    let decoder = JSONDecoder()
                     do {
                         let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
                         smartCitizenHistoricalData = dataFromSmartCitizenHistorical
