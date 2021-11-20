@@ -206,6 +206,10 @@ class menuFunctions: NSObject {
         NSWorkspace.shared.open(URL(string: "https://www.global-warming.org")!)
     }
     
+    @objc func openWHOAirQualityGuidelines(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://www.who.int/publications/i/item/9789240034228?ua=1")!)
+    }
+    
     @objc func menuRefresh(_ sender: NSMenuItem) {
         
         
@@ -250,6 +254,14 @@ class menuFunctions: NSObject {
         )
         menuRefresh.target = self
         menu.addItem(menuRefresh)
+        
+        let wHOAirQualityGuidelines = NSMenuItem(
+            title: "WHO Global Air Quality Guidelines [ ① ② ③ ④ Ⓐ ✓ ]...",
+            action: #selector(menuFunctions.openWHOAirQualityGuidelines(_:)),
+            keyEquivalent: "w"
+        )
+        wHOAirQualityGuidelines.target = self
+        menu.addItem(wHOAirQualityGuidelines)
         
         let menuPreferences = NSMenuItem(
             title: "Miasma Preferences...",
@@ -1482,7 +1494,7 @@ class menuFunctions: NSObject {
             DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1w(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1M(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
             DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()))
-
+            
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
@@ -1701,11 +1713,11 @@ class menuFunctions: NSObject {
                     var outputpm25historicalString1w: String = ""
                     var outputpm25historicalString1M: String = ""
                     var outputpm25historicalString1y: String = ""
-                
+                    
                     
                     if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
                     {
-                         outputpm25historicalString1d = String("\(pm25historicalString1d)")
+                        outputpm25historicalString1d = String("\(pm25historicalString1d)")
                     }
                     
                     if let pm25historicalString3d = smartCitizenHistoricalData3d.readings?[1][1]
@@ -1715,42 +1727,93 @@ class menuFunctions: NSObject {
                     
                     if let pm25historicalString1w = smartCitizenHistoricalData1w.readings?[1][1]
                     {
-                         outputpm25historicalString1w = String("\(pm25historicalString1w)")
+                        outputpm25historicalString1w = String("\(pm25historicalString1w)")
                     }
-
+                    
                     if let pm25historicalString1M = smartCitizenHistoricalData1M.readings?[0][1]
                     {
-                         outputpm25historicalString1M = String("\(pm25historicalString1M)")
+                        outputpm25historicalString1M = String("\(pm25historicalString1M)")
                     }
                     
                     if let pm25historicalString1y = smartCitizenHistoricalData1y.readings?[0][1]
                     {
-                         outputpm25historicalString1y = String("\(pm25historicalString1y)")
+                        outputpm25historicalString1y = String("\(pm25historicalString1y)")
                     }
                     
                     
-                    self.smartCitizen24HourExposurePM25.title = "📊: Averages  1y | 1m | 1w | 3d | 1d:                          \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1y)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1M)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1w)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString3d)) | \(generatesmartCitizen24HourAverages(pm25historicalString:outputpm25historicalString1d)) μg/m³ PM₂.₅"
+                    self.smartCitizen24HourExposurePM25.title = "📊: Averages μg/m³ PM₂.₅:       1y: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y)) | 1m: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1M)) | 1w: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1w)) | 3d: \(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString3d)) | 1d: \(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d))"
                     
-                                        
-                    func generatesmartCitizen24HourAverages(pm25historicalString:String) -> Int{
+                    
+                    func generatesmartCitizen24HourAverage(pm25historicalString:String) -> String{
                         
                         let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
                         
-//                        print(step1)
+                        let step2 = NumberFormatter().number(from: step1)?.doubleValue
+                        
+                        let step3:Int = Int(round(step2 ?? 0.0))
+                        
+                        switch (step3) {
+                            
+                        case _ where step3 >= 0 && step3 < 15:
+                            return String("\(step3) ✓")
+                            
+                        case _ where step3 >= 15 && step3 < 25:
+                            return String("\(step3) Ⓐ")
+                            
+                        case _ where step3 >= 25 && step3 < 37:
+                            return String("\(step3) ④")
+                            
+                        case _ where step3 >= 37 && step3 < 50:
+                            return String("\(step3) ③")
+                            
+                        case _ where step3 >= 50 && step3 < 75:
+                            return String("\(step3) ②")
+                            
+                        case _ where step3 >= 75:
+                            return String("\(step3) ①)")
+                            
+                        default:
+                            return String("\(step3)")
+                            
+                        }
+                        
+                    }
+                    
+                    func generatesmartCitizenAnnualAverage(pm25historicalString:String) -> String{
+                        
+                        let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
                         
                         let step2 = NumberFormatter().number(from: step1)?.doubleValue
                         
-//                        print(step2)
-                        
-//                        return(step2)
-                        
                         let step3:Int = Int(round(step2 ?? 0.0))
-
-//                        print(step3)
-
-                        return step3
+                        
+                        switch (step3) {
+                            
+                        case _ where step3 >= 0 && step3 < 5:
+                            return String("\(step3) ✓")
+                            
+                        case _ where step3 >= 5 && step3 < 10:
+                            return String("\(step3) Ⓐ")
+                            
+                        case _ where step3 >= 10 && step3 < 15:
+                            return String("\(step3) ④")
+                            
+                        case _ where step3 >= 15 && step3 < 25:
+                            return String("\(step3) ③")
+                            
+                        case _ where step3 >= 25 && step3 < 35:
+                            return String("\(step3) ②")
+                            
+                        case _ where step3 >= 35:
+                            return String("\(step3) ①)")
+                            
+                        default:
+                            return String("\(step3)")
+                            
+                        }
+                        
                     }
-
+                    
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
@@ -2053,7 +2116,7 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute:  {
                 
-                if let lastElement = dailyAtmosphericCO2Data.co2?.last?.cycle {
+                if (dailyAtmosphericCO2Data.co2?.last?.cycle) != nil {
                     
                     let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
                     
