@@ -256,7 +256,7 @@ class menuFunctions: NSObject {
         menu.addItem(menuRefresh)
         
         let wHOAirQualityGuidelines = NSMenuItem(
-            title: "WHO Global Air Quality Guidelines [ ① ② ③ ④ Ⓐ ✓ ]...",
+            title: "WHO Global Air Quality Guidelines <- Best ✓ ④ ③ ② ① ⓪ Worst -> ...",
             action: #selector(menuFunctions.openWHOAirQualityGuidelines(_:)),
             keyEquivalent: "w"
         )
@@ -705,7 +705,36 @@ class menuFunctions: NSObject {
                     
                 }
                 
-                self.purpleAirRunningAverages.title = "📊: Averages 1w, 24h, 6h, 60m, 30m, 10m, now:       \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_1week ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_6hour ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_60minute ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_30minute ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_10minute ?? 0)) | \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.pm25_cf_1 ?? 0))"
+                func generatePurepleAir24HourAverageWHO(pm25historical:Double) -> String{
+                    
+                    switch (pm25historical) {
+                        
+                    case _ where pm25historical >= 0 && pm25historical < 15:
+                        return String("✓")
+                        
+                    case _ where pm25historical >= 15 && pm25historical < 25:
+                        return String("④")
+                        
+                    case _ where pm25historical >= 25 && pm25historical < 37.5:
+                        return String("③")
+                        
+                    case _ where pm25historical >= 37.5 && pm25historical < 50:
+                        return String("②")
+                        
+                    case _ where pm25historical >= 50 && pm25historical < 75:
+                        return String("①")
+                        
+                    case _ where pm25historical >= 75:
+                        return String("⓪")
+                        
+                    default:
+                        return String("")
+                        
+                    }
+                    
+                }
+                
+                self.purpleAirRunningAverages.title = "📊: Average AQI:   1w: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_1week ?? 0)) \(generatePurepleAir24HourAverageWHO(pm25historical:purpleAirData.sensor?.stats?.pm25_1week ?? 0)) | 1d: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) \(generatePurepleAir24HourAverageWHO(pm25historical:purpleAirData.sensor?.stats?.pm25_24hour ?? 0)) | 6h: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_6hour ?? 0)) | 60m: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_60minute ?? 0)) | 30m: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_30minute ?? 0)) | 10m: \(generatepurpleAirRunningAverages(pm25historical:purpleAirData.sensor?.stats?.pm25_10minute ?? 0))"
                 
                 self.purpleAirHumidity.title = "🌡: \(calculateCelsius(fahrenheit: Double(PurpleAirFahrenheit)))℃ / \(PurpleAirFahrenheit)℉     |    💧: \(String((purpleAirData.sensor?.humidity ?? 0)+4))% Relative Humidity"
                 
@@ -1758,19 +1787,19 @@ class menuFunctions: NSObject {
                             return String("\(step3) ✓")
                             
                         case _ where step3 >= 15 && step3 < 25:
-                            return String("\(step3) Ⓐ")
-                            
-                        case _ where step3 >= 25 && step3 < 37:
                             return String("\(step3) ④")
                             
-                        case _ where step3 >= 37 && step3 < 50:
+                        case _ where step3 >= 25 && step3 < 37:
                             return String("\(step3) ③")
                             
-                        case _ where step3 >= 50 && step3 < 75:
+                        case _ where step3 >= 37 && step3 < 50:
                             return String("\(step3) ②")
                             
+                        case _ where step3 >= 50 && step3 < 75:
+                            return String("\(step3) ①")
+                            
                         case _ where step3 >= 75:
-                            return String("\(step3) ①)")
+                            return String("\(step3) ⓪")
                             
                         default:
                             return String("\(step3)")
@@ -1793,19 +1822,19 @@ class menuFunctions: NSObject {
                             return String("\(step3) ✓")
                             
                         case _ where step3 >= 5 && step3 < 10:
-                            return String("\(step3) Ⓐ")
-                            
-                        case _ where step3 >= 10 && step3 < 15:
                             return String("\(step3) ④")
                             
-                        case _ where step3 >= 15 && step3 < 25:
+                        case _ where step3 >= 10 && step3 < 15:
                             return String("\(step3) ③")
                             
-                        case _ where step3 >= 25 && step3 < 35:
+                        case _ where step3 >= 15 && step3 < 25:
                             return String("\(step3) ②")
                             
+                        case _ where step3 >= 25 && step3 < 35:
+                            return String("\(step3) ①")
+                            
                         case _ where step3 >= 35:
-                            return String("\(step3) ①)")
+                            return String("\(step3) ⓪")
                             
                         default:
                             return String("\(step3)")
@@ -1817,7 +1846,6 @@ class menuFunctions: NSObject {
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
-                    //                    self.smartCitizen24HourExposurePM25.title = "📊: \(String(smartCitizenHistoricalData.readings?[0][0].self ?? 0))"
                     
                     self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))%"
                     
