@@ -131,8 +131,8 @@ struct ErrorView: View {
 
 struct TrackingView: View {
     @EnvironmentObject var locationViewModel: LocationViewModel
-    
-    
+
+
     var body: some View {
         VStack {
             VStack {
@@ -162,7 +162,7 @@ struct TrackingView: View {
             .padding()
         }
     }
-    
+
     var coordinate: CLLocationCoordinate2D? {
         locationViewModel.lastSeenLocation?.coordinate
     }
