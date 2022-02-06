@@ -173,6 +173,10 @@ class menuFunctions: NSObject {
         return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
     }()
     
+    var trendAtmosphericCO2 : NSMenuItem = {
+        return NSMenuItem(title: "📈: ", action: nil, keyEquivalent: "")
+    }()
+    
     // Define how to open windows & web addresses from menu
     @objc func openPurpleAir(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String())")!)
@@ -187,7 +191,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openCO2(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://www.electricitymap.org/")!)
+        NSWorkspace.shared.open(URL(string: "https://app.electricitymap.org/map")!)
     }
     
     @objc func openOpenSky(_ sender: NSMenuItem){
@@ -199,7 +203,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openClimaCell(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://www.climacell.co/weather/")!)
+        NSWorkspace.shared.open(URL(string: "https://www.tomorrow.io/weather/")!)
     }
     
     @objc func openClimateChangeStats(_ sender: NSMenuItem){
@@ -208,6 +212,10 @@ class menuFunctions: NSObject {
     
     @objc func openWHOAirQualityGuidelines(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://www.who.int/publications/i/item/9789240034228?ua=1")!)
+    }
+    
+    @objc func openUNEPEG2019(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://www.unep.org/resources/emissions-gap-report-2019")!)
     }
     
     @objc func menuRefresh(_ sender: NSMenuItem) {
@@ -262,6 +270,14 @@ class menuFunctions: NSObject {
         )
         wHOAirQualityGuidelines.target = self
         menu.addItem(wHOAirQualityGuidelines)
+        
+        let uNEPEmissionsGap = NSMenuItem(
+            title: "UN Environment Programme Emissions Gap (<-7.6% CO₂ to limit to 1.5℃ anomaly , <-2.7% to limit to 2℃)...",
+            action: #selector(menuFunctions.openUNEPEG2019(_:)),
+            keyEquivalent: "u"
+        )
+        uNEPEmissionsGap.target = self
+        menu.addItem(uNEPEmissionsGap)
         
         let menuPreferences = NSMenuItem(
             title: "Miasma Preferences...",
@@ -320,7 +336,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let CO2Link = NSMenuItem(
-                    title: "Electricity Consumption (CO₂ Signal)...",
+                    title: "Electricity Consumption (electricityMap)...",
                     action: #selector(menuFunctions.openCO2(_:)),
                     keyEquivalent: "e"
                 )
@@ -994,7 +1010,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let CO2Link = NSMenuItem(
-                    title: "Electricity Consumption (CO₂ Signal)...",
+                    title: "Electricity Consumption (electricityMap)...",
                     action: #selector(menuFunctions.openCO2(_:)),
                     keyEquivalent: "e"
                 )
@@ -1471,7 +1487,7 @@ class menuFunctions: NSObject {
                 
                 menu.addItem(NSMenuItem.separator())
                 let CO2Link = NSMenuItem(
-                    title: "Electricity Consumption (CO₂ Signal)...",
+                    title: "Electricity Consumption (electricityMap)...",
                     action: #selector(menuFunctions.openCO2(_:)),
                     keyEquivalent: "e"
                 )
@@ -2136,6 +2152,7 @@ class menuFunctions: NSObject {
             menu.addItem(ClimateChange)
             
             menu.addItem(dailyAtmosphericCO2)
+            menu.addItem(trendAtmosphericCO2)
             menu.addItem(globalWarming)
             
             DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
@@ -2145,20 +2162,30 @@ class menuFunctions: NSObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute:  {
                 
                 if (dailyAtmosphericCO2Data.co2?.last?.cycle) != nil {
-                    
+
                     let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
                     
                     let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
                     let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
-                    let cO2PPMAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
-                    let cO2PPMAnnualDeltaPercentage = (cO2PPMAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
+                    let cO2PPMLastAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
                     
-                    let dailyAtmosphericCO2DataArray10YearsAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-3650]
-                    let dailyAtmosphericCO2Data10YearsAgo = dailyAtmosphericCO2DataArray10YearsAgo?.trend ?? "0"
-                    let cO2PPMDecadeDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue
-                    let cO2PPMDecadeDeltaPercentage = (cO2PPMDecadeDelta / (dailyAtmosphericCO2Data10YearsAgo as NSString).doubleValue) * 100
+                    let dailyAtmosphericCO2DataArray730DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-730]
+                    let dailyAtmosphericCO2Data730DaysAgo = dailyAtmosphericCO2DataArray730DaysAgo?.trend ?? "0"
+                    let cO2PPMPrecedingAnnualDelta = (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue - (dailyAtmosphericCO2Data730DaysAgo as NSString).doubleValue
+
+                    let cO2PPMLastYearOnYearDeltaPercentage = ((cO2PPMLastAnnualDelta - cO2PPMPrecedingAnnualDelta) / cO2PPMLastAnnualDelta) * 100
+                
+                    let daysSinceUNEPMilestone = ((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)
+                    let yearsSinceUNEPMilestone = (((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)/365)
+
+                    let dailyAtmosphericCO2DataArrayOnUNEPMilestone = ((dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-Int(daysSinceUNEPMilestone)].trend ?? "0") as NSString).doubleValue
+
+                    let cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = ((((((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / (((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue)) / yearsSinceUNEPMilestone) * 100
                     
-                    self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO2 (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualDeltaPercentage))% (Annual Δ), \(String(format: "%.2f", locale: Locale.current, cO2PPMDecadeDeltaPercentage))% (Decade Δ)"
+                    self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO₂ (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMLastYearOnYearDeltaPercentage))% (Last Year CO₂ Emissions Δ on Preceding Year)"
+                    
+                    self.trendAtmosphericCO2.title = "📈: Annualised Average Δ CO₂ Emissions since 2019: \(String(format: "%.1f", locale: Locale.current, cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage))%"
+                    
                 }
                 
                 self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃, \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean surface temp. anomaly vs. 1951-1980"
