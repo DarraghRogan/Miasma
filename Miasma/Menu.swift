@@ -256,7 +256,7 @@ class menuFunctions: NSObject {
         )
         
         let menuRefresh = NSMenuItem(
-            title: "Refresh (automatically every \((AppDelegate().defaults.object(forKey:"RefreshIntervalSeconds") as? Double ?? Double())/60) mins)",
+            title: "Refresh (automatically every \(Int((AppDelegate().defaults.object(forKey:"RefreshIntervalSeconds") as? Double ?? Double())/60)) mins)",
             action: #selector(menuFunctions.menuRefresh(_:)),
             keyEquivalent: "r"
         )
@@ -272,7 +272,7 @@ class menuFunctions: NSObject {
         menu.addItem(wHOAirQualityGuidelines)
         
         let uNEPEmissionsGap = NSMenuItem(
-            title: "UN Environment Programme Emissions Gap (<-7.6% CO₂ to limit to 1.5℃ anomaly , <-2.7% to limit to 2℃)...",
+            title: "UNEP Emissions Gap for 2030 (<-7.6% Avg. Annual CO₂ to limit to 1.5℃, <-2.7% for 2℃)...",
             action: #selector(menuFunctions.openUNEPEG2019(_:)),
             keyEquivalent: "u"
         )
@@ -974,9 +974,9 @@ class menuFunctions: NSObject {
                     
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉ (Apparent), with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(Int(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0)))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)  \(solarGHI_visual)"
                     
@@ -1449,9 +1449,9 @@ class menuFunctions: NSObject {
                     
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉ (Apparent), with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(Int(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0)))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
@@ -1860,10 +1860,10 @@ class menuFunctions: NSObject {
                     }
                     
                     
-                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(smartCitizenPresentData.data?.sensors?[0].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(smartCitizenPresentData.data?.sensors?[1].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
+                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
                     
-                    self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))%"
+                    self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[9].value ?? 0)))%"
                     
                     var pressureValue = smartCitizenPresentData.data?.sensors?[5].value ?? 0
                     let pressure_visual: String
@@ -2090,9 +2090,9 @@ class menuFunctions: NSObject {
                     
                     self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉ (Apparent), with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
                     
-                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(Int(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0)))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
                     
-                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0), Grass: \(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0), Weeds: \(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)"
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
                     
                     self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
                     
