@@ -229,15 +229,15 @@ public struct ContentViewPurpleAir: View {
                     }
                     
                     
-                    HStack {
-                        Spacer()
-                        Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
-                            .font(.footnote)
-                            .padding(.bottom, 10.0)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-                    }
+//                    HStack {
+//                        Spacer()
+//                        Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
+//                            .font(.footnote)
+//                            .padding(.bottom, 10.0)
+////                            .onAppear() {
+////                                self.updateListEntry()
+////                            }
+//                    }
                     
                 }
                 .ignoresSafeArea()
@@ -250,8 +250,8 @@ public struct ContentViewPurpleAir: View {
                             ProgressView()
                         }
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
-                             destination: URL(string: "https://www.electricitymap.org/")!)
-                            .padding(.top, 5.0)
+                             destination: URL(string: "https://app.electricitymap.org/map")!)
+//                            .padding(.top, 5.0)
                             .font(.headline)
 //                            .onAppear() {
 //                                self.updateListEntry()
@@ -268,13 +268,13 @@ public struct ContentViewPurpleAir: View {
 //                                }
                         }
                         
-                        HStack {
-                            Spacer()
-                            Text("(CO₂ Signal) ⇀")
-                                .font(.footnote)
-                                .padding(.bottom, 5.0)
-                            
-                        }
+//                        HStack {
+//                            Spacer()
+//                            Text("(Electricity Map) ⇀")
+//                                .font(.footnote)
+//                                .padding(.bottom, 5.0)
+//
+//                        }
                         
                     }
                     .ignoresSafeArea()
@@ -402,13 +402,13 @@ public struct ContentViewPurpleAir: View {
 //                            }
                         }
                         
-                        HStack {
-                            Spacer()
-                            Text("(Tomorrow.io) ⇀")
-                                .font(.footnote)
-                                .padding(.bottom, 5.0)
-                            
-                        }
+//                        HStack {
+//                            Spacer()
+//                            Text("(Tomorrow.io) ⇀")
+//                                .font(.footnote)
+//                                .padding(.bottom, 5.0)
+//
+//                        }
                         
                         
                     }
@@ -531,10 +531,10 @@ public struct ContentViewPurpleAir: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 7.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +7s list entries")
+                print("updating +6s list entries")
                 
                 ProgressIndicatorShown = false
                 

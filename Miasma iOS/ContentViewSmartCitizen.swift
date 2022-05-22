@@ -225,15 +225,15 @@ public struct ContentViewSmartCitizen: View {
                     }
                     
                     
-                    HStack {
-                        Spacer()
-                        Text("User Selected Station (SmartCitizen) ⇀")
-                            .font(.footnote)
-                            .padding(.bottom, 10.0)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-                    }
+//                    HStack {
+//                        Spacer()
+//                        Text("User Selected Station (SmartCitizen) ⇀")
+//                            .font(.footnote)
+//                            .padding(.bottom, 10.0)
+////                            .onAppear() {
+////                                self.updateListEntry()
+////                            }
+//                    }
                     
                 }
                 
@@ -245,8 +245,8 @@ public struct ContentViewSmartCitizen: View {
                             ProgressView()
                         }
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
-                             destination: URL(string: "https://www.electricitymap.org/")!)
-                            .padding(.top, 5.0)
+                             destination: URL(string: "https://app.electricitymap.org/map")!)
+//                            .padding(.top, 5.0)
                             .font(.headline)
 //                            .onAppear() {
 //                                self.updateListEntry()
@@ -263,13 +263,13 @@ public struct ContentViewSmartCitizen: View {
 //                                }
                         }
                         
-                        HStack {
-                            Spacer()
-                            Text("(CO₂ Signal) ⇀")
-                                .font(.footnote)
-                                .padding(.bottom, 5.0)
-                            
-                        }
+//                        HStack {
+//                            Spacer()
+//                            Text("(Electricty Map) ⇀")
+//                                .font(.footnote)
+//                                .padding(.bottom, 5.0)
+//                            
+//                        }
                         
                     }
                     .ignoresSafeArea()
@@ -398,13 +398,13 @@ public struct ContentViewSmartCitizen: View {
 //                            }
                         }
                         
-                        HStack {
-                            Spacer()
-                            Text("(Tomorrow.io) ⇀")
-                                .font(.footnote)
-                                .padding(.bottom, 5.0)
-                            
-                        }
+//                        HStack {
+//                            Spacer()
+//                            Text("(Tomorrow.io) ⇀")
+//                                .font(.footnote)
+//                                .padding(.bottom, 5.0)
+//
+//                        }
                         
                         
                     }
@@ -517,10 +517,10 @@ public struct ContentViewSmartCitizen: View {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8.05) { // sort of URL session task
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
                 
-                print("updating +8s list entries")
+                print("updating +6s list entries")
                 
                 ProgressIndicatorShown = false
                 
