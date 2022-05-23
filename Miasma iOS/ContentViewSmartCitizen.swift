@@ -15,6 +15,8 @@ public struct ContentViewSmartCitizen: View {
     
     @ObservedObject var smartCitizenViewModel = SmartCitizenViewModel()
     
+    @ObservedObject var telraamViewModel = TelraamViewModel()
+    
     @State var ProgressIndicatorShown = true
     
     // the default location has top-notch food :-) (pork with fish sauce for the win)
@@ -50,6 +52,15 @@ public struct ContentViewSmartCitizen: View {
     @State var aQI_CalculatedDouble: Double = 0
     @State var aQI_CalculatedRounded: Double = 0
     @State var fahrenheitForDisplaySmartCitizen: String = "0"
+    
+//    // Defining VARs for Telraam
+//    @State var pedestrian: Double = 0
+//    @State var bike: Double = 0
+//    @State var car: Double = 0
+//    @State var lorry: Double = 0
+//    @State var lastDataPackage: String = "0"
+//
+    
     
     // Defining the Progress Bar Styles
     struct aQIProgressBarStyle: ProgressViewStyle {
@@ -412,6 +423,94 @@ public struct ContentViewSmartCitizen: View {
                     
                 }
                 
+                if ProfileEditor().TelraamDataWanted == true
+                {
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ ᴅᴀᴛᴀ",
+                             destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
+//                            .padding(.top, 5.0)
+                            .font(.headline)
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+                        
+                        
+                        HStack {
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚶")
+                                        .font(.title)
+                                    Text("\(String(telraamViewModel.telraamData.properties?.pedestrian ?? 0))")
+                                }
+                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚲")
+                                        .font(.title)
+                                    Text("\(String(telraamViewModel.telraamData.properties?.bike ?? 0))")
+                                }
+                            }
+                            .onAppear() {
+                                self.updateListEntry()
+                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚗")
+                                        .font(.title)
+                                    Text("\(String(telraamViewModel.telraamData.properties?.car ?? 0))")
+                                }
+                            }
+
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚚")
+                                        .font(.title)
+                                    Text("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
+                                }
+                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+                        }
+                        
+
+                        
+                    }
+                    .ignoresSafeArea()
+                    
+                }
+                
                 Button("🔄", action: {
                     updateListEntry()
                 } )
@@ -437,8 +536,11 @@ public struct ContentViewSmartCitizen: View {
         
         ProgressIndicatorShown = true
         
-        smartCitizenViewModel.getSmartCitizen()
-        smartCitizenViewModel.objectWillChange.send()
+//        smartCitizenViewModel.getSmartCitizen()
+//        smartCitizenViewModel.objectWillChange.send()
+        
+//        telraamViewModel.getTelraam()
+//        telraamViewModel.objectWillChange.send()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
@@ -521,6 +623,7 @@ public struct ContentViewSmartCitizen: View {
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 print("updating +6s list entries")
+//                print("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
                 
                 ProgressIndicatorShown = false
                 
@@ -680,3 +783,4 @@ public struct ContentViewSmartCitizen: View {
     }
     
 }
+

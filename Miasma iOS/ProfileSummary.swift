@@ -39,6 +39,11 @@ struct ProfileSummary: View {
                 Spacer()
                 Text("\((ProfileEditor().OneHourForecastDataWanted) ? "On": "Off" )")
             }
+            HStack{
+                Text("Telraam Traffic Data:")
+                Spacer()
+                Text("\((ProfileEditor().TelraamDataWanted) ? "On": "Off" )")
+            }
             //            HStack{
             //                Text("Notifications:")
             //                Spacer()

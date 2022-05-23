@@ -434,8 +434,8 @@ public struct ContentViewPurpleAir: View {
         
         ProgressIndicatorShown = true
         
-        purpleAirViewModel.getPurpleAir()
-        purpleAirViewModel.objectWillChange.send()
+//        purpleAirViewModel.getPurpleAir()
+//        purpleAirViewModel.objectWillChange.send()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task

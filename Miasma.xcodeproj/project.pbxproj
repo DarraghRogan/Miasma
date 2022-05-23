@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02028E162526955600D9368E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02028E152526955600D9368E /* CircleImage.swift */; };
 		02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02038D5226E4BB5E008B4930 /* LocationViewModel.swift */; };
+		02175A7B283AAC31002374D9 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */; };
 		0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */; };
 		0218A778256DBBD500B2D684 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A777256DBBD500B2D684 /* WidgetKit.framework */; };
 		0218A77A256DBBD500B2D684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A779256DBBD500B2D684 /* SwiftUI.framework */; };
@@ -155,6 +156,7 @@
 /* Begin PBXFileReference section */
 		02028E152526955600D9368E /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		02038D5226E4BB5E008B4930 /* LocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
+		02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTelraam.swift; sourceTree = "<group>"; };
 		0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderWAQI.swift; sourceTree = "<group>"; };
 		0218A776256DBBD500B2D684 /* Miasma WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Miasma WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0218A777256DBBD500B2D684 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
@@ -281,6 +283,7 @@
 				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
 				022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */,
 				02BCC4E426C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift */,
+				02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
 				02038D5226E4BB5E008B4930 /* LocationViewModel.swift */,
@@ -623,6 +626,7 @@
 				02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */,
 				02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */,
 				02BCC4E526C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift in Sources */,
+				02175A7B283AAC31002374D9 /* DataLoaderTelraam.swift in Sources */,
 				02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */,
 				02028E162526955600D9368E /* CircleImage.swift in Sources */,
 				023BBDF025251AC3006E8054 /* ContentView.swift in Sources */,

@@ -44,7 +44,7 @@ extension SmartCitizenViewModel {
                   receiveValue: {
                     self.smartCitizenData = $0.smartCitizenData
                   })
-        //        print(ProfileEditor().SensorID)
+//        print(ProfileEditor().SensorID)
 //        print(smartCitizenData)
     }
 }
@@ -64,7 +64,7 @@ struct SmartCitizenAPIClient {
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
                 
-                //                print(Response<Any>.self)
+//                print(Response<Any>.self)
 //                print(result.response)
                 
                 return Response(value: value, response: result.response)

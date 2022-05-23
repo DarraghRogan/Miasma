@@ -21,35 +21,39 @@ struct ProfileEditor: View {
     
     @AppStorage("NotificationsWanted") var NotificationsWanted = false
     
+    @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
+    @AppStorage("SegmentID") var segmentID = ""
     
     var body: some View {
         List {
             Text("Miasma Preferences")
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.title)
-            Text("Please choose air quality data source, and enter desired station ID.")
-                .font(.caption)
-            HStack{
-                Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
-                    Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
-                    Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
-                    Button("Smart Citizen", action: {AppDelegate().defaults.set("SmartCitizen", forKey: "AirQualityDataSource")})
-                }/*@END_MENU_TOKEN@*/
-                
-                Divider()
-                Text("\(AirQualityDataSource)")
+            VStack{
+                Text("Please choose air quality data source, and enter desired sensor ID.")
+                    .font(.caption)
+                HStack{
+                    Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
+                        Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
+                        Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
+                        Button("Smart Citizen", action: {AppDelegate().defaults.set("SmartCitizen", forKey: "AirQualityDataSource")})
+                    }/*@END_MENU_TOKEN@*/
+                    
+                    Divider()
+                    Text("\(AirQualityDataSource)")
+                }
+                HStack {
+                    Text("Sensor ID")
+                    Divider()
+                    TextField("Sensor ID", text: $SensorID)
+                        .disableAutocorrection(true)
+                        .autocapitalization(UITextAutocapitalizationType.none)
+                }
+                Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
+                    .font(.caption)
+                Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
+                    .font(.caption)
             }
-            HStack {
-                Text("Sensor ID")
-                Divider()
-                TextField("Sensor ID", text: $SensorID)
-                    .disableAutocorrection(true)
-                    .autocapitalization(UITextAutocapitalizationType.none)
-            }
-            Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
-                .font(.caption)
-            Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
-                .font(.caption)
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumpt. data")
             }
@@ -63,7 +67,18 @@ struct ProfileEditor: View {
             //            Toggle(isOn: $NotificationsWanted) {
             //                Text("Enable Notifications")
             //            }
-            
+            VStack{
+                Toggle(isOn: $TelraamDataWanted) {
+                    Text("Enable Telraam Traffic Data")
+                }
+                HStack {
+                    Text("Segment ID")
+                    Divider()
+                    TextField("Segment ID", text: $segmentID)
+                        .disableAutocorrection(true)
+                        .autocapitalization(UITextAutocapitalizationType.none)
+                }
+            }
             .padding(.top)
             
             
