@@ -223,66 +223,14 @@ public struct ContentViewPurpleAir: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
-                        
+
                         
                     }
-                    
-                    
-//                    HStack {
-//                        Spacer()
-//                        Text("\(String(Int((NSDate().timeIntervalSince1970))-(purpleAirViewModel.purpleAirdata.lastSeen ?? 0))) seconds old; User Selected Station (PurpleAir) ⇀")
-//                            .font(.footnote)
-//                            .padding(.bottom, 10.0)
-////                            .onAppear() {
-////                                self.updateListEntry()
-////                            }
-//                    }
+ 
                     
                 }
                 .ignoresSafeArea()
-                
-                if ProfileEditor().ElectricalConsumptionDataWanted == true
-                {
-                    
-                    VStack{
-                        if ProgressIndicatorShown == true{
-                            ProgressView()
-                        }
-                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
-                             destination: URL(string: "https://app.electricitymap.org/map")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-                        
-                        
-                        HStack {
-                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
-                                .accentColor(.green)
-                                .padding(.top, 0.5)
-                                .padding(.bottom, 4.0)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
-                        }
-                        
-//                        HStack {
-//                            Spacer()
-//                            Text("(Electricity Map) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//
-//                        }
-                        
-                    }
-                    .ignoresSafeArea()
-                    
-                }
-                
+                                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -417,6 +365,46 @@ public struct ContentViewPurpleAir: View {
                     .ignoresSafeArea()
                     
                 }
+                
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                             destination: URL(string: "https://app.electricitymap.org/map")!)
+//                            .padding(.top, 5.0)
+                            .font(.headline)
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+                        
+                        
+                        HStack {
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                                .accentColor(.green)
+                                .padding(.top, 0.5)
+                                .padding(.bottom, 4.0)
+//                                .onAppear() {
+//                                    self.updateListEntry()
+//                                }
+                        }
+                        
+//                        HStack {
+//                            Spacer()
+//                            Text("(Electricity Map) ⇀")
+//                                .font(.footnote)
+//                                .padding(.bottom, 5.0)
+//
+//                        }
+                        
+                    }
+                    .ignoresSafeArea()
+                    
+                }
+
                 
                 if ProfileEditor().TelraamDataWanted == true
                 {

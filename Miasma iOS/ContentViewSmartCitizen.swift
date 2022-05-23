@@ -248,44 +248,7 @@ public struct ContentViewSmartCitizen: View {
                     
                 }
                 
-                if ProfileEditor().ElectricalConsumptionDataWanted == true
-                {
-                    
-                    VStack{
-                        if ProgressIndicatorShown == true{
-                            ProgressView()
-                        }
-                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
-                             destination: URL(string: "https://app.electricitymap.org/map")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-                        
-                        
-                        HStack {
-                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
-                                .accentColor(.green)
-                                .padding(.top, 0.5)
-                                .padding(.bottom, 4.0)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
-                        }
-                        
-//                        HStack {
-//                            Spacer()
-//                            Text("(Electricty Map) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//                            
-//                        }
-                        
-                    }
-                    .ignoresSafeArea()
-                    
-                }
+
                 
                 
                 
@@ -418,6 +381,30 @@ public struct ContentViewSmartCitizen: View {
 //                        }
                         
                         
+                    }
+                    .ignoresSafeArea()
+                    
+                }
+                
+                if ProfileEditor().ElectricalConsumptionDataWanted == true
+                {
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                             destination: URL(string: "https://app.electricitymap.org/map")!)
+//                            .padding(.top, 5.0)
+                            .font(.headline)
+
+                    
+                        HStack {
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                                .accentColor(.green)
+                                .padding(.top, 0.5)
+                                .padding(.bottom, 4.0)
+                        }
                     }
                     .ignoresSafeArea()
                     
