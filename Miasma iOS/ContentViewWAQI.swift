@@ -15,6 +15,8 @@ public struct ContentViewWAQI: View {
     
     @ObservedObject var wAQIViewModel = WAQIViewModel()
     
+    @ObservedObject var telraamViewModel = TelraamViewModel()
+    
     @State var ProgressIndicatorShown = true
     
     // the default location has top-notch food :-) (pork with fish sauce for the win)
@@ -411,6 +413,91 @@ public struct ContentViewWAQI: View {
 //                            
 //                        }
                         
+                        
+                    }
+                    .ignoresSafeArea()
+                    
+                }
+                
+                if ProfileEditor().TelraamDataWanted == true
+                {
+                    
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
+                             destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
+//                            .padding(.top, 5.0)
+                            .font(.headline)
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+                        
+                        
+                        HStack {
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚶")
+                                        .font(.title)
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
+                                }
+                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚲")
+                                        .font(.title)
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
+                                }
+                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚗")
+                                        .font(.title)
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
+                                }
+                            }
+
+                            Spacer()
+                            ZStack{
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 25)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🚚")
+                                        .font(.title)
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.lorry ?? 0))))")
+                                }
+                            }
+                        }
+                        
+
                         
                     }
                     .ignoresSafeArea()

@@ -32,6 +32,10 @@ struct ProfileEditor: View {
             VStack{
                 Text("Please choose air quality data source, and enter desired sensor ID.")
                     .font(.caption)
+                Text("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces), or set to 'here'")
+                    .font(.caption)
+                Text("For PurpleAir & SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
+                    .font(.caption)
                 HStack{
                     Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
                         Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
@@ -49,10 +53,7 @@ struct ProfileEditor: View {
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
                 }
-                Text("For WAQI/AQICN, please search on AQICN.org website for city name (one word, no spaces), or set to here to detect based on closest to your device's IP address.")
-                    .font(.caption)
-                Text("For PurpleAir & SmartCitizen, please enter 4 to 6 digit sensor ID as read from the webpages' Map view URL")
-                    .font(.caption)
+
             }
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumpt. data")
@@ -68,6 +69,8 @@ struct ProfileEditor: View {
             //                Text("Enable Notifications")
             //            }
             VStack{
+                Text("Please enter 10 digit ID from Telraam webpage")
+                    .font(.caption)
                 Toggle(isOn: $TelraamDataWanted) {
                     Text("Enable Telraam Traffic Data")
                 }

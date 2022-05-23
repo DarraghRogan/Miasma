@@ -26,6 +26,8 @@
 	<string>public.app-category.weather</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>To detect the closest air quality sensor &amp; weather data</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalised ads to you.</string>
 	<key>SKAdNetworkItems</key>
@@ -176,8 +178,6 @@
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>To detect the closest air quality sensor &amp; weather data</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

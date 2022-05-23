@@ -63,8 +63,8 @@ struct TelraamAPIClient {
                     T.self, from: result.data)
                 
 //                print(Response<Any>.self)
-                print(result.response)
-                print(result.data)
+//                print(result.response)
+//                print(result.data)
                 
                 return Response(value: value, response: result.response)
                 
@@ -100,7 +100,7 @@ extension TelraamDB {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-        print(request.url)
+//        print(request.url)
 
         return apiClient.run(request)
         

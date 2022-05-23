@@ -430,7 +430,7 @@ public struct ContentViewSmartCitizen: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ ᴅᴀᴛᴀ",
+                        Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
 //                            .padding(.top, 5.0)
                             .font(.headline)
@@ -449,7 +449,7 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("🚶")
                                         .font(.title)
-                                    Text("\(String(telraamViewModel.telraamData.properties?.pedestrian ?? 0))")
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
 //                            .onAppear() {
@@ -466,12 +466,12 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("🚲")
                                         .font(.title)
-                                    Text("\(String(telraamViewModel.telraamData.properties?.bike ?? 0))")
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+//                            .onAppear() {
+//                                self.updateListEntry()
+//                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
@@ -482,7 +482,7 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("🚗")
                                         .font(.title)
-                                    Text("\(String(telraamViewModel.telraamData.properties?.car ?? 0))")
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
                                 }
                             }
 
@@ -496,12 +496,9 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("🚚")
                                         .font(.title)
-                                    Text("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
+                                    Text("\(String(Int(round(telraamViewModel.telraamData.properties?.lorry ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                         }
                         
 
