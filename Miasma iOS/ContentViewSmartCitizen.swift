@@ -236,14 +236,18 @@ public struct ContentViewSmartCitizen: View {
                         VStack{
                             Text("Averages")
                                 .font(.subheadline)
+//                                .padding(.bottom, 0.5)
                             Text("1 Day: \(displaypm25historicalString1d)")
                                 .font(.caption)
+                                .multilineTextAlignment(.trailing)
                             Text("1 Week: \(displaypm25historicalString1w)")
                                 .font(.caption)
+                                .multilineTextAlignment(.trailing)
                             Text("1 Year: \(displaypm25historicalString1y)")
                                 .font(.caption)
+                                .multilineTextAlignment(.trailing)
                             Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
-                                .font(.caption)
+                                .font(.caption2)
                         }
                     }
                 }
