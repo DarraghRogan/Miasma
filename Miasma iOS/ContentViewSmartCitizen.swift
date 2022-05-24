@@ -51,15 +51,12 @@ public struct ContentViewSmartCitizen: View {
     @State var pM2_5Value: Double = 0
     @State var aQI_CalculatedDouble: Double = 0
     @State var aQI_CalculatedRounded: Double = 0
-    @State var fahrenheitForDisplaySmartCitizen: String = "0"
-    
-//    // Defining VARs for Telraam
-//    @State var pedestrian: Double = 0
-//    @State var bike: Double = 0
-//    @State var car: Double = 0
-//    @State var lorry: Double = 0
-//    @State var lastDataPackage: String = "0"
-//
+    @State var fahrenheitForDisplaySmartCitizen: String = "◌"
+    @State var pm25historicalString1d: String = "◌"
+    @State var outputpm25historicalString1d: String = "◌"
+    @State var pm25historicalString1y: String = "◌"
+    @State var outputpm25historicalString1y: String = "◌"
+
     
     
     // Defining the Progress Bar Styles
@@ -151,13 +148,13 @@ public struct ContentViewSmartCitizen: View {
         {
             
             MapView(coordinate: locationCoordinate)
-                //                .edgesIgnoringSafeArea(.top)
+            //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
                 .opacity(0.7)
                 .overlay((CircleImage()
-                            .offset(x: 0, y: 0)), alignment: .center)
+                    .offset(x: 0, y: 0)), alignment: .center)
                 .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
-                            .font(.largeTitle)
+                    .font(.largeTitle)
                 )
             
             List
@@ -169,16 +166,16 @@ public struct ContentViewSmartCitizen: View {
                     }
                     Link("\(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
-                        .font(.headline)
+                    .font(.headline)
                     
                     HStack {
-                        ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
+                        ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ  / \(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))) µɢ/ᴍ³ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+                        //                            .onAppear() {
+                        //                                self.updateListEntry()
+                        //                            }
                         
                     }
                     
@@ -196,9 +193,9 @@ public struct ContentViewSmartCitizen: View {
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        //                        .onAppear() {
+                        //                            self.updateListEntry()
+                        //                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0), total: 100)
@@ -213,9 +210,9 @@ public struct ContentViewSmartCitizen: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        //                        .onAppear() {
+                        //                            self.updateListEntry()
+                        //                        }
                         Spacer()
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 98)-98, total: 5)
@@ -230,25 +227,25 @@ public struct ContentViewSmartCitizen: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        //                        .onAppear() {
+                        //                            self.updateListEntry()
+                        //                        }
                     }
                     
                     
-//                    HStack {
-//                        Spacer()
-//                        Text("User Selected Station (SmartCitizen) ⇀")
-//                            .font(.footnote)
-//                            .padding(.bottom, 10.0)
-////                            .onAppear() {
-////                                self.updateListEntry()
-////                            }
-//                    }
+                    //                    HStack {
+                    //                        Spacer()
+                    //                        Text("User Selected Station (SmartCitizen) ⇀")
+                    //                            .font(.footnote)
+                    //                            .padding(.bottom, 10.0)
+                    ////                            .onAppear() {
+                    ////                                self.updateListEntry()
+                    ////                            }
+                    //                    }
                     
                 }
                 
-
+                
                 
                 
                 
@@ -260,8 +257,8 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Link("ᴏɴᴇ ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
-                            .padding(.top, 8.0)
-                            .font(.headline)
+                        .padding(.top, 8.0)
+                        .font(.headline)
                         
                         HStack {
                             ZStack{
@@ -277,9 +274,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             
                             Spacer()
                             ZStack{
@@ -297,9 +294,9 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
@@ -316,9 +313,9 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                         }
                         
                         HStack {
@@ -334,9 +331,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             
                             Spacer()
                             ZStack{
@@ -351,9 +348,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
@@ -367,18 +364,18 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                         }
                         
-//                        HStack {
-//                            Spacer()
-//                            Text("(Tomorrow.io) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//
-//                        }
+                        //                        HStack {
+                        //                            Spacer()
+                        //                            Text("(Tomorrow.io) ⇀")
+                        //                                .font(.footnote)
+                        //                                .padding(.bottom, 5.0)
+                        //
+                        //                        }
                         
                         
                     }
@@ -395,10 +392,10 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-
-                    
+                        //                            .padding(.top, 5.0)
+                        .font(.headline)
+                        
+                        
                         HStack {
                             ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
                                 .accentColor(.green)
@@ -419,16 +416,16 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                        //                            .padding(.top, 5.0)
+                        .font(.headline)
+                        //                            .onAppear() {
+                        //                                self.updateListEntry()
+                        //                            }
                         
                         
                         HStack {
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -439,13 +436,13 @@ public struct ContentViewSmartCitizen: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
+                            
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -456,12 +453,12 @@ public struct ContentViewSmartCitizen: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -472,10 +469,10 @@ public struct ContentViewSmartCitizen: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
                                 }
                             }
-
+                            
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -488,20 +485,22 @@ public struct ContentViewSmartCitizen: View {
                             }
                         }
                         
-
+                        
                         
                     }
                     .ignoresSafeArea()
                     
                 }
                 
-//                Button("🔄", action: {
-//                    updateListEntry()
-//                } )
-//                .font(.title)
-//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
-            
+            .onAppear() {
+                self.updateListEntry()
+            }
             
         }
         
@@ -520,12 +519,15 @@ public struct ContentViewSmartCitizen: View {
         
         ProgressIndicatorShown = true
         
-//        smartCitizenViewModel.getSmartCitizen()
-//        smartCitizenViewModel.objectWillChange.send()
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID))
         
-//        telraamViewModel.getTelraam()
-//        telraamViewModel.objectWillChange.send()
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (ProfileEditor().SensorID))
         
+        //        smartCitizenViewModel.getSmartCitizen()
+        //        smartCitizenViewModel.objectWillChange.send()
+        
+        //        telraamViewModel.getTelraam()
+        //        telraamViewModel.objectWillChange.send()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!
@@ -533,6 +535,86 @@ public struct ContentViewSmartCitizen: View {
                 print("running +3s data loaders")
                 
                 ProgressIndicatorShown = true
+                
+                // show historical smartcitizen pm2.5 data
+                if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
+                {
+                    outputpm25historicalString1d = String("\(pm25historicalString1d)")
+
+                }
+                
+                func generatesmartCitizen24HourAverage(pm25historicalString:String) -> String{
+                    
+                    let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
+                    
+                    let step2 = NumberFormatter().number(from: step1)?.doubleValue
+                    
+                    let step3:Int = Int(round(step2 ?? 0.0))
+                    
+                    switch (step3) {
+                        
+                    case _ where step3 >= 0 && step3 < 15:
+                        return String("\(step3) ✓")
+                        
+                    case _ where step3 >= 15 && step3 < 25:
+                        return String("\(step3) ④")
+                        
+                    case _ where step3 >= 25 && step3 < 37:
+                        return String("\(step3) ③")
+                        
+                    case _ where step3 >= 37 && step3 < 50:
+                        return String("\(step3) ②")
+                        
+                    case _ where step3 >= 50 && step3 < 75:
+                        return String("\(step3) ①")
+                        
+                    case _ where step3 >= 75:
+                        return String("\(step3) ⓪")
+                        
+                    default:
+                        return String("\(step3)")
+                        
+                    }
+                    
+                }
+                
+                func generatesmartCitizenAnnualAverage(pm25historicalString:String) -> String{
+                    
+                    let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
+                    
+                    let step2 = NumberFormatter().number(from: step1)?.doubleValue
+                    
+                    let step3:Int = Int(round(step2 ?? 0.0))
+                    
+                    switch (step3) {
+                        
+                    case _ where step3 >= 0 && step3 < 5:
+                        return String("\(step3) ✓")
+                        
+                    case _ where step3 >= 5 && step3 < 10:
+                        return String("\(step3) ④")
+                        
+                    case _ where step3 >= 10 && step3 < 15:
+                        return String("\(step3) ③")
+                        
+                    case _ where step3 >= 15 && step3 < 25:
+                        return String("\(step3) ②")
+                        
+                    case _ where step3 >= 25 && step3 < 35:
+                        return String("\(step3) ①")
+                        
+                    case _ where step3 >= 35:
+                        return String("\(step3) ⓪")
+                        
+                    default:
+                        return String("\(step3)")
+                        
+                    }
+                    
+                }
+                
+                print(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d))
+                print(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y))
                 
                 // Get Latitude & longitude to feed into other APIs
                 self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0, smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0)
@@ -607,7 +689,7 @@ public struct ContentViewSmartCitizen: View {
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 print("updating +6s list entries")
-//                print("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
+                //                print("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
                 
                 ProgressIndicatorShown = false
                 

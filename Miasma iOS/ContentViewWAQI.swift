@@ -45,7 +45,7 @@ public struct ContentViewWAQI: View {
     @State var climaCellPollenWeed: Int = 0
     @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
-
+    
     
     // Defining VARs for WAQI
     @State var wAQIAQI: Int = 0
@@ -140,13 +140,13 @@ public struct ContentViewWAQI: View {
         {
             
             MapView(coordinate: locationCoordinate)
-                //                .edgesIgnoringSafeArea(.top)
+            //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
                 .opacity(0.7)
                 .overlay((CircleImage()
-                            .offset(x: 0, y: 0)), alignment: .center)
+                    .offset(x: 0, y: 0)), alignment: .center)
                 .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
-                            .font(.largeTitle)
+                    .font(.largeTitle)
                 )
             
             List
@@ -158,17 +158,13 @@ public struct ContentViewWAQI: View {
                     }
                     Link("\(wAQIViewModel.wAQIdata.city?.name ?? "◌")",
                          destination: URL(string: wAQIViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
-                        .font(.headline)
-
+                    .font(.headline)
+                    
                     HStack {
                         ProgressView("☁️ \(wAQIViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴍᴀɪɴʟʏ \(wAQIViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIViewModel.wAQIdata.aqi ?? 0), total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
-
                     }
                     
                     HStack {
@@ -177,7 +173,7 @@ public struct ContentViewWAQI: View {
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
                                     .font(.title)
@@ -185,16 +181,15 @@ public struct ContentViewWAQI: View {
                                 Text("/ \(self.fahrenheitForDisplayWAQI)℉")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        
                         Spacer()
+                        
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("💧")
                                     .font(.title)
@@ -202,16 +197,15 @@ public struct ContentViewWAQI: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        
                         Spacer()
+                        
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 100, height: 100)
                                 .contentShape(Rectangle())
-                                                        .padding(.bottom, 4.0)
+                                .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌬️")
                                     .font(.title)
@@ -219,27 +213,18 @@ public struct ContentViewWAQI: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
-                }
+                    }
                     
                     HStack {
                         Spacer()
                         Text("\(wAQIViewModel.wAQIdata.attributions?[0].name ?? "0")")
                             .font(.footnote)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                     }
                     HStack {
                         Spacer()
                         Text("\(wAQIViewModel.wAQIdata.time?.s ?? "0")")
                             .font(.footnote)
                             .padding(.bottom, 10.0)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                     }
                     
                 }
@@ -253,8 +238,8 @@ public struct ContentViewWAQI: View {
                         }
                         Link("ᴏɴᴇ ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
-                            .padding(.top, 8.0)
-                            .font(.headline)
+                        .padding(.top, 8.0)
+                        .font(.headline)
                         
                         HStack {
                             ZStack{
@@ -270,11 +255,9 @@ public struct ContentViewWAQI: View {
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -290,10 +273,9 @@ public struct ContentViewWAQI: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -309,9 +291,6 @@ public struct ContentViewWAQI: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                         }
                         
                         HStack {
@@ -327,11 +306,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -344,10 +321,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -360,23 +336,9 @@ public struct ContentViewWAQI: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
                         }
-                        
-//                        HStack {
-//                            Spacer()
-//                            Text("(Tomorrow.io) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//                            
-//                        }
-                        
-                        
                     }
                     .ignoresSafeArea()
-                    
                 }
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
@@ -388,36 +350,20 @@ public struct ContentViewWAQI: View {
                         }
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
-//                                .padding(.top, 5.0)
-                            .font(.headline)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
-                        
+                        .font(.headline)
                         
                         HStack {
                             ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
-//                                    .onAppear() {
-//                                        self.updateListEntry()
-//                                    }
                         }
-                        
-//                            HStack {
-//                                Spacer()
-//                                Text("(Electricity Map) ⇀")
-//                                    .font(.footnote)
-//                                    .padding(.bottom, 5.0)
-//
-//                            }
                         
                     }
                     .ignoresSafeArea()
                     
                 }
-
+                
                 
                 if ProfileEditor().TelraamDataWanted == true
                 {
@@ -428,16 +374,12 @@ public struct ContentViewWAQI: View {
                         }
                         Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                        .font(.headline)
                         
                         
                         HStack {
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -448,13 +390,11 @@ public struct ContentViewWAQI: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-
+                            
                             Spacer()
+                            
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -465,12 +405,11 @@ public struct ContentViewWAQI: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            
                             Spacer()
+                            
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -481,10 +420,11 @@ public struct ContentViewWAQI: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
                                 }
                             }
-
+                            
                             Spacer()
+                            
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -496,24 +436,21 @@ public struct ContentViewWAQI: View {
                                 }
                             }
                         }
-                        
-
-                        
                     }
                     .ignoresSafeArea()
                     
                 }
                 
-//                Button("🔄", action: {
-//                    updateListEntry()
-//                } )
-//                .font(.title)
-//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
-            
-            
         }
-        
+        .onAppear() {
+            self.updateListEntry()
+        }
     }
     
     
@@ -579,7 +516,7 @@ public struct ContentViewWAQI: View {
                     DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 }
                 
-
+                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -602,9 +539,9 @@ public struct ContentViewWAQI: View {
                     self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
                     
                     self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-
+                    
                 }
-
+                
                 
                 // a little protection from when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
                 var isIndexValid: Bool = false
@@ -616,14 +553,14 @@ public struct ContentViewWAQI: View {
                 
                 if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
-
                     
-//                    self.climaCellWeatherCode = ClimaCellWeatherCodeText
+                    
+                    //                    self.climaCellWeatherCode = ClimaCellWeatherCodeText
                     self.climaCellWindDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
                     self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0
-//                    self.climaCellEPAPrimaryPollutant = ClimaCellPrimaryPollutant
+                    //                    self.climaCellEPAPrimaryPollutant = ClimaCellPrimaryPollutant
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)

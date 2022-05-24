@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02009341283D6E6000575220 /* DataLoaderSmartCitizenHistorical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */; };
+		02009343283D6E6400575220 /* DataLoaderSmartCitizenHistorical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02009342283D6E6400575220 /* DataLoaderSmartCitizenHistorical.swift */; };
 		02028E162526955600D9368E /* CircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02028E152526955600D9368E /* CircleImage.swift */; };
 		02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02038D5226E4BB5E008B4930 /* LocationViewModel.swift */; };
 		02175A7B283AAC31002374D9 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */; };
@@ -50,7 +52,6 @@
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
-		02D71F5527404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */; };
 		02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
@@ -154,6 +155,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02009342283D6E6400575220 /* DataLoaderSmartCitizenHistorical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderSmartCitizenHistorical.swift; sourceTree = "<group>"; };
 		02028E152526955600D9368E /* CircleImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImage.swift; sourceTree = "<group>"; };
 		02038D5226E4BB5E008B4930 /* LocationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewModel.swift; sourceTree = "<group>"; };
 		02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTelraam.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
 				022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */,
 				02BCC4E426C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift */,
+				02009342283D6E6400575220 /* DataLoaderSmartCitizenHistorical.swift */,
 				02175A7A283AAC31002374D9 /* DataLoaderTelraam.swift */,
 				0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
@@ -344,8 +347,8 @@
 				02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
-				02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
+				02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */,
 				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
 				02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
@@ -634,6 +637,7 @@
 				02BCC4E326C02C9400FDFF74 /* ContentViewSmartCitizen.swift in Sources */,
 				0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */,
 				02A740A22527263100830B35 /* DataLoaderClimaCell.swift in Sources */,
+				02009343283D6E6400575220 /* DataLoaderSmartCitizenHistorical.swift in Sources */,
 				023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */,
 				02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */,
 				022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */,
@@ -655,7 +659,7 @@
 				02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */,
 				02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
-				02D71F5527404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift in Sources */,
+				02009341283D6E6000575220 /* DataLoaderSmartCitizenHistorical.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
 				02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */,
@@ -805,7 +809,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -833,7 +837,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;

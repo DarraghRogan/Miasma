@@ -145,13 +145,13 @@ public struct ContentViewPurpleAir: View {
         {
             
             MapView(coordinate: locationCoordinate)
-                //                .edgesIgnoringSafeArea(.top)
+            //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
                 .opacity(0.7)
                 .overlay((CircleImage()
-                            .offset(x: 0, y: 0)), alignment: .center)
+                    .offset(x: 0, y: 0)), alignment: .center)
                 .overlay(Text("M \(AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as? String ?? String())")
-                            .font(.largeTitle)
+                    .font(.largeTitle)
                 )
             
             List{
@@ -161,16 +161,16 @@ public struct ContentViewPurpleAir: View {
                     }
                     Link("\(purpleAirViewModel.purpleAirdata.name ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://www.purpleair.com/map?opt=1/mAQI/a0/cC0&select=\(ProfileEditor().SensorID)")!)
-                        .font(.headline)
-                        .padding(.top, 5.0)
+                    .font(.headline)
+                    .padding(.top, 5.0)
                     HStack {
                         ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
-                            .onAppear() {
-                                self.updateListEntry()
-                            }
+                        //                            .onAppear() {
+                        //                                self.updateListEntry()
+                        //                            }
                         
                     }
                     
@@ -188,9 +188,9 @@ public struct ContentViewPurpleAir: View {
                                 Text("/ \(String((purpleAirViewModel.purpleAirdata.temperatureA ?? 0)-8))℉")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        //                        .onAppear() {
+                        //                            self.updateListEntry()
+                        //                        }
                         
                         Spacer()
                         ZStack{
@@ -206,9 +206,9 @@ public struct ContentViewPurpleAir: View {
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                             }
                         }
-//                        .onAppear() {
-//                            self.updateListEntry()
-//                        }
+                        //                        .onAppear() {
+                        //                            self.updateListEntry()
+                        //                        }
                         Spacer()
                         ZStack{
                             ProgressView("🌬️ \(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))millibar ᴀᴛᴍᴏsᴘʜᴇʀɪᴄ ᴘʀᴇssᴜʀᴇ", value: ((purpleAirViewModel.purpleAirdata.pressureA ?? 980)-980), total: 50)
@@ -223,14 +223,14 @@ public struct ContentViewPurpleAir: View {
                                 Text("ᴘʀᴇs.")
                             }
                         }
-
+                        
                         
                     }
- 
+                    
                     
                 }
                 .ignoresSafeArea()
-                                
+                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -240,8 +240,8 @@ public struct ContentViewPurpleAir: View {
                         }
                         Link("1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
-                            .padding(.top, 8.0)
-                            .font(.headline)
+                        .padding(.top, 8.0)
+                        .font(.headline)
                         
                         HStack {
                             ZStack{
@@ -257,9 +257,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("/ \(fahrenheitForDisplay)℉")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             
                             Spacer()
                             ZStack{
@@ -277,9 +277,9 @@ public struct ContentViewPurpleAir: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
@@ -296,9 +296,9 @@ public struct ContentViewPurpleAir: View {
                                         .font(.caption)
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                         }
                         
                         HStack {
@@ -314,9 +314,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             
                             Spacer()
                             ZStack{
@@ -331,9 +331,9 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
@@ -347,18 +347,18 @@ public struct ContentViewPurpleAir: View {
                                     Text("Pollen")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                         }
                         
-//                        HStack {
-//                            Spacer()
-//                            Text("(Tomorrow.io) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//
-//                        }
+                        //                        HStack {
+                        //                            Spacer()
+                        //                            Text("(Tomorrow.io) ⇀")
+                        //                                .font(.footnote)
+                        //                                .padding(.bottom, 5.0)
+                        //
+                        //                        }
                         
                         
                     }
@@ -375,11 +375,11 @@ public struct ContentViewPurpleAir: View {
                         }
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                        //                            .padding(.top, 5.0)
+                        .font(.headline)
+                        //                            .onAppear() {
+                        //                                self.updateListEntry()
+                        //                            }
                         
                         
                         HStack {
@@ -387,24 +387,24 @@ public struct ContentViewPurpleAir: View {
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
-//                                .onAppear() {
-//                                    self.updateListEntry()
-//                                }
+                            //                                .onAppear() {
+                            //                                    self.updateListEntry()
+                            //                                }
                         }
                         
-//                        HStack {
-//                            Spacer()
-//                            Text("(Electricity Map) ⇀")
-//                                .font(.footnote)
-//                                .padding(.bottom, 5.0)
-//
-//                        }
+                        //                        HStack {
+                        //                            Spacer()
+                        //                            Text("(Electricity Map) ⇀")
+                        //                                .font(.footnote)
+                        //                                .padding(.bottom, 5.0)
+                        //
+                        //                        }
                         
                     }
                     .ignoresSafeArea()
                     
                 }
-
+                
                 
                 if ProfileEditor().TelraamDataWanted == true
                 {
@@ -415,16 +415,16 @@ public struct ContentViewPurpleAir: View {
                         }
                         Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
-//                            .padding(.top, 5.0)
-                            .font(.headline)
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                        //                            .padding(.top, 5.0)
+                        .font(.headline)
+                        //                            .onAppear() {
+                        //                                self.updateListEntry()
+                        //                            }
                         
                         
                         HStack {
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -435,13 +435,13 @@ public struct ContentViewPurpleAir: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
-
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
+                            
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -452,12 +452,12 @@ public struct ContentViewPurpleAir: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-//                            .onAppear() {
-//                                self.updateListEntry()
-//                            }
+                            //                            .onAppear() {
+                            //                                self.updateListEntry()
+                            //                            }
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -468,10 +468,10 @@ public struct ContentViewPurpleAir: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
                                 }
                             }
-
+                            
                             Spacer()
                             ZStack{
-                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 25)
+                                ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -484,19 +484,22 @@ public struct ContentViewPurpleAir: View {
                             }
                         }
                         
-
+                        
                         
                     }
                     .ignoresSafeArea()
                     
                 }
                 
-//                Button("🔄", action: {
-//                    updateListEntry()
-//                } )
-//                .font(.title)
-//                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                Button("🔄", action: {
+                    updateListEntry()
+                } )
+                .font(.title)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 
+            }
+            .onAppear() {
+                self.updateListEntry()
             }
         }
         
@@ -508,8 +511,8 @@ public struct ContentViewPurpleAir: View {
         
         ProgressIndicatorShown = true
         
-//        purpleAirViewModel.getPurpleAir()
-//        purpleAirViewModel.objectWillChange.send()
+        //        purpleAirViewModel.getPurpleAir()
+        //        purpleAirViewModel.objectWillChange.send()
         
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
