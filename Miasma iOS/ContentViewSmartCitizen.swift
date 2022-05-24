@@ -52,11 +52,15 @@ public struct ContentViewSmartCitizen: View {
     @State var aQI_CalculatedDouble: Double = 0
     @State var aQI_CalculatedRounded: Double = 0
     @State var fahrenheitForDisplaySmartCitizen: String = "◌"
-    @State var pm25historicalString1d: String = "◌"
+    //    @State var pm25historicalString1d: Double = 0
     @State var outputpm25historicalString1d: String = "◌"
-    @State var pm25historicalString1y: String = "◌"
+    @State var displaypm25historicalString1d: String = "◌"
+    @State var outputpm25historicalString1w: String = "◌"
+    @State var displaypm25historicalString1w: String = "◌"
+    //    @State var pm25historicalString1y: Double = 0
     @State var outputpm25historicalString1y: String = "◌"
-
+    @State var displaypm25historicalString1y: String = "◌"
+    
     
     
     // Defining the Progress Bar Styles
@@ -146,7 +150,6 @@ public struct ContentViewSmartCitizen: View {
         
         VStack
         {
-            
             MapView(coordinate: locationCoordinate)
             //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
@@ -173,80 +176,77 @@ public struct ContentViewSmartCitizen: View {
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
-                        //                            .onAppear() {
-                        //                                self.updateListEntry()
-                        //                            }
-                        
                     }
                     
                     HStack {
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)+17.78, total: 57)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)))℃")
+                                    .font(.caption)
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
+                                    .font(.caption)
                             }
                         }
-                        //                        .onAppear() {
-                        //                            self.updateListEntry()
-                        //                        }
+                        
                         Spacer()
+                        
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0), total: 100)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("💧")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0)))%")
+                                    .font(.caption)
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
+                                    .font(.caption)
                             }
                         }
-                        //                        .onAppear() {
-                        //                            self.updateListEntry()
-                        //                        }
+                        
                         Spacer()
+                        
                         ZStack{
                             ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 98)-98, total: 5)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌬️")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0))kPa")
+                                    .font(.caption)
                                 Text("ᴘʀᴇs.")
+                                    .font(.caption)
                             }
                         }
-                        //                        .onAppear() {
-                        //                            self.updateListEntry()
-                        //                        }
+                        
+                        Spacer()
+                        
+                        VStack{
+                            Text("Averages")
+                                .font(.subheadline)
+                            Text("1 Day: \(displaypm25historicalString1d)")
+                                .font(.caption)
+                            Text("1 Week: \(displaypm25historicalString1w)")
+                                .font(.caption)
+                            Text("1 Year: \(displaypm25historicalString1y)")
+                                .font(.caption)
+                            Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
+                                .font(.caption)
+                        }
                     }
-                    
-                    
-                    //                    HStack {
-                    //                        Spacer()
-                    //                        Text("User Selected Station (SmartCitizen) ⇀")
-                    //                            .font(.footnote)
-                    //                            .padding(.bottom, 10.0)
-                    ////                            .onAppear() {
-                    ////                                self.updateListEntry()
-                    ////                            }
-                    //                    }
-                    
                 }
-                
-                
-                
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
@@ -274,11 +274,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -294,10 +292,9 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+                            
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -313,9 +310,6 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.caption)
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
                         
                         HStack {
@@ -331,11 +325,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -348,10 +340,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+                            
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -364,20 +355,7 @@ public struct ContentViewSmartCitizen: View {
                                     Text("Pollen")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
-                        
-                        //                        HStack {
-                        //                            Spacer()
-                        //                            Text("(Tomorrow.io) ⇀")
-                        //                                .font(.footnote)
-                        //                                .padding(.bottom, 5.0)
-                        //
-                        //                        }
-                        
-                        
                     }
                     .ignoresSafeArea()
                     
@@ -416,12 +394,7 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
-                        //                            .padding(.top, 5.0)
                         .font(.headline)
-                        //                            .onAppear() {
-                        //                                self.updateListEntry()
-                        //                            }
-                        
                         
                         HStack {
                             ZStack{
@@ -436,11 +409,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -453,10 +424,9 @@ public struct ContentViewSmartCitizen: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+                            
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -471,6 +441,7 @@ public struct ContentViewSmartCitizen: View {
                             }
                             
                             Spacer()
+                            
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -484,12 +455,8 @@ public struct ContentViewSmartCitizen: View {
                                 }
                             }
                         }
-                        
-                        
-                        
                     }
                     .ignoresSafeArea()
-                    
                 }
                 
                 Button("🔄", action: {
@@ -501,9 +468,7 @@ public struct ContentViewSmartCitizen: View {
             .onAppear() {
                 self.updateListEntry()
             }
-            
         }
-        
     }
     
     
@@ -519,9 +484,81 @@ public struct ContentViewSmartCitizen: View {
         
         ProgressIndicatorShown = true
         
-        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID))
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID) as? String ?? String())
         
-        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (ProfileEditor().SensorID))
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (ProfileEditor().SensorID) as? String ?? String())
+        
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1w(id: (ProfileEditor().SensorID) as? String ?? String())
+        
+        func generatesmartCitizen24HourAverage(pm25historicalString:String) -> String{
+            
+            let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
+            
+            let step2 = NumberFormatter().number(from: step1)?.doubleValue
+            
+            let step3:Int = Int(round(step2 ?? 0.0))
+            
+            switch (step3) {
+                
+            case _ where step3 >= 0 && step3 < 15:
+                return String("\(step3) ✓")
+                
+            case _ where step3 >= 15 && step3 < 25:
+                return String("\(step3) ④")
+                
+            case _ where step3 >= 25 && step3 < 37:
+                return String("\(step3) ③")
+                
+            case _ where step3 >= 37 && step3 < 50:
+                return String("\(step3) ②")
+                
+            case _ where step3 >= 50 && step3 < 75:
+                return String("\(step3) ①")
+                
+            case _ where step3 >= 75:
+                return String("\(step3) ⓪")
+                
+            default:
+                return String("\(step3)")
+                
+            }
+            
+        }
+        
+        func generatesmartCitizenAnnualAverage(pm25historicalString:String) -> String{
+            
+            let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
+            
+            let step2 = NumberFormatter().number(from: step1)?.doubleValue
+            
+            let step3:Int = Int(round(step2 ?? 0.0))
+            
+            switch (step3) {
+                
+            case _ where step3 >= 0 && step3 < 5:
+                return String("\(step3) ✓")
+                
+            case _ where step3 >= 5 && step3 < 10:
+                return String("\(step3) ④")
+                
+            case _ where step3 >= 10 && step3 < 15:
+                return String("\(step3) ③")
+                
+            case _ where step3 >= 15 && step3 < 25:
+                return String("\(step3) ②")
+                
+            case _ where step3 >= 25 && step3 < 35:
+                return String("\(step3) ①")
+                
+            case _ where step3 >= 35:
+                return String("\(step3) ⓪")
+                
+            default:
+                return String("\(step3)")
+                
+            }
+            
+        }
         
         //        smartCitizenViewModel.getSmartCitizen()
         //        smartCitizenViewModel.objectWillChange.send()
@@ -536,93 +573,35 @@ public struct ContentViewSmartCitizen: View {
                 
                 ProgressIndicatorShown = true
                 
-                // show historical smartcitizen pm2.5 data
-                if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
-                {
-                    outputpm25historicalString1d = String("\(pm25historicalString1d)")
-
-                }
-                
-                func generatesmartCitizen24HourAverage(pm25historicalString:String) -> String{
-                    
-                    let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
-                    
-                    let step2 = NumberFormatter().number(from: step1)?.doubleValue
-                    
-                    let step3:Int = Int(round(step2 ?? 0.0))
-                    
-                    switch (step3) {
-                        
-                    case _ where step3 >= 0 && step3 < 15:
-                        return String("\(step3) ✓")
-                        
-                    case _ where step3 >= 15 && step3 < 25:
-                        return String("\(step3) ④")
-                        
-                    case _ where step3 >= 25 && step3 < 37:
-                        return String("\(step3) ③")
-                        
-                    case _ where step3 >= 37 && step3 < 50:
-                        return String("\(step3) ②")
-                        
-                    case _ where step3 >= 50 && step3 < 75:
-                        return String("\(step3) ①")
-                        
-                    case _ where step3 >= 75:
-                        return String("\(step3) ⓪")
-                        
-                    default:
-                        return String("\(step3)")
-                        
-                    }
-                    
-                }
-                
-                func generatesmartCitizenAnnualAverage(pm25historicalString:String) -> String{
-                    
-                    let step1 = pm25historicalString.replacingOccurrences(of: "[^\\.\\d+]", with: "", options: [.regularExpression])
-                    
-                    let step2 = NumberFormatter().number(from: step1)?.doubleValue
-                    
-                    let step3:Int = Int(round(step2 ?? 0.0))
-                    
-                    switch (step3) {
-                        
-                    case _ where step3 >= 0 && step3 < 5:
-                        return String("\(step3) ✓")
-                        
-                    case _ where step3 >= 5 && step3 < 10:
-                        return String("\(step3) ④")
-                        
-                    case _ where step3 >= 10 && step3 < 15:
-                        return String("\(step3) ③")
-                        
-                    case _ where step3 >= 15 && step3 < 25:
-                        return String("\(step3) ②")
-                        
-                    case _ where step3 >= 25 && step3 < 35:
-                        return String("\(step3) ①")
-                        
-                    case _ where step3 >= 35:
-                        return String("\(step3) ⓪")
-                        
-                    default:
-                        return String("\(step3)")
-                        
-                    }
-                    
-                }
-                
-                print(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d))
-                print(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y))
-                
                 // Get Latitude & longitude to feed into other APIs
                 self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0, smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0)
                 
                 self.sensorLatitude = smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0
                 self.sensorLongitude = smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0
                 
+                // show historical smartcitizen pm2.5 data
+                if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
+                {
+                    outputpm25historicalString1d = String("\(pm25historicalString1d)")
+                    displaypm25historicalString1d = generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d)
+                }
                 
+                if let pm25historicalString1w = smartCitizenHistoricalData1w.readings?[1][1]
+                {
+                    outputpm25historicalString1w = String("\(pm25historicalString1w)")
+                    displaypm25historicalString1w = generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1w)
+                }
+                
+                if let pm25historicalString1y = smartCitizenHistoricalData1y.readings?[0][1]
+                {
+                    outputpm25historicalString1y = String("\(pm25historicalString1y)")
+                    displaypm25historicalString1y = generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y)
+                }
+                
+                
+                
+                //                print(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d))
+                //                print(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y))
                 
                 // Calculate AQI & create images
                 self.pM2_5Value = round((smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0.0))
@@ -689,9 +668,9 @@ public struct ContentViewSmartCitizen: View {
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 print("updating +6s list entries")
-                //                print("\(String(telraamViewModel.telraamData.properties?.lorry ?? 0))")
                 
                 ProgressIndicatorShown = false
+                
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
