@@ -138,6 +138,7 @@ struct Sensor: Codable {
 //    var pm10_A, pm10_B: Double?
     var pm25_A: Double?
     var pm25_B: Double?
+    var pm25_cf_1: Double?
 //    var pm100_A, pm100_B: Double?
 //    var the03_UmCountA: Int?
 //    var the03_UmCountB, the05_UmCountA, the05_UmCountB, the10_UmCountA: Double?
@@ -157,6 +158,7 @@ struct Sensor: Codable {
 //    var firmwareUpgrade, firmwareVersion: String?
 //    var rssi, icon, confidenceManual, confidenceAuto: Int?
 //    var channelFlagsAuto: Int?
+    var stats: Stats?
     
     enum CodingKeys: String, CodingKey {
         case sensorIndex = "sensor_index"
@@ -177,6 +179,7 @@ struct Sensor: Codable {
 //        case pm10_B = "pm1.0_b"
         case pm25_A = "pm2.5_a"
         case pm25_B = "pm2.5_b"
+        case pm25_cf_1 = "pm2.5_cf_1"
 //        case pm100_A = "pm10.0_a"
 //        case pm100_B = "pm10.0_b"
 //        case the03_UmCountA = "0.3_um_count_a"
@@ -210,6 +213,25 @@ struct Sensor: Codable {
 //        case confidenceManual = "confidence_manual"
 //        case confidenceAuto = "confidence_auto"
 //        case channelFlagsAuto = "channel_flags_auto"
+        case stats
+    }
+    
+    struct Stats: Codable {
+        var pm25_10minute: Double?
+        var pm25_30minute: Double?
+        var pm25_60minute: Double?
+        var pm25_6hour: Double?
+        var pm25_24hour: Double?
+        var pm25_1week: Double?
+        
+        enum CodingKeys: String, CodingKey {
+            case pm25_10minute = "pm2.5_10minute"
+            case pm25_30minute = "pm2.5_30minute"
+            case pm25_60minute = "pm2.5_60minute"
+            case pm25_6hour = "pm2.5_6hour"
+            case pm25_24hour = "pm2.5_24hour"
+            case pm25_1week = "pm2.5_1week"
+        }
     }
 }
 
