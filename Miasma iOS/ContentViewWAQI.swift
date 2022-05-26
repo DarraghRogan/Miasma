@@ -441,12 +441,15 @@ public struct ContentViewWAQI: View {
                     
                 }
                 
-                Button("🔄", action: {
-                    updateListEntry()
-                } )
-                .font(.title)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                //                Button("🔄", action: {
+                //                    updateListEntry()
+                //                } )
+                //                .font(.title)
+                //                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
             }
+        }
+        .refreshable {
+            self.updateListEntry()
         }
         .onAppear() {
             self.updateListEntry()
@@ -469,6 +472,11 @@ public struct ContentViewWAQI: View {
         wAQIViewModel.getWAQI()
         wAQIViewModel.objectWillChange.send()
         
+        if ProfileEditor().TelraamDataWanted == true
+        {
+            telraamViewModel.getTelraam()
+            telraamViewModel.objectWillChange.send()
+        }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!

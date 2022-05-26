@@ -236,7 +236,7 @@ public struct ContentViewSmartCitizen: View {
                         VStack{
                             Text("Averages")
                                 .font(.subheadline)
-//                                .padding(.bottom, 0.5)
+                            //                                .padding(.bottom, 0.5)
                             Text("1 Day: \(displaypm25historicalString1d)")
                                 .font(.caption)
                                 .multilineTextAlignment(.trailing)
@@ -463,14 +463,18 @@ public struct ContentViewSmartCitizen: View {
                     .ignoresSafeArea()
                 }
                 
-                Button("🔄", action: {
-                    updateListEntry()
-                } )
-                .font(.title)
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+                //                Button("🔄", action: {
+                //                    updateListEntry()
+                //                } )
+                //                .font(.title)
+                //                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
+            }
+            .refreshable {
+                self.updateListEntry()
             }
             .onAppear() {
                 self.updateListEntry()
+                
             }
         }
     }
@@ -487,6 +491,15 @@ public struct ContentViewSmartCitizen: View {
     public func updateListEntry() {
         
         ProgressIndicatorShown = true
+        
+        smartCitizenViewModel.getSmartCitizen()
+        smartCitizenViewModel.objectWillChange.send()
+        
+        if ProfileEditor().TelraamDataWanted == true
+        {
+            telraamViewModel.getTelraam()
+            telraamViewModel.objectWillChange.send()
+        }
         
         DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID) as? String ?? String())
         
@@ -564,11 +577,7 @@ public struct ContentViewSmartCitizen: View {
             
         }
         
-        //        smartCitizenViewModel.getSmartCitizen()
-        //        smartCitizenViewModel.objectWillChange.send()
         
-        //        telraamViewModel.getTelraam()
-        //        telraamViewModel.objectWillChange.send()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
             DispatchQueue.main.async { // you need to update it in main thread!

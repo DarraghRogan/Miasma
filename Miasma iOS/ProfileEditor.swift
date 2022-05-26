@@ -22,7 +22,7 @@ struct ProfileEditor: View {
     @AppStorage("NotificationsWanted") var NotificationsWanted = false
     
     @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
-    @AppStorage("SegmentID") var segmentID = ""
+    @AppStorage("SegmentID") var segmentID =  ""
     
     var body: some View {
         List {
