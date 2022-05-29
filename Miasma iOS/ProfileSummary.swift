@@ -6,12 +6,12 @@
  */
 
 import SwiftUI
+import AppTrackingTransparency
 
 let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject
 
-
 struct ProfileSummary: View {
-    
+
     var body: some View {
         List {
             Text("Miasma Preferences")

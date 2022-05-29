@@ -42,12 +42,56 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     public let defaults = UserDefaults.standard
     
 }
-    
+
+public extension UIApplication {
+    func currentUIWindow() -> UIWindow? {
+        let connectedScenes = UIApplication.shared.connectedScenes
+            .filter({
+                $0.activationState == .foregroundActive})
+            .compactMap({$0 as? UIWindowScene})
+        
+        let window = connectedScenes.first?
+            .windows
+            .first { $0.isKeyWindow }
+
+        return window
+        
+    }
+}
+
+func requestPermission() {
+    if #available(iOS 14, *) {
+        ATTrackingManager.requestTrackingAuthorization { status in
+            switch status {
+            case .authorized:
+                // Tracking authorization dialog was shown
+                // and we are authorized
+                print("Authorized")
+                
+                // Now that we are authorized we can get the IDFA
+//                print(ASIdentifierManager.shared().advertisingIdentifier)
+            case .denied:
+                // Tracking authorization dialog was
+                // shown and permission is denied
+                print("Denied")
+            case .notDetermined:
+                // Tracking authorization dialog has not been shown
+                print("Not Determined")
+            case .restricted:
+                print("Restricted")
+            @unknown default:
+                print("Unknown")
+            }
+        }
+    }
+}
+
 @main
 struct Miasma_iOSApp: App {
     
     init() {
-        requestIDFA()
+//        requestIDFA()
+        showConsentInformation()
     }
     
     var body: some Scene {
@@ -81,6 +125,7 @@ struct Miasma_iOSApp: App {
                     let formStatus = UMPConsentInformation.sharedInstance.formStatus
                     if formStatus == UMPFormStatus.available {
                       loadForm()
+                        requestPermission()
                     }
                 }
             })
@@ -94,7 +139,7 @@ struct Miasma_iOSApp: App {
                 } else {
                     // Present the form
                     if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.required {
-                        form?.present(from: UIApplication.shared.windows.first!.rootViewController! as UIViewController, completionHandler: { dimissError in
+                        form?.present(from: (UIApplication.shared.currentUIWindow()?.rootViewController)! as UIViewController, completionHandler: { dimissError in
                             if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
                                 // App can start requesting ads.
                                 initGoogleMobileAds()
