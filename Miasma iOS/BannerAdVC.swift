@@ -9,8 +9,6 @@
 import SwiftUI
 import GoogleMobileAds
 import UIKit
-import AppTrackingTransparency
-import AdSupport
 
 class BannerAdVC: UIViewController {
     let adUnitId: String

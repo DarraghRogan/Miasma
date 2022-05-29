@@ -38,7 +38,9 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To detect the closest air quality sensor &amp; weather data</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>This identifier will be used to deliver personalised ads to you.</string>
+	<string>This identifier will be used to deliver personalised ads to you, and should you click any links the revenue enables me to keep developing Miasma.</string>
+    <key>GADDelayAppMeasurementInit</key>
+    <true/>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

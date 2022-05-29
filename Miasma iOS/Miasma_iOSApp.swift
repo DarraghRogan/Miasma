@@ -66,21 +66,21 @@ func requestPermission() {
             case .authorized:
                 // Tracking authorization dialog was shown
                 // and we are authorized
-                print("Authorized")
+                print("App Tracking Transparency Authorized")
                 
                 // Now that we are authorized we can get the IDFA
 //                print(ASIdentifierManager.shared().advertisingIdentifier)
             case .denied:
                 // Tracking authorization dialog was
                 // shown and permission is denied
-                print("Denied")
+                print("App Tracking Transparency Denied")
             case .notDetermined:
                 // Tracking authorization dialog has not been shown
-                print("Not Determined")
+                print("App Tracking Transparency Not Determined")
             case .restricted:
-                print("Restricted")
+                print("App Tracking Transparency Restricted")
             @unknown default:
-                print("Unknown")
+                print("App Tracking Transparency Unknown")
             }
         }
     }
@@ -125,7 +125,6 @@ struct Miasma_iOSApp: App {
                     let formStatus = UMPConsentInformation.sharedInstance.formStatus
                     if formStatus == UMPFormStatus.available {
                       loadForm()
-                        requestPermission()
                     }
                 }
             })
@@ -142,6 +141,7 @@ struct Miasma_iOSApp: App {
                         form?.present(from: (UIApplication.shared.currentUIWindow()?.rootViewController)! as UIViewController, completionHandler: { dimissError in
                             if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
                                 // App can start requesting ads.
+                                requestPermission()
                                 initGoogleMobileAds()
                             }
                         })

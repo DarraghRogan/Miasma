@@ -841,4 +841,3 @@ public struct ContentViewSmartCitizen: View {
     }
     
 }
-
