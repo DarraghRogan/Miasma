@@ -19,6 +19,8 @@ struct ProfileEditor: View {
     
     @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
     
+    @AppStorage("AirQualityLocalToDevice") var AirQualityLocalToDevice = false
+    
     @AppStorage("NotificationsWanted") var NotificationsWanted = false
     
     @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
@@ -54,6 +56,9 @@ struct ProfileEditor: View {
                         .autocapitalization(UITextAutocapitalizationType.none)
                 }
 
+            }
+            Toggle(isOn: $AirQualityLocalToDevice) {
+                Text("Also show Air Quality local to device 📲")
             }
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
                 Text("Enable Electricty Consumpt. data")

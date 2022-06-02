@@ -17,6 +17,8 @@ public struct ContentViewPurpleAir: View {
     
     @ObservedObject var telraamViewModel = TelraamViewModel()
     
+    @ObservedObject var wAQIhereViewModel = WAQIhereViewModel()
+    
     @State var ProgressIndicatorShown = true
     
     // the default location has top-notch food :-) (pork with fish sauce for the win)
@@ -55,6 +57,10 @@ public struct ContentViewPurpleAir: View {
     @State var celciusForDisplay: String = "◌"
     @State var fahrenheitForCalculation: Double = 0
     @State var pressure_visual: String = "[___/______/____]"
+    
+    // Defining VARs for WAQI
+    @State var wAQIAQI: Int = 0
+    @State var fahrenheitForDisplayWAQI: String = "0"
     
     // Defining the Progress Bar Styles
     struct aQIProgressBarStyle: ProgressViewStyle {
@@ -246,7 +252,7 @@ public struct ContentViewPurpleAir: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.subheadline)
-                                Text("\(String(purpleAirViewModel.purpleAirdata.pressureA ?? 0))mb")
+                                Text("\(String(format: "%.1f", locale: Locale.current,purpleAirViewModel.purpleAirdata.pressureA ?? 0))mb")
                                     .font(.caption)
                                 Text("ᴘʀᴇs.")
                                     .font(.caption)
@@ -277,6 +283,109 @@ public struct ContentViewPurpleAir: View {
                 }
                 .ignoresSafeArea()
                 
+                if ProfileEditor().AirQualityLocalToDevice == true
+                {
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(wAQIhereViewModel.wAQIdata.city?.name ?? "◌") 📲",
+                             destination: URL(string: wAQIhereViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
+                        .font(.headline)
+                        
+                        HStack {
+                            ProgressView("☁️ \(wAQIhereViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴍᴀɪɴʟʏ \(wAQIhereViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIhereViewModel.wAQIdata.aqi ?? 0), total: 500)
+                                .progressViewStyle(aQIProgressBarStyle())
+                                .padding(.top, 0.5)
+                                .padding(.bottom, 7.0)
+                        }
+                        
+                        HStack {
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)+17.78, total: 57)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌡")
+                                        .font(.subheadline)
+                                    Text("\(String(format: "%.1f", locale: Locale.current, wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
+                                        .font(.caption)
+                                    Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("💧")
+                                        .font(.subheadline)
+                                    Text("\(String(Int(wAQIhereViewModel.wAQIdata.iaqi?.h?.v ?? 0)))%")
+                                        .font(.caption)
+                                    Text("ʀᴇʟ. ʜᴜᴍ.")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌬️")
+                                        .font(.subheadline)
+                                    Text("\(String(format: "%.1f", locale: Locale.current, wAQIhereViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
+                                        .font(.caption)
+                                    Text("ᴘʀᴇs.")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🪁")
+                                        .font(.subheadline)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*2.23694))mph")
+                                        .font(.caption2)
+                                }
+                            }
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Text("\(wAQIhereViewModel.wAQIdata.attributions?[0].name ?? "0")")
+                                .font(.footnote)
+                        }
+                        HStack {
+                            Spacer()
+                            Text("\(wAQIhereViewModel.wAQIdata.time?.s ?? "0")")
+                                .font(.footnote)
+                                .padding(.bottom, 2.0)
+                        }
+                        
+                    }
+                }
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -384,9 +493,6 @@ public struct ContentViewPurpleAir: View {
                              destination: URL(string: "https://app.electricitymap.org/map")!)
                         //                            .padding(.top, 5.0)
                         .font(.headline)
-                        //                            .onAppear() {
-                        //                                self.updateListEntry()
-                        //                            }
                         
                         
                         HStack {
@@ -394,19 +500,9 @@ public struct ContentViewPurpleAir: View {
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
-                            //                                .onAppear() {
-                            //                                    self.updateListEntry()
-                            //                                }
+
                         }
-                        
-                        //                        HStack {
-                        //                            Spacer()
-                        //                            Text("(Electricity Map) ⇀")
-                        //                                .font(.footnote)
-                        //                                .padding(.bottom, 5.0)
-                        //
-                        //                        }
-                        
+
                     }
                     .ignoresSafeArea()
                     
@@ -424,9 +520,6 @@ public struct ContentViewPurpleAir: View {
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
                         //                            .padding(.top, 5.0)
                         .font(.headline)
-                        //                            .onAppear() {
-                        //                                self.updateListEntry()
-                        //                            }
                         
                         
                         HStack {
@@ -442,9 +535,7 @@ public struct ContentViewPurpleAir: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+ 
                             
                             Spacer()
                             ZStack{
@@ -459,9 +550,7 @@ public struct ContentViewPurpleAir: View {
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
                                 }
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
+
                             Spacer()
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
@@ -515,7 +604,12 @@ public struct ContentViewPurpleAir: View {
         
     }
     
-    
+    func calculateFahrenheit(celcius: Double) -> String {
+        var fahrenheit: Double
+        fahrenheit = (celcius  * 9 / 5) + 32
+        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+        return fahrenheitRoundedString
+    }
     
     public func updateListEntry() {
         
@@ -523,6 +617,12 @@ public struct ContentViewPurpleAir: View {
         
         purpleAirViewModel.getPurpleAir()
         purpleAirViewModel.objectWillChange.send()
+        
+        if ProfileEditor().AirQualityLocalToDevice == true
+        {
+            wAQIhereViewModel.getWAQIhere()
+            wAQIhereViewModel.objectWillChange.send()
+        }
         
         if ProfileEditor().TelraamDataWanted == true
         {
@@ -613,6 +713,10 @@ public struct ContentViewPurpleAir: View {
                     DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
                 }
                 
+                if ProfileEditor().AirQualityLocalToDevice == true
+                {
+                    self.fahrenheitForDisplayWAQI = calculateFahrenheit(celcius: wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)
+                }
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {

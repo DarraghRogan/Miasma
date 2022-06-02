@@ -29,11 +29,11 @@ struct ProfileSummary: View {
                 Spacer()
                 Text("\((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
             }
-            //            HStack{
-            //                Text("Aircraft Overhead data:")
-            //                Spacer()
-            //                Text("\((ProfileEditor().AircraftDataWanted) ? "On": "Off" )")
-            //            }
+                        HStack{
+                            Text("Also show Air Quality local to device 📲:")
+                            Spacer()
+                            Text("\((ProfileEditor().AirQualityLocalToDevice) ? "On": "Off" )")
+                        }
             HStack{
                 Text("1 Hour Forecast:")
                 Spacer()

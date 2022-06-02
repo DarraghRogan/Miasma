@@ -29,6 +29,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             //         defaults.set(true, forKey:"AircraftDataWanted")
             defaults.set(false, forKey:"OneHourForecastDataWanted")
             defaults.set(false, forKey:"TelraamDataWanted")
+            defaults.set(false, forKey:"AirQualityLocalToDevice")
             defaults.set("9000002573", forKey: "segmentID")
             defaults.set(0.0, forKey: "UserLatitude")
             defaults.set(0.0, forKey: "UserLongitude")

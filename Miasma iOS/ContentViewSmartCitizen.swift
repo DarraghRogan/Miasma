@@ -15,6 +15,8 @@ public struct ContentViewSmartCitizen: View {
     
     @ObservedObject var smartCitizenViewModel = SmartCitizenViewModel()
     
+    @ObservedObject var wAQIhereViewModel = WAQIhereViewModel()
+    
     @ObservedObject var telraamViewModel = TelraamViewModel()
     
     @State var ProgressIndicatorShown = true
@@ -62,6 +64,9 @@ public struct ContentViewSmartCitizen: View {
     @State var outputpm25historicalString1y: String = "◌"
     @State var displaypm25historicalString1y: String = "◌"
     
+    // Defining VARs for WAQI
+    @State var wAQIAQI: Int = 0
+    @State var fahrenheitForDisplayWAQI: String = "0"
     
     
     // Defining the Progress Bar Styles
@@ -254,6 +259,110 @@ public struct ContentViewSmartCitizen: View {
                 }
                 
                 
+                if ProfileEditor().AirQualityLocalToDevice == true
+                {
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(wAQIhereViewModel.wAQIdata.city?.name ?? "◌") 📲",
+                             destination: URL(string: wAQIhereViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
+                        .font(.headline)
+                        
+                        HStack {
+                            ProgressView("☁️ \(wAQIhereViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴍᴀɪɴʟʏ \(wAQIhereViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIhereViewModel.wAQIdata.aqi ?? 0), total: 500)
+                                .progressViewStyle(aQIProgressBarStyle())
+                                .padding(.top, 0.5)
+                                .padding(.bottom, 7.0)
+                        }
+                        
+                        HStack {
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)+17.78, total: 57)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌡")
+                                        .font(.subheadline)
+                                    Text("\(String(format: "%.1f", locale: Locale.current, wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
+                                        .font(.caption)
+                                    Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("💧")
+                                        .font(.subheadline)
+                                    Text("\(String(Int(wAQIhereViewModel.wAQIdata.iaqi?.h?.v ?? 0)))%")
+                                        .font(.caption)
+                                    Text("ʀᴇʟ. ʜᴜᴍ.")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🌬️")
+                                        .font(.subheadline)
+                                    Text("\(String(format: "%.1f", locale: Locale.current, wAQIhereViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
+                                        .font(.caption)
+                                    Text("ᴘʀᴇs.")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🪁")
+                                        .font(.subheadline)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*2.23694))mph")
+                                        .font(.caption2)
+                                }
+                            }
+                        }
+                        
+                        HStack {
+                            Spacer()
+                            Text("\(wAQIhereViewModel.wAQIdata.attributions?[0].name ?? "0")")
+                                .font(.footnote)
+                        }
+                        HStack {
+                            Spacer()
+                            Text("\(wAQIhereViewModel.wAQIdata.time?.s ?? "0")")
+                                .font(.footnote)
+                                .padding(.bottom, 2.0)
+                        }
+                        
+                    }
+                }
+                
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
                     VStack{
@@ -336,14 +445,14 @@ public struct ContentViewSmartCitizen: View {
                                 Text("💐: \(String(Int(climaCellPollenWeed))) / 5")
                                     .font(.caption)
                                     .multilineTextAlignment(.trailing)
-
+                                
                                 Text("☀️: \(String(Int(uvIndex))) / 11")
                                     .font(.caption)
                                     .multilineTextAlignment(.trailing)
                             }
                         }
                         
-
+                        
                     }
                     .ignoresSafeArea()
                     
@@ -478,6 +587,12 @@ public struct ContentViewSmartCitizen: View {
         
         smartCitizenViewModel.getSmartCitizen()
         smartCitizenViewModel.objectWillChange.send()
+        
+        if ProfileEditor().AirQualityLocalToDevice == true
+        {
+            wAQIhereViewModel.getWAQIhere()
+            wAQIhereViewModel.objectWillChange.send()
+        }
         
         if ProfileEditor().TelraamDataWanted == true
         {
@@ -645,6 +760,10 @@ public struct ContentViewSmartCitizen: View {
                 
                 self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)
                 
+                if ProfileEditor().AirQualityLocalToDevice == true
+                {
+                    self.fahrenheitForDisplayWAQI = calculateFahrenheit(celcius: wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)
+                }
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {

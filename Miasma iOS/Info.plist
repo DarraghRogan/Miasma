@@ -22,6 +22,8 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-4380200549840291~8045330228</string>
+	<key>GADDelayAppMeasurementInit</key>
+	<true/>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.weather</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -39,8 +41,6 @@
 	<string>To detect the closest air quality sensor &amp; weather data</string>
 	<key>NSUserTrackingUsageDescription</key>
 	<string>This identifier will be used to deliver personalised ads to you, and should you click any links the revenue enables me to keep developing Miasma.</string>
-    <key>GADDelayAppMeasurementInit</key>
-    <true/>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

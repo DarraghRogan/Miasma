@@ -173,49 +173,49 @@ struct WAQITime: Codable {
 
 
 
-// define an instance of the data that can be filled by the data loader and read by the menu
-var wAQIData = WAQIDataStructure()
-
-public class DataLoaderWAQI {
-    
-    
-    func loadWAQIData(id:String) {
-        
-        let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.waqi.info/feed/\(id)/?token=\(APIKeyWAQI)")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
-        
-        
-        request.httpMethod = "GET"
-        
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
-                print("Received from the WAQI API")
-                //                if let data = data,
-                //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                //                    print(urlContent)
-                //                } else {
-                //                    print("error with printing string encoded data")
-                //                }
-                //Parse JSON
-                let decoder = JSONDecoder()
-                do {
-                    let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
-                    wAQIData = dataFromWAQI
-                    
-                }
-                catch {
-                    print("Error in WAQI JSON parsing")
-                    //                    print(purpleAirData)
-                }
-            }
-        })
-        
-        dataTask.resume()
-    }
-}
+//// define an instance of the data that can be filled by the data loader and read by the menu
+//var wAQIData = WAQIDataStructure()
+//
+//public class DataLoaderWAQI {
+//
+//
+//    func loadWAQIData(id:String) {
+//
+//        let request = NSMutableURLRequest(url: NSURL(string:
+//                                                        "https://api.waqi.info/feed/\(id)/?token=\(APIKeyWAQI)")! as URL,
+//                                          cachePolicy: .useProtocolCachePolicy,
+//                                          timeoutInterval: 10.0)
+//
+//
+//        request.httpMethod = "GET"
+//
+//        let session = URLSession.shared
+//        let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
+//            if (error != nil) {
+//                print(error)
+//            } else {
+//                let httpResponse = response as? HTTPURLResponse
+//                print("Received from the WAQI API")
+//                //                if let data = data,
+//                //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+//                //                    print(urlContent)
+//                //                } else {
+//                //                    print("error with printing string encoded data")
+//                //                }
+//                //Parse JSON
+//                let decoder = JSONDecoder()
+//                do {
+//                    let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
+//                    wAQIData = dataFromWAQI
+//
+//                }
+//                catch {
+//                    print("Error in WAQI JSON parsing")
+//                    //                    print(purpleAirData)
+//                }
+//            }
+//        })
+//
+//        dataTask.resume()
+//    }
+//}

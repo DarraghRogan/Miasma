@@ -178,7 +178,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌡")
                                     .font(.subheadline)
-                                Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)))℃")
+                                Text("\(String(format: "%.1f", locale: Locale.current, wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
                                     .font(.caption)
                                 Text("/ \(self.fahrenheitForDisplayWAQI)℉")
                                     .font(.caption)
@@ -214,7 +214,7 @@ public struct ContentViewWAQI: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.subheadline)
-                                Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0)))mb")
+                                Text("\(String(format: "%.1f", locale: Locale.current, wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0))mb")
                                     .font(.caption)
                                 Text("ᴘʀᴇs.")
                                     .font(.caption)
