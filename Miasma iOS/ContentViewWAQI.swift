@@ -39,12 +39,13 @@ public struct ContentViewWAQI: View {
     @State var climaCellFeelsLike: Double = 0.0
     @State var climaCellWindSpeed: Double = 0.0
     @State var climaCellEPAAQI: Int = 0
-    @State var climaCellPrimaryPollutant: String = "◌"
+    @State var climaCellEPAPrimaryPollutant: String = "◌"
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
     @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
+    @State var uvIndex: Double = 0
     
     
     // Defining VARs for WAQI
@@ -171,14 +172,16 @@ public struct ContentViewWAQI: View {
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)+17.78, total: 57)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌡")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.t?.v ?? 0)))℃")
+                                    .font(.caption)
                                 Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                                    .font(.caption)
                             }
                         }
                         
@@ -187,14 +190,16 @@ public struct ContentViewWAQI: View {
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0), total: 100)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("💧")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.h?.v ?? 0)))%")
+                                    .font(.caption)
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
+                                    .font(.caption)
                             }
                         }
                         
@@ -203,14 +208,34 @@ public struct ContentViewWAQI: View {
                         ZStack{
                             ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 980)-980, total: 50)
                                 .progressViewStyle(GaugeProgressStyle())
-                                .frame(width: 100, height: 100)
+                                .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
                                 .padding(.bottom, 4.0)
                             VStack{
                                 Text("🌬️")
-                                    .font(.title)
+                                    .font(.subheadline)
                                 Text("\(String(Int(wAQIViewModel.wAQIdata.iaqi?.p?.v ?? 0)))mb")
+                                    .font(.caption)
                                 Text("ᴘʀᴇs.")
+                                    .font(.caption)
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        ZStack{
+                            ProgressView("", value: Float16(wAQIViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
+                                .progressViewStyle(GaugeProgressStyle())
+                                .frame(width: 70, height: 70)
+                                .contentShape(Rectangle())
+                                .padding(.bottom, 4.0)
+                            VStack{
+                                Text("🪁")
+                                    .font(.subheadline)
+                                Text("\(Int((wAQIViewModel.wAQIdata.iaqi?.w?.v ?? 0)*3.6))km/h")
+                                    .font(.caption2)
+                                Text("\(Int((wAQIViewModel.wAQIdata.iaqi?.w?.v ?? 0)*2.23694))mph")
+                                    .font(.caption2)
                             }
                         }
                     }
@@ -245,14 +270,16 @@ public struct ContentViewWAQI: View {
                             ZStack{
                                 ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌡")
-                                        .font(.title)
+                                        .font(.subheadline)
                                     Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
+                                        .font(.caption2)
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
+                                        .font(.caption2)
                                 }
                             }
                             
@@ -261,16 +288,18 @@ public struct ContentViewWAQI: View {
                             ZStack{
                                 ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🪁")
-                                        .font(.title)
-                                    Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                        .font(.caption)
-                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
-                                        .font(.caption)
+                                        .font(.subheadline)
+                                    Text("\(Int(climaCellWindSpeed*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int(climaCellWindSpeed*2.23694))mph")
+                                        .font(.caption2)
+                                    Text("\(windDirection_acronymn)")
+                                        .font(.caption2)
                                 }
                             }
                             
@@ -279,62 +308,39 @@ public struct ContentViewWAQI: View {
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("☁️")
-                                        .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
-                                        .font(.caption)
-                                    Text("ᴍᴀɪɴʟʏ \(self.climaCellPrimaryPollutant)")
-                                        .font(.caption)
+                                        .font(.subheadline)
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ")
+                                        .font(.caption2)
+                                    Text("\(climaCellEPAPrimaryPollutant)")
+                                        .font(.caption2)
                                 }
                             }
-                        }
-                        
-                        HStack {
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenTree), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌳")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
+                            
                             
                             Spacer()
                             
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌱")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
-                            
-                            Spacer()
-                            
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("💐")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
+                            VStack{
+                                Text("Pollen & UV")
+                                    .font(.caption)
+                                //                                .padding(.bottom, 0.5)
+                                Text("🌳: \(String(Int(climaCellPollenTree))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("🌱: \(String(Int(climaCellPollenGrass))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("💐: \(String(Int(climaCellPollenWeed))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+
+                                Text("☀️: \(String(Int(uvIndex))) / 11")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
                             }
                         }
                     }
@@ -572,6 +578,7 @@ public struct ContentViewWAQI: View {
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)
+                    self.uvIndex = climaCellData.data?.timelines?[0].intervals?[1].values?.uvIndex ?? 0
                     
                     let windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
@@ -600,19 +607,19 @@ public struct ContentViewWAQI: View {
                     var ClimaCellPrimaryPollutantText: String
                     switch climaCellPrimaryPollutant {
                     case _ where climaCellPrimaryPollutant == 0:
-                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                        climaCellEPAPrimaryPollutant = "PM₂.₅"
                     case _ where climaCellPrimaryPollutant == 1:
-                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                        climaCellEPAPrimaryPollutant = "PM₁₀"
                     case _ where climaCellPrimaryPollutant == 2:
-                        ClimaCellPrimaryPollutantText = "O₃"
+                        climaCellEPAPrimaryPollutant = "O₃"
                     case _ where climaCellPrimaryPollutant == 3:
-                        ClimaCellPrimaryPollutantText = "NO₂"
+                        climaCellEPAPrimaryPollutant = "NO₂"
                     case _ where climaCellPrimaryPollutant == 4:
-                        ClimaCellPrimaryPollutantText = "CO"
+                        climaCellEPAPrimaryPollutant = "CO"
                     case _ where climaCellPrimaryPollutant == 5:
                         ClimaCellPrimaryPollutantText = "SO₂"
                     default:
-                        ClimaCellPrimaryPollutantText = "Unknown"
+                        climaCellEPAPrimaryPollutant = "Unknown"
                     }
                     
                     

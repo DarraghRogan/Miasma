@@ -43,8 +43,9 @@ public struct ContentViewPurpleAir: View {
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
-    @State var fahrenheitForDisplay: String = "0"
+    @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
+    @State var uvIndex: Double = 0
     
     // Defining VARs for PurpleAir
     @State var pM2_5Value: Double = 0
@@ -290,112 +291,81 @@ public struct ContentViewPurpleAir: View {
                         
                         HStack {
                             ZStack{
-                                ProgressView("", value: Float16(fahrenheitForDisplay), total: 100)
+                                ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌡")
-                                        .font(.title)
+                                        .font(.subheadline)
                                     Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
-                                    Text("/ \(fahrenheitForDisplay)℉")
+                                        .font(.caption2)
+                                    Text("/ \(fahrenheitForDisplayClimaCell)℉")
+                                        .font(.caption2)
                                 }
                             }
-
+                            
                             Spacer()
                             
                             ZStack{
                                 ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🪁")
-                                        .font(.title)
-                                    Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                        .font(.caption)
-                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
-                                        .font(.caption)
+                                        .font(.subheadline)
+                                    Text("\(Int(climaCellWindSpeed*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int(climaCellWindSpeed*2.23694))mph")
+                                        .font(.caption2)
+                                    Text("\(windDirection_acronymn)")
+                                        .font(.caption2)
                                 }
                             }
-
+                            
                             Spacer()
                             
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("☁️")
-                                        .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
-                                        .font(.caption)
-                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
-                                        .font(.caption)
-                                }
-                            }
-                        }
-                        
-                        HStack {
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenTree), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌳")
-                                        .font(.title)
-                                    Text("Pollen")
+                                        .font(.subheadline)
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ")
+                                        .font(.caption2)
+                                    Text("\(climaCellEPAPrimaryPollutant)")
+                                        .font(.caption2)
                                 }
                             }
                             
+                            
                             Spacer()
                             
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌱")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
+                            VStack{
+                                Text("Pollen & UV")
+                                    .font(.caption)
+                                //                                .padding(.bottom, 0.5)
+                                Text("🌳: \(String(Int(climaCellPollenTree))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("🌱: \(String(Int(climaCellPollenGrass))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("💐: \(String(Int(climaCellPollenWeed))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+
+                                Text("☀️: \(String(Int(uvIndex))) / 11")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
                             }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
-                            Spacer()
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("💐")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
-                            //                            .onAppear() {
-                            //                                self.updateListEntry()
-                            //                            }
                         }
-                        
-                        //                        HStack {
-                        //                            Spacer()
-                        //                            Text("(Tomorrow.io) ⇀")
-                        //                                .font(.footnote)
-                        //                                .padding(.bottom, 5.0)
-                        //
-                        //                        }
                         
                         
                     }
@@ -671,7 +641,7 @@ public struct ContentViewPurpleAir: View {
                 
                 
                 
-                // a little protection for when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
+                // a little protection from when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
                 var isIndexValid: Bool = false
                 if 2 < climaCellData.data?.timelines?[0].intervals?.count ?? 0 {
                     isIndexValid = true
@@ -682,6 +652,8 @@ public struct ContentViewPurpleAir: View {
                 if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
                     
+                    
+                    //                    self.climaCellWeatherCode = ClimaCellWeatherCodeText
                     self.climaCellWindDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
@@ -690,6 +662,7 @@ public struct ContentViewPurpleAir: View {
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)
+                    self.uvIndex = climaCellData.data?.timelines?[0].intervals?[1].values?.uvIndex ?? 0
                     
                     let windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
@@ -793,14 +766,15 @@ public struct ContentViewPurpleAir: View {
                     }
                     
                     // Calculate Farenheit from Celcius for ClimaCell
-                    self.celciusForCalculationClimaCell = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
+                    celciusForCalculationClimaCell = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius  * 9 / 5) + 32
                         let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
                         return fahrenheitRoundedString
                     }
-                    self.fahrenheitForDisplay = calculateFahrenheit(celcius: self.celciusForCalculationClimaCell)
+                    self.fahrenheitForDisplayClimaCell = calculateFahrenheit(celcius: celciusForCalculationClimaCell)
+                    
                 }
                 
             }

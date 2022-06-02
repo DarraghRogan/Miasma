@@ -45,6 +45,7 @@ public struct ContentViewSmartCitizen: View {
     @State var climaCellPollenWeed: Int = 0
     @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
+    @State var uvIndex: Double = 0
     
     
     // Defining VARs for SmartCitizen
@@ -188,7 +189,7 @@ public struct ContentViewSmartCitizen: View {
                             VStack{
                                 Text("🌡")
                                     .font(.subheadline)
-                                Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)))℃")
+                                Text("\(String(format: "%.1f", locale: Locale.current, (smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)))℃")
                                     .font(.caption)
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                                     .font(.caption)
@@ -268,14 +269,16 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🌡")
-                                        .font(.title)
+                                        .font(.subheadline)
                                     Text("\(String(format: "%.1f", locale: Locale.current, climaCellFeelsLike))℃")
+                                        .font(.caption2)
                                     Text("/ \(fahrenheitForDisplayClimaCell)℉")
+                                        .font(.caption2)
                                 }
                             }
                             
@@ -284,16 +287,18 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(climaCellWindSpeed), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("🪁")
-                                        .font(.title)
-                                    Text("\(Int(climaCellWindSpeed*3.6))km/h / \(Int(climaCellWindSpeed*2.23694))mph")
-                                        .font(.caption)
-                                    Text("ꜰʀᴏᴍ \(windDirection_acronymn)")
-                                        .font(.caption)
+                                        .font(.subheadline)
+                                    Text("\(Int(climaCellWindSpeed*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int(climaCellWindSpeed*2.23694))mph")
+                                        .font(.caption2)
+                                    Text("\(windDirection_acronymn)")
+                                        .font(.caption2)
                                 }
                             }
                             
@@ -302,64 +307,43 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(climaCellEPAAQI), total: 500)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
+                                    .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
                                     .padding(.bottom, 4.0)
                                 VStack{
                                     Text("☁️")
-                                        .font(.title)
-                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ ᴇᴘᴀ")
-                                        .font(.caption)
-                                    Text("ᴍᴀɪɴʟʏ \(climaCellEPAPrimaryPollutant)")
-                                        .font(.caption)
+                                        .font(.subheadline)
+                                    Text("\(climaCellEPAAQI) ᴜs ᴀǫɪ")
+                                        .font(.caption2)
+                                    Text("\(climaCellEPAPrimaryPollutant)")
+                                        .font(.caption2)
                                 }
+                            }
+                            
+                            
+                            Spacer()
+                            
+                            VStack{
+                                Text("Pollen & UV")
+                                    .font(.caption)
+                                //                                .padding(.bottom, 0.5)
+                                Text("🌳: \(String(Int(climaCellPollenTree))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("🌱: \(String(Int(climaCellPollenGrass))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+                                Text("💐: \(String(Int(climaCellPollenWeed))) / 5")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
+
+                                Text("☀️: \(String(Int(uvIndex))) / 11")
+                                    .font(.caption)
+                                    .multilineTextAlignment(.trailing)
                             }
                         }
                         
-                        HStack {
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenTree), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌳")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
-                            
-                            Spacer()
-                            
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenGrass), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🌱")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
-                            
-                            Spacer()
-                            
-                            ZStack{
-                                ProgressView("", value: Float16(climaCellPollenWeed), total: 5)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 100, height: 100)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("💐")
-                                        .font(.title)
-                                    Text("Pollen")
-                                }
-                            }
-                        }
+
                     }
                     .ignoresSafeArea()
                     
@@ -710,7 +694,7 @@ public struct ContentViewSmartCitizen: View {
                     self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
                     self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
                     self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0
-                    //                    self.climaCellEPAPrimaryPollutant = ClimaCellPrimaryPollutant
+                    self.uvIndex = climaCellData.data?.timelines?[0].intervals?[1].values?.uvIndex ?? 0
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)

@@ -41,6 +41,7 @@ struct Values: Codable {
     var windDirection, windSpeed: Double?
     var epaIndex, epaPrimaryPollutant: Int?
     var solarGHI: Double?
+    var uvIndex: Double?
 }
 
 
@@ -58,7 +59,7 @@ public class DataLoaderClimaCell {
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.tomorrow.io/v4/timelines?location=\(lat),\(lon)&fields=treeIndex,grassIndex,weedIndex,temperatureApparent,weatherCode,windDirection,windSpeed,epaIndex,epaPrimaryPollutant,solarGHI&apikey=\(APIKeyClimaCellV4)")! as URL,
+            "https://api.tomorrow.io/v4/timelines?location=\(lat),\(lon)&fields=treeIndex,grassIndex,weedIndex,temperatureApparent,weatherCode,windDirection,windSpeed,epaIndex,epaPrimaryPollutant,solarGHI,uvIndex&apikey=\(APIKeyClimaCellV4)")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         

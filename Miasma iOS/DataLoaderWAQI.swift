@@ -63,7 +63,10 @@ struct WAQIAPIClient {
             .tryMap { result -> Response<T> in
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
-//                print(Response<Any>.self)
+
+//                                print(Response<Any>.self)
+//                                print(result.response)
+                
                 return Response(value: value, response: result.response)
             }
             .receive(on: DispatchQueue.main)
