@@ -30,66 +30,95 @@ struct ProfileEditor: View {
     var body: some View {
         List {
             Text("Miasma Preferences")
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .font(.title)
+                .fontWeight(.bold)
+                .font(.headline)
             VStack{
-                Text("Please choose air quality data source, and enter desired sensor ID.")
-                    .font(.caption)
-                Text("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces), or set to 'here'")
-                    .font(.caption)
-                Text("For PurpleAir & SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
-                    .font(.caption)
+                Text("\(Image(systemName: "house")) Selected Air Quality Data")
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 1.5)
+                Text("""
+                     Please choose air quality data source, and enter desired sensor ID.
+                     For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces), or set to 'here'
+                     For PurpleAir & SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL as viewed on a Laptop/Desktop browser
+                     """)
+                .font(.caption)
+                .frame(maxWidth: .infinity, alignment: .leading)
                 HStack{
-                    Menu("Air Quality Data Source") /*@START_MENU_TOKEN@*/{
-                        Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
+                    Menu("Data Provider") /*@START_MENU_TOKEN@*/{
                         Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
+                        Button("PurpleAir", action: {AppDelegate().defaults.set("PurpleAir", forKey: "AirQualityDataSource")})
                         Button("Smart Citizen", action: {AppDelegate().defaults.set("SmartCitizen", forKey: "AirQualityDataSource")})
                     }/*@END_MENU_TOKEN@*/
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     
                     Divider()
                     Text("\(AirQualityDataSource)")
                 }
+                .font(.subheadline)
+                .padding(.bottom, 1.0)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                
+                
                 HStack {
-                    Text("Sensor ID")
+                    Text("Sensor ID:")
                     Divider()
+                    Spacer()
                     TextField("Sensor ID", text: $SensorID)
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
                 }
-
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                
             }
             Toggle(isOn: $AirQualityLocalToDevice) {
-                Text("Also show Air Quality local to device 📲")
+                Text("\(Image(systemName: "location.north")) Show Air Quality local to device")
+                    .font(.subheadline)
             }
             Toggle(isOn: $ElectricalConsumptionDataWanted) {
-                Text("Enable Electricty Consumpt. data")
+                Text("\(Image(systemName: "bolt")) Electricty Consumption data")
+                    .font(.subheadline)
             }
-            //            Toggle(isOn: $AircraftDataWanted) {
-            //                Text("Enable Aircraft Overhead data")
-            //            }
-            .disabled(/*@START_MENU_TOKEN@*/false/*@END_MENU_TOKEN@*/)
+            
+            //            .disabled(false)
+            
             Toggle(isOn: $OneHourForecastDataWanted) {
-                Text("Enable 1 Hour Forecast")
+                Text("\(Image(systemName: "binoculars")) Show 1 Hour Forecast")
+                    .font(.subheadline)
             }
-
+            
             VStack{
+                Text("\(Image(systemName: "car.2")) Telraam Traffic Data")
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 1.5)
                 Text("Please enter 10 digit ID from Telraam webpage")
                     .font(.caption)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Toggle(isOn: $TelraamDataWanted) {
                     Text("Enable Telraam Traffic Data")
+                        .font(.subheadline)
                 }
                 HStack {
-                    Text("Segment ID")
+                    Text("Segment ID:")
                     Divider()
+                    Spacer()
                     TextField("Segment ID", text: $segmentID)
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    
                 }
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                
             }
-                        Toggle(isOn: $ShowWelcomeText) {
-                            Text("Show Miasma welcome text")
-                        }
-            .padding(.top)
+            Toggle(isOn: $ShowWelcomeText) {
+                Text("\(Image(systemName: "hand.wave")) Show Miasma welcome text")
+                    .font(.subheadline)
+            }
+            //            .padding(.top)
             
             
         }

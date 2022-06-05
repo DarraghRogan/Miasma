@@ -403,7 +403,7 @@ public struct ContentViewPurpleAir: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
+                        Link("\(Image(systemName: "binoculars")) 1 ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
                         .padding(.top, 8.0)
                         .font(.subheadline)
@@ -500,7 +500,7 @@ public struct ContentViewPurpleAir: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                        Link("\(Image(systemName: "bolt")) \(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
                         //                            .padding(.top, 5.0)
                         .font(.subheadline)
@@ -528,7 +528,7 @@ public struct ContentViewPurpleAir: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
+                        Link("\(Image(systemName: "car.2")) ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
                         //                            .padding(.top, 5.0)
                         .font(.subheadline)
