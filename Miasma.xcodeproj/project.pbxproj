@@ -284,11 +284,13 @@
 			children = (
 				0269848125251DB7002BFB88 /* APIKeys.swift */,
 				023BBDF125251AC5006E8054 /* Assets.xcassets */,
+				027DEB4B253501C200CF7936 /* BannerAdVC.swift */,
+				02624DDC284232920076F8FF /* BannerAdViewControllerRepresentable.swift */,
 				02028E152526955600D9368E /* CircleImage.swift */,
 				023BBDEF25251AC3006E8054 /* ContentView.swift */,
 				02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */,
-				02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */,
 				02BCC4E226C02C9400FDFF74 /* ContentViewSmartCitizen.swift */,
+				02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */,
 				02A740A12527263100830B35 /* DataLoaderClimaCell.swift */,
 				02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */,
 				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
@@ -300,16 +302,14 @@
 				029DD8B62849612800A420A1 /* DataLoaderWAQIhere.swift */,
 				023BBDF625251AC5006E8054 /* Info.plist */,
 				02038D5226E4BB5E008B4930 /* LocationViewModel.swift */,
-				027DEB4B253501C200CF7936 /* BannerAdVC.swift */,
-				02624DDC284232920076F8FF /* BannerAdViewControllerRepresentable.swift */,
-				02624DDE284232FE0076F8FF /* SwiftUIBannerAd.swift */,
 				028E0E592526345600D03420 /* MapView.swift */,
 				023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */,
 				023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */,
+				023BBDF325251AC5006E8054 /* Preview Content */,
 				02D5AB59252A144B007E73DC /* ProfileEditor.swift */,
 				02D5AB57252A144B007E73DC /* ProfileHost.swift */,
 				02D5AB58252A144B007E73DC /* ProfileSummary.swift */,
-				023BBDF325251AC5006E8054 /* Preview Content */,
+				02624DDE284232FE0076F8FF /* SwiftUIBannerAd.swift */,
 			);
 			path = "Miasma iOS";
 			sourceTree = "<group>";
@@ -825,7 +825,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -836,7 +836,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -854,7 +854,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 33;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -865,7 +865,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.13;
+				MARKETING_VERSION = 1.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

@@ -60,10 +60,12 @@ public struct ContentView: View {
         }
 //        .overlay((CircleImage()
 //                    .offset(x: 0, y: 0)), alignment: .center)
-        .overlay((Button("🔧", action: { self.showingProfile.toggle() } )
+        .overlay((Button("\(Image(systemName: "gearshape.fill"))", action: { self.showingProfile.toggle() } )
                     .padding(EdgeInsets())
-                    .offset(x: 155, y: 35)
-                    .font(.title)), alignment: .top)
+                    .offset(x: 135, y: 15)
+                    .font(.system(size: 60))), alignment: .top)
+                    .foregroundColor(.primary)
+        
         
 //        .edgesIgnoringSafeArea(.top)
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))

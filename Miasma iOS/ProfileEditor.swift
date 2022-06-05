@@ -15,15 +15,16 @@ struct ProfileEditor: View {
     
     @AppStorage("ElectricalConsumptionDataWanted") var ElectricalConsumptionDataWanted = false
     
-    //    @AppStorage("AircraftDataWanted") var AircraftDataWanted = true
+    @AppStorage("ShowWelcomeText") var ShowWelcomeText = true
     
     @AppStorage("OneHourForecastDataWanted") var OneHourForecastDataWanted = false
     
-    @AppStorage("AirQualityLocalToDevice") var AirQualityLocalToDevice = false
+    @AppStorage("AirQualityLocalToDevice") var AirQualityLocalToDevice = true
     
     @AppStorage("NotificationsWanted") var NotificationsWanted = false
     
     @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
+    
     @AppStorage("SegmentID") var segmentID =  ""
     
     var body: some View {
@@ -70,9 +71,7 @@ struct ProfileEditor: View {
             Toggle(isOn: $OneHourForecastDataWanted) {
                 Text("Enable 1 Hour Forecast")
             }
-            //            Toggle(isOn: $NotificationsWanted) {
-            //                Text("Enable Notifications")
-            //            }
+
             VStack{
                 Text("Please enter 10 digit ID from Telraam webpage")
                     .font(.caption)
@@ -87,6 +86,9 @@ struct ProfileEditor: View {
                         .autocapitalization(UITextAutocapitalizationType.none)
                 }
             }
+                        Toggle(isOn: $ShowWelcomeText) {
+                            Text("Show Miasma welcome text")
+                        }
             .padding(.top)
             
             

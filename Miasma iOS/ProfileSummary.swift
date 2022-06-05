@@ -44,11 +44,11 @@ struct ProfileSummary: View {
                 Spacer()
                 Text("\((ProfileEditor().TelraamDataWanted) ? "On": "Off" )")
             }
-            //            HStack{
-            //                Text("Notifications:")
-            //                Spacer()
-            //                Text("\((ProfileEditor().NotificationsWanted) ? "On": "Off" )")
-            //            }
+                        HStack{
+                            Text("Miasma welcome text:")
+                            Spacer()
+                            Text("\((ProfileEditor().ShowWelcomeText) ? "On": "Off" )")
+                        }
             HStack{
                 Text("Review / Feedback for Miasma")
                 Spacer()

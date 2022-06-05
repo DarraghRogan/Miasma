@@ -66,7 +66,7 @@ public struct ContentViewSmartCitizen: View {
     
     // Defining VARs for WAQI
     @State var wAQIAQI: Int = 0
-    @State var fahrenheitForDisplayWAQI: String = "0"
+    @State var fahrenheitForDisplayWAQIhere: String = "0"
     
     
     // Defining the Progress Bar Styles
@@ -144,10 +144,12 @@ public struct ContentViewSmartCitizen: View {
                     .trim(from: 0, to: 100)
                     .stroke(nonStrokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
                     .rotationEffect(.degrees(-90))
+                    .animation(.easeInOut)
                 Circle()
                     .trim(from: 0, to: CGFloat(fractionCompleted))
                     .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
                     .rotationEffect(.degrees(-90))
+                    .animation(.easeInOut)
             }
         }
     }
@@ -173,15 +175,19 @@ public struct ContentViewSmartCitizen: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("\(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
+                    Link("\(Image(systemName: "house")) \(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
-                    .font(.headline)
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 1.0)
                     
                     HStack {
                         ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ  / \(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))) µɢ/ᴍ³ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.top, 0.5)
                             .padding(.bottom, 7.0)
+                            .font(.subheadline)
+                            .animation(.easeInOut)
                     }
                     
                     HStack {
@@ -230,7 +236,7 @@ public struct ContentViewSmartCitizen: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.subheadline)
-                                Text("\(String(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0))kPa")
+                                Text("\(String(format: "%.1f", locale: Locale.current,(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0)*10))mb")
                                     .font(.caption)
                                 Text("ᴘʀᴇs.")
                                     .font(.caption)
@@ -241,21 +247,22 @@ public struct ContentViewSmartCitizen: View {
                         
                         VStack{
                             Text("Averages")
-                                .font(.subheadline)
+                                .font(.caption)
                             //                                .padding(.bottom, 0.5)
                             Text("1 Day: \(displaypm25historicalString1d)")
-                                .font(.caption)
+                                .font(.caption2)
                                 .multilineTextAlignment(.trailing)
                             Text("1 Week: \(displaypm25historicalString1w)")
-                                .font(.caption)
+                                .font(.caption2)
                                 .multilineTextAlignment(.trailing)
                             Text("1 Year: \(displaypm25historicalString1y)")
-                                .font(.caption)
+                                .font(.caption2)
                                 .multilineTextAlignment(.trailing)
                             Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
                                 .font(.caption2)
                         }
                     }
+                    .padding(.bottom, 4.0)
                 }
                 
                 
@@ -265,15 +272,19 @@ public struct ContentViewSmartCitizen: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("\(wAQIhereViewModel.wAQIdata.city?.name ?? "◌") 📲",
+                        Link("\(Image(systemName: "location.north")) \(wAQIhereViewModel.wAQIdata.city?.name ?? "◌")",
                              destination: URL(string: wAQIhereViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
-                        .font(.headline)
+                        .font(.subheadline)
+                        .padding(.bottom, 1.0)
+                        .padding(.top, 5.0)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
                             ProgressView("☁️ \(wAQIhereViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴍᴀɪɴʟʏ \(wAQIhereViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIhereViewModel.wAQIdata.aqi ?? 0), total: 500)
                                 .progressViewStyle(aQIProgressBarStyle())
-                                .padding(.top, 0.5)
                                 .padding(.bottom, 7.0)
+                                .font(.subheadline)
+                                .animation(.easeInOut)
                         }
                         
                         HStack {
@@ -288,7 +299,7 @@ public struct ContentViewSmartCitizen: View {
                                         .font(.subheadline)
                                     Text("\(String(format: "%.1f", locale: Locale.current, wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0))℃")
                                         .font(.caption)
-                                    Text("/ \(self.fahrenheitForDisplayWAQI)℉")
+                                    Text("/ \(self.fahrenheitForDisplayWAQIhere)℉")
                                         .font(.caption)
                                 }
                             }
@@ -350,13 +361,13 @@ public struct ContentViewSmartCitizen: View {
                         
                         HStack {
                             Spacer()
-                            Text("\(wAQIhereViewModel.wAQIdata.attributions?[0].name ?? "0")")
-                                .font(.footnote)
+                            Text("Data from \(wAQIhereViewModel.wAQIdata.attributions?[0].name ?? "0")")
+                                .font(.caption2)
                         }
                         HStack {
                             Spacer()
-                            Text("\(wAQIhereViewModel.wAQIdata.time?.s ?? "0")")
-                                .font(.footnote)
+                            Text("Taken on \(wAQIhereViewModel.wAQIdata.time?.s ?? "0")")
+                                .font(.caption2)
                                 .padding(.bottom, 2.0)
                         }
                         
@@ -372,8 +383,9 @@ public struct ContentViewSmartCitizen: View {
                         Link("ᴏɴᴇ ʜᴏᴜʀ ꜰᴏʀᴇᴄᴀsᴛ: \(climaCellWeatherCode)",
                              destination: URL(string: "https://www.tomorrow.io/weather/")!)
                         .padding(.top, 8.0)
-                        .font(.headline)
-                        
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
                         HStack {
                             ZStack{
                                 ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
@@ -468,14 +480,16 @@ public struct ContentViewSmartCitizen: View {
                         Link("\(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
                         //                            .padding(.top, 5.0)
-                        .font(.headline)
-                        
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
                             ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 4.0)
+                                .font(.subheadline)
+                                .animation(.easeInOut)
                         }
                     }
                     .ignoresSafeArea()
@@ -491,8 +505,9 @@ public struct ContentViewSmartCitizen: View {
                         }
                         Link("ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴅᴀʏʟɪɢʜᴛ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
-                        .font(.headline)
-                        
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
                         HStack {
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 50)
@@ -504,6 +519,8 @@ public struct ContentViewSmartCitizen: View {
                                     Text("🚶")
                                         .font(.title)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
+                                        .font(.subheadline)
+
                                 }
                             }
                             
@@ -519,6 +536,8 @@ public struct ContentViewSmartCitizen: View {
                                     Text("🚲")
                                         .font(.title)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
+                                        .font(.subheadline)
+
                                 }
                             }
                             
@@ -534,6 +553,8 @@ public struct ContentViewSmartCitizen: View {
                                     Text("🚗")
                                         .font(.title)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
+                                        .font(.subheadline)
+
                                 }
                             }
                             
@@ -549,11 +570,47 @@ public struct ContentViewSmartCitizen: View {
                                     Text("🚚")
                                         .font(.title)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.lorry ?? 0))))")
+                                        .font(.subheadline)
+
                                 }
                             }
                         }
                     }
                     .ignoresSafeArea()
+                }
+                
+                if ProfileEditor().ShowWelcomeText == false
+                {
+                    
+                }
+                else
+                {
+                    VStack{
+                        Text("\(Image(systemName: "hand.wave")) Welcome to Miasma")
+                            .font(.subheadline)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.bottom, 1.5)
+                            .padding(.top, 2.0)
+                        Text("""
+By default the air quality & other data for the weather measurement station closest to your iPhone's coarse location (denoted by \(Image(systemName: "location.north"))) is shown.
+You can choose to additonally show a particular sensor (denoted by \(Image(systemName: "house"))) in the preferences menu \(Image(systemName: "gearshape.fill")) (top right of screen).
+You can also show factors that influence air quality like electrical grid carbon intensity, road traffic data, and receive a 1 hour pollution & weather forecast.
+Tapping any data tile will give deeper information. And pulling and releasing the data tiles will refresh their data.
+Best wishes in using the app, and wishing you have good air quality. Darragh
+""")
+                        .font(.caption)
+                        .font(Font.body.leading(.loose))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .lineSpacing(4)
+                        Button("Dismiss Welcome text", role: .destructive) {
+                        action: do {
+                            AppDelegate().defaults.set(false, forKey: "ShowWelcomeText")
+                            self.updateListEntry()
+                        }
+                        }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.top, 2.0)
+                    }
                 }
                 
                 //                Button("🔄", action: {
@@ -762,7 +819,7 @@ public struct ContentViewSmartCitizen: View {
                 
                 if ProfileEditor().AirQualityLocalToDevice == true
                 {
-                    self.fahrenheitForDisplayWAQI = calculateFahrenheit(celcius: wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)
+                    self.fahrenheitForDisplayWAQIhere = calculateFahrenheit(celcius: wAQIhereViewModel.wAQIdata.iaqi?.t?.v ?? 0)
                 }
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true

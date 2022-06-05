@@ -15,26 +15,26 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                      [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
-        // set up user defaults for people
-        // this is where returning users should end up
-        if defaults.bool(forKey: "First Launch") == true  {
-            
-        } else {
-            // default config for new users
-            
-            defaults.set(true, forKey: "First Launch")
-            defaults.set("here", forKey: "SensorID")
-            defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")
-            defaults.set(true, forKey:"ElectricalConsumptionDataWanted")
-            //         defaults.set(true, forKey:"AircraftDataWanted")
-            defaults.set(false, forKey:"OneHourForecastDataWanted")
-            defaults.set(false, forKey:"TelraamDataWanted")
-            defaults.set(false, forKey:"AirQualityLocalToDevice")
-            defaults.set("9000002573", forKey: "segmentID")
-            defaults.set(0.0, forKey: "UserLatitude")
-            defaults.set(0.0, forKey: "UserLongitude")
-            
-        }
+//        // set up user defaults for people
+//        // this is where returning users should end up
+//        if defaults.bool(forKey: "FirstLaunchCompleted") == true  {
+//
+//        } else {
+//            // default config for new users
+//
+//            defaults.set(true, forKey: "FirstLaunchCompleted")
+//            defaults.set("here", forKey: "SensorID")
+//            defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")
+//            defaults.set(true, forKey:"ElectricalConsumptionDataWanted")
+//            //         defaults.set(true, forKey:"AircraftDataWanted")
+//            defaults.set(false, forKey:"OneHourForecastDataWanted")
+//            defaults.set(false, forKey:"TelraamDataWanted")
+//            defaults.set(false, forKey:"AirQualityLocalToDevice")
+//            defaults.set("9000002573", forKey: "segmentID")
+//            defaults.set(0.0, forKey: "UserLatitude")
+//            defaults.set(0.0, forKey: "UserLongitude")
+//
+//        }
         
         return true
         
