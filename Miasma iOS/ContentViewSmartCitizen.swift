@@ -48,6 +48,7 @@ public struct ContentViewSmartCitizen: View {
     @State var fahrenheitForDisplayClimaCell: String = "0"
     @State var celciusForCalculationClimaCell: Double = 0
     @State var uvIndex: Double = 0
+    @State var precipitationProbability: Int = 0
     
     
     // Defining VARs for SmartCitizen
@@ -82,6 +83,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Good")
                             .italic()
+                            .font(.caption)
                     }
                 case 0.1..<0.2:
                     HStack{
@@ -90,6 +92,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Moderate")
                             .italic()
+                            .font(.caption)
                     }
                 case 0.2..<0.3:
                     HStack{
@@ -98,6 +101,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Unhealthy for Sensitive Groups")
                             .italic()
+                            .font(.caption)
                     }
                 case 0.3..<0.4:
                     HStack{
@@ -106,6 +110,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Unhealthy")
                             .italic()
+                            .font(.caption)
                     }
                 case 0.4..<0.6:
                     HStack{
@@ -114,6 +119,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Very Unhealthy")
                             .italic()
+                            .font(.caption)
                     }
                 case 0.6..<1:
                     HStack{
@@ -122,6 +128,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         Text("Hazardous")
                             .italic()
+                            .font(.caption)
                     }
                 default:
                     ProgressView(configuration)
@@ -179,15 +186,37 @@ public struct ContentViewSmartCitizen: View {
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 1.0)
+                    .padding(.bottom, 0.0)
                     
                     HStack {
-                        ProgressView("☁️ \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ  / \(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))) µɢ/ᴍ³ ᴘᴍ₂.₅", value: aQI_CalculatedRounded, total: 500)
-                            .progressViewStyle(aQIProgressBarStyle())
-                            .padding(.top, 0.5)
-                            .padding(.bottom, 7.0)
-                            .font(.subheadline)
-                            .animation(.easeInOut)
+                        ProgressView("""
+                        \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ  /
+                        \(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))) µɢ/ᴍ³ ᴘᴍ₂.₅
+                        """, value: aQI_CalculatedRounded, total: 500)
+                        .progressViewStyle(aQIProgressBarStyle())
+                        .padding(.top, 0.5)
+                        .padding(.bottom, 7.0)
+                        .font(.subheadline)
+                        .animation(.easeInOut)
+                        
+                        Divider()
+                        
+                        VStack{
+                            Text("ᴡʜᴏ ᴀᴠᴇʀᴀɢᴇs")
+                                .font(.caption2)
+                            //                                .padding(.bottom, 0.5)
+                            Text("1 ᴅᴀʏ: \(displaypm25historicalString1d)")
+                                .font(.caption2)
+                                .multilineTextAlignment(.trailing)
+                            Text("1 ᴡᴇᴇᴋ: \(displaypm25historicalString1w)")
+                                .font(.caption2)
+                                .multilineTextAlignment(.trailing)
+                            Text("1 ʏᴇᴀʀ: \(displaypm25historicalString1y)")
+                                .font(.caption2)
+                                .multilineTextAlignment(.trailing)
+                            Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
+                                .font(.caption2)
+                        }
                     }
                     
                     HStack {
@@ -243,24 +272,6 @@ public struct ContentViewSmartCitizen: View {
                             }
                         }
                         
-                        Spacer()
-                        
-                        VStack{
-                            Text("Averages")
-                                .font(.caption)
-                            //                                .padding(.bottom, 0.5)
-                            Text("1 Day: \(displaypm25historicalString1d)")
-                                .font(.caption2)
-                                .multilineTextAlignment(.trailing)
-                            Text("1 Week: \(displaypm25historicalString1w)")
-                                .font(.caption2)
-                                .multilineTextAlignment(.trailing)
-                            Text("1 Year: \(displaypm25historicalString1y)")
-                                .font(.caption2)
-                                .multilineTextAlignment(.trailing)
-                            Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
-                                .font(.caption2)
-                        }
                     }
                     .padding(.bottom, 4.0)
                 }
@@ -272,19 +283,38 @@ public struct ContentViewSmartCitizen: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("\(Image(systemName: "location.north")) \(wAQIhereViewModel.wAQIdata.city?.name ?? "◌")",
+                        Link("\(Image(systemName: "location.north")) \(wAQIhereViewModel.wAQIdata.city?.name ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                              destination: URL(string: wAQIhereViewModel.wAQIdata.city?.url ?? "https://aciqn.org")!)
                         .font(.subheadline)
                         .padding(.bottom, 1.0)
-                        .padding(.top, 5.0)
+                        .padding(.top, 8.0)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
-                            ProgressView("☁️ \(wAQIhereViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ, ᴍᴀɪɴʟʏ \(wAQIhereViewModel.wAQIdata.dominentpol ?? "0")", value: Float16(wAQIhereViewModel.wAQIdata.aqi ?? 0), total: 500)
-                                .progressViewStyle(aQIProgressBarStyle())
-                                .padding(.bottom, 7.0)
-                                .font(.subheadline)
-                                .animation(.easeInOut)
+                            ProgressView("""
+                        \(wAQIhereViewModel.wAQIdata.aqi ?? 0) ᴜs ᴇᴘᴀ ᴀǫɪ
+                        ᴍᴀɪɴʟʏ \(wAQIhereViewModel.wAQIdata.dominentpol ?? "0")
+                        """, value: Float16(wAQIhereViewModel.wAQIdata.aqi ?? 0), total: 500)
+                            .progressViewStyle(aQIProgressBarStyle())
+                            .padding(.bottom, 7.0)
+                            .font(.subheadline)
+                            .animation(.easeInOut)
+                            Divider()
+                            ZStack{
+                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 4.0)
+                                VStack{
+                                    Text("🪁")
+                                        .font(.subheadline)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*3.6))km/h")
+                                        .font(.caption2)
+                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*2.23694))mph")
+                                        .font(.caption2)
+                                }
+                            }
                         }
                         
                         HStack {
@@ -340,39 +370,29 @@ public struct ContentViewSmartCitizen: View {
                                 }
                             }
                             
-                            Spacer()
-                            
-                            ZStack{
-                                ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
-                                    .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 70, height: 70)
-                                    .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
-                                VStack{
-                                    Text("🪁")
-                                        .font(.subheadline)
-                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*3.6))km/h")
-                                        .font(.caption2)
-                                    Text("\(Int((wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0)*2.23694))mph")
-                                        .font(.caption2)
-                                }
-                            }
                         }
                         
                         HStack {
                             Spacer()
                             Text("Data from \(wAQIhereViewModel.wAQIdata.attributions?[0].name ?? "0")")
                                 .font(.caption2)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            
                         }
                         HStack {
                             Spacer()
                             Text("Taken on \(wAQIhereViewModel.wAQIdata.time?.s ?? "0")")
                                 .font(.caption2)
                                 .padding(.bottom, 2.0)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            
                         }
                         
                     }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    
                 }
+                
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
@@ -385,7 +405,7 @@ public struct ContentViewSmartCitizen: View {
                         .padding(.top, 8.0)
                         .font(.subheadline)
                         .frame(maxWidth: .infinity, alignment: .leading)
-
+                        
                         HStack {
                             ZStack{
                                 ProgressView("", value: Float16(fahrenheitForDisplayClimaCell), total: 100)
@@ -441,30 +461,64 @@ public struct ContentViewSmartCitizen: View {
                                 }
                             }
                             
+                        }
+                        
+                        HStack {
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(climaCellPollenTree+climaCellPollenGrass+climaCellPollenWeed), total: 15)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 8.0)
+                                VStack{
+                                    Text("🌱")
+                                        .font(.subheadline)
+                                    Text("\(climaCellPollenTree+climaCellPollenGrass+climaCellPollenWeed) / 15")
+                                        .font(.caption2)
+                                    Text("ᴘᴏʟʟᴇɴ")
+                                        .font(.caption2)
+                                }
+                            }
                             
                             Spacer()
                             
-                            VStack{
-                                Text("Pollen & UV")
-                                    .font(.caption)
-                                //                                .padding(.bottom, 0.5)
-                                Text("🌳: \(String(Int(climaCellPollenTree))) / 5")
-                                    .font(.caption)
-                                    .multilineTextAlignment(.trailing)
-                                Text("🌱: \(String(Int(climaCellPollenGrass))) / 5")
-                                    .font(.caption)
-                                    .multilineTextAlignment(.trailing)
-                                Text("💐: \(String(Int(climaCellPollenWeed))) / 5")
-                                    .font(.caption)
-                                    .multilineTextAlignment(.trailing)
-                                
-                                Text("☀️: \(String(Int(uvIndex))) / 11")
-                                    .font(.caption)
-                                    .multilineTextAlignment(.trailing)
+                            ZStack{
+                                ProgressView("", value: Float16(uvIndex), total: 11)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 8.0)
+                                VStack{
+                                    Text("☀️")
+                                        .font(.subheadline)
+                                    Text("\(Int(uvIndex)) / 11")
+                                        .font(.caption2)
+                                    Text("UV Iɴᴅᴇx")
+                                        .font(.caption2)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            ZStack{
+                                ProgressView("", value: Float16(precipitationProbability), total: 100)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 8.0)
+                                VStack{
+                                    Text("🌧️")
+                                        .font(.subheadline)
+                                    Text("\(precipitationProbability)%")
+                                        .font(.caption2)
+                                    Text("ᴘʀᴇᴄɪᴘ.")
+                                        .font(.caption2)
+                                    Text("ᴘʀᴏʙ.")
+                                        .font(.caption2)
+                                }
                             }
                         }
-                        
-                        
                     }
                     .ignoresSafeArea()
                     
@@ -477,7 +531,7 @@ public struct ContentViewSmartCitizen: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("\(Image(systemName: "bolt")) \(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ᴄᴏ₂",
+                        Link("\(Image(systemName: "bolt")) \(cO2Country) ᴇʟᴇᴄᴛʀɪᴄɪᴛʏ ʀᴇɴᴇᴡᴀʙʟᴇs",
                              destination: URL(string: "https://app.electricitymap.org/map")!)
                         //                            .padding(.top, 5.0)
                         .font(.subheadline)
@@ -487,7 +541,7 @@ public struct ContentViewSmartCitizen: View {
                             ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
-                                .padding(.bottom, 4.0)
+                                .padding(.bottom, 8.0)
                                 .font(.subheadline)
                                 .animation(.easeInOut)
                         }
@@ -507,20 +561,20 @@ public struct ContentViewSmartCitizen: View {
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
                         .font(.subheadline)
                         .frame(maxWidth: .infinity, alignment: .leading)
-
+                        .padding(.top, 8.0)
+                        
                         HStack {
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.pedestrian ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 70, height: 70)
+                                    .frame(width: 50, height: 50)
                                     .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
+                                    .padding(.bottom, 8.0)
                                 VStack{
                                     Text("🚶")
-                                        .font(.title)
+                                        .font(.headline)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.pedestrian ?? 0))))")
-                                        .font(.subheadline)
-
+                                        .font(.caption)
                                 }
                             }
                             
@@ -529,15 +583,14 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.bike ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 70, height: 70)
+                                    .frame(width: 50, height: 50)
                                     .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
+                                    .padding(.bottom, 8.0)
                                 VStack{
                                     Text("🚲")
-                                        .font(.title)
+                                        .font(.headline)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.bike ?? 0))))")
-                                        .font(.subheadline)
-
+                                        .font(.caption)
                                 }
                             }
                             
@@ -546,15 +599,14 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.car ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 70, height: 70)
+                                    .frame(width: 50, height: 50)
                                     .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
+                                    .padding(.bottom, 8.0)
                                 VStack{
                                     Text("🚗")
-                                        .font(.title)
+                                        .font(.headline)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.car ?? 0))))")
-                                        .font(.subheadline)
-
+                                        .font(.caption)
                                 }
                             }
                             
@@ -563,15 +615,14 @@ public struct ContentViewSmartCitizen: View {
                             ZStack{
                                 ProgressView("", value: Float16(telraamViewModel.telraamData.properties?.lorry ?? 0), total: 50)
                                     .progressViewStyle(GaugeProgressStyle())
-                                    .frame(width: 70, height: 70)
+                                    .frame(width: 50, height: 50)
                                     .contentShape(Rectangle())
-                                    .padding(.bottom, 4.0)
+                                    .padding(.bottom, 8.0)
                                 VStack{
                                     Text("🚚")
-                                        .font(.title)
+                                        .font(.headline)
                                     Text("\(String(Int(round(telraamViewModel.telraamData.properties?.lorry ?? 0))))")
-                                        .font(.subheadline)
-
+                                        .font(.caption)
                                 }
                             }
                         }
@@ -871,6 +922,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
                     self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0
                     self.uvIndex = climaCellData.data?.timelines?[0].intervals?[1].values?.uvIndex ?? 0
+                    self.precipitationProbability = climaCellData.data?.timelines?[0].intervals?[1].values?.precipitationProbability ?? 0
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)

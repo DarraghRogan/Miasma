@@ -62,7 +62,7 @@ public struct ContentView: View {
 //                    .offset(x: 0, y: 0)), alignment: .center)
         .overlay((Button("\(Image(systemName: "gearshape.fill"))", action: { self.showingProfile.toggle() } )
                     .padding(EdgeInsets())
-                    .offset(x: 135, y: 15)
+                    .offset(x: 125, y: 15)
                     .font(.system(size: 60))), alignment: .top)
                     .foregroundColor(.primary)
         
