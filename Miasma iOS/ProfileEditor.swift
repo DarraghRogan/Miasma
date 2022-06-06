@@ -25,7 +25,7 @@ struct ProfileEditor: View {
     
     @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
     
-    @AppStorage("SegmentID") var segmentID =  ""
+    @AppStorage("SegmentID") var segmentID =  "9000002573"
     
     var body: some View {
         List {
@@ -37,13 +37,10 @@ struct ProfileEditor: View {
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 1.5)
-                Text("""
-                     Please choose air quality data source, and enter desired sensor ID.
-                     For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces), or set to 'here'
-                     For PurpleAir & SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL as viewed on a Laptop/Desktop browser
-                     """)
-                .font(.caption)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                Text("Please choose air quality data source, and enter desired sensor ID.")
+                    .font(.caption)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
                 HStack{
                     Menu("Data Provider") /*@START_MENU_TOKEN@*/{
                         Button("WAQI/AQICN", action: {AppDelegate().defaults.set("WAQI/AQICN", forKey: "AirQualityDataSource")})
@@ -59,6 +56,30 @@ struct ProfileEditor: View {
                 .padding(.bottom, 1.0)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 
+                Text("The sensor ID needs to be manually transcribed from the data provider's website")
+                    .font(.caption)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                HStack{
+                    Text("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces).")
+                        .font(.caption)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://aqicn.org/here/")!)
+                }
+                HStack{
+                    Text("For PurpleAir, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
+                        .font(.caption)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://map.purpleair.com/")!)
+                }
+                HStack{
+                    Text("For SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
+                        .font(.caption)
+//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://smartcitizen.me/kits/")!)
+                }
                 
                 HStack {
                     Text("Sensor ID:")
@@ -96,10 +117,6 @@ struct ProfileEditor: View {
                 Text("Please enter 10 digit ID from Telraam webpage")
                     .font(.caption)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Toggle(isOn: $TelraamDataWanted) {
-                    Text("Enable Telraam Traffic Data")
-                        .font(.subheadline)
-                }
                 HStack {
                     Text("Segment ID:")
                     Divider()
@@ -108,11 +125,13 @@ struct ProfileEditor: View {
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
                         .frame(maxWidth: .infinity, alignment: .trailing)
-                    
                 }
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                
+                Toggle(isOn: $TelraamDataWanted) {
+                    Text("Enable Telraam Traffic Data")
+                        .font(.subheadline)
+                }
             }
             Toggle(isOn: $ShowWelcomeText) {
                 Text("\(Image(systemName: "hand.wave")) Show Miasma welcome text")
