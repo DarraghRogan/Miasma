@@ -20,13 +20,26 @@ struct ProfileSummary: View {
             
             VStack{
                 HStack{
-                    Text("\(Image(systemName: "stethoscope"))WHO Air Quality Guidelines")
+                    Text("\(Image(systemName: "stethoscope")) WHO Air Quality Guidelines")
                     Spacer()
                     Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://www.who.int/publications/i/item/9789240034228?ua=1")!)
                 }
                 .font(.subheadline)
                 
                 Text("<- Best ✓ ④ ③ ② ① ⓪ Worst ->")
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            
+            VStack{
+                HStack{
+                    Text("☁️ Air Quality Index explanation")
+                    Spacer()
+                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://m.wikipedia.org/wiki/Air_quality_index#United_States")!)
+                }
+                .font(.subheadline)
+                
+                Text("<- Best 🟢 🟡 🟠 🔴 🟣 🟤 Worst ->")
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .center)
             }
@@ -67,12 +80,12 @@ struct ProfileSummary: View {
             }
             .font(.subheadline)
             
-            HStack{
-                Text("\(Image(systemName: "hand.wave")) Miasma Welcome Text:")
-                Spacer()
-                Text("\((ProfileEditor().ShowWelcomeText) ? "On": "Off" )")
-            }
-            .font(.subheadline)
+//            HStack{
+//                Text("\(Image(systemName: "hand.wave")) Miasma Welcome Text:")
+//                Spacer()
+//                Text("\((ProfileEditor().ShowWelcomeText) ? "On": "Off" )")
+//            }
+//            .font(.subheadline)
             
             HStack{
                 Text("\(Image(systemName: "person.wave.2")) Review / Give Feedback")

@@ -6,6 +6,7 @@
  */
 
 import SwiftUI
+import Combine
 
 struct ProfileEditor: View {
     
@@ -37,7 +38,7 @@ struct ProfileEditor: View {
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 1.5)
-                Text("Please choose air quality data source, and enter desired sensor ID.")
+                Text("Please choose air quality data source")
                     .font(.caption)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
@@ -56,30 +57,43 @@ struct ProfileEditor: View {
                 .padding(.bottom, 1.0)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 
-                Text("The sensor ID needs to be manually transcribed from the data provider's website")
+                Text("Manually enter Sensor ID from provider webpage")
                     .font(.caption)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                HStack{
-                    Text("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces).")
-                        .font(.caption)
-                    //                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://aqicn.org/here/")!)
-                }
-                HStack{
-                    Text("For PurpleAir, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
-                        .font(.caption)
-                    //                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://map.purpleair.com/")!)
-                }
-                HStack{
-                    Text("For SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
-                        .font(.caption)
-                    //                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://smartcitizen.me/kits/")!)
-                }
+                    .multilineTextAlignment(.leading)
+//                HStack{
+//                    Link("WAQI/AQICN", destination: URL(string: "https://aqicn.org/here/")!)
+//                        .font(.subheadline)
+//                    Spacer()
+//                    Link("PurpleAir", destination: URL(string: "https://map.purpleair.com/")!)
+//                        .font(.subheadline)
+//                    Spacer()
+//                    Link("SmartCitizen", destination: URL(string: "https://smartcitizen.me/kits/")!)
+//                        .font(.subheadline)
+//                }
+//                HStack{
+//                    Link("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces).", destination: URL(string: "https://aqicn.org/here/")!)
+//                        .font(.caption)
+//                        .multilineTextAlignment(.leading)
+//                    Spacer()
+//                    Text("\(Image(systemName: "link.circle"))")
+//                        .font(.largeTitle)
+//                }
+//                HStack{
+//                    Link("For PurpleAir, enter 4 to 6 digit sensor ID from the webpages' URL", destination: URL(string: "https://map.purpleair.com/")!)
+//                        .font(.caption)
+//                        .multilineTextAlignment(.leading)
+//                    Spacer()
+//                    Text("\(Image(systemName: "link.circle"))")
+//                        .font(.largeTitle)
+//                }
+//                HStack{
+//                    Link("For SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' URL", destination: URL(string: "https://smartcitizen.me/kits/")!)
+//                        .font(.caption)
+//                        .multilineTextAlignment(.leading)
+//                    Spacer()
+//                    Text("\(Image(systemName: "link.circle"))")
+//                        .font(.largeTitle)
+//                }
                 
                 HStack {
                     Text("Sensor ID:")
@@ -88,6 +102,7 @@ struct ProfileEditor: View {
                     TextField("Sensor ID", text: $SensorID)
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
+                        .keyboardType(.asciiCapable)
                 }
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -125,6 +140,13 @@ struct ProfileEditor: View {
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
                         .frame(maxWidth: .infinity, alignment: .trailing)
+                        .keyboardType(.numberPad)
+                        .onReceive(Just(segmentID)) { newValue in
+                            let filtered = newValue.filter { "0123456789".contains($0) }
+                            if filtered != newValue {
+                                self.segmentID = filtered
+                            }
+                    }
                 }
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .trailing)
