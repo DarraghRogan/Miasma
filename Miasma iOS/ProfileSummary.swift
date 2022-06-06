@@ -39,7 +39,7 @@ struct ProfileSummary: View {
                 }
                 .font(.subheadline)
                 
-                Text("<- Best 🟢 🟡 🟠 🔴 🟣 🟤 Worst ->")
+                Text("<- Best 🟢🟡🟠🔴🟣🟤 Worst ->")
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .center)
             }

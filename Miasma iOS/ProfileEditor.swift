@@ -102,7 +102,13 @@ struct ProfileEditor: View {
                     TextField("Sensor ID", text: $SensorID)
                         .disableAutocorrection(true)
                         .autocapitalization(UITextAutocapitalizationType.none)
-                        .keyboardType(.asciiCapable)
+                        .keyboardType(.numbersAndPunctuation)
+                        .onReceive(Just(SensorID)) { newValue in
+                            let filtered = newValue.filter { "0123456789abcdefghijklmnopqrstuvwxyz".contains($0) }
+                            if filtered != newValue {
+                                self.SensorID = filtered
+                            }
+                    }
                 }
                 .font(.subheadline)
                 .frame(maxWidth: .infinity, alignment: .trailing)
