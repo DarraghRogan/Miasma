@@ -555,7 +555,7 @@ public struct ContentViewWAQI: View {
                         if ProgressIndicatorShown == true{
                             ProgressView()
                         }
-                        Link("\(Image(systemName: "car.2")) ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ",
+                        Link("\(Image(systemName: "car.2")) ᴛᴇʟʀᴀᴀᴍ ᴛʀᴀғғɪᴄ (ʟᴀsᴛ ᴡʜᴏʟᴇ ʜᴏᴜʀ)",
                              destination: URL(string: "https://www.telraam.net/en/location/\(ProfileEditor().segmentID)")!)
                         .font(.subheadline)
                         .frame(maxWidth: .infinity, alignment: .leading)
