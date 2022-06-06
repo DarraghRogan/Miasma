@@ -18,6 +18,19 @@ struct ProfileSummary: View {
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                 .font(.headline)
             
+            VStack{
+                HStack{
+                    Text("\(Image(systemName: "stethoscope"))WHO Air Quality Guidelines")
+                    Spacer()
+                    Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://www.who.int/publications/i/item/9789240034228?ua=1")!)
+                }
+                .font(.subheadline)
+                
+                Text("<- Best ✓ ④ ③ ② ① ⓪ Worst ->")
+                    .font(.subheadline)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            
             HStack{
                 Text("\(Image(systemName: "house")) Selected Air Quality data:")
                 Spacer()
@@ -62,37 +75,20 @@ struct ProfileSummary: View {
             .font(.subheadline)
             
             HStack{
-                Text("Review / Feedback for Miasma")
+                Text("\(Image(systemName: "person.wave.2")) Review / Give Feedback")
                 Spacer()
                 Link("\(Image(systemName: "link.circle"))", destination: URL(string: "itms-apps://itunes.apple.com/developer/id1518488644")!)
             }
             .font(.subheadline)
-            
-            
-//            HStack{
-//                Text("WHO Air Quality Guidelines")
-//                Spacer()
-//                Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://www.who.int/publications/i/item/9789240034228?ua=1")!)
-//            }
-//            .font(.subheadline)
-            
-//                            Text("<- Best ✓ ④ ③ ② ① ⓪ Worst ->")
-//                                .font(.subheadline)
-
-            
+                        
             HStack{
-                Text("About Miasma")
+                Text("\(Image(systemName: "gear.badge.questionmark")) About Miasma (Version \((nsObject.self ?? 1.00 as AnyObject) as! String))")
                 Spacer()
                 Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://miasma.app")!)
             }
             .font(.subheadline)
             
-            HStack{
-                Text("Version:")
-                Spacer()
-                Text("\((nsObject.self ?? 1.00 as AnyObject) as! String)")
-            }
-            .font(.subheadline)
+
         }
     }
 }

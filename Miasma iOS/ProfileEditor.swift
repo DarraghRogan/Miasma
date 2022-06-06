@@ -62,21 +62,21 @@ struct ProfileEditor: View {
                 HStack{
                     Text("For WAQI/AQICN, search on AQICN.org for city name (one word, no spaces).")
                         .font(.caption)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
                     Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://aqicn.org/here/")!)
                 }
                 HStack{
                     Text("For PurpleAir, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
                         .font(.caption)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
                     Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://map.purpleair.com/")!)
                 }
                 HStack{
                     Text("For SmartCitizen, enter 4 to 6 digit sensor ID from the webpages' Map view URL")
                         .font(.caption)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
+                    //                        .frame(maxWidth: .infinity, alignment: .leading)
                     Spacer()
                     Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://smartcitizen.me/kits/")!)
                 }
@@ -139,7 +139,7 @@ struct ProfileEditor: View {
             }
             //            .padding(.top)
             
-            
+
         }
     }
 }
