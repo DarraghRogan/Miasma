@@ -1,5 +1,5 @@
 <center><img src="Miasma/Graphics/ScreenshotMenuCropped.png" class="img-responsive" alt=""></center>
-<center><img src="Miasma/Graphics/SimulatorScreenShot-iPhone8Plus-2021-08-31at19.05.44.png" class="img-responsive" alt=""></center>
+<center><img src="Miasma/Graphics/SimulatorScreenShot-iPhone11ProMax-2022-06-07at17.34.32.png" class="img-responsive" alt=""></center>
 
 Miasma is an open source lightweight menu bar app for macOS & lightweight app for iOS that shows publicly available air quality data & potential pollution sources for your locality.
 You can click the app if you want to see pertinent metrics, and on macOS the menu bar icon changes colour to match current PM₂.₅ conditions. 
