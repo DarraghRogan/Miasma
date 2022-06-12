@@ -45,6 +45,13 @@ struct ProfileSummary: View {
             }
             
             HStack{
+                Text("\(Image(systemName: "globe")) UN Emissions Gap Report 2019")
+                Spacer()
+                Link("\(Image(systemName: "link.circle"))", destination: URL(string: "https://www.unep.org/resources/emissions-gap-report-2019")!)
+            }
+            .font(.subheadline)
+            
+            HStack{
                 Text("\(Image(systemName: "house")) Selected Air Quality data:")
                 Spacer()
                 Text("\(ProfileEditor().AirQualityDataSource)")
@@ -52,33 +59,33 @@ struct ProfileSummary: View {
             }
             .font(.subheadline)
             
-            HStack{
-                Text("\(Image(systemName: "location.north")) Show Air Quality local to device:")
-                Spacer()
-                Text("\((ProfileEditor().AirQualityLocalToDevice) ? "On": "Off" )")
-            }
-            .font(.subheadline)
-            
-            HStack{
-                Text("\(Image(systemName: "binoculars")) 1 Hour Forecast:")
-                Spacer()
-                Text("\((ProfileEditor().OneHourForecastDataWanted) ? "On": "Off" )")
-            }
-            .font(.subheadline)
-            
-            HStack{
-                Text("\(Image(systemName: "bolt")) Electricty Consumption data:")
-                Spacer()
-                Text("\((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
-            }
-            .font(.subheadline)
-            
-            HStack{
-                Text("\(Image(systemName: "car.2")) Telraam Traffic Data:")
-                Spacer()
-                Text("\((ProfileEditor().TelraamDataWanted) ? "On": "Off" )")
-            }
-            .font(.subheadline)
+//            HStack{
+//                Text("\(Image(systemName: "location.north")) Show Air Quality local to device:")
+//                Spacer()
+//                Text("\((ProfileEditor().AirQualityLocalToDevice) ? "On": "Off" )")
+//            }
+//            .font(.subheadline)
+//
+//            HStack{
+//                Text("\(Image(systemName: "binoculars")) 1 Hour Forecast:")
+//                Spacer()
+//                Text("\((ProfileEditor().OneHourForecastDataWanted) ? "On": "Off" )")
+//            }
+//            .font(.subheadline)
+//
+//            HStack{
+//                Text("\(Image(systemName: "bolt")) Electricty Consumption data:")
+//                Spacer()
+//                Text("\((ProfileEditor().ElectricalConsumptionDataWanted) ? "On": "Off" )")
+//            }
+//            .font(.subheadline)
+//
+//            HStack{
+//                Text("\(Image(systemName: "car.2")) Telraam Traffic Data:")
+//                Spacer()
+//                Text("\((ProfileEditor().TelraamDataWanted) ? "On": "Off" )")
+//            }
+//            .font(.subheadline)
             
 //            HStack{
 //                Text("\(Image(systemName: "hand.wave")) Miasma Welcome Text:")

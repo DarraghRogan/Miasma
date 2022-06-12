@@ -45,7 +45,7 @@ public struct ContentViewSmartCitizen: View {
     @State var climaCellPollenTree: Int = 0
     @State var climaCellPollenGrass: Int = 0
     @State var climaCellPollenWeed: Int = 0
-    @State var fahrenheitForDisplayClimaCell: String = "0"
+    @State var fahrenheitForDisplayClimaCell: String = "◌"
     @State var celciusForCalculationClimaCell: Double = 0
     @State var uvIndex: Double = 0
     @State var precipitationProbability: Int = 0
@@ -67,12 +67,16 @@ public struct ContentViewSmartCitizen: View {
     
     // Defining VARs for WAQI
     @State var wAQIAQI: Int = 0
-    @State var fahrenheitForDisplayWAQIhere: String = "0"
+    @State var fahrenheitForDisplayWAQIhere: String = "◌"
     
-    // Defining VARs for DailyAtmosphericCO2
+    // Defining VARs for DailyAtmosphericCO2 & GlobalWarming
     @State var cO2PPMLastYearOnYearDeltaPercentage: Double = 0
     @State var cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage: Double = 0
-    @State var dailyAtmosphericCO2Data365Last: String = "0"
+    @State var dailyAtmosphericCO2Data365Last: String = "◌"
+    
+    @State var globalWarmingLastYearOnYearDeltaPercentage: Double = 0
+    @State var globalWarmingLastValue: String = "◌"
+    @State var globalWarmingLastTime: String = "◌"
     
     // Defining the Progress Bar Styles
     struct aQIProgressBarStyle: ProgressViewStyle {
@@ -681,7 +685,45 @@ public struct ContentViewSmartCitizen: View {
                                     .font(.caption)
                                     .padding(.bottom, 2.0)
                                     .frame(maxWidth: .infinity, alignment: .leading)
-
+                                
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        HStack{
+                            ZStack{
+                                ProgressView("", value: Float16(dailyAtmosphericCO2Data365Last), total: 2)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 6.0)
+                                VStack{
+                                    Text("🌡")
+                                        .font(.subheadline)
+                                    Text("\(globalWarmingLastValue)℃")
+                                        .font(.caption)
+                                    Text("\(globalWarmingLastTime)")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            VStack{
+                                Text("Monthly mean surface temp. anomaly")
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.bottom, 2.0)
+                                
+                                Text("\(String(format: "%.1f", locale: Locale.current, globalWarmingLastYearOnYearDeltaPercentage))% Δ Year on Year")
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Text("( Should be negative )")
+                                    .font(.caption)
+                                    .padding(.bottom, 2.0)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
                             }
                         }
                     }
@@ -771,6 +813,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
         if ProfileEditor().ClimateChangeStats == true
         {
             DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
+            DataLoaderGlobalWarming().loadGlobalWarmingData()
         }
         
         DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID) as? String ?? String())
@@ -951,9 +994,6 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
                 }
                 
-                
-                
-                
                 if ProfileEditor().ClimateChangeStats == true
                 {
                     if (dailyAtmosphericCO2Data.co2?.last?.cycle) != nil {
@@ -980,8 +1020,46 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                         cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = ((((((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / (((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue)) / yearsSinceUNEPMilestone) * 100
                         
                     }
+                    
+                    let globalWarmingArraySize = globalWarmingData.result?.count ?? 0
+                    
+                    let globalWarmingDataArray1MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-1]
+                    let globalWarmingDataArray2MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-2]
+                    let globalWarmingDataArray3MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-3]
+                    let globalWarmingDataArray4MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-4]
+                    let globalWarmingDataArray5MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-5]
+                    let globalWarmingDataArray6MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-6]
+                    let globalWarmingDataArray7MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-7]
+                    let globalWarmingDataArray8MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-8]
+                    let globalWarmingDataArray9MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-9]
+                    let globalWarmingDataArray10MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-10]
+                    let globalWarmingDataArray11MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-11]
+                    let globalWarmingDataArray12MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-12]
+                    let globalWarmingDataArray13MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-13]
+                    let globalWarmingDataArray14MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-14]
+                    let globalWarmingDataArray15MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-15]
+                    let globalWarmingDataArray16MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-16]
+                    let globalWarmingDataArray17MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-17]
+                    let globalWarmingDataArray18MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-18]
+                    let globalWarmingDataArray19MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-19]
+                    let globalWarmingDataArray20MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-20]
+                    let globalWarmingDataArray21MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-21]
+                    let globalWarmingDataArray22MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-22]
+                    let globalWarmingDataArray23MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-23]
+                    let globalWarmingDataArray24MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-24]
+                    
+                    let globalWarmingLast12MonthsAgoTotal = (((globalWarmingDataArray1MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray2MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray3MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray4MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray5MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray6MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray7MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray8MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray9MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray10MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray11MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray12MonthsAgo?.land ?? "0") as NSString).doubleValue)
+                    let globalWarmingLast12MonthsAgoAverage = globalWarmingLast12MonthsAgoTotal / 12
+                    
+                    let globalWarming24MonthsAgo12MonthsTotal = (((globalWarmingDataArray13MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray14MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray15MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray16MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray17MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray18MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray19MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray20MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray21MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray22MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray23MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray24MonthsAgo?.land ?? "0") as NSString).doubleValue)
+                    let  globalWarming24MonthsAgo12MonthsAverage = globalWarming24MonthsAgo12MonthsTotal / 12
+                    
+                    globalWarmingLastYearOnYearDeltaPercentage = ((globalWarmingLast12MonthsAgoAverage - globalWarming24MonthsAgo12MonthsAverage) / globalWarmingLast12MonthsAgoAverage) * 100
+                    
+                    globalWarmingLastValue = globalWarmingData.result?.last?.land ?? "◌"
+                    globalWarmingLastTime = globalWarmingData.result?.last?.time ?? "◌"
+                    
                 }
-                
             }
         }
         
