@@ -718,7 +718,7 @@ public struct ContentViewPurpleAir: View {
                         
                         HStack{
                             ZStack{
-                                ProgressView("", value: Float16(dailyAtmosphericCO2Data365Last), total: 2)
+                                ProgressView("", value: Float16(globalWarmingLastValue), total: 2)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
