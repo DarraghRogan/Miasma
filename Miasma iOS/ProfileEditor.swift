@@ -26,6 +26,8 @@ struct ProfileEditor: View {
     
     @AppStorage("TelraamDataWanted") var TelraamDataWanted = false
     
+    @AppStorage("ClimateChangeStats") var ClimateChangeStats = true
+    
     @AppStorage("SegmentID") var segmentID =  "9000002573"
     
     var body: some View {
@@ -160,6 +162,10 @@ struct ProfileEditor: View {
                     Text("Enable Telraam Traffic Data")
                         .font(.subheadline)
                 }
+            }
+            Toggle(isOn: $ClimateChangeStats) {
+                Text("\(Image(systemName: "globe")) Show Climate Change Stats")
+                    .font(.subheadline)
             }
             Toggle(isOn: $ShowWelcomeText) {
                 Text("\(Image(systemName: "hand.wave")) Show Miasma welcome text")

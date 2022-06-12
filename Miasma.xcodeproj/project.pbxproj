@@ -17,12 +17,15 @@
 		0218A77A256DBBD500B2D684 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0218A779256DBBD500B2D684 /* SwiftUI.framework */; };
 		0218A77D256DBBD500B2D684 /* Miasma_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0218A77C256DBBD500B2D684 /* Miasma_Widget.swift */; };
 		0218A77F256DBBD700B2D684 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0218A77E256DBBD700B2D684 /* Assets.xcassets */; };
+		021ACB1228527722009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
+		021ACB142852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */; };
 		022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */; };
 		023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */; };
 		023BBDF025251AC3006E8054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDEF25251AC3006E8054 /* ContentView.swift */; };
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
 		023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF425251AC5006E8054 /* Preview Assets.xcassets */; };
+		025AE4D1285683B600BAC05E /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025AE4D0285683B600BAC05E /* DataLoaderGlobalWarming.swift */; };
 		02624DDD284232920076F8FF /* BannerAdViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624DDC284232920076F8FF /* BannerAdViewControllerRepresentable.swift */; };
 		02624DDF284232FE0076F8FF /* SwiftUIBannerAd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02624DDE284232FE0076F8FF /* SwiftUIBannerAd.swift */; };
 		02624DE12842513E0076F8FF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02624DE02842513E0076F8FF /* AppTrackingTransparency.framework */; };
@@ -56,7 +59,6 @@
 		02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB57252A144B007E73DC /* ProfileHost.swift */; };
 		02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB58252A144B007E73DC /* ProfileSummary.swift */; };
 		02D5AB5C252A144B007E73DC /* ProfileEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D5AB59252A144B007E73DC /* ProfileEditor.swift */; };
-		02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */; };
 		02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */; };
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
@@ -170,6 +172,7 @@
 		0218A77C256DBBD500B2D684 /* Miasma_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miasma_Widget.swift; sourceTree = "<group>"; };
 		0218A77E256DBBD700B2D684 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0218A780256DBBD700B2D684 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderDailyAtmosphericCO2.swift; sourceTree = "<group>"; };
 		022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
 		022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTelraam.swift; sourceTree = "<group>"; };
 		023BBDEB25251AC3006E8054 /* Miasma iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Miasma iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -181,6 +184,7 @@
 		023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Miasma iOS.entitlements"; sourceTree = "<group>"; };
 		0241630B253B577100441270 /* Locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Locations.plist; sourceTree = "<group>"; };
 		02416310253B57A900441270 /* StationLocationWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLocationWAQI.swift; sourceTree = "<group>"; };
+		025AE4D0285683B600BAC05E /* DataLoaderGlobalWarming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderGlobalWarming.swift; sourceTree = "<group>"; };
 		02624DDC284232920076F8FF /* BannerAdViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		02624DDE284232FE0076F8FF /* SwiftUIBannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIBannerAd.swift; sourceTree = "<group>"; };
 		02624DE02842513E0076F8FF /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS15.5.sdk/System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = DEVELOPER_DIR; };
@@ -291,6 +295,8 @@
 				02C2C9672533A0C4005840F7 /* ContentViewPurpleAir.swift */,
 				02BCC4E226C02C9400FDFF74 /* ContentViewSmartCitizen.swift */,
 				02C2C96C2533A0D6005840F7 /* ContentViewWAQI.swift */,
+				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
+				025AE4D0285683B600BAC05E /* DataLoaderGlobalWarming.swift */,
 				02A740A12527263100830B35 /* DataLoaderClimaCell.swift */,
 				02A7409425269E6300830B35 /* DataLoaderCO2Signal.swift */,
 				02A7409C2527228300830B35 /* DataLoaderOpenSky.swift */,
@@ -360,8 +366,8 @@
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
+				021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */,
 				02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */,
-				02DAD2E9273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift */,
 				02DAD2EB273C6DF900C233E5 /* DataLoaderGlobalWarming.swift */,
 				0218870A24F4486900F95C20 /* DataLoaderWAQI.swift */,
 				02AAE82A24F9A56300948D5F /* Extensions.swift */,
@@ -640,6 +646,7 @@
 				0269848225251DB7002BFB88 /* APIKeys.swift in Sources */,
 				028E0E5A2526345600D03420 /* MapView.swift in Sources */,
 				029DD8B72849612800A420A1 /* DataLoaderWAQIhere.swift in Sources */,
+				021ACB1228527722009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				02D5AB5A252A144B007E73DC /* ProfileHost.swift in Sources */,
 				02038D5326E4BB5E008B4930 /* LocationViewModel.swift in Sources */,
 				02BCC4E526C02CAB00FDFF74 /* DataLoaderSmartCitizen.swift in Sources */,
@@ -657,6 +664,7 @@
 				02C2C96D2533A0D6005840F7 /* ContentViewWAQI.swift in Sources */,
 				02624DDD284232920076F8FF /* BannerAdViewControllerRepresentable.swift in Sources */,
 				022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */,
+				025AE4D1285683B600BAC05E /* DataLoaderGlobalWarming.swift in Sources */,
 				02A7409525269E6400830B35 /* DataLoaderCO2Signal.swift in Sources */,
 				027DEB4C253501C200CF7936 /* BannerAdVC.swift in Sources */,
 				02D5AB5B252A144B007E73DC /* ProfileSummary.swift in Sources */,
@@ -673,10 +681,10 @@
 				0218870B24F4486900F95C20 /* DataLoaderWAQI.swift in Sources */,
 				0283DD9924F051EE00E4CC07 /* DataLoaderPurpleAir.swift in Sources */,
 				02B85174250C0B8D0048F2FD /* APIKeys.swift in Sources */,
-				02DAD2EA273B1FFB00C233E5 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */,
 				02009341283D6E6000575220 /* DataLoaderSmartCitizenHistorical.swift in Sources */,
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
+				021ACB142852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
 				02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */,
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
@@ -825,7 +833,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -836,7 +844,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -854,7 +862,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_PREVIEWS = YES;
@@ -865,7 +873,7 @@
 					"@executable_path/Frameworks",
 				);
 				MACH_O_TYPE = mh_execute;
-				MARKETING_VERSION = 1.14;
+				MARKETING_VERSION = 1.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

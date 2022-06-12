@@ -69,6 +69,10 @@ public struct ContentViewSmartCitizen: View {
     @State var wAQIAQI: Int = 0
     @State var fahrenheitForDisplayWAQIhere: String = "0"
     
+    // Defining VARs for DailyAtmosphericCO2
+    @State var cO2PPMLastYearOnYearDeltaPercentage: Double = 0
+    @State var cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage: Double = 0
+    @State var dailyAtmosphericCO2Data365Last: String = "0"
     
     // Defining the Progress Bar Styles
     struct aQIProgressBarStyle: ProgressViewStyle {
@@ -630,6 +634,62 @@ public struct ContentViewSmartCitizen: View {
                     .ignoresSafeArea()
                 }
                 
+                if ProfileEditor().ClimateChangeStats == true
+                {
+                    VStack{
+                        if ProgressIndicatorShown == true{
+                            ProgressView()
+                        }
+                        Link("\(Image(systemName: "globe")) ᴄʟɪᴍᴀᴛᴇ ᴄʜᴀɴɢᴇ sᴛᴀᴛs",
+                             destination: URL(string: "https://www.global-warming.org")!)
+                        .font(.subheadline)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 8.0)
+                        
+                        HStack{
+                            ZStack{
+                                ProgressView("", value: Float16(dailyAtmosphericCO2Data365Last), total: 450)
+                                    .progressViewStyle(GaugeProgressStyle())
+                                    .frame(width: 70, height: 70)
+                                    .contentShape(Rectangle())
+                                    .padding(.bottom, 6.0)
+                                VStack{
+                                    Text("⚫")
+                                        .font(.subheadline)
+                                    Text("\(dailyAtmosphericCO2Data365Last)")
+                                        .font(.caption)
+                                    Text("ᴘᴘᴍ ᴄᴏ₂")
+                                        .font(.caption)
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            VStack{
+                                Text("\(String(format: "%.2f", locale: Locale.current, cO2PPMLastYearOnYearDeltaPercentage))% Δ CO₂ Emissions Year on Year")
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Text("( Short term reading, should be <0% )")
+                                    .font(.caption)
+                                    .padding(.bottom, 2.0)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                
+                                Text("\(String(format: "%.1f", locale: Locale.current, cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage))% Average CO₂ Emissions since 2019")
+                                    .font(.caption)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                Text("( Should be <-7.6%  to limit to +1.5℃ )")
+                                    .font(.caption)
+                                    .padding(.bottom, 2.0)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                            }
+                        }
+                    }
+                }
+                
+                
+                
+                
                 if ProfileEditor().ShowWelcomeText == false
                 {
                     
@@ -708,6 +768,11 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
             telraamViewModel.objectWillChange.send()
         }
         
+        if ProfileEditor().ClimateChangeStats == true
+        {
+            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
+        }
+        
         DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID) as? String ?? String())
         
         DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (ProfileEditor().SensorID) as? String ?? String())
@@ -783,6 +848,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
             }
             
         }
+        
         
         
         
@@ -883,6 +949,37 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
                     DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
+                }
+                
+                
+                
+                
+                if ProfileEditor().ClimateChangeStats == true
+                {
+                    if (dailyAtmosphericCO2Data.co2?.last?.cycle) != nil {
+                        
+                        dailyAtmosphericCO2Data365Last = String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0")
+                        
+                        let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
+                        
+                        let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
+                        let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
+                        let cO2PPMLastAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
+                        
+                        let dailyAtmosphericCO2DataArray730DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-730]
+                        let dailyAtmosphericCO2Data730DaysAgo = dailyAtmosphericCO2DataArray730DaysAgo?.trend ?? "0"
+                        let cO2PPMPrecedingAnnualDelta = (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue - (dailyAtmosphericCO2Data730DaysAgo as NSString).doubleValue
+                        
+                        cO2PPMLastYearOnYearDeltaPercentage = ((cO2PPMLastAnnualDelta - cO2PPMPrecedingAnnualDelta) / cO2PPMLastAnnualDelta) * 100
+                        
+                        let daysSinceUNEPMilestone = ((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)
+                        let yearsSinceUNEPMilestone = (((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)/365)
+                        
+                        let dailyAtmosphericCO2DataArrayOnUNEPMilestone = ((dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-Int(daysSinceUNEPMilestone)].trend ?? "0") as NSString).doubleValue
+                        
+                        cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = ((((((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / (((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue)) / yearsSinceUNEPMilestone) * 100
+                        
+                    }
                 }
                 
             }
