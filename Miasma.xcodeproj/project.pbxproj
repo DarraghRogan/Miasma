@@ -21,6 +21,7 @@
 		021ACB142852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */; };
 		022934C9252CDF8600CD4FFB /* DataLoaderPurpleAir.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */; };
 		022DBE23259B2875007DEB37 /* DataLoaderTelraam.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */; };
+		023072E8285A6A5E00B94555 /* DataLoaderSensorCommunity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023072E7285A6A5E00B94555 /* DataLoaderSensorCommunity.swift */; };
 		023BBDEE25251AC3006E8054 /* Miasma_iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */; };
 		023BBDF025251AC3006E8054 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 023BBDEF25251AC3006E8054 /* ContentView.swift */; };
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
@@ -175,6 +176,7 @@
 		021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderDailyAtmosphericCO2.swift; sourceTree = "<group>"; };
 		022934C8252CDF8600CD4FFB /* DataLoaderPurpleAir.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderPurpleAir.swift; sourceTree = "<group>"; };
 		022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderTelraam.swift; sourceTree = "<group>"; };
+		023072E7285A6A5E00B94555 /* DataLoaderSensorCommunity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataLoaderSensorCommunity.swift; sourceTree = "<group>"; };
 		023BBDEB25251AC3006E8054 /* Miasma iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Miasma iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		023BBDED25251AC3006E8054 /* Miasma_iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Miasma_iOSApp.swift; sourceTree = "<group>"; };
 		023BBDEF25251AC3006E8054 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -365,6 +367,7 @@
 				02ED019125096F3200BDF25A /* DataLoaderOpenSky.swift */,
 				0283DD9824F051EE00E4CC07 /* DataLoaderPurpleAir.swift */,
 				029BD3832536E99500C743A7 /* DataLoaderSmartCitizen.swift */,
+				023072E7285A6A5E00B94555 /* DataLoaderSensorCommunity.swift */,
 				022DBE22259B2875007DEB37 /* DataLoaderTelraam.swift */,
 				021ACB132852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift */,
 				02D71F5427404FA000E6E9F8 /* DataLoaderSmartCitizenHistorical.swift */,
@@ -686,6 +689,7 @@
 				0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */,
 				021ACB142852772D009EB002 /* DataLoaderDailyAtmosphericCO2.swift in Sources */,
 				0283DD9D24F0568000E4CC07 /* Menu.swift in Sources */,
+				023072E8285A6A5E00B94555 /* DataLoaderSensorCommunity.swift in Sources */,
 				02DAD2EC273C6DF900C233E5 /* DataLoaderGlobalWarming.swift in Sources */,
 				02AAE82B24F9A56300948D5F /* Extensions.swift in Sources */,
 				02ED019225096F3200BDF25A /* DataLoaderOpenSky.swift in Sources */,

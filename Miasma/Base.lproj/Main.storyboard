@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19529"/>
-        <plugIn identifier="com.apple.MapKitIBPlugin" version="19529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.MapKitIBPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -687,7 +687,7 @@
             <objects>
                 <viewController title="Miasma Preferences" storyboardIdentifier="PreferencesStoryboard" id="XfG-lQ-9wD" customClass="ViewController" customModule="Miasma" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="1479" height="729"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1925" height="729"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ND2-AO-lfk">
@@ -1451,6 +1451,111 @@ It is a 4 or 5 digit number in the URL web address after clicking the sensor you
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eXm-fO-Q23">
+                                <rect key="frame" x="1658" y="686" width="258" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Open SensorCommunity Map Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aIL-i1-auk">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="SensorCommunityMapButton:" target="XfG-lQ-9wD" id="9ji-dU-Qwb"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sSC-FO-8ID">
+                                <rect key="frame" x="1507" y="670" width="17" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" enabled="NO" title="ID" id="G1y-I6-ttJ">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y7D-G7-Ms2">
+                                <rect key="frame" x="1508" y="548" width="173" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Saved SensorCommunity ID" id="FyS-4y-nzq">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zXV-jm-TD6">
+                                <rect key="frame" x="1508" y="601" width="165" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Sensor Location Validation" id="lrc-Rg-Bbt">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2qL-rc-00u">
+                                <rect key="frame" x="1676" y="565" width="225" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Save SensorCommunity ID" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2WS-zm-exu">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="SensorCommunityIDSaveButton:" target="XfG-lQ-9wD" id="T8x-LQ-grx"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l5f-3W-IVq">
+                                <rect key="frame" x="1679" y="548" width="201" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" selectable="YES" id="SCe-OP-Byn">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AYn-gM-8J2">
+                                <rect key="frame" x="1679" y="601" width="201" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="m5I-oM-Pp9">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="djL-F3-qYl">
+                                <rect key="frame" x="1681" y="667" width="122" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="06X-v9-aQT">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="SensorCommunityIDField:" target="XfG-lQ-9wD" id="pjT-Gk-eH9"/>
+                                </connections>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZOQ-WK-xu3">
+                                <rect key="frame" x="1805" y="660" width="96" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Validate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dum-DY-Q4j">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="SensorCommunityCheckButton:" target="XfG-lQ-9wD" id="spN-FK-nHN"/>
+                                </connections>
+                            </button>
+                            <box horizontalHuggingPriority="750" fixedFrame="YES" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="983-jX-3Ch">
+                                <rect key="frame" x="1475" y="446" width="5" height="254"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </box>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xTd-65-HVO">
+                                <rect key="frame" x="1508" y="447" width="399" height="69"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" selectable="YES" enabled="NO" alignment="left" id="FgY-er-WOu">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <string key="title">Please find the ID for the sensor you are interested in from the SensorCommunity website map.
+It is a 5 digit number in the URL web address after clicking the sensor you are interested in.</string>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qqt-F7-0c3">
                                 <rect key="frame" x="598" y="315" width="227" height="98"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -1482,6 +1587,17 @@ It is a 5 or 9 digit number in the URL web address after clicking the street seg
                                     <action selector="DailyAtmosphericCO2Action:" target="XfG-lQ-9wD" id="fAV-jx-dFw"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fcm-Vk-tgw">
+                                <rect key="frame" x="1485" y="695" width="172" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="radio" title="From SensorCommunity" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="pzw-cT-YBZ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="SensorCommunityRadioAction:" target="XfG-lQ-9wD" id="nLS-H1-uei"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
                     <connections>
@@ -1501,6 +1617,11 @@ It is a 5 or 9 digit number in the URL web address after clicking the street seg
                         <outlet property="PurpleAirRadioOutlet" destination="dNg-47-2VM" id="YPN-09-bPM"/>
                         <outlet property="PurpleAirSavedIDLabel" destination="lSN-T0-4a0" id="0wV-9T-dJg"/>
                         <outlet property="RefreshIntervalButtonOutlet" destination="XJc-1i-Uy3" id="ZUK-q8-Wk2"/>
+                        <outlet property="SensorCommunityCheckedLabel" destination="AYn-gM-8J2" id="xHz-2Z-xQf"/>
+                        <outlet property="SensorCommunityIDField" destination="djL-F3-qYl" id="hml-33-udN"/>
+                        <outlet property="SensorCommunityIDSaveButton" destination="2qL-rc-00u" id="0FO-8C-38t"/>
+                        <outlet property="SensorCommunityRadioOutlet" destination="Fcm-Vk-tgw" id="dhd-tN-odj"/>
+                        <outlet property="SensorCommunitySavedIDLabel" destination="l5f-3W-IVq" id="NRF-h0-ble"/>
                         <outlet property="ShowAQIinMenubarButtonOutlet" destination="9Wr-dH-MEn" id="5ge-Wr-8fE"/>
                         <outlet property="SmartCitizenCheckedLabel" destination="Ydp-if-5lH" id="hys-1x-whX"/>
                         <outlet property="SmartCitizenIDField" destination="gXk-tZ-6hX" id="P3k-c9-COn"/>
@@ -1525,7 +1646,7 @@ It is a 5 or 9 digit number in the URL web address after clicking the street seg
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="574.5" y="884.5"/>
+            <point key="canvasLocation" x="797.5" y="884.5"/>
         </scene>
     </scenes>
     <resources>

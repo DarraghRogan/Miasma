@@ -17,6 +17,7 @@
     let validityTypeWAQI: String.ValidityType = .wAQICity
     let validityTypeSmartCitizen: String.ValidityType = .smartCitizenStationID
     let validityTypeTelraam: String.ValidityType = .telraamSegmentID
+     let validityTypeSensorCommunity: String.ValidityType = .sensorCommunityStationID
     
     
     @objc fileprivate func handleTextChangePurpleAir() {
@@ -111,6 +112,27 @@
             TelraamSegmentIDOutlet.layer?.borderWidth = 2.0
         }
     }
+     
+     @objc fileprivate func handleTextChangeSensorCommunity() {
+         guard let text = SensorCommunityIDField?.stringValue else { return }
+         if text.isValid(validityTypeSensorCommunity) {
+             DataLoaderSensorCommunity().loadSensorCommunityPresentData(id: SensorCommunityIDField.stringValue)
+             SensorCommunityCheckedLabel.stringValue = "Loading (5s)"
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                 
+                 if sensorCommunityPresentData[0].location?.id == nil {
+                     self.SensorCommunityCheckedLabel.stringValue = "Error. Check SensorCommunity ID"
+                 } else {
+                     self.SensorCommunityCheckedLabel.stringValue = String(sensorCommunityPresentData[0].location?.id ?? 0)
+                     self.SensorCommunityIDSaveButton.isEnabled = true
+                 }
+             })
+             SensorCommunityIDField.layer?.borderWidth = 0.0
+         } else {
+             SensorCommunityIDField.layer?.borderColor = CGColor.init(red: 255, green: 0, blue: 0, alpha: 100)
+             SensorCommunityIDField.layer?.borderWidth = 2.0
+         }
+     }
     
     
     @IBOutlet weak var MiasmaVersionLabel: NSTextField!
@@ -151,8 +173,10 @@
         
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
     }
     
     @IBOutlet weak var PurpleAirIDSaveButton: NSButton!
@@ -163,9 +187,11 @@
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
         
         AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
         CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
@@ -225,6 +251,9 @@
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
         
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
+        
     }
     
     @IBOutlet weak var WAQIComboBoxOutlet: NSComboBox!
@@ -244,6 +273,8 @@
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
         AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
         CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
         AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
@@ -281,8 +312,10 @@
         
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
-        AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+        AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
     }
     
     @IBOutlet weak var SmartCitizenIDSaveButton: NSButton!
@@ -293,9 +326,11 @@
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
         AppDelegate().defaults.set(1, forKey:"SmartCitizenInUse")
         AppDelegate().defaults.set(0, forKey:"PurpleAirInUse")
         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+        AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
         
         AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
         CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
@@ -319,6 +354,76 @@
     
     @IBOutlet weak var SmartCitizenSavedIDLabel: NSTextField!
     
+     
+     
+     
+     @IBOutlet weak var SensorCommunityRadioOutlet: NSButton!
+     
+     @IBAction func SensorCommunityMapButton(_ sender: Any) {
+         NSWorkspace.shared.open(URL(string: "https://maps.sensor.community/")!)
+
+     }
+     
+     @IBOutlet weak var SensorCommunityIDField: NSTextField!
+     
+     @IBAction func SensorCommunityIDField(_ sender: Any) {
+         SensorCommunityCheckButton((Any).self)
+     }
+     
+     @IBAction func SensorCommunityRadioAction(_ sender: Any) {
+         if SensorCommunitySavedIDLabel.stringValue == ""{
+         }
+         else{
+             AppDelegate().defaults.set(1, forKey: "SensorCommunityInUse")
+         }
+         
+         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+         AppDelegate().defaults.set(0, forKey: "PurpleAirInUse")
+         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+     }
+     
+     @IBOutlet weak var SensorCommunityIDSaveButton: NSButton!
+     
+     
+     @IBAction func SensorCommunityIDSaveButton(_ sender: Any) {
+         AppDelegate().defaults.set(SensorCommunityIDField.stringValue, forKey: "SensorCommunityStationID")
+         SensorCommunitySavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SensorCommunityStationID") as? String ?? String()
+         SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+         WAQIRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+        SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
+         AppDelegate().defaults.set(1, forKey:"SensorCommunityInUse")
+         AppDelegate().defaults.set(0, forKey:"PurpleAirInUse")
+         AppDelegate().defaults.set(0, forKey: "WAQIInUse")
+         AppDelegate().defaults.set(0, forKey: "SmartCitizenInUse")
+         
+         AppDelegate().defaults.set(1, forKey:"CO2SignalInUse")
+         CO2SignalButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+         AppDelegate().defaults.set(1, forKey:"OpenSkyInUse")
+         OpenSkyButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+         //        AppDelegate().defaults.set(1, forKey:"ClimaCellInUse")
+         //        ClimaCellButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)
+         
+         if SensorCommunityIDField.stringValue == ""{
+             AppDelegate().defaults.set(0, forKey: "SensorCommunityInUse")
+         }
+         else{
+         }
+     }
+     
+     @IBAction func SensorCommunityCheckButton(_ sender: Any) {
+         handleTextChangeSensorCommunity()
+
+     }
+     
+     @IBOutlet weak var SensorCommunityCheckedLabel: NSTextField!
+     
+     @IBOutlet weak var SensorCommunitySavedIDLabel: NSTextField!
+     
+     
     
     
     @IBAction func TelraamButton(_ sender: Any) {
@@ -601,12 +706,18 @@
             SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         }
         
+        if AppDelegate().defaults.integer(forKey:"SensorCommunityInUse") == 1{
+            SensorCommunityRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
+        }
+        
         
         PurpleAirSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"PurpleAirStationID") as? String ?? String()
         
         WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
         
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
+        
+        SensorCommunitySavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SensorCommunityStationID") as? String ?? String()
         
         TelraamSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"TelraamSegmentID") as? String ?? String()
         

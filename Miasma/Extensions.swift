@@ -20,12 +20,14 @@ extension String {
         case purpleAirID
         case wAQICity
         case smartCitizenStationID
+        case sensorCommunityStationID
         case telraamSegmentID
     }
     
     enum Regex: String {
         case purpleAirID = "[0-9]{4,6}"
         case smartCitizenStationID = "[0-9]{3,5}"
+        case sensorCommunityStationID = "[0-9]{4,5}"
         case telraamSegmentID = "[0-9]{5,10}"
         case wAQICity = "^[a-zA-Z]*$"
     }
@@ -41,6 +43,8 @@ extension String {
             regex = Regex.wAQICity.rawValue
         case .smartCitizenStationID:
             regex = Regex.smartCitizenStationID.rawValue
+        case .sensorCommunityStationID:
+            regex = Regex.sensorCommunityStationID.rawValue
         case .telraamSegmentID:
             regex = Regex.telraamSegmentID.rawValue
         }

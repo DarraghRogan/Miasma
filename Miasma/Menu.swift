@@ -121,6 +121,47 @@ class menuFunctions: NSObject {
     
     
     
+    
+    
+    
+    var sensorCommunityLocationType : NSMenuItem = {
+        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityPM2_5 : NSMenuItem = {
+        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityOtherPollutants : NSMenuItem = {
+        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityPhysicalProperties : NSMenuItem = {
+        return NSMenuItem(title: "🎤: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunity24HourExposurePM25 : NSMenuItem = {
+        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityTemperatureHumidity : NSMenuItem = {
+        return NSMenuItem(title: "🌡: / 💧: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityPressure : NSMenuItem = {
+        return NSMenuItem(title: "🌬️: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityReadingAge : NSMenuItem = {
+        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+    }()
+    
+    var sensorCommunityPM2_5StatusBarIcon : NSMenuItem = {
+        return NSMenuItem(title: "", action: nil, keyEquivalent: "")
+    }()
+    
+    
+    
     var cO2Country : NSMenuItem = {
         return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
     }()
@@ -188,6 +229,10 @@ class menuFunctions: NSObject {
     
     @objc func openSmartCitizen(_ sender: NSMenuItem){
         NSWorkspace.shared.open(URL(string: "https://smartcitizen.me/kits/\(AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String())")!)
+    }
+    
+    @objc func openSensorCommunity(_ sender: NSMenuItem){
+        NSWorkspace.shared.open(URL(string: "https://maps.sensor.community/\(AppDelegate().defaults.object(forKey:"SensorCommunityStationID") as? String ?? String())")!)
     }
     
     @objc func openCO2(_ sender: NSMenuItem){
@@ -2100,6 +2145,577 @@ class menuFunctions: NSObject {
                 
             }
         }
+        
+        
+        
+        
+        
+        if AppDelegate().defaults.integer(forKey:"SensorCommunityInUse") == 1 {
+            
+            let SensorCommunityLink = NSMenuItem(
+                title: "Air Quality (SensorCommunity)...",
+                action: #selector(menuFunctions.openSensorCommunity(_:)),
+                keyEquivalent: "s"
+            )
+            SensorCommunityLink.target = self
+            menu.addItem(SensorCommunityLink)
+            
+            menu.addItem(sensorCommunityLocationType)
+            menu.addItem(sensorCommunityPM2_5)
+            menu.addItem(sensorCommunity24HourExposurePM25)
+            menu.addItem(sensorCommunityOtherPollutants)
+            menu.addItem(sensorCommunityTemperatureHumidity)
+            menu.addItem(sensorCommunityPressure)
+            menu.addItem(sensorCommunityPhysicalProperties)
+
+            
+            menu.addItem(NSMenuItem.separator())
+            
+            if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let CO2Link = NSMenuItem(
+                    title: "Electricity Consumption (electricityMap)...",
+                    action: #selector(menuFunctions.openCO2(_:)),
+                    keyEquivalent: "e"
+                )
+                CO2Link.target = self
+                menu.addItem(CO2Link)
+                
+                menu.addItem(cO2Country)
+                menu.addItem(cO2levelComparedTo100g)
+                menu.addItem(cO2FossilFuelMix)
+                
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenSkyLink = NSMenuItem(
+                    title: "Aircraft Overhead (OpenSky)...",
+                    action: #selector(menuFunctions.openOpenSky(_:)),
+                    keyEquivalent: "o"
+                )
+                OpenSkyLink.target = self
+                menu.addItem(OpenSkyLink)
+                
+                menu.addItem(openSkyAircraftInBox)
+                
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                
+                menu.addItem(NSMenuItem.separator())
+                let OpenClimaCell = NSMenuItem(
+                    title: "1 Hour Forecast (Tomorrow.io Timeline)...",
+                    action: #selector(menuFunctions.openClimaCell(_:)),
+                    keyEquivalent: "c"
+                )
+                OpenClimaCell.target = self
+                menu.addItem(OpenClimaCell)
+                
+                menu.addItem(climaCellWeather)
+                menu.addItem(climaCellAirQuality)
+                menu.addItem(climaCellPollen)
+                menu.addItem(climaCellSolarGHI)
+            }
+            
+            DataLoaderSensorCommunity().loadSensorCommunityPresentData(id: (AppDelegate().defaults.object(forKey:"SensorCommunityStationID") as? String ?? String()))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
+                
+                if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                    DataLoaderCO2().loadCO2Data(lat: String(sensorCommunityPresentData[0].location?.latitude ?? "0"), lon: String(sensorCommunityPresentData[0].location?.longitude ?? "0"))
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((Double(sensorCommunityPresentData[0].location?.latitude ?? "0") ?? 0)-1), lomin: ((Double(sensorCommunityPresentData[0].location?.longitude ?? "0") ?? 0)-1), lamax: ((Double(sensorCommunityPresentData[0].location?.latitude ?? "0") ?? 0)+1), lomax: ((Double(sensorCommunityPresentData[0].location?.longitude ?? "0") ?? 0)+1))
+                }
+                
+                if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                    DataLoaderClimaCell().loadClimaCellData(lat: Double(sensorCommunityPresentData[0].location?.latitude ?? "0") ?? 0, lon: Double(sensorCommunityPresentData[0].location?.longitude ?? "0") ?? 0)
+                }
+                
+                if 1 == 0 {
+                    
+                    self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenPresentData.data?.location?.city ?? "0")), \(String(smartCitizenPresentData.data?.location?.country ?? "0")) / Exposure: \(String(smartCitizenPresentData.data?.location?.exposure ?? "0"))"
+                    
+                    
+                    
+                    // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
+                    
+                    var pM2_5Value = round(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+                    let pM2_5ColourButton: String
+                    let aQI_CalculatedDouble: Double
+                    var aQI_CalculatedRounded: Int = 0
+                    switch (pM2_5Value) {
+                    case _ where pM2_5Value >= 0 && pM2_5Value < 12:
+                        pM2_5ColourButton = "[🟢_____]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟢"
+                        aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬇ 🟢 Good AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is considered satisfactory, and air pollution poses little or no risk.")
+                        }
+                        
+                        AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
+                        pM2_5ColourButton = "[_🟡_____]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟡"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        
+                        if AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬇ 🟡 Moderate AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people.")
+                        }
+                        
+                        AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
+                        pM2_5ColourButton = "[__🟠____]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟠"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬇ 🟠 Unhealthy for Sensitive Groups AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Members of sensitive groups may experience health effects. The general public is not likely to be affected.")
+                        }
+                        
+                        AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
+                        pM2_5ColourButton = "[___🔴___]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🔴"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬇ 🔴 Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.")
+                        }
+                        
+                        AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
+                        pM2_5ColourButton = "[____🟣__]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟣"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟤") && AppDelegate().defaults.integer(forKey:"FallingAQINotificationsWanted") == 1 && aQI_CalculatedRounded <= Int32(AppDelegate().defaults.integer(forKey:"FallingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬇ 🟣 Very Unhealthy AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health alert: everyone may experience more serious health effects.")
+                        }
+                        
+                        AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
+                        pM2_5ColourButton = "[_____🟤_]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟤"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
+                        aQI_CalculatedRounded = Int(round(aQI_CalculatedDouble))
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                        }
+                        AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
+                        
+                        
+                    case _ where pM2_5Value >= 500.5:
+                        pM2_5ColourButton = "[______🟤]"
+                        self.smartCitizenPM2_5StatusBarIcon.title = "🟤"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        aQI_CalculatedRounded = 500
+                        
+                        if AppDelegate().defaults.integer(forKey:"ShowAQIinMenubar") == 1 {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title) \(aQI_CalculatedRounded)"
+                        }
+                        else
+                        {
+                            statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                        }
+                        
+                        if (AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟢" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟡" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟠" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🔴" || AppDelegate().defaults.object(forKey:"PreviousStateForNotification") as! String == "🟣") && AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1 && aQI_CalculatedRounded >= Int32(AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsTrigger"))
+                        {
+                            AppDelegate().showNotification(title: "⬆ 🟤 Hazardous AQI reached", subtitle: "Air Quality Index is \(aQI_CalculatedRounded) in \(String(smartCitizenPresentData.data?.location?.city ?? "0"))", informativeText: "Health warnings of emergency conditions. The entire population is more likely to be affected.")
+                        }
+                        AppDelegate().defaults.set(self.smartCitizenPM2_5StatusBarIcon.title, forKey: "PreviousStateForNotification")
+                        
+                        
+                    default:
+                        pM2_5ColourButton = ""
+                        self.smartCitizenPM2_5StatusBarIcon.title = "⚪"
+                        statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
+                    }
+                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                    
+                    var outputpm25historicalString1d: String = ""
+                    var outputpm25historicalString3d: String = ""
+                    var outputpm25historicalString1w: String = ""
+                    var outputpm25historicalString1M: String = ""
+                    var outputpm25historicalString1y: String = ""
+                    
+                    
+                    if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
+                    {
+                        outputpm25historicalString1d = String("\(pm25historicalString1d)")
+                    }
+                    
+                    if let pm25historicalString3d = smartCitizenHistoricalData3d.readings?[1][1]
+                    {
+                        outputpm25historicalString3d = String("\(pm25historicalString3d)")
+                    }
+                    
+                    if let pm25historicalString1w = smartCitizenHistoricalData1w.readings?[1][1]
+                    {
+                        outputpm25historicalString1w = String("\(pm25historicalString1w)")
+                    }
+                    
+                    if let pm25historicalString1M = smartCitizenHistoricalData1M.readings?[0][1]
+                    {
+                        outputpm25historicalString1M = String("\(pm25historicalString1M)")
+                    }
+                    
+                    if let pm25historicalString1y = smartCitizenHistoricalData1y.readings?[0][1]
+                    {
+                        outputpm25historicalString1y = String("\(pm25historicalString1y)")
+                    }
+                    
+                    
+//                    self.smartCitizen24HourExposurePM25.title = "📊: Averages μg/m³ PM₂.₅:       1y: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y)) | 1m: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1M)) | 1w: \(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1w)) | 3d: \(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString3d)) | 1d: \(generatesmartCitizen24HourAverage(pm25historicalString:outputpm25historicalString1d))"
+                    
+
+                    
+                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
+                    
+                    
+                    self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[9].value ?? 0)))%"
+                    
+                    var pressureValue = smartCitizenPresentData.data?.sensors?[5].value ?? 0
+                    let pressure_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (pressureValue) {
+                    case _ where pressureValue < 100.9144:
+                        pressure_visual = "[Low/______/____]"
+                    case _ where pressureValue > 100.9144 && pressureValue < 102.2689:
+                        pressure_visual = "[___/Normal/____]"
+                    case _ where pressureValue > 102.2689:
+                        pressure_visual = "[___/______/High]"
+                    default:
+                        pressure_visual = ""
+                    }
+                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    
+                    
+                    
+                    self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[2].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[2].unit ?? "0"))"
+                    
+                    //                    self.smartCitizenReadingAge.title = "📅: \(String(smartCitizenData.lastReadingAt?. ?? 0))"
+                    
+                }
+            })
+            
+            if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    
+                    if cO2Data.data?.carbonIntensity ?? 100 < 100
+                    {
+                        self.cO2levelComparedTo100g.title = "🔥: Lower than IEA target of 100gCO₂eq/kWh 👍"
+                        
+                    }
+                    else {
+                        var cO2Intensity = cO2Data.data?.carbonIntensity ?? 100
+                        let cO2IntensityMultiplier = cO2Intensity/100
+                        self.cO2levelComparedTo100g.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
+                    }
+                    
+                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    let fossilFuelPercentage_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (fossilFuelPercentage) {
+                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
+                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
+                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
+                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
+                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
+                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
+                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    case _ where fossilFuelPercentage > 95:
+                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
+                    default:
+                        fossilFuelPercentage_visual = ""
+                    }
+                    
+                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
+                    
+                })
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    self.openSkyAircraftInBox.title = "✈️: \(String(format: "%U", locale: Locale.current, openSkyData.states?.count ?? 0)) aircraft in ±1° latitude/longitude box over Air Quality sensor"
+                })
+            }
+            
+            if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
+                    
+                    var windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
+                    let windDirection_acronymn: String
+                    // directiosn from http://www.angelfire.com/space/one1/cal.html
+                    switch (windDirection) {
+                    case _ where windDirection < 45:
+                        windDirection_acronymn = "NNE"
+                    case _ where windDirection > 45 && windDirection < 90:
+                        windDirection_acronymn = "ENE"
+                    case _ where windDirection > 90 && windDirection < 135:
+                        windDirection_acronymn = "ESE"
+                    case _ where windDirection > 135 && windDirection < 180:
+                        windDirection_acronymn = "SSE"
+                    case _ where windDirection > 180 && windDirection < 225:
+                        windDirection_acronymn = "SSW"
+                    case _ where windDirection > 225 && windDirection < 270:
+                        windDirection_acronymn = "WSW"
+                    case _ where windDirection > 270 && windDirection < 315:
+                        windDirection_acronymn = "WNW"
+                    case _ where windDirection > 315:
+                        windDirection_acronymn = "NNW"
+                    default:
+                        windDirection_acronymn = ""
+                    }
+                    
+                    let ClimaCellCelcius = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
+                    func calculateFahrenheit(celcius: Double) -> String {
+                        var fahrenheit: Double
+                        fahrenheit = (celcius * 9 / 5) + 32
+                        let fahrenheitRoundedString = String(format: "%.1f", locale: Locale.current, fahrenheit)
+                        return fahrenheitRoundedString
+                    }
+                    
+                    let ClimaCellWeatherCode = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    var ClimaCellWeatherCodeText: String
+                    switch ClimaCellWeatherCode {
+                    case _ where ClimaCellWeatherCode == 1000:
+                        ClimaCellWeatherCodeText = "Clear"
+                    case _ where ClimaCellWeatherCode == 1001:
+                        ClimaCellWeatherCodeText = "Cloudy"
+                    case _ where ClimaCellWeatherCode == 1100:
+                        ClimaCellWeatherCodeText = "Mostly Clear"
+                    case _ where ClimaCellWeatherCode == 1101:
+                        ClimaCellWeatherCodeText = "Partly Cloudy"
+                    case _ where ClimaCellWeatherCode == 1102:
+                        ClimaCellWeatherCodeText = "Mostly Cloudy"
+                    case _ where ClimaCellWeatherCode == 2000:
+                        ClimaCellWeatherCodeText = "Fog"
+                    case _ where ClimaCellWeatherCode == 2100:
+                        ClimaCellWeatherCodeText = "Light Fog"
+                    case _ where ClimaCellWeatherCode == 3000:
+                        ClimaCellWeatherCodeText = "Light Wind"
+                    case _ where ClimaCellWeatherCode == 3001:
+                        ClimaCellWeatherCodeText = "Wind"
+                    case _ where ClimaCellWeatherCode == 3002:
+                        ClimaCellWeatherCodeText = "Strong Wind"
+                    case _ where ClimaCellWeatherCode == 4000:
+                        ClimaCellWeatherCodeText = "Drizzle"
+                    case _ where ClimaCellWeatherCode == 4001:
+                        ClimaCellWeatherCodeText = "Rain"
+                    case _ where ClimaCellWeatherCode == 4200:
+                        ClimaCellWeatherCodeText = "Light Rain"
+                    case _ where ClimaCellWeatherCode == 4201:
+                        ClimaCellWeatherCodeText = "Heavy Rain"
+                    case _ where ClimaCellWeatherCode == 5000:
+                        ClimaCellWeatherCodeText = "Snow"
+                    case _ where ClimaCellWeatherCode == 5001:
+                        ClimaCellWeatherCodeText = "Flurries"
+                    case _ where ClimaCellWeatherCode == 5100:
+                        ClimaCellWeatherCodeText = "Light Snow"
+                    case _ where ClimaCellWeatherCode == 5101:
+                        ClimaCellWeatherCodeText = "Heavy Snow"
+                    case _ where ClimaCellWeatherCode == 6000:
+                        ClimaCellWeatherCodeText = "Freezing Drizzle"
+                    case _ where ClimaCellWeatherCode == 6001:
+                        ClimaCellWeatherCodeText = "Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6200:
+                        ClimaCellWeatherCodeText = "Light Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 6201:
+                        ClimaCellWeatherCodeText = "Heavy Freezing Rain"
+                    case _ where ClimaCellWeatherCode == 7000:
+                        ClimaCellWeatherCodeText = "Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7101:
+                        ClimaCellWeatherCodeText = "Heavy Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 7102:
+                        ClimaCellWeatherCodeText = "Light Ice Pellets"
+                    case _ where ClimaCellWeatherCode == 8000:
+                        ClimaCellWeatherCodeText = "Thunderstorm"
+                    default:
+                        ClimaCellWeatherCodeText = "Unknown"
+                    }
+                    
+                    let ClimaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
+                    var ClimaCellPrimaryPollutantText: String
+                    switch ClimaCellPrimaryPollutant {
+                    case _ where ClimaCellPrimaryPollutant == 0:
+                        ClimaCellPrimaryPollutantText = "PM₂.₅"
+                    case _ where ClimaCellPrimaryPollutant == 1:
+                        ClimaCellPrimaryPollutantText = "PM₁₀"
+                    case _ where ClimaCellPrimaryPollutant == 2:
+                        ClimaCellPrimaryPollutantText = "O₃"
+                    case _ where ClimaCellPrimaryPollutant == 3:
+                        ClimaCellPrimaryPollutantText = "NO₂"
+                    case _ where ClimaCellPrimaryPollutant == 4:
+                        ClimaCellPrimaryPollutantText = "CO"
+                    case _ where ClimaCellPrimaryPollutant == 5:
+                        ClimaCellPrimaryPollutantText = "SO₂"
+                    default:
+                        ClimaCellPrimaryPollutantText = "Unknown"
+                    }
+                    
+                    var solarGHI = climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0
+                    let solarGHI_visual: String
+                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                    switch (solarGHI) {
+                    case _ where solarGHI > 0 && solarGHI < 100:
+                        solarGHI_visual = "[☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 100 && solarGHI < 200:
+                        solarGHI_visual = "[☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 200 && solarGHI < 300:
+                        solarGHI_visual = "[☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 300 && solarGHI < 400:
+                        solarGHI_visual = "[☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 400 && solarGHI < 500:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 500 && solarGHI < 600:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚🌚]"
+                    case _ where solarGHI > 600 && solarGHI < 700:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚🌚]"
+                    case _ where solarGHI > 700 && solarGHI < 800:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚🌚]"
+                    case _ where solarGHI > 800 && solarGHI < 900:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚🌚]"
+                    case _ where solarGHI > 900 && solarGHI < 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️🌚]"
+                    case _ where solarGHI > 1000:
+                        solarGHI_visual = "[☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️☀️]"
+                    default:
+                        solarGHI_visual = "[🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚🌚]"
+                    }
+                    
+                    self.climaCellWeather.title = "🌦: Will be \(ClimaCellWeatherCodeText), \(String(format: "%.1f", locale: Locale.current, climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0))℃ / \(calculateFahrenheit(celcius: Double(ClimaCellCelcius)))℉ (Apparent), with wind from \(windDirection_acronymn) @ \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)))m/s / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*3.6))km/h / \(String(format: "%.1f", locale: Locale.current, Double(climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0)*2.23694))mph"
+                    
+                    self.climaCellAirQuality.title = "☁️: Air Quality will be \(Int(round(Double(climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0)))) US EPA AQI PM₂.₅, with primary pollutant of \(ClimaCellPrimaryPollutantText)"
+                    
+                    self.climaCellPollen.title = "🌳: Pollen Index [0-5] will be: Trees: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)), Grass: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)), Weeds: \(Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0))"
+                    
+                    self.climaCellSolarGHI.title = "☀️: \(climaCellData.data?.timelines?[0].intervals?[1].values?.solarGHI ?? 0)W/m² potential solar generation (GHI)   \(solarGHI_visual)"
+                    
+                })
+                
+            }
+        }
+        
+        
+        
+        
+        
         
         if AppDelegate().defaults.integer(forKey:"TelraamInUse") == 1 {
             
