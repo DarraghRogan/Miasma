@@ -123,7 +123,7 @@
                  if sensorCommunityPresentData[0].location?.id == nil {
                      self.SensorCommunityCheckedLabel.stringValue = "Error. Check SensorCommunity ID"
                  } else {
-                     self.SensorCommunityCheckedLabel.stringValue = String(sensorCommunityPresentData[0].location?.id ?? 0)
+                     self.SensorCommunityCheckedLabel.stringValue = "\(String(sensorCommunityPresentData[0].sensor?.sensorType?.manufacturer ?? "0")) \(String(sensorCommunityPresentData[0].sensor?.sensorType?.name ?? "0"))"
                      self.SensorCommunityIDSaveButton.isEnabled = true
                  }
              })
