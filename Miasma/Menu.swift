@@ -2239,7 +2239,7 @@ class menuFunctions: NSObject {
                 
                 if 1 == 1 {
                     
-                    self.sensorCommunityLocationType.title = "🌍: \(String(sensorCommunityPresentData[0].location?.country ?? "0")) / Sensor ID: \(String(sensorCommunityPresentData[0].sensor?.sensorType?.id ?? 0))"
+                    self.sensorCommunityLocationType.title = "🌍: \(String(sensorCommunityPresentData[0].location?.country ?? "0")) / Sensor ID: \(String(sensorCommunityPresentData[0].sensor?.id ?? 0))"
                     
                     
                     
