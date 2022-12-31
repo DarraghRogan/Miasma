@@ -43,6 +43,7 @@ struct Values: Codable {
     var solarGHI: Double?
     var uvIndex: Double?
     var precipitationProbability: Double?
+    var rainAccumulation: Double?
 }
 
 

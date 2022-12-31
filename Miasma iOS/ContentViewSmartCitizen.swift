@@ -49,6 +49,8 @@ public struct ContentViewSmartCitizen: View {
     @State var celciusForCalculationClimaCell: Double = 0
     @State var uvIndex: Double = 0
     @State var precipitationProbability: Double = 0
+    @State var rainAccumulation: Double = 0
+
     
     
     // Defining VARs for SmartCitizen
@@ -510,7 +512,7 @@ public struct ContentViewSmartCitizen: View {
                             Spacer()
                             
                             ZStack{
-                                ProgressView("", value: Float16(precipitationProbability), total: 100)
+                                ProgressView("", value: Float16(rainAccumulation), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
                                     .frame(width: 70, height: 70)
                                     .contentShape(Rectangle())
@@ -518,11 +520,11 @@ public struct ContentViewSmartCitizen: View {
                                 VStack{
                                     Text("🌧️")
                                         .font(.subheadline)
-                                    Text("\(String(format: "%.1f", locale: Locale.current, precipitationProbability))%")
+                                    Text("\(String(format: "%.1f", locale: Locale.current, rainAccumulation))mm")
                                         .font(.caption2)
-                                    Text("ᴘʀᴇᴄɪᴘ.")
+                                    Text("ʀᴀɪɴ")
                                         .font(.caption2)
-                                    Text("ᴘʀᴏʙ.")
+                                    Text("ᴀᴄᴄᴜᴍ")
                                         .font(.caption2)
                                 }
                             }
@@ -1101,6 +1103,8 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
                     self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
                     self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)
+                    self.rainAccumulation = climaCellData.data?.timelines?[0].intervals?[1].values?.rainAccumulation ?? 0
+
                     
                     let windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
