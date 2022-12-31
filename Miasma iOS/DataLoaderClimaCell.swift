@@ -42,7 +42,7 @@ struct Values: Codable {
     var epaIndex, epaPrimaryPollutant: Int?
     var solarGHI: Double?
     var uvIndex: Double?
-    var precipitationProbability: Int?
+    var precipitationProbability: Double?
 }
 
 

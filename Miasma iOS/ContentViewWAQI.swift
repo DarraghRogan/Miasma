@@ -48,7 +48,7 @@ public struct ContentViewWAQI: View {
     @State var fahrenheitForDisplayClimaCell: String = "◌"
     @State var celciusForCalculationClimaCell: Double = 0
     @State var uvIndex: Double = 0
-    @State var precipitationProbability: Int = 0
+    @State var precipitationProbability: Double = 0
     
     
     // Defining VARs for WAQI
@@ -517,7 +517,7 @@ public struct ContentViewWAQI: View {
                                 VStack{
                                     Text("🌧️")
                                         .font(.subheadline)
-                                    Text("\(precipitationProbability)%")
+                                    Text("\(String(format: "%.1f", locale: Locale.current, precipitationProbability))%")
                                         .font(.caption2)
                                     Text("ᴘʀᴇᴄɪᴘ.")
                                         .font(.caption2)
