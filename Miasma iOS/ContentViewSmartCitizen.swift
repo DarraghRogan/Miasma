@@ -937,32 +937,32 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 switch (pM2_5Value) {
                 case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                     
-                    self.aQI_CalculatedDouble = ((50-0)/(12-0))*((pM2_5Value)-0)+0
+                    self.aQI_CalculatedDouble = ((50)/(12))*((pM2_5Value)-0)+0
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟢", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 12 && pM2_5Value < 35.5:
-                    self.aQI_CalculatedDouble = ((100-51)/(35.4-12.1))*((pM2_5Value)-12.1)+51
+                    self.aQI_CalculatedDouble = ((49)/(23.3))*((pM2_5Value)-12.1)+51
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟡", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 35.5 && pM2_5Value < 55.5:
-                    self.aQI_CalculatedDouble = ((150-101)/(55.4-35.5))*((pM2_5Value)-35.5)+101
+                    self.aQI_CalculatedDouble = ((49)/(19.9))*((pM2_5Value)-35.5)+101
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟠", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 55.5 && pM2_5Value < 150.5:
-                    aQI_CalculatedDouble = ((200-151)/(150.4-55.5))*((pM2_5Value)-55.5)+151
+                    aQI_CalculatedDouble = ((49)/(94.9))*((pM2_5Value)-55.5)+151
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🔴", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 150.5 && pM2_5Value < 250.5:
-                    self.aQI_CalculatedDouble = ((300-201)/(250.4-150.5))*((pM2_5Value)-150.5)+201
+                    self.aQI_CalculatedDouble = ((99)/(99.9))*((pM2_5Value)-150.5)+201
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟣", forKey: "PreviousStateForNotification")
                     
                 case _ where pM2_5Value >= 250.5 && pM2_5Value < 500.5:
-                    self.aQI_CalculatedDouble = ((500-301)/(500.4-250.5))*((pM2_5Value)-250.5)+301
+                    self.aQI_CalculatedDouble = ((199)/(249.9))*((pM2_5Value)-250.5)+301
                     self.aQI_CalculatedRounded = Double(Int(round(self.aQI_CalculatedDouble)))
                     AppDelegate().defaults.set("🟤", forKey: "PreviousStateForNotification")
                     
@@ -1010,14 +1010,14 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                         let dailyAtmosphericCO2Data730DaysAgo = dailyAtmosphericCO2DataArray730DaysAgo?.trend ?? "0"
                         let cO2PPMPrecedingAnnualDelta = (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue - (dailyAtmosphericCO2Data730DaysAgo as NSString).doubleValue
                         
-                        cO2PPMLastYearOnYearDeltaPercentage = ((cO2PPMLastAnnualDelta) / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
+                        cO2PPMLastYearOnYearDeltaPercentage = (cO2PPMLastAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
                         
                         let daysSinceUNEPMilestone = ((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)
                         let yearsSinceUNEPMilestone = (((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)/365)
                         
                         let dailyAtmosphericCO2DataArrayOnUNEPMilestone = ((dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-Int(daysSinceUNEPMilestone)].trend ?? "0") as NSString).doubleValue
                         
-                        cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = ((((((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / (((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue)) / yearsSinceUNEPMilestone) * 100
+                        cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = (((((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone) / dailyAtmosphericCO2DataArrayOnUNEPMilestone) * 100) / yearsSinceUNEPMilestone
                         
                     }
                     
