@@ -120,7 +120,7 @@
              SensorCommunityCheckedLabel.stringValue = "Loading (5s)"
              DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                  
-                 if sensorCommunityPresentData[0].location?.id == nil {
+                 if sensorCommunityPresentData.isEmpty ?? true {
                      self.SensorCommunityCheckedLabel.stringValue = "Error. Check SensorCommunity ID"
                  } else {
                      self.SensorCommunityCheckedLabel.stringValue = "\(String(sensorCommunityPresentData[0].sensor?.id ?? 0))"
