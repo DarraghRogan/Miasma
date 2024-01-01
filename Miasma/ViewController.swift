@@ -512,11 +512,11 @@
     
     @IBAction func RefreshIntervalButtonAction(_ sender: Any) {
         if RefreshIntervalButtonOutlet.state == NSControl.StateValue.off {
-            AppDelegate().defaults.set(1200.0, forKey: "RefreshIntervalSeconds")
+            AppDelegate().defaults.set(1800.0, forKey: "RefreshIntervalSeconds")
             ClimaCellButtonOutlet.isEnabled.self = true
         }
         if RefreshIntervalButtonOutlet.state == NSControl.StateValue.on {
-            AppDelegate().defaults.set(600.0, forKey: "RefreshIntervalSeconds")
+            AppDelegate().defaults.set(900.0, forKey: "RefreshIntervalSeconds")
             AppDelegate().defaults.set(false, forKey: "ClimaCellInUse")
             ClimaCellButtonOutlet.isEnabled.self = false
             ClimaCellButtonOutlet.state.self = NSControl.StateValue.off
