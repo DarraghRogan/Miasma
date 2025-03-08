@@ -1586,11 +1586,28 @@ class menuFunctions: NSObject {
                 
                 if 1 == 1 {
                     
+ 
+                    
                     self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenPresentData.data?.location?.city ?? "0")), \(String(smartCitizenPresentData.data?.location?.country ?? "0")) / Exposure: \(String(smartCitizenPresentData.data?.location?.exposure ?? "0"))"
                     
                     
                     
                     // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
+                    
+                    print(smartCitizenPresentData.hardware?.version ?? "0")
+                    print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+
+                    if ((smartCitizenPresentData.data?.sensors?.contains(where: {$0.name == "pm_avg_2.5"})) != nil) {
+print("success")
+                        
+                    } else {
+                        print("failure")
+                    }
+                    
+//                    if let index = smartCitizenPresentData.data?.sensors?.first?.default_key(String:"pm_avg_2.5")
+  //                  {
+//                        print(index)
+  //                  }
                     
                     var pM2_5Value = round(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
                     let pM2_5ColourButton: String
@@ -1787,8 +1804,7 @@ class menuFunctions: NSObject {
                     var outputpm25historicalString1w: String = ""
                     var outputpm25historicalString1M: String = ""
                     var outputpm25historicalString1y: String = ""
-                    
-                    
+                                        
                     if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
                     {
                         outputpm25historicalString1d = String("\(pm25historicalString1d)")

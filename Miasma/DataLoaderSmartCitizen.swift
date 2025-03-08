@@ -15,7 +15,7 @@ struct SmartCitizenPresentDataStructure: Codable {
     //    var uuid,
     var name: String?
     //       var welcomeDescription, state: String?
-    //    var hardwareInfo: HardwareInfo?
+        var hardware: HardwareInfo?
     //    var systemTags, userTags: [String]?
     //    var isPrivate, notifyLowBattery, notifyStoppedPublishing: Bool?
     //    var lastReadingAt, addedAt, updatedAt: Date?
@@ -40,7 +40,7 @@ struct SmartCitizenPresentDataStructure: Codable {
         //        case addedAt = "added_at"
         //        case updatedAt = "updated_at"
         //        case macAddress = "mac_address"
-        case owner, data
+        case owner, data, hardware
         //             case kit
     }
 }
@@ -84,7 +84,7 @@ struct DataLocation: Codable {
 struct SmartCitizenSensor: Codable {
     //    var id: Int?
     //    var ancestry: String?
-    var name, sensorDescription, unit: String?
+    var name, sensorDescription, unit, default_key: String?
     //    var createdAt, updatedAt: Date?
     var measurementID: Int?
     //    var uuid: String?
@@ -93,6 +93,7 @@ struct SmartCitizenSensor: Codable {
     enum CodingKeys: String, CodingKey {
         //        case id, ancestry
         case name
+        case default_key
         case sensorDescription = "description"
         case unit
         //        case createdAt = "created_at"
@@ -108,6 +109,7 @@ struct SmartCitizenSensor: Codable {
 
 // MARK: - HardwareInfo
 struct HardwareInfo: Codable {
+    var version: String?
     var id, mac: String?
     var time: Date?
     var espBd, hwVer: String?
@@ -115,7 +117,7 @@ struct HardwareInfo: Codable {
     var espVer, samVer: String?
     
     enum CodingKeys: String, CodingKey {
-        case id, mac, time
+        case id, mac, time, version
         case espBd = "esp_bd"
         case hwVer = "hw_ver"
         case samBd = "sam_bd"
