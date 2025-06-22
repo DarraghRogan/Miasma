@@ -1605,17 +1605,19 @@ class menuFunctions: NSObject {
                     print(smartCitizenPresentData.data?.sensors?[7].value ?? 0)
                    print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
                    print(smartCitizenPresentData.data?.sensors?[9].value ?? 0)
- //                  print(smartCitizenPresentData.data?.sensors?[10].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[11].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[12].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[13].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[14].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[15].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[16].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[17].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[18].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[19].value ?? 0)
- //                   print(smartCitizenPresentData.data?.sensors?[20].value ?? 0)
+                  print(smartCitizenPresentData.data?.sensors?[10].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[11].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[12].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[13].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[14].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[15].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[16].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[17].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[18].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[19].value ?? 0)
+                  print(smartCitizenPresentData.data?.sensors?[20].value ?? 0)
+                    
+                   print(smartCitizenPresentData.data?.location? ?? "0")
                     
                     print(AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion"))
 
@@ -1634,7 +1636,7 @@ class menuFunctions: NSObject {
 //                        print(index)
   //                  }
                     
-                    var pM2_5Value = round(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+                    var pM2_5Value = round(smartCitizenPresentData.data?.sensors?[6].value ?? 0)
                     let pM2_5ColourButton: String
                     let aQI_CalculatedDouble: Double
                     var aQI_CalculatedRounded: Int = 0
@@ -1822,8 +1824,14 @@ class menuFunctions: NSObject {
                         self.smartCitizenPM2_5StatusBarIcon.title = "⚪"
                         statusItem.button?.title = "M \(self.smartCitizenPM2_5StatusBarIcon.title)"
                     }
-                    self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
-                    
+
+                    if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
+                        self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[6].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                    }
+                    else
+                    {
+                        self.smartCitizenPM2_5.title = "☁️: \(String(aQI_CalculatedRounded)) US EPA AQI PM₂.₅ / \(String(smartCitizenPresentData.data?.sensors?[8].value ?? 0)) μg/m³ PM₂.₅ (Current)                         \(pM2_5ColourButton)"
+                    }
                     var outputpm25historicalString1d: String = ""
                     var outputpm25historicalString3d: String = ""
                     var outputpm25historicalString1w: String = ""
@@ -1929,9 +1937,14 @@ class menuFunctions: NSObject {
                         
                     }
                     
-                    
-                    self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
-                    
+                    if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
+                        self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
+                    }
+                    else
+                    {
+                        self.smartCitizenOtherPollutants.title = "☁️: UVA \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / UVB \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0")) / UVC \(String(Int(smartCitizenPresentData.data?.sensors?[2].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[2].unit ?? "0"))"
+                    }
+                        
                     if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
                         self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[10].value ?? 0)))%"
                     }
@@ -1978,9 +1991,13 @@ class menuFunctions: NSObject {
 
                     
                     
-                    
-                    self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[4].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[2].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[2].unit ?? "0"))"
-                    
+                    if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
+                        self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[19].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[19].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[7].unit ?? "0"))"
+                    }
+                    else
+                    {
+                        self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[19].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[19].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[5].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[5].unit ?? "0"))"
+                    }
                     //                    self.smartCitizenReadingAge.title = "📅: \(String(smartCitizenData.lastReadingAt?. ?? 0))"
                     
                 }
