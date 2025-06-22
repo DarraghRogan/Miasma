@@ -18,7 +18,7 @@ struct SmartCitizenPresentDataStructure: Codable {
         var hardware: HardwareInfo?
     //    var systemTags, userTags: [String]?
     //    var isPrivate, notifyLowBattery, notifyStoppedPublishing: Bool?
-    //    var lastReadingAt, addedAt, updatedAt: Date?
+        var lastReadingAt, addedAt, updatedAt: String?
     //    var macAddress: String?
     var owner: Owner?
     var location: DataLocation?
@@ -37,11 +37,11 @@ struct SmartCitizenPresentDataStructure: Codable {
         //        case isPrivate = "is_private"
         //        case notifyLowBattery = "notify_low_battery"
         //        case notifyStoppedPublishing = "notify_stopped_publishing"
-        //        case lastReadingAt = "last_reading_at"
-        //        case addedAt = "added_at"
-        //        case updatedAt = "updated_at"
+                case lastReadingAt = "last_reading_at"
+               case addedAt = "added_at"
+            case updatedAt = "updated_at"
         //        case macAddress = "mac_address"
-        case owner, data, hardware
+        case owner, data, hardware, location
         //             case kit
     }
 }
@@ -471,7 +471,7 @@ public class DataLoaderSmartCitizen {
                 }
                 catch {
                     print("Error in SmartCitizen Present JSON parsing")
-                    //                    print(purpleAirData)
+//                                        print(smartCitizenPresentData)
                 }
             }
         })

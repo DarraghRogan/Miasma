@@ -1573,56 +1573,56 @@ class menuFunctions: NSObject {
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
                 if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
-                    DataLoaderCO2().loadCO2Data(lat: String(smartCitizenPresentData.data?.location?.latitude ?? 0), lon: String(smartCitizenPresentData.data?.location?.longitude ?? 0))
+                    DataLoaderCO2().loadCO2Data(lat: String(smartCitizenPresentData.location?.latitude ?? 0), lon: String(smartCitizenPresentData.location?.longitude ?? 0))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"OpenSkyInUse") == 1 {
-                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((smartCitizenPresentData.data?.location?.latitude ?? 0)-1), lomin: ((smartCitizenPresentData.data?.location?.longitude ?? 0)-1), lamax: ((smartCitizenPresentData.data?.location?.latitude ?? 0)+1), lomax: ((smartCitizenPresentData.data?.location?.longitude ?? 0)+1))
+                    DataLoaderOpenSky().loadOpenSkyData(lamin: ((smartCitizenPresentData.location?.latitude ?? 0)-1), lomin: ((smartCitizenPresentData.location?.longitude ?? 0)-1), lamax: ((smartCitizenPresentData.location?.latitude ?? 0)+1), lomax: ((smartCitizenPresentData.location?.longitude ?? 0)+1))
                 }
                 
                 if AppDelegate().defaults.integer(forKey:"ClimaCellInUse") == 1 {
-                    DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenPresentData.data?.location?.latitude ?? 0, lon: smartCitizenPresentData.data?.location?.longitude ?? 0)
+                    DataLoaderClimaCell().loadClimaCellData(lat: smartCitizenPresentData.location?.latitude ?? 0, lon: smartCitizenPresentData.location?.longitude ?? 0)
                 }
                 
                 if 1 == 1 {
                     
  
                     
-                    self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenPresentData.data?.location?.city ?? "0")), \(String(smartCitizenPresentData.data?.location?.country ?? "0")) / Exposure: \(String(smartCitizenPresentData.data?.location?.exposure ?? "0"))"
+                    self.smartCitizenLocationType.title = "🌍: \(String(smartCitizenPresentData.name ?? "0")), \(String(smartCitizenPresentData.location?.city ?? "0")), \(String(smartCitizenPresentData.location?.country ?? "0"))"
                     
                     
                     
                     // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                     
-                    print(smartCitizenPresentData.hardware?.version ?? "0")
-                    print(smartCitizenPresentData.data?.sensors?[0].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[1].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[2].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[3].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[4].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[5].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[6].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[7].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[9].value ?? 0)
-                  print(smartCitizenPresentData.data?.sensors?[10].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[11].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[12].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[13].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[14].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[15].value ?? 0)
-                    print(smartCitizenPresentData.data?.sensors?[16].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[17].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[18].value ?? 0)
-                   print(smartCitizenPresentData.data?.sensors?[19].value ?? 0)
-                  print(smartCitizenPresentData.data?.sensors?[20].value ?? 0)
+//                    print(smartCitizenPresentData.hardware?.version ?? "0")
+//                  print(smartCitizenPresentData.data?.sensors?[0].value ?? 0)
+//                print(smartCitizenPresentData.data?.sensors?[1].value ?? 0)
+//              print(smartCitizenPresentData.data?.sensors?[2].value ?? 0)
+//            print(smartCitizenPresentData.data?.sensors?[3].value ?? 0)
+//          print(smartCitizenPresentData.data?.sensors?[4].value ?? 0)
+//        print(smartCitizenPresentData.data?.sensors?[5].value ?? 0)
+//      print(smartCitizenPresentData.data?.sensors?[6].value ?? 0)
+//    print(smartCitizenPresentData.data?.sensors?[7].value ?? 0)
+// print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+//                   print(smartCitizenPresentData.data?.sensors?[9].value ?? 0)
+  //                print(smartCitizenPresentData.data?.sensors?[10].value ?? 0)
+    //               print(smartCitizenPresentData.data?.sensors?[11].value ?? 0)
+      //             print(smartCitizenPresentData.data?.sensors?[12].value ?? 0)
+        //           print(smartCitizenPresentData.data?.sensors?[13].value ?? 0)
+          //         print(smartCitizenPresentData.data?.sensors?[14].value ?? 0)
+            //       print(smartCitizenPresentData.data?.sensors?[15].value ?? 0)
+              //      print(smartCitizenPresentData.data?.sensors?[16].value ?? 0)
+                //   print(smartCitizenPresentData.data?.sensors?[17].value ?? 0)
+//                   print(smartCitizenPresentData.data?.sensors?[18].value ?? 0)
+  //                 print(smartCitizenPresentData.data?.sensors?[19].value ?? 0)
+    //              print(smartCitizenPresentData.data?.sensors?[20].value ?? 0)
                     
-                   print(smartCitizenPresentData.data?.location? ?? "0")
+      //              print(smartCitizenPresentData.location?.city ?? "0")
                     
-                    print(AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion"))
+        //            print(AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion"))
 
 //                   print(smartCitizenPresentData.data?.sensors ?? 0)
-     //               print(smartCitizenPresentData.location?.city ?? "0")
+//                    print(smartCitizenPresentData.location.unsafelyUnwrapped ?? 0)
 
        //             if ((smartCitizenPresentData.data?.sensors?.contains(where: {$0.name == "pm_avg_2.5"})) != nil) {
  //   print("success")
@@ -1946,7 +1946,7 @@ class menuFunctions: NSObject {
                     }
                         
                     if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
-                        self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[10].value ?? 0)))%"
+                        self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[8].value ?? 0)))%"
                     }
                     else
                     {
@@ -1992,7 +1992,7 @@ class menuFunctions: NSObject {
                     
                     
                     if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
-                        self.smartCitizenPhysicalProperties.title = "🎤: Noise \(String(smartCitizenPresentData.data?.sensors?[19].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[19].unit ?? "0")) / Ambient Light \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))\(String(smartCitizenPresentData.data?.sensors?[7].unit ?? "0"))"
+                        self.smartCitizenPhysicalProperties.title = "📅: \(String(smartCitizenPresentData.lastReadingAt ?? ""))"
                     }
                     else
                     {

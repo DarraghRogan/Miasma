@@ -72,7 +72,7 @@
                 if smartCitizenPresentData.name == nil {
                     self.SmartCitizenCheckedLabel.stringValue = "Error. Check SmartCitizen ID"
                 } else {
-                    self.SmartCitizenCheckedLabel.stringValue = String(smartCitizenPresentData.data?.location?.city ?? "")
+                    self.SmartCitizenCheckedLabel.stringValue = String(smartCitizenPresentData.name ?? "")
                     self.SmartCitizenSavedVersionLabel.stringValue = String(smartCitizenPresentData.hardware?.version ?? "0")
                     
                     self.SmartCitizenIDSaveButton.isEnabled = true
