@@ -11,7 +11,7 @@ import Foundation
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
 struct SmartCitizenPresentDataStructure: Codable {
-    //    var id: Int?
+        var id: Int?
     //    var uuid,
     var name: String?
     //       var welcomeDescription, state: String?
@@ -21,6 +21,7 @@ struct SmartCitizenPresentDataStructure: Codable {
     //    var lastReadingAt, addedAt, updatedAt: Date?
     //    var macAddress: String?
     var owner: Owner?
+    var location: DataLocation?
     var data: SmartCitizenDataClass?
     //    var kit: Kit?
     

@@ -1595,14 +1595,39 @@ class menuFunctions: NSObject {
                     // AQI Calc from https://forum.airnowtech.org/t/the-aqi-equation/169
                     
                     print(smartCitizenPresentData.hardware?.version ?? "0")
-                    print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[0].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[1].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[2].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[3].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[4].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[5].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[6].value ?? 0)
+                    print(smartCitizenPresentData.data?.sensors?[7].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[8].value ?? 0)
+                   print(smartCitizenPresentData.data?.sensors?[9].value ?? 0)
+ //                  print(smartCitizenPresentData.data?.sensors?[10].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[11].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[12].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[13].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[14].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[15].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[16].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[17].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[18].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[19].value ?? 0)
+ //                   print(smartCitizenPresentData.data?.sensors?[20].value ?? 0)
+                    
+                    print(AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion"))
 
-                    if ((smartCitizenPresentData.data?.sensors?.contains(where: {$0.name == "pm_avg_2.5"})) != nil) {
-print("success")
-                        
-                    } else {
-                        print("failure")
-                    }
+//                   print(smartCitizenPresentData.data?.sensors ?? 0)
+     //               print(smartCitizenPresentData.location?.city ?? "0")
+
+       //             if ((smartCitizenPresentData.data?.sensors?.contains(where: {$0.name == "pm_avg_2.5"})) != nil) {
+ //   print("success")
+   //
+     //               } else {
+       //                 print("failure")
+         //           }
                     
 //                    if let index = smartCitizenPresentData.data?.sensors?.first?.default_key(String:"pm_avg_2.5")
   //                  {
@@ -1907,23 +1932,50 @@ print("success")
                     
                     self.smartCitizenOtherPollutants.title = "☁️: VOC \(String(Int(smartCitizenPresentData.data?.sensors?[0].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[0].unit ?? "0")) / CO₂ \(String(Int(smartCitizenPresentData.data?.sensors?[1].value ?? 0)))\(String(smartCitizenPresentData.data?.sensors?[1].unit ?? "0"))"
                     
-                    
-                    self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[10].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[9].value ?? 0)))%"
-                    
-                    var pressureValue = smartCitizenPresentData.data?.sensors?[5].value ?? 0
-                    let pressure_visual: String
-                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                    switch (pressureValue) {
-                    case _ where pressureValue < 100.9144:
-                        pressure_visual = "[Low/______/____]"
-                    case _ where pressureValue > 100.9144 && pressureValue < 102.2689:
-                        pressure_visual = "[___/Normal/____]"
-                    case _ where pressureValue > 102.2689:
-                        pressure_visual = "[___/______/High]"
-                    default:
-                        pressure_visual = ""
+                    if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
+                        self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[9].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[10].value ?? 0)))%"
                     }
-                    self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[5].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    else
+                    {
+                        self.smartCitizenTemperatureHumidity.title = "🌡: \(String(smartCitizenPresentData.data?.sensors?[18].value ?? 0))℃  /  💧: \(String(Int(smartCitizenPresentData.data?.sensors?[19].value ?? 0)))%"
+                    }
+                    
+
+                    if AppDelegate().defaults.string(forKey:"SmartCitizenStationVersion") != "2.3" {
+                        var pressureValue = smartCitizenPresentData.data?.sensors?[3].value ?? 0
+                        let pressure_visual: String
+                        // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                        switch (pressureValue) {
+                        case _ where pressureValue < 100.9144:
+                            pressure_visual = "[Low/______/____]"
+                        case _ where pressureValue > 100.9144 && pressureValue < 102.2689:
+                            pressure_visual = "[___/Normal/____]"
+                        case _ where pressureValue > 102.2689:
+                            pressure_visual = "[___/______/High]"
+                        default:
+                            pressure_visual = ""
+                        }
+                        self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[3].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    }
+                    else
+                    {
+                        var pressureValue = smartCitizenPresentData.data?.sensors?[4].value ?? 0
+                        let pressure_visual: String
+                        // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
+                        switch (pressureValue) {
+                        case _ where pressureValue < 100.9144:
+                            pressure_visual = "[Low/______/____]"
+                        case _ where pressureValue > 100.9144 && pressureValue < 102.2689:
+                            pressure_visual = "[___/Normal/____]"
+                        case _ where pressureValue > 102.2689:
+                            pressure_visual = "[___/______/High]"
+                        default:
+                            pressure_visual = ""
+                        }
+                        self.smartCitizenPressure.title = "🌬️: \(String(smartCitizenPresentData.data?.sensors?[4].value ?? 0))kilopascal                                                                   \(pressure_visual)"
+                    }
+
+
                     
                     
                     

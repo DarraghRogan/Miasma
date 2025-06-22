@@ -28,12 +28,12 @@ struct SensorCommunityPresentDataStructureElement: Codable {
 // MARK: - Location
 struct Location: Codable {
     let indoor: Int?
-    let country, latitude, altitude: String?
+    let city, country, latitude, altitude: String?
     let id, exactLocation: Int?
     let longitude: String?
 
     enum CodingKeys: String, CodingKey {
-        case indoor, country, latitude, altitude, id
+        case city, indoor, country, latitude, altitude, id
         case exactLocation
         case longitude
     }

@@ -73,6 +73,8 @@
                     self.SmartCitizenCheckedLabel.stringValue = "Error. Check SmartCitizen ID"
                 } else {
                     self.SmartCitizenCheckedLabel.stringValue = String(smartCitizenPresentData.data?.location?.city ?? "")
+                    self.SmartCitizenSavedVersionLabel.stringValue = String(smartCitizenPresentData.hardware?.version ?? "0")
+                    
                     self.SmartCitizenIDSaveButton.isEnabled = true
                 }
             })
@@ -322,6 +324,7 @@
     
     @IBAction func SmartCitizenIDSaveButton(_ sender: Any) {
         AppDelegate().defaults.set(SmartCitizenIDField.stringValue, forKey: "SmartCitizenStationID")
+        AppDelegate().defaults.set(SmartCitizenSavedVersionLabel.stringValue, forKey: "SmartCitizenStationVersion")
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
         SmartCitizenRadioOutlet.state.self = NSControl.StateValue(rawValue: 1)
         PurpleAirRadioOutlet.state.self = NSControl.StateValue(rawValue: 0)
@@ -354,6 +357,7 @@
     
     @IBOutlet weak var SmartCitizenSavedIDLabel: NSTextField!
     
+    @IBOutlet weak var SmartCitizenSavedVersionLabel: NSTextField!
      
      
      
@@ -716,6 +720,8 @@
         WAQISavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"WAQICity") as? String ?? String()
         
         SmartCitizenSavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationID") as? String ?? String()
+        
+        SmartCitizenSavedVersionLabel.stringValue = AppDelegate().defaults.object(forKey:"SmartCitizenStationVersion") as? String ?? String()
         
         SensorCommunitySavedIDLabel.stringValue = AppDelegate().defaults.object(forKey:"SensorCommunityStationID") as? String ?? String()
         
