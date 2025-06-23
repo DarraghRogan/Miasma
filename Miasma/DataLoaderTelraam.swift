@@ -83,20 +83,55 @@ public class DataLoaderTelraam {
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
         
-        print(request.url)
+//        print(request.url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+//        request.setValue("application/json", forHTTPHeaderField: "Accept")
         
         request.httpMethod = "POST"
+        
+        // First, get the current date
+        let currentDateAndTimeUnformatted = Date()
+        // Next, create a Calendar instance and set it to the current time zone
+//        let calendar = Calendar.current
+        // Then, create a DateComponents instance and set its "hour" property to -1
+        // This will represent the difference between the current date and the date one hour earlier
+//        let twoHourdateComponents = DateComponents(hour: -2)
+//        let oneHourdateComponents = DateComponents(hour: -1)
+        // Finally, use the Calendar instance to create a new date by adding the dateComponents to the current date
+//        let twoHourEarlierDateAndTimeUnformatted = calendar.date(byAdding: twoHourdateComponents, to: currentDateAndTimeUnformatted)
+//        let oneHourEarlierDateAndTimeUnformatted = calendar.date(byAdding: oneHourdateComponents, to: currentDateAndTimeUnformatted)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+
+//        let timeFormatter = DateFormatter()
+//        timeFormatter.timeStyle = .medium
+
+
+        let currentDate = dateFormatter.string(from: currentDateAndTimeUnformatted)
+//        let currentTime = timeFormatter.string(from: currentDateAndTimeUnformatted)
+//
+//        let twoHourEarlierDate = dateFormatter.string(from: twoHourEarlierDateAndTimeUnformatted ?? Date())
+//        let twoHourEarlierTime = timeFormatter.string(from: twoHourEarlierDateAndTimeUnformatted ?? Date())
+//        
+//        let oneHourEarlierDate = dateFormatter.string(from: oneHourEarlierDateAndTimeUnformatted ?? Date())
+//        let oneHourEarlierTime = timeFormatter.string(from: oneHourEarlierDateAndTimeUnformatted ?? Date())
+//
+//        print("Two hour earlier: \(twoHourEarlierDate) \(twoHourEarlierTime)Z")
+//        print("One hour earlier: \(oneHourEarlierDate) \(oneHourEarlierTime)Z")
+
+                
         let parameters: [String: Any] = [
             "level": "segments",
             "id": "\(segmentID)",
             "format": "per-hour",
-            "time_start": "2025-05-12 11:00:00Z",
-            "time_end": "2025-06-12 12:00:00Z"
+            "time_start": "\(currentDate) 00:00:00Z",
+            "time_end": "\(currentDate) 23:00:00Z"
         ]
         request.allHTTPHeaderFields = headers
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+//        print(request.allHTTPHeaderFields)
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in

@@ -224,7 +224,7 @@ class menuFunctions: NSObject {
     }
     
     @objc func openOpenSky(_ sender: NSMenuItem){
-        NSWorkspace.shared.open(URL(string: "https://opensky-network.org/")!)
+        NSWorkspace.shared.open(URL(string: "https://map.opensky-network.org/")!)
     }
     
     @objc func openTelraam(_ sender: NSMenuItem){
@@ -2739,7 +2739,7 @@ class menuFunctions: NSObject {
             menu.addItem(NSMenuItem.separator())
             
             let telraam = NSMenuItem(
-                title: "Road Traffic in previous full hour (daylight only) (Telraam)...",
+                title: "Road Traffic in previous full hour (Telraam)...",
                 action: #selector(menuFunctions.openTelraam(_:)),
                 keyEquivalent: "t"
             )
@@ -2755,9 +2755,10 @@ class menuFunctions: NSObject {
                 
                 if telraamData.report?.count ?? 0 > 0 {
                     
-                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.report?[0].pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.report?[0].bike ?? 0)))), 🚗: \(String(Int(round(telraamData.report?[0].car ?? 0)))), 🚚: \(String(Int(round(telraamData.report?[0].heavy ?? 0)))), 🚀: \(String(Int(round(telraamData.report?[0].v85 ?? 0))))kmh V85"
+
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.report?.last?.pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.report?.last?.bike ?? 0)))), 🚗: \(String(Int(round(telraamData.report?.last?.car ?? 0)))), 🚚: \(String(Int(round(telraamData.report?.last?.heavy ?? 0)))), 🚀: \(String(Int(round(telraamData.report?.last?.v85 ?? 0))))kmh V85"
                     
-                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.report?[0].date ?? "")"
+                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.report?.last?.date ?? "")"
                     
                     //                    print(telraamData.features?[0].properties?.car)
                     
