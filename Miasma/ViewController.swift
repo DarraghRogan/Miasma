@@ -92,9 +92,9 @@
             TelraamCheckedLabel.stringValue = "Loading (5s)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                if telraamData.features?.count ?? 0 > 0 {
+                if telraamData.report?.count ?? 0 > 0 {
                     
-                    self.TelraamCheckedLabel.stringValue = String(telraamData.features?[0].properties?.oidn ?? 0)
+                    self.TelraamCheckedLabel.stringValue = String(telraamData.report?[0].segmentID ?? 0)
                     self.TelraamSaveButton.isEnabled = true
                     
                 } else {

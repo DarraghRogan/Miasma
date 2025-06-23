@@ -2753,11 +2753,11 @@ class menuFunctions: NSObject {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 5.1, execute: {
                 
-                if telraamData.features?.count ?? 0 > 0 {
+                if telraamData.report?.count ?? 0 > 0 {
                     
-                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.features?[0].properties?.pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.features?[0].properties?.bike ?? 0)))), 🚗: \(String(Int(round(telraamData.features?[0].properties?.car ?? 0)))), 🚚: \(String(Int(round(telraamData.features?[0].properties?.lorry ?? 0))))"
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.report?[0].pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.report?[0].bike ?? 0)))), 🚗: \(String(Int(round(telraamData.report?[0].car ?? 0)))), 🚚: \(String(Int(round(telraamData.report?[0].heavy ?? 0)))), 🚀: \(String(Int(round(telraamData.report?[0].v85 ?? 0))))kmh V85"
                     
-                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.features?[0].properties?.lastDataPackage ?? "")"
+                    self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.report?[0].date ?? "")"
                     
                     //                    print(telraamData.features?[0].properties?.car)
                     

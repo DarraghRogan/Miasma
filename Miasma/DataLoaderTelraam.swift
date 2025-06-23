@@ -12,52 +12,57 @@ import Foundation
 
 struct TelraamDataStructure: Codable {
     var statusCode: Int?
-    var message, type: String?
-    var features: [Feature]?
-    
+    var message: String?
+    var report: [TelraamReport]?
+
     enum CodingKeys: String, CodingKey {
         case statusCode = "status_code"
-        case message, type, features
+        case message, report
     }
 }
 
-// MARK: - Feature
-struct Feature: Codable {
-    var type: String?
-    //    var geometry: Geometry?
-    var properties: Properties?
-}
+// MARK: - Report
+struct TelraamReport: Codable {
+    var instanceID, segmentID: Int?
+    var date: String?
+    var interval: TelraamInterval?
+    var uptime, heavy, car, bike: Double?
+    var pedestrian, night, heavyLft, heavyRgt: Double?
+    var carLft, carRgt, bikeLft, bikeRgt: Double?
+    var pedestrianLft, pedestrianRgt, nightLft, nightRgt: Double?
+    var direction: Int?
+    var carSpeedHist0To70Plus, carSpeedHist0To120Plus: [Double]?
+    var timezone: Timezone?
+    var v85: Double?
 
-// MARK: - Geometry
-//struct Geometry: Codable {
-//    var type: String?
-//    var coordinates: [[[Double]]]?
-//}
-
-// MARK: - Properties
-struct Properties: Codable {
-    var oidn: Int?
-    var firstDataPackage, lastDataPackage: String?
-    //    var speed: Int?
-    //    var oneway: Bool?
-    //    var roadType, roadSpeed: String?
-    var pedestrian, bike, car, lorry: Double?
-    //    var speedHistogram: [Double]?
-    //    var speedBuckets: [Int]?
-    
     enum CodingKeys: String, CodingKey {
-        case oidn
-        case firstDataPackage = "first_data_package"
-        case lastDataPackage = "last_data_package"
-        //        case speed, oneway
-        //        case roadType = "road_type"
-        //        case roadSpeed = "road_speed"
-        case pedestrian, bike, car, lorry
-        //        case speedHistogram = "speed_histogram"
-        //        case speedBuckets = "speed_buckets"
+        case instanceID = "instance_id"
+        case segmentID = "segment_id"
+        case date, interval, uptime, heavy, car, bike, pedestrian, night
+        case heavyLft = "heavy_lft"
+        case heavyRgt = "heavy_rgt"
+        case carLft = "car_lft"
+        case carRgt = "car_rgt"
+        case bikeLft = "bike_lft"
+        case bikeRgt = "bike_rgt"
+        case pedestrianLft = "pedestrian_lft"
+        case pedestrianRgt = "pedestrian_rgt"
+        case nightLft = "night_lft"
+        case nightRgt = "night_rgt"
+        case direction
+        case carSpeedHist0To70Plus = "car_speed_hist_0to70plus"
+        case carSpeedHist0To120Plus = "car_speed_hist_0to120plus"
+        case timezone, v85
     }
 }
 
+enum TelraamInterval: String, Codable {
+    case hourly = "hourly"
+}
+
+enum Timezone: String, Codable {
+    case europeBrussels = "Europe/Brussels"
+}
 
 
 // define an instance of the data that can be filled by the data loader and read by the menu
