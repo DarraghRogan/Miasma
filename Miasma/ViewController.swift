@@ -8,7 +8,7 @@
  
  import Cocoa
  import ServiceManagement
- import MapKit
+// import MapKit
  
  class ViewController: NSViewController {
     

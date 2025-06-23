@@ -14,7 +14,7 @@ struct TelraamDataStructure: Codable {
     var statusCode: Int?
     var message, type: String?
     var features: [Feature]?
-
+    
     enum CodingKeys: String, CodingKey {
         case statusCode = "status_code"
         case message, type, features
@@ -24,7 +24,7 @@ struct TelraamDataStructure: Codable {
 // MARK: - Feature
 struct Feature: Codable {
     var type: String?
-//    var geometry: Geometry?
+    //    var geometry: Geometry?
     var properties: Properties?
 }
 
@@ -38,23 +38,23 @@ struct Feature: Codable {
 struct Properties: Codable {
     var oidn: Int?
     var firstDataPackage, lastDataPackage: String?
-//    var speed: Int?
-//    var oneway: Bool?
-//    var roadType, roadSpeed: String?
+    //    var speed: Int?
+    //    var oneway: Bool?
+    //    var roadType, roadSpeed: String?
     var pedestrian, bike, car, lorry: Double?
-//    var speedHistogram: [Double]?
-//    var speedBuckets: [Int]?
-
+    //    var speedHistogram: [Double]?
+    //    var speedBuckets: [Int]?
+    
     enum CodingKeys: String, CodingKey {
         case oidn
         case firstDataPackage = "first_data_package"
         case lastDataPackage = "last_data_package"
-//        case speed, oneway
-//        case roadType = "road_type"
-//        case roadSpeed = "road_speed"
+        //        case speed, oneway
+        //        case roadType = "road_type"
+        //        case roadSpeed = "road_speed"
         case pedestrian, bike, car, lorry
-//        case speedHistogram = "speed_histogram"
-//        case speedBuckets = "speed_buckets"
+        //        case speedHistogram = "speed_histogram"
+        //        case speedBuckets = "speed_buckets"
     }
 }
 
@@ -63,53 +63,63 @@ struct Properties: Codable {
 // define an instance of the data that can be filled by the data loader and read by the menu
 var telraamData = TelraamDataStructure()
 
- public class DataLoaderTelraam {
-
+public class DataLoaderTelraam {
+    
     
     func loadTelraamData(segmentID:String) {
         
         let headers = [
-            "Accept": "application/json",
+//            "Accept": "application/json",
             "X-Api-Key": "\(APIKeyTelraam)"
         ]
-
+        
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://telraam-api.net/v1/segments/id/\(segmentID)")! as URL,
-                                                cachePolicy: .useProtocolCachePolicy,
-                                                timeoutInterval: 10.0)
+                                                        "https://telraam-api.net/v1/reports/traffic")! as URL,
+                                          cachePolicy: .useProtocolCachePolicy,
+                                          timeoutInterval: 10.0)
         
-//        print(request.url)
+        print(request.url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        let parameters: [String: Any] = [
+            "level": "segments",
+            "id": "\(segmentID)",
+            "format": "per-hour",
+            "time_start": "2025-05-12 11:00:00Z",
+            "time_end": "2025-06-12 12:00:00Z"
+        ]
         request.allHTTPHeaderFields = headers
-
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
             if (error != nil) {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the Telraam API")
-//                if let data = data,
-//                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-//                } else {
-//                    print("error with printing string encoded data")
-//                }
+                print("Received from the Telraam API")
+                if let data = data,
+                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
+                    print(urlContent)
+                } else {
+                    print("error with printing string encoded data")
+                }
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
                     let dataFromTelraam = try decoder.decode(TelraamDataStructure.self, from: data!)
                     telraamData = dataFromTelraam
-
+                    
                 }
                 catch {
                     print("Error in Telraam JSON parsing")
-//                    print(purpleAirData)
+                    //                    print(purpleAirData)
                 }
             }
         })
-
+        
         dataTask.resume()
     }
- }
+}
