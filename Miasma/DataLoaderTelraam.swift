@@ -13,7 +13,7 @@ import Foundation
 struct TelraamDataStructure: Codable {
     var statusCode: Int?
     var message: String?
-    var report: [TelraamReport]?
+    var report: [Report]?
 
     enum CodingKeys: String, CodingKey {
         case statusCode = "status_code"
@@ -22,17 +22,19 @@ struct TelraamDataStructure: Codable {
 }
 
 // MARK: - Report
-struct TelraamReport: Codable {
+struct Report: Codable {
     var instanceID, segmentID: Int?
     var date: String?
     var interval: TelraamInterval?
     var uptime, heavy, car, bike: Double?
-    var pedestrian, night, heavyLft, heavyRgt: Double?
-    var carLft, carRgt, bikeLft, bikeRgt: Double?
-    var pedestrianLft, pedestrianRgt, nightLft, nightRgt: Double?
+    var pedestrian: Double?
+    var night: Double?
+    var heavyLft, heavyRgt, carLft, carRgt: Double?
+    var bikeLft, bikeRgt, pedestrianLft, pedestrianRgt: Double?
+    var nightLft, nightRgt: Double?
     var direction: Int?
     var carSpeedHist0To70Plus, carSpeedHist0To120Plus: [Double]?
-    var timezone: Timezone?
+    var timezone: TelraamTimezone?
     var v85: Double?
 
     enum CodingKeys: String, CodingKey {
@@ -60,8 +62,8 @@ enum TelraamInterval: String, Codable {
     case hourly = "hourly"
 }
 
-enum Timezone: String, Codable {
-    case europeBrussels = "Europe/Brussels"
+enum TelraamTimezone: String, Codable {
+    case europeLondon = "Europe/London"
 }
 
 
@@ -139,10 +141,10 @@ public class DataLoaderTelraam {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-                print("Received from the Telraam API")
+//                print("Received from the Telraam API")
                 if let data = data,
                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-                    print(urlContent)
+//                    print(urlContent)
                 } else {
                     print("error with printing string encoded data")
                 }

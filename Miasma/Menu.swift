@@ -2756,7 +2756,7 @@ class menuFunctions: NSObject {
                 if telraamData.report?.count ?? 0 > 0 {
                     
 
-                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.report?.last?.pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.report?.last?.bike ?? 0)))), 🚗: \(String(Int(round(telraamData.report?.last?.car ?? 0)))), 🚚: \(String(Int(round(telraamData.report?.last?.heavy ?? 0)))), 🚀: \(String(Int(round(telraamData.report?.last?.v85 ?? 0))))kmh V85"
+                    self.telraamRoadUsers.title = "📊: 🚶: \(String(Int(round(telraamData.report?.last?.pedestrian ?? 0)))), 🚲: \(String(Int(round(telraamData.report?.last?.bike ?? 0)))), 🚗: \(String(Int(round(telraamData.report?.last?.car ?? 0)))), 🚚: \(String(Int(round(telraamData.report?.last?.heavy ?? 0)))), 🚀: \(String(Int(round(telraamData.report?.last?.v85 ?? 0))))km/h V85"
                     
                     self.telraamDataTime.title = "📅: Data Recorded: \(telraamData.report?.last?.date ?? "")"
                     
