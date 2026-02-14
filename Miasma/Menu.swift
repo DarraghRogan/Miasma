@@ -2673,10 +2673,16 @@ class menuFunctions: NSObject {
                 if (dailyAtmosphericCO2Data.co2?.last?.cycle) != nil {
                     
                     let dailyAtmosphericCO2DataArraySize = dailyAtmosphericCO2Data.co2?.count ?? 0
+//                    print("dailyAtmosphericCO2DataArraySize: \(dailyAtmosphericCO2DataArraySize)")
                     
                     let dailyAtmosphericCO2DataArray365DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-365]
+//                    print("dailyAtmosphericCO2DataArray365DaysAgo: \(dailyAtmosphericCO2DataArray365DaysAgo)")
+                    
                     let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
+//                    print("dailyAtmosphericCO2Data365DaysAgo \(dailyAtmosphericCO2Data365DaysAgo)")
+                    
                     let cO2PPMLastAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
+//                    print("cO2PPMLastAnnualDelta \(cO2PPMLastAnnualDelta)")
                     
                     //                    let dailyAtmosphericCO2DataArray730DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-730]
                     //                    let dailyAtmosphericCO2Data730DaysAgo = dailyAtmosphericCO2DataArray730DaysAgo?.trend ?? "0"
@@ -2685,30 +2691,40 @@ class menuFunctions: NSObject {
                     //                    let cO2PPMLastYearOnYearDeltaPercentage = ((cO2PPMLastAnnualDelta - cO2PPMPrecedingAnnualDelta) / cO2PPMPrecedingAnnualDelta) * 100
                     
                     let cO2PPMLastYearOnYearDeltaPercentage = (cO2PPMLastAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
-                    
-                    
-                    
+//                    print("cO2PPMLastYearOnYearDeltaPercentage \(cO2PPMLastYearOnYearDeltaPercentage)")
                     
                     let daysSinceUNEPMilestone = ((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)
+//                    print("daysSinceUNEPMilestone \(daysSinceUNEPMilestone)")
+                    
                     let yearsSinceUNEPMilestone = (((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)/365)
+//                    print("yearsSinceUNEPMilestone \(yearsSinceUNEPMilestone)")
                     
                     let dailyAtmosphericCO2DataArrayOnUNEPMilestone = ((dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-Int(daysSinceUNEPMilestone)].trend ?? "0") as NSString).doubleValue
+//                    print("dailyAtmosphericCO2DataArrayOnUNEPMilestone \(dailyAtmosphericCO2DataArrayOnUNEPMilestone)")
                     
                     //                    let cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = ((((((dailyAtmosphericCO2Data.co2?[0].trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / (dailyAtmosphericCO2DataArrayOnUNEPMilestone)) / yearsSinceUNEPMilestone) * 100
                     
                     let cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage = (((((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - dailyAtmosphericCO2DataArrayOnUNEPMilestone) / dailyAtmosphericCO2DataArrayOnUNEPMilestone) * 100) / yearsSinceUNEPMilestone
+//                    print("cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage \(cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage)")
                     
-                    self.dailyAtmosphericCO2.title = "⛽: \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO₂ (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMLastYearOnYearDeltaPercentage))% Δ Latest CO₂ Emissions on Last Year"
+                    self.dailyAtmosphericCO2.title = "⛽: Currently \(String(dailyAtmosphericCO2Data.co2?.last?.trend ?? "0"))ppm CO₂ (Trend), \(String(format: "%.2f", locale: Locale.current, cO2PPMLastYearOnYearDeltaPercentage))% Δ Latest CO₂ Emissions on Last Year"
                     
-                    self.trendAtmosphericCO2.title = "📈: Annualised Average Δ CO₂ Emissions since 2019: \(String(format: "%.1f", locale: Locale.current, cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage))%"
+                    self.trendAtmosphericCO2.title = "📈: Annualised Average Δ CO₂ Emissions since UN EP Milestone 2019: \(String(format: "%.2f", locale: Locale.current, cO2PPMAnnualAverageSinceUNEPMilestoneDeltaPercentage))% (was \(dailyAtmosphericCO2DataArrayOnUNEPMilestone)ppm CO₂)"
                     
                 }
                 
                 let globalWarmingArraySize = globalWarmingData.result?.count ?? 0
+//                print("globalWarmingArraySize: \(globalWarmingArraySize)")
                 
                 let globalWarmingDataArray1MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-1]
+//                print("globalWarmingDataArray1MonthsAgo: \(globalWarmingDataArray1MonthsAgo)")
+                
                 let globalWarmingDataArray2MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-2]
+//                print("globalWarmingDataArray2MonthsAgo: \(globalWarmingDataArray2MonthsAgo)")
+                
                 let globalWarmingDataArray3MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-3]
+//                print("globalWarmingDataArray3MonthsAgo \(globalWarmingDataArray3MonthsAgo)")
+                
                 let globalWarmingDataArray4MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-4]
                 let globalWarmingDataArray5MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-5]
                 let globalWarmingDataArray6MonthsAgo = globalWarmingData.result?[globalWarmingArraySize-6]
@@ -2733,13 +2749,17 @@ class menuFunctions: NSObject {
                 
                 let globalWarmingLast12MonthsAgoTotal = (((globalWarmingDataArray1MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray2MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray3MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray4MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray5MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray6MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray7MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray8MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray9MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray10MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray11MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray12MonthsAgo?.land ?? "0") as NSString).doubleValue)
                 let globalWarmingLast12MonthsAgoAverage = globalWarmingLast12MonthsAgoTotal / 12
+//                print("globalWarmingLast12MonthsAgoAverage: \(globalWarmingLast12MonthsAgoAverage)")
+                
                 
                 let globalWarming24MonthsAgo12MonthsTotal = (((globalWarmingDataArray13MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray14MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray15MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray16MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray17MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray18MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray19MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray20MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray21MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray22MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray23MonthsAgo?.land ?? "0") as NSString).doubleValue + ((globalWarmingDataArray24MonthsAgo?.land ?? "0") as NSString).doubleValue)
                 let  globalWarming24MonthsAgo12MonthsAverage = globalWarming24MonthsAgo12MonthsTotal / 12
+//                print("globalWarming24MonthsAgo12MonthsAverage \(globalWarming24MonthsAgo12MonthsAverage)")
                 
                 let globalWarmingLastYearOnYearDeltaPercentage = ((globalWarmingLast12MonthsAgoAverage - globalWarming24MonthsAgo12MonthsAverage) / globalWarmingLast12MonthsAgoAverage) * 100
+//                print("globalWarmingLastYearOnYearDeltaPercentage: \(globalWarmingLastYearOnYearDeltaPercentage)")
                 
-                self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃ \(String(globalWarmingData.result?.last?.time ?? "0")) Monthly mean surface temp. anomaly; \(String(format: "%.1f", locale: Locale.current, globalWarmingLastYearOnYearDeltaPercentage))% Δ Last Year on Preceding Year"
+                self.globalWarming.title = "🌡: \(String(globalWarmingData.result?.last?.land ?? "0.00"))℃ \(String(globalWarmingData.result?.last?.time ?? "0")) land surface temp. anomaly; \(String(format: "%.2f", locale: Locale.current, globalWarmingLast12MonthsAgoAverage))℃ Last 12 Months; \(String(format: "%.2f", locale: Locale.current, globalWarming24MonthsAgo12MonthsAverage))℃ Preceding 12 Months"
                 
             })
             
