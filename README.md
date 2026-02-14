@@ -21,7 +21,11 @@ Project should open in Xcode.
 All data requests are sent directly, using HTTPS, to the data providers from your Mac or iPhone / iPad. Note that the data providers can see the ID of PurpleAir sensor you're interested in or the resultant coordinates, and your device's public IP address which can be unique to you depending on network configuration.
 
 ### Support
-Please email me on miasma@kissengineering.ie or chat on Twitter @DarraghRogan - this is a side project for me so understand it may take me a couple of days to get back.
+In the first instance, if Miasma doesn't load (or attempts to load then quits), it is typically because of a data source problem. To reset Miasma to defaults, please run the following command in the Terminal app on your Mac:
+
+defaults delete "Darragh-Rogan.Miasma"
+
+Please email me on miasma@kissengineering.ie or chat on Bluesky @DarraghRogan - this is a side project for me so understand it may take me a couple of days to get back.
 
 ### About the name
 Miasma is an obselete medical theory that bad vapours in the air caused sickness. Nowadays, with climate change caused by smoke being spread, maybe the theory isn't so obselete! See https://en.wikipedia.org/wiki/Miasma_theory
