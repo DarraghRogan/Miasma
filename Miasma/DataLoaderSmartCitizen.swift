@@ -455,7 +455,7 @@ public class DataLoaderSmartCitizen {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Present API")
+                print("Miasma received from the SmartCitizen Present API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

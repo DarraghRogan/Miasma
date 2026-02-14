@@ -7,9 +7,9 @@
 //
 
 import SwiftUI
-import GoogleMobileAds
-import AppTrackingTransparency
-import UserMessagingPlatform
+//import GoogleMobileAds
+//import AppTrackingTransparency
+//import UserMessagingPlatform
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
@@ -60,39 +60,39 @@ public extension UIApplication {
     }
 }
 
-func requestPermission() {
-    if #available(iOS 14, *) {
-        ATTrackingManager.requestTrackingAuthorization { status in
-            switch status {
-            case .authorized:
-                // Tracking authorization dialog was shown
-                // and we are authorized
-                print("App Tracking Transparency Authorized")
-                
-                // Now that we are authorized we can get the IDFA
-//                print(ASIdentifierManager.shared().advertisingIdentifier)
-            case .denied:
-                // Tracking authorization dialog was
-                // shown and permission is denied
-                print("App Tracking Transparency Denied")
-            case .notDetermined:
-                // Tracking authorization dialog has not been shown
-                print("App Tracking Transparency Not Determined")
-            case .restricted:
-                print("App Tracking Transparency Restricted")
-            @unknown default:
-                print("App Tracking Transparency Unknown")
-            }
-        }
-    }
-}
+//func requestPermission() {
+//    if #available(iOS 14, *) {
+//        ATTrackingManager.requestTrackingAuthorization { status in
+//            switch status {
+//            case .authorized:
+//                // Tracking authorization dialog was shown
+//                // and we are authorized
+//                print("App Tracking Transparency Authorized")
+//                
+//                // Now that we are authorized we can get the IDFA
+////                print(ASIdentifierManager.shared().advertisingIdentifier)
+//            case .denied:
+//                // Tracking authorization dialog was
+//                // shown and permission is denied
+//                print("App Tracking Transparency Denied")
+//            case .notDetermined:
+//                // Tracking authorization dialog has not been shown
+//                print("App Tracking Transparency Not Determined")
+//            case .restricted:
+//                print("App Tracking Transparency Restricted")
+//            @unknown default:
+//                print("App Tracking Transparency Unknown")
+//            }
+//        }
+//    }
+//}
 
 @main
 struct Miasma_iOSApp: App {
     
     init() {
 //        requestIDFA()
-        showConsentInformation()
+//        showConsentInformation()
     }
     
     var body: some Scene {
@@ -101,60 +101,60 @@ struct Miasma_iOSApp: App {
         }
     }
     
-    private func requestIDFA() {
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-            // Tracking authorization completed. Start loading ads here.
-            showConsentInformation()
-        })
-    }
+//    private func requestIDFA() {
+//        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+//            // Tracking authorization completed. Start loading ads here.
+//            showConsentInformation()
+//        })
+//    }
     
-    private func showConsentInformation() {
-        let parameters = UMPRequestParameters()
-        
-        // false means users are not under age.
-        parameters.tagForUnderAgeOfConsent = false
-        
-        UMPConsentInformation.sharedInstance.requestConsentInfoUpdate(
-            with: parameters,
-            completionHandler: { error in
-                if error != nil {
-                    // Handle the error.
-                } else {
-                    // The consent information state was updated.
-                    // You are now ready to check if a form is
-                    // available.
-                    let formStatus = UMPConsentInformation.sharedInstance.formStatus
-                    if formStatus == UMPFormStatus.available {
-                      loadForm()
-                    }
-                }
-            })
-    }
+//    private func showConsentInformation() {
+//        let parameters = RequestParameters()
+//        
+//        // false means users are not under age.
+//        parameters.isTaggedForUnderAgeOfConsent = false
+//        
+//        ConsentInformation.shared.requestConsentInfoUpdate(
+//            with: parameters,
+//            completionHandler: { error in
+//                if error != nil {
+//                    // Handle the error.
+//                } else {
+//                    // The consent information state was updated.
+//                    // You are now ready to check if a form is
+//                    // available.
+//                    let formStatus = ConsentInformation.shared.formStatus
+//                    if formStatus == FormStatus.available {
+//                      loadForm()
+//                    }
+//                }
+//            })
+//    }
     
-    func loadForm() {
-        UMPConsentForm.load(
-            completionHandler: { form, loadError in
-                if loadError != nil {
-                    // Handle the error
-                } else {
-                    // Present the form
-                    if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.required {
-                        form?.present(from: (UIApplication.shared.currentUIWindow()?.rootViewController)! as UIViewController, completionHandler: { dimissError in
-                            if UMPConsentInformation.sharedInstance.consentStatus == UMPConsentStatus.obtained {
-                                // App can start requesting ads.
-                                requestPermission()
-                                initGoogleMobileAds()
-                            }
-                        })
-                    }
-                }
-            })
-    }
+//    func loadForm() {
+//        ConsentForm.load(
+//            with: { form, loadError in
+//                if loadError != nil {
+//                    // Handle the error
+//                } else {
+//                    // Present the form
+//                    if ConsentInformation.shared.consentStatus == ConsentStatus.required {
+//                        form?.present(from: (UIApplication.shared.currentUIWindow()?.rootViewController)! as UIViewController, completionHandler: { dimissError in
+//                            if ConsentInformation.shared.consentStatus == ConsentStatus.obtained {
+//                                // App can start requesting ads.
+//                                requestPermission()
+//                                initGoogleMobileAds()
+//                            }
+//                        })
+//                    }
+//                }
+//            })
+//    }
     
-    private func initGoogleMobileAds() {
-        GADMobileAds.sharedInstance()
-            .start(completionHandler: nil)
-    }
+//    private func initGoogleMobileAds() {
+//        MobileAds.shared
+//            .start(completionHandler: nil)
+//    }
     
 }
 

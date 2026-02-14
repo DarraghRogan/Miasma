@@ -319,7 +319,7 @@ class menuFunctions: NSObject {
         let menuReview = NSMenuItem(
             title: "Review / Suggest Improvements for Miasma...",
             action: #selector(menuFunctions.menuReview(_:)),
-            keyEquivalent: "e"
+            keyEquivalent: "i"
         )
         menuReview.target = self
         menu.addItem(menuReview)
@@ -802,52 +802,20 @@ class menuFunctions: NSObject {
             
             if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.zone ?? ""): \(String(cO2Data.carbonIntensity ?? 0))gCO₂eq/kWh"
                     
-                    if cO2Data.data?.carbonIntensity ?? 100 < 100
+                    if cO2Data.carbonIntensity ?? 100 < 100
                     {
                         self.cO2levelComparedTo100g.title = "🔥: Lower than IEA target of 100gCO₂eq/kWh 👍"
                         
                     }
                     else {
-                        var cO2Intensity = cO2Data.data?.carbonIntensity ?? 100
+                        var cO2Intensity = cO2Data.carbonIntensity ?? 100
                         let cO2IntensityMultiplier = cO2Intensity/100
-                        self.cO2levelComparedTo100g.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
+                        self.cO2levelComparedTo100g.title = "🔥: \(String(cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
                     }
                     
-                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    let fossilFuelPercentage_visual: String
-                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = ""
-                    }
-                    
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:                 \(fossilFuelPercentage_visual)"
-                    
-                    
+                    self.cO2FossilFuelMix.title = "🕐: Temporal Granularity: \(cO2Data.temporalGranularity ?? "") / Updated at: \(cO2Data.updatedAt ?? "")"
                 })
             }
             
@@ -1278,51 +1246,20 @@ class menuFunctions: NSObject {
             
             if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.zone ?? ""): \(String(cO2Data.carbonIntensity ?? 0))gCO₂eq/kWh"
                     
-                    if cO2Data.data?.carbonIntensity ?? 100 < 100
+                    if cO2Data.carbonIntensity ?? 100 < 100
                     {
                         self.cO2levelComparedTo100g.title = "🔥: Lower than IEA target of 100gCO₂eq/kWh 👍"
                         
                     }
                     else {
-                        var cO2Intensity = cO2Data.data?.carbonIntensity ?? 100
+                        var cO2Intensity = cO2Data.carbonIntensity ?? 100
                         let cO2IntensityMultiplier = cO2Intensity/100
-                        self.cO2levelComparedTo100g.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
+                        self.cO2levelComparedTo100g.title = "🔥: \(String(cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
                     }
                     
-                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    let fossilFuelPercentage_visual: String
-                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = ""
-                    }
-                    
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
-                    
+                    self.cO2FossilFuelMix.title = "🕐: Temporal Granularity: \(cO2Data.temporalGranularity ?? "") / Updated at: \(cO2Data.updatedAt ?? "")"
                 })
             }
             
@@ -2013,51 +1950,20 @@ class menuFunctions: NSObject {
             
             if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.zone ?? ""): \(String(cO2Data.carbonIntensity ?? 0))gCO₂eq/kWh"
                     
-                    if cO2Data.data?.carbonIntensity ?? 100 < 100
+                    if cO2Data.carbonIntensity ?? 100 < 100
                     {
                         self.cO2levelComparedTo100g.title = "🔥: Lower than IEA target of 100gCO₂eq/kWh 👍"
                         
                     }
                     else {
-                        var cO2Intensity = cO2Data.data?.carbonIntensity ?? 100
+                        var cO2Intensity = cO2Data.carbonIntensity ?? 100
                         let cO2IntensityMultiplier = cO2Intensity/100
-                        self.cO2levelComparedTo100g.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
+                        self.cO2levelComparedTo100g.title = "🔥: \(String(cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
                     }
                     
-                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    let fossilFuelPercentage_visual: String
-                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = ""
-                    }
-                    
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
-                    
+                    self.cO2FossilFuelMix.title = "🕐: Temporal Granularity: \(cO2Data.temporalGranularity ?? "") / Updated at: \(cO2Data.updatedAt ?? "")"
                 })
             }
             
@@ -2519,51 +2425,20 @@ class menuFunctions: NSObject {
             
             if AppDelegate().defaults.integer(forKey:"CO2SignalInUse") == 1 {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 10.1, execute: {
-                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.countryCode ?? ""): \(String(format: "%.1f", locale: Locale.current, cO2Data.data?.carbonIntensity ?? 0))gCO₂eq/kWh"
+                    self.cO2Country.title = "🌍: Carbon Intensity in \(cO2Data.zone ?? ""): \(String(cO2Data.carbonIntensity ?? 0))gCO₂eq/kWh"
                     
-                    if cO2Data.data?.carbonIntensity ?? 100 < 100
+                    if cO2Data.carbonIntensity ?? 100 < 100
                     {
                         self.cO2levelComparedTo100g.title = "🔥: Lower than IEA target of 100gCO₂eq/kWh 👍"
                         
                     }
                     else {
-                        var cO2Intensity = cO2Data.data?.carbonIntensity ?? 100
+                        var cO2Intensity = cO2Data.carbonIntensity ?? 100
                         let cO2IntensityMultiplier = cO2Intensity/100
-                        self.cO2levelComparedTo100g.title = "🔥: \(String(format: "%.1f", locale: Locale.current, cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
+                        self.cO2levelComparedTo100g.title = "🔥: \(String(cO2IntensityMultiplier)) times the IEA target of 100gCO₂eq/kWh 👎"
                     }
                     
-                    var fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
-                    let fossilFuelPercentage_visual: String
-                    // ranges for pressure values from https://www.thoughtco.com/how-to-read-a-barometer-3444043
-                    switch (fossilFuelPercentage) {
-                    case _ where fossilFuelPercentage > 0 && fossilFuelPercentage < 5:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️♻️]"
-                    case _ where fossilFuelPercentage > 5 && fossilFuelPercentage < 15:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️♻️🦖]"
-                    case _ where fossilFuelPercentage > 15 && fossilFuelPercentage < 25:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️♻️🦖🦖]"
-                    case _ where fossilFuelPercentage > 25 && fossilFuelPercentage < 35:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️♻️🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 35 && fossilFuelPercentage < 45:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️♻️🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 45 && fossilFuelPercentage < 55:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️♻️🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 55 && fossilFuelPercentage < 65:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️♻️🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 65 && fossilFuelPercentage < 75:
-                        fossilFuelPercentage_visual = "[♻️♻️♻️🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 75 && fossilFuelPercentage < 85:
-                        fossilFuelPercentage_visual = "[♻️♻️🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 85 && fossilFuelPercentage < 95:
-                        fossilFuelPercentage_visual = "[♻️🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    case _ where fossilFuelPercentage > 95:
-                        fossilFuelPercentage_visual = "[🦖🦖🦖🦖🦖🦖🦖🦖🦖🦖]"
-                    default:
-                        fossilFuelPercentage_visual = ""
-                    }
-                    
-                    self.cO2FossilFuelMix.title = "⚡️: Low / High Carbon Energy mix:               \(fossilFuelPercentage_visual)"
-                    
+                    self.cO2FossilFuelMix.title = "🕐: Temporal Granularity: \(cO2Data.temporalGranularity ?? "") / Updated at: \(cO2Data.updatedAt ?? "")"
                 })
             }
             

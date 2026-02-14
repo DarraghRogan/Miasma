@@ -60,7 +60,7 @@ struct SwiftUIBannerAd: View {
         let frame = UIScreen.main.bounds.inset(by: safeAreaInsets)
         
         //Use the frame to determine the size of the ad
-        let adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(frame.width)
+        let adSize = currentOrientationAnchoredAdaptiveBanner(width: frame.width)
         
         //Set the ads frame
         self.width = adSize.size.width

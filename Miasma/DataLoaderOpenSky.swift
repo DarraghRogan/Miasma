@@ -95,7 +95,7 @@ public class DataLoaderOpenSky {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the OpenSky API")
+                print("Miasma received from the OpenSky API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

@@ -77,7 +77,7 @@ public class DataLoaderClimaCell {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the ClimaCell API")
+                print("Miasma received from the ClimaCell API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

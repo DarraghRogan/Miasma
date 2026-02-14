@@ -34,6 +34,7 @@
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
 		027DEB4C253501C200CF7936 /* BannerAdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027DEB4B253501C200CF7936 /* BannerAdVC.swift */; };
+		028199F22EEE230900D609CC /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 028199F12EEE230900D609CC /* GoogleMobileAds */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
 		0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0283DD8C24F051BF00E4CC07 /* Assets.xcassets */; };
@@ -252,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				028199F22EEE230900D609CC /* GoogleMobileAds in Frameworks */,
 				C8F1147075CD7F8C11D5BFD3 /* Pods_Miasma_iOS.framework in Frameworks */,
 				02624DE12842513E0076F8FF /* AppTrackingTransparency.framework in Frameworks */,
 			);
@@ -538,6 +540,7 @@
 			);
 			mainGroup = 0283DD7C24F051B700E4CC07;
 			packageReferences = (
+				028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 0283DD8624F051B700E4CC07 /* Products */;
 			projectDirPath = "";
@@ -1012,7 +1015,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1022,7 +1025,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.27;
+				MARKETING_VERSION = 1.28;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1039,7 +1042,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 35;
+				CURRENT_PROJECT_VERSION = 36;
 				DEVELOPMENT_TEAM = VDLCQ62KZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1049,7 +1052,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				MARKETING_VERSION = 1.27;
+				MARKETING_VERSION = 1.28;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1156,6 +1159,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		028199F12EEE230900D609CC /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0283DD7D24F051B700E4CC07 /* Project object */;
 }

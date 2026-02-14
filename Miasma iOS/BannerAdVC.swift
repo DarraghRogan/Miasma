@@ -23,7 +23,7 @@ class BannerAdVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var bannerView: GADBannerView = GADBannerView() //Creates your BannerView
+    var bannerView: BannerView = BannerView() //Creates your BannerView
     override func viewDidLoad() {
         bannerView.adUnitID = adUnitId
         bannerView.rootViewController = self
@@ -54,9 +54,9 @@ class BannerAdVC: UIViewController {
         let viewWidth = frame.size.width
 
         //Updates the BannerView size relative to the current safe area of device (This creates the adaptive banner)
-        bannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth)
+        bannerView.adSize = currentOrientationAnchoredAdaptiveBanner(width: viewWidth)
 
-        bannerView.load(GADRequest())
+        bannerView.load(Request())
     }
 }
 

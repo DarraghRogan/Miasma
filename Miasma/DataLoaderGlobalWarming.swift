@@ -51,7 +51,7 @@ var globalWarmingData = GlobalWarmingDataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the GlobalWarming API")
+                print("Miasma received from the GlobalWarming API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

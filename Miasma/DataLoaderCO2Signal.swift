@@ -11,24 +11,11 @@ import Foundation
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
 struct CO2DataStructure: Codable {
-    var disclaimer, status, countryCode: String?
-    var data: CO2DataClass?
-    var units: CO2Units?
-
-    enum CodingKeys: String, CodingKey {
-        case disclaimer = "_disclaimer"
-        case status, countryCode, data, units
-    }
-}
-
-// MARK: - DataClass
-struct CO2DataClass: Codable {
-    var carbonIntensity, fossilFuelPercentage: Double
-}
-
-// MARK: - Units
-struct CO2Units: Codable {
-    var carbonIntensity: String
+    var zone: String?
+    var carbonIntensity: Int?
+    var datetime, updatedAt, createdAt, emissionFactorType: String?
+    var isEstimated: Bool?
+    var estimationMethod, temporalGranularity: String?
 }
 
 
@@ -46,7 +33,7 @@ var cO2Data = CO2DataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://api.co2signal.com/v1/latest?lon=\(lon)&lat=\(lat)")! as URL,
+            "https://api.electricitymaps.com/v3/carbon-intensity/latest?lon=\(lon)&lat=\(lat)")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         
@@ -61,7 +48,7 @@ var cO2Data = CO2DataStructure()
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Received from the CO2 API")
+                print("Miasma received from the ElectricityMaps CO2 API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)

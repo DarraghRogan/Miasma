@@ -119,7 +119,7 @@ public class DataLoaderSmartCitizenHistorical {
                     print(error)
                 } else {
                     let httpResponse = response as? HTTPURLResponse
-//                    print("Miasma received from the SmartCitizen Historical 1d API")
+                    print("Miasma received from the SmartCitizen Historical 1d API")
 //                    if let data = data,
 //                       let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                        print(urlContent)
@@ -172,7 +172,7 @@ public class DataLoaderSmartCitizenHistorical {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Historical 3 day API")
+                print("Miasma received from the SmartCitizen Historical 3 day API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
@@ -225,7 +225,7 @@ public class DataLoaderSmartCitizenHistorical {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Historical 1 Week API")
+                print("Miasma received from the SmartCitizen Historical 1 Week API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
@@ -278,7 +278,7 @@ public class DataLoaderSmartCitizenHistorical {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Historical 1 Month API")
+                print("Miasma received from the SmartCitizen Historical 1 Month API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
@@ -331,7 +331,7 @@ public class DataLoaderSmartCitizenHistorical {
                 print(error)
             } else {
                 let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Historical 1 Year API")
+                print("Miasma received from the SmartCitizen Historical 1 Year API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
