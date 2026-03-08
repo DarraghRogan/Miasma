@@ -97,16 +97,13 @@
                     self.TelraamCheckedLabel.stringValue = String(telraamData.report?[0].segmentID ?? 0)
                     self.TelraamSaveButton.isEnabled = true
                     
+                } else if let statusCode = telraamData.statusCode, statusCode < 0 {
+                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam Connectivity"
+                    self.TelraamSaveButton.isEnabled = false
                 } else {
                     self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
+                    self.TelraamSaveButton.isEnabled = false
                 }
-                
-//                if telraamData.features?[0].properties?.oidn == nil {
-//                    self.TelraamCheckedLabel.stringValue = "Error. Check Telraam ID"
-//                } else {
-//                    self.TelraamCheckedLabel.stringValue = String(telraamData.features?[0].properties?.oidn ?? 0)
-//                    self.TelraamSaveButton.isEnabled = true
-//                }
             })
             TelraamSegmentIDOutlet.layer?.borderWidth = 0.0
         } else {

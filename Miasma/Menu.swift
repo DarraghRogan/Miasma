@@ -15,6 +15,8 @@ let menu = NSMenu()
 
 class menuFunctions: NSObject {
     
+    var preferencesWindowController: NSWindowController?
+    
     // Initialise the menu
     override init() {
         super.init()
@@ -27,27 +29,27 @@ class menuFunctions: NSObject {
     // Define the initial variables for each menu entry
     
     var purpleAirLocation : NSMenuItem = {
-        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Location: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirPM2_5 : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "PM2.5: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirHumidity : NSMenuItem = {
-        return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Temp/Humidity: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirRunningAverages : NSMenuItem = {
-        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Averages: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirPressure : NSMenuItem = {
-        return NSMenuItem(title: "🌬️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Pressure: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirReadingAge : NSMenuItem = {
-        return NSMenuItem(title: "⏳: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Age: ", action: nil, keyEquivalent: "")
     }()
     
     var purpleAirPM2_5StatusBarIcon : NSMenuItem = {
@@ -59,60 +61,60 @@ class menuFunctions: NSObject {
     }()
     
     var wAQICity : NSMenuItem = {
-        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Location: ", action: nil, keyEquivalent: "")
     }()
     
     var wAQIAttribution : NSMenuItem = {
-        return NSMenuItem(title: "📜: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Source: ", action: nil, keyEquivalent: "")
     }()
     
     var wAQIAQI : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "AQI: ", action: nil, keyEquivalent: "")
     }()
     
     var wAQIDominentPol : NSMenuItem = {
-        return NSMenuItem(title: "🎯: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Dominant Pollutant: ", action: nil, keyEquivalent: "")
     }()
     
     var wAQITemperature : NSMenuItem = {
-        return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Temperature: ", action: nil, keyEquivalent: "")
     }()
     
     var wAQITime : NSMenuItem = {
-        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Reading Time: ", action: nil, keyEquivalent: "")
     }()
     
     
     var smartCitizenLocationType : NSMenuItem = {
-        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Location: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenPM2_5 : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "PM2.5: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenOtherPollutants : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Other Pollutants: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenPhysicalProperties : NSMenuItem = {
-        return NSMenuItem(title: "🎤: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Noise: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizen24HourExposurePM25 : NSMenuItem = {
-        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Exposure: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenTemperatureHumidity : NSMenuItem = {
-        return NSMenuItem(title: "🌡: / 💧: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Temp/Humidity: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenPressure : NSMenuItem = {
-        return NSMenuItem(title: "🌬️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Pressure: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenReadingAge : NSMenuItem = {
-        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Reading Time: ", action: nil, keyEquivalent: "")
     }()
     
     var smartCitizenPM2_5StatusBarIcon : NSMenuItem = {
@@ -125,19 +127,19 @@ class menuFunctions: NSObject {
     
     
     var sensorCommunityLocationType : NSMenuItem = {
-        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Location: ", action: nil, keyEquivalent: "")
     }()
     
     var sensorCommunityPM2_5 : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "PM2.5: ", action: nil, keyEquivalent: "")
     }()
     
     var sensorCommunityPM10 : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "PM10: ", action: nil, keyEquivalent: "")
     }()
     
     var sensorCommunityReadingAge : NSMenuItem = {
-        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Reading Time: ", action: nil, keyEquivalent: "")
     }()
     
     var sensorCommunityPM2_5StatusBarIcon : NSMenuItem = {
@@ -147,59 +149,59 @@ class menuFunctions: NSObject {
     
     
     var cO2Country : NSMenuItem = {
-        return NSMenuItem(title: "🌍: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Location: ", action: nil, keyEquivalent: "")
     }()
     
     var cO2levelComparedTo100g : NSMenuItem = {
-        return NSMenuItem(title: "🔥: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Intensity: ", action: nil, keyEquivalent: "")
     }()
     
     var cO2FossilFuelMix : NSMenuItem = {
-        return NSMenuItem(title: "⚡️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Update: ", action: nil, keyEquivalent: "")
     }()
     
     
     var openSkyAircraftInBox : NSMenuItem = {
-        return NSMenuItem(title: "✈️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Aircraft: ", action: nil, keyEquivalent: "")
     }()
     
     
     var telraamRoadUsers : NSMenuItem = {
-        return NSMenuItem(title: "📊: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Road Users: ", action: nil, keyEquivalent: "")
     }()
     
     var telraamDataTime : NSMenuItem = {
-        return NSMenuItem(title: "📅: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Reading Time: ", action: nil, keyEquivalent: "")
     }()
     
     
     var climaCellWeather : NSMenuItem = {
-        return NSMenuItem(title: "🌦: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Weather: ", action: nil, keyEquivalent: "")
     }()
     
     var climaCellAirQuality : NSMenuItem = {
-        return NSMenuItem(title: "☁️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Air Quality: ", action: nil, keyEquivalent: "")
     }()
     
     var climaCellPollen : NSMenuItem = {
-        return NSMenuItem(title: "🌳: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Pollen: ", action: nil, keyEquivalent: "")
     }()
     
     var climaCellSolarGHI : NSMenuItem = {
-        return NSMenuItem(title: "☀️: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Solar GHI: ", action: nil, keyEquivalent: "")
     }()
     
     
     var dailyAtmosphericCO2 : NSMenuItem = {
-        return NSMenuItem(title: "⛽: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Daily CO2: ", action: nil, keyEquivalent: "")
     }()
     
     var globalWarming : NSMenuItem = {
-        return NSMenuItem(title: "🌡: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "Temperature: ", action: nil, keyEquivalent: "")
     }()
     
     var trendAtmosphericCO2 : NSMenuItem = {
-        return NSMenuItem(title: "📈: ", action: nil, keyEquivalent: "")
+        return NSMenuItem(title: "CO2 Trend: ", action: nil, keyEquivalent: "")
     }()
     
     // Define how to open windows & web addresses from menu
@@ -265,18 +267,26 @@ class menuFunctions: NSObject {
     }
     
     @objc func showPreferences(_ sender: Any) {
-        var myWindow: NSWindow? = nil
-        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"),bundle: nil)
+        if let controller = preferencesWindowController {
+            NSApp.activate(ignoringOtherApps: true)
+            controller.showWindow(self)
+            controller.window?.makeKeyAndOrderFront(self)
+            return
+        }
+        
+        let storyboard = NSStoryboard(name: NSStoryboard.Name("Main"), bundle: nil)
         let controller = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("PreferencesStoryboard")) as! NSViewController
-        myWindow = NSWindow(contentViewController: controller)
+        let window = NSWindow(contentViewController: controller)
+        window.title = "Miasma Preferences"
+        let windowController = NSWindowController(window: window)
+        preferencesWindowController = windowController
         NSApp.activate(ignoringOtherApps: true)
-        myWindow?.makeKeyAndOrderFront(self)
-        let vc = NSWindowController(window: myWindow)
-        vc.showWindow(self)
+        windowController.showWindow(self)
+        window.makeKeyAndOrderFront(self)
     }
     
     func menuLoadNonOptionals(){
-        statusItem.button?.title = "M ⚪"
+        statusItem.button?.title = "M o"
         statusItem.button?.target = self
         statusItem.menu = menu
         

@@ -76,89 +76,71 @@ public class DataLoaderTelraam {
     func loadTelraamData(segmentID:String) {
         
         let headers = [
-//            "Accept": "application/json",
+            "Accept": "application/json",
             "X-Api-Key": "\(APIKeyTelraam)"
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string:
                                                         "https://telraam-api.net/v1/reports/traffic")! as URL,
-                                          cachePolicy: .useProtocolCachePolicy,
-                                          timeoutInterval: 10.0)
+                                          cachePolicy: .reloadIgnoringLocalCacheData,
+                                          timeoutInterval: 20.0)
         
-//        print(request.url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "POST"
         
-        // First, get the current date
         let currentDateAndTimeUnformatted = Date()
-        // Next, create a Calendar instance and set it to the current time zone
-//        let calendar = Calendar.current
-        // Then, create a DateComponents instance and set its "hour" property to -1
-        // This will represent the difference between the current date and the date one hour earlier
-//        let twoHourdateComponents = DateComponents(hour: -2)
-//        let oneHourdateComponents = DateComponents(hour: -1)
-        // Finally, use the Calendar instance to create a new date by adding the dateComponents to the current date
-//        let twoHourEarlierDateAndTimeUnformatted = calendar.date(byAdding: twoHourdateComponents, to: currentDateAndTimeUnformatted)
-//        let oneHourEarlierDateAndTimeUnformatted = calendar.date(byAdding: oneHourdateComponents, to: currentDateAndTimeUnformatted)
-
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-
-//        let timeFormatter = DateFormatter()
-//        timeFormatter.timeStyle = .medium
-
-
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
         let currentDate = dateFormatter.string(from: currentDateAndTimeUnformatted)
-//        let currentTime = timeFormatter.string(from: currentDateAndTimeUnformatted)
-//
-//        let twoHourEarlierDate = dateFormatter.string(from: twoHourEarlierDateAndTimeUnformatted ?? Date())
-//        let twoHourEarlierTime = timeFormatter.string(from: twoHourEarlierDateAndTimeUnformatted ?? Date())
-//        
-//        let oneHourEarlierDate = dateFormatter.string(from: oneHourEarlierDateAndTimeUnformatted ?? Date())
-//        let oneHourEarlierTime = timeFormatter.string(from: oneHourEarlierDateAndTimeUnformatted ?? Date())
-//
-//        print("Two hour earlier: \(twoHourEarlierDate) \(twoHourEarlierTime)Z")
-//        print("One hour earlier: \(oneHourEarlierDate) \(oneHourEarlierTime)Z")
-
-                
+        
         let parameters: [String: Any] = [
             "level": "segments",
             "id": "\(segmentID)",
             "format": "per-hour",
             "time_start": "\(currentDate) 00:00:00Z",
-            "time_end": "\(currentDate) 23:00:00Z"
+            "time_end": "\(currentDate) 23:59:59Z"
         ]
+        
         request.allHTTPHeaderFields = headers
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
         
-//        print(request.allHTTPHeaderFields)
-        
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
-                print("Miasma received from the Telraam API")
-                if let data = data,
-                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
-//                    print(urlContent)
-                } else {
-                    print("error with printing string encoded data")
-                }
-                //Parse JSON
-                let decoder = JSONDecoder()
-                do {
-                    let dataFromTelraam = try decoder.decode(TelraamDataStructure.self, from: data!)
-                    telraamData = dataFromTelraam
-                    
-                }
-                catch {
-                    print("Error in Telraam JSON parsing")
-                    //                    print(purpleAirData)
-                }
+            if let error = error {
+                print("Telraam network error: \(error.localizedDescription)")
+                telraamData = TelraamDataStructure(statusCode: -1, message: "Connectivity error", report: nil)
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Telraam error: invalid response")
+                telraamData = TelraamDataStructure(statusCode: -2, message: "Invalid response", report: nil)
+                return
+            }
+            
+            guard (200...299).contains(httpResponse.statusCode) else {
+                print("Telraam HTTP error: \(httpResponse.statusCode)")
+                telraamData = TelraamDataStructure(statusCode: httpResponse.statusCode, message: "HTTP error", report: nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("Telraam error: empty response body")
+                telraamData = TelraamDataStructure(statusCode: httpResponse.statusCode, message: "Empty response", report: nil)
+                return
+            }
+            
+            print("Miasma received from the Telraam API")
+            let decoder = JSONDecoder()
+            do {
+                let dataFromTelraam = try decoder.decode(TelraamDataStructure.self, from: data)
+                telraamData = dataFromTelraam
+            }
+            catch {
+                print("Error in Telraam JSON parsing: \(error.localizedDescription)")
+                telraamData = TelraamDataStructure(statusCode: httpResponse.statusCode, message: "JSON parsing error", report: nil)
             }
         })
         
