@@ -118,7 +118,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDele
         let runningApps = NSWorkspace.shared.runningApplications
         let isRunning = !runningApps.filter { $0.bundleIdentifier == launcherAppId }.isEmpty
         
-        SMLoginItemSetEnabled(launcherAppId as CFString, self.defaults.bool(forKey: "AutorunAtStartup"))
+        let shouldEnableLauncher = defaults.bool(forKey: "AutorunAtStartup")
+        if !SMLoginItemSetEnabled(launcherAppId as CFString, shouldEnableLauncher) {
+            NSLog("Miasma failed to %@ its login item.", shouldEnableLauncher ? "enable" : "disable")
+        }
         
         if isRunning {
             DistributedNotificationCenter.default().post(name: .killLauncher, object: Bundle.main.bundleIdentifier!)

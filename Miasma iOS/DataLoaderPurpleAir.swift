@@ -11,30 +11,27 @@ import Combine
 
 struct PurpleAirResponse: Codable {
     let purpleAirdata: Sensor
-    
+
     enum CodingKeys: String, CodingKey {
         case purpleAirdata = "sensor"
     }
 }
 
-
-
 class PurpleAirViewModel: ObservableObject {
-    
+
     @Published var purpleAirdata: Sensor = Sensor()
-    
+
     var purpleAirCancellationToken: AnyCancellable?
-    
-    
+
     init() {
         getPurpleAir()
-        
+
     }
-    
+
 }
 
 extension PurpleAirViewModel {
-    
+
     func getPurpleAir() {
         purpleAirCancellationToken = PurpleAirDB.request(.station)
             .mapError({ (error) -> Error in
@@ -50,17 +47,24 @@ extension PurpleAirViewModel {
 }
 
 struct PurpleAirAPIClient {
-    
+
     struct Response<T> {
         let value: T
         let response: URLResponse
     }
-    
+
     func run<T: Decodable>(_ request: URLRequest) ->
     AnyPublisher<Response<T>, Error> {
         return URLSession.shared
             .dataTaskPublisher(for: request)
             .tryMap { result -> Response<T> in
+
+                guard let httpResponse = result.response as? HTTPURLResponse else {
+                    throw URLError(.badServerResponse)
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    throw NSError(domain: "Miasma.HTTP", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(httpResponse.statusCode)"])
+                }
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
 //                print(Response<Any>.self)
@@ -68,7 +72,7 @@ struct PurpleAirAPIClient {
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-        
+
     }
 }
 
@@ -82,14 +86,13 @@ enum PurpleAirAPIPath: String {
 }
 
 extension PurpleAirDB {
-    
+
     static func request(_ path: PurpleAirAPIPath) -> AnyPublisher<PurpleAirResponse, Error> {
-        
+
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
 //        components.queryItems = [URLQueryItem(name: "X-API-Key", value: APIKeyPurpleAirNewAPI)]
-        
-        
+
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
 
@@ -98,16 +101,15 @@ extension PurpleAirDB {
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
-        
+
 //        print(request)
-        
+
         return apiClient.run(request)
-            
+
             .map(\.value)
             .eraseToAnyPublisher()
     }
 }
-
 
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
 
@@ -115,7 +117,7 @@ struct PurpleAirDataStructure: Codable {
 //    var apiVersion: String?
 //    var timeStamp: Int?
     var sensor: Sensor?
-    
+
     enum CodingKeys: String, CodingKey {
 //        case apiVersion = "api_version"
 //        case timeStamp = "time_stamp"
@@ -159,7 +161,7 @@ struct Sensor: Codable {
 //    var rssi, icon, confidenceManual, confidenceAuto: Int?
 //    var channelFlagsAuto: Int?
     var stats: Stats?
-    
+
     enum CodingKeys: String, CodingKey {
         case sensorIndex = "sensor_index"
         case name
@@ -215,7 +217,7 @@ struct Sensor: Codable {
 //        case channelFlagsAuto = "channel_flags_auto"
         case stats
     }
-    
+
     struct Stats: Codable {
         var pm25_10minute: Double?
         var pm25_30minute: Double?
@@ -223,7 +225,7 @@ struct Sensor: Codable {
         var pm25_6hour: Double?
         var pm25_24hour: Double?
         var pm25_1week: Double?
-        
+
         enum CodingKeys: String, CodingKey {
             case pm25_10minute = "pm2.5_10minute"
             case pm25_30minute = "pm2.5_30minute"
@@ -234,8 +236,6 @@ struct Sensor: Codable {
         }
     }
 }
-
-
 
 //struct PurpleAirDataStructure: Codable {
 ////    var mapVersion, baseVersion, mapVersionString: String?

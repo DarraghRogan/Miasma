@@ -11,29 +11,26 @@ import Combine
 
 struct WAQIhereResponse: Codable {
     let wAQIdata: WAQIDataClass
-    
+
     enum CodingKeys: String, CodingKey {
         case wAQIdata = "data"
     }
 }
 
-
-
 class WAQIhereViewModel: ObservableObject {
-    
+
     @Published var wAQIdata: WAQIDataClass = WAQIDataClass()
-    
+
     var wAQICancellationToken: AnyCancellable?
-    
-    
+
     init() {
         getWAQIhere()
     }
-    
+
 }
 
 extension WAQIhereViewModel {
-    
+
     func getWAQIhere() {
         wAQICancellationToken = WAQIhereDB.request(.city)
             .mapError({ (error) -> Error in
@@ -50,28 +47,34 @@ extension WAQIhereViewModel {
 }
 
 struct WAQIhereAPIClient {
-    
+
     struct Response<T> {
         let value: T
         let response: URLResponse
     }
-    
+
     func run<T: Decodable>(_ request: URLRequest) ->
     AnyPublisher<Response<T>, Error> {
         return URLSession.shared
             .dataTaskPublisher(for: request)
             .tryMap { result -> Response<T> in
+
+                guard let httpResponse = result.response as? HTTPURLResponse else {
+                    throw URLError(.badServerResponse)
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    throw NSError(domain: "Miasma.HTTP", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(httpResponse.statusCode)"])
+                }
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
 
 //                                print(Response<Any>.self)
 //                                print(result.response)
-                
-                return Response(value: value, response: result.response)
+return Response(value: value, response: result.response)
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-        
+
     }
 }
 
@@ -85,21 +88,20 @@ enum WAQIhereAPIPath: String {
 }
 
 extension WAQIhereDB {
-    
+
     static func request(_ path: WAQIhereAPIPath) -> AnyPublisher<WAQIhereResponse, Error> {
-        
+
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
         components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
-        
+
         let request = URLRequest(url: components.url!)
-        
+
 //        print(request)
-        
+
         return apiClient.run(request)
-            
+
             .map(\.value)
             .eraseToAnyPublisher()
     }
 }
-

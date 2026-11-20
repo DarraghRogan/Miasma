@@ -118,7 +118,18 @@ public class DataLoaderSmartCitizenHistorical {
                 if (error != nil) {
                     print(error)
                 } else {
-                    let httpResponse = response as? HTTPURLResponse
+                    guard let validHTTPResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(validHTTPResponse.statusCode) else {
+                    print("Request failed with HTTP status \(validHTTPResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
 //                    print("Miasma received from the SmartCitizen Historical 1d API")
 //                    if let data = data,
 //                       let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -129,7 +140,7 @@ public class DataLoaderSmartCitizenHistorical {
                     //Parse JSON
 //                    let decoder = JSONDecoder()
                     do {
-                        let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                        let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
                         smartCitizenHistoricalData1d = dataFromSmartCitizenHistorical
                     }
                     catch {
@@ -171,7 +182,18 @@ public class DataLoaderSmartCitizenHistorical {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let validHTTPResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(validHTTPResponse.statusCode) else {
+                    print("Request failed with HTTP status \(validHTTPResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
 //                print("Miasma received from the SmartCitizen Historical 3 day API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -182,7 +204,7 @@ public class DataLoaderSmartCitizenHistorical {
                 //Parse JSON
 //                    let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
                     smartCitizenHistoricalData3d = dataFromSmartCitizenHistorical
                 }
                 catch {
@@ -224,7 +246,18 @@ public class DataLoaderSmartCitizenHistorical {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let validHTTPResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(validHTTPResponse.statusCode) else {
+                    print("Request failed with HTTP status \(validHTTPResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
 //                print("Miasma received from the SmartCitizen Historical 1 Week API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -235,7 +268,7 @@ public class DataLoaderSmartCitizenHistorical {
                 //Parse JSON
 //                    let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
                     smartCitizenHistoricalData1w = dataFromSmartCitizenHistorical
                 }
                 catch {
@@ -277,7 +310,18 @@ public class DataLoaderSmartCitizenHistorical {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let validHTTPResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(validHTTPResponse.statusCode) else {
+                    print("Request failed with HTTP status \(validHTTPResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
 //                print("Miasma received from the SmartCitizen Historical 1 Month API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -288,7 +332,7 @@ public class DataLoaderSmartCitizenHistorical {
                 //Parse JSON
 //                    let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
                     smartCitizenHistoricalData1M = dataFromSmartCitizenHistorical
                 }
                 catch {
@@ -330,7 +374,18 @@ public class DataLoaderSmartCitizenHistorical {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let validHTTPResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(validHTTPResponse.statusCode) else {
+                    print("Request failed with HTTP status \(validHTTPResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
 //                print("Miasma received from the SmartCitizen Historical 1 Year API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -341,7 +396,7 @@ public class DataLoaderSmartCitizenHistorical {
                 //Parse JSON
 //                    let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+                    let dataFromSmartCitizenHistorical = try newJSONDecoder().decode(SmartCitizenHistoricalDataStructure.self, from: data)
                     smartCitizenHistoricalData1y = dataFromSmartCitizenHistorical
                 }
                 catch {

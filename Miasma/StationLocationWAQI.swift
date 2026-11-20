@@ -95,10 +95,11 @@ class LocationWAQI: NSObject, MKAnnotation {
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
+            if let error = error {
+                print("WAQI station request failed: \(error.localizedDescription)")
+            } else if let httpResponse = response as? HTTPURLResponse,
+                      (200..<300).contains(httpResponse.statusCode),
+                      let data = data {
                 //                print("Received from the ClimaCell API")
                 //                if let data = data,
                 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -109,13 +110,15 @@ class LocationWAQI: NSObject, MKAnnotation {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let stationsFromWAQI = try decoder.decode(StationsFromWAQI.self, from: data!)
+                    let stationsFromWAQI = try decoder.decode(StationsFromWAQI.self, from: data)
                     wAQIStations = stationsFromWAQI
                 }
                 catch {
-                    print("Error in ClimaCell JSON parsing")
+                    print("WAQI station response decoding failed: \(error.localizedDescription)")
                 }
-                
+            } else {
+                let status = (response as? HTTPURLResponse)?.statusCode
+                print("WAQI station request returned an invalid response (HTTP \(status.map(String.init) ?? "unknown"))")
             }
         })
         

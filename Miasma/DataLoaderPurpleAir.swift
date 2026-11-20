@@ -247,10 +247,11 @@ public class DataLoaderPurpleAir {
         
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                let httpResponse = response as? HTTPURLResponse
+            if let error = error {
+                print("PurpleAir request failed: \(error.localizedDescription)")
+            } else if let httpResponse = response as? HTTPURLResponse,
+                      (200..<300).contains(httpResponse.statusCode),
+                      let data = data {
                 print("Miasma received from the Purple Air API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -261,15 +262,17 @@ public class DataLoaderPurpleAir {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromPurpleAir = try decoder.decode(PurpleAirDataStructure.self, from: data!)
+                    let dataFromPurpleAir = try decoder.decode(PurpleAirDataStructure.self, from: data)
                     purpleAirData = dataFromPurpleAir
                     //                    print(purpleAirData.results?[0].deviceLocationtype)
                     
                 }
                 catch {
-                    print("Error in Purple Air JSON parsing")
-                    //                    print(purpleAirData)
+                    print("PurpleAir response decoding failed: \(error.localizedDescription)")
                 }
+            } else {
+                let status = (response as? HTTPURLResponse)?.statusCode
+                print("PurpleAir returned an invalid response (HTTP \(status.map(String.init) ?? "unknown"))")
             }
         })
         

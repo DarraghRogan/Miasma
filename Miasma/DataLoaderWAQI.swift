@@ -99,7 +99,18 @@ var wAQIData = WAQIDataStructure()
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    print("Request failed with HTTP status \(httpResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
                 print("Miasma received from the WAQI API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -110,7 +121,7 @@ var wAQIData = WAQIDataStructure()
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data!)
+                    let dataFromWAQI = try decoder.decode(WAQIDataStructure.self, from: data)
                     wAQIData = dataFromWAQI
 
                 }

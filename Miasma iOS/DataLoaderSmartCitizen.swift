@@ -11,29 +11,26 @@ import Combine
 
 struct SmartCitizenResponse: Codable {
     let smartCitizenData: DataClass
-    
+
         enum CodingKeys: String, CodingKey {
             case smartCitizenData = "data"
         }
 }
 
-
-
 class SmartCitizenViewModel: ObservableObject {
-    
+
     @Published var smartCitizenData: DataClass = DataClass()
-    
+
     var smartCitizenCancellationToken: AnyCancellable?
-    
-    
+
     init() {
         getSmartCitizen()
     }
-    
+
 }
 
 extension SmartCitizenViewModel {
-    
+
     func getSmartCitizen() {
         smartCitizenCancellationToken = SmartCitizenDB.request(.station)
             .mapError({ (error) -> Error in
@@ -50,30 +47,35 @@ extension SmartCitizenViewModel {
 }
 
 struct SmartCitizenAPIClient {
-    
+
     struct Response<T> {
         let value: T
         let response: URLResponse
     }
-    
+
     func run<T: Decodable>(_ request: URLRequest) ->
     AnyPublisher<Response<T>, Error> {
         return URLSession.shared
             .dataTaskPublisher(for: request)
             .tryMap { result -> Response<T> in
+
+                guard let httpResponse = result.response as? HTTPURLResponse else {
+                    throw URLError(.badServerResponse)
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    throw NSError(domain: "Miasma.HTTP", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(httpResponse.statusCode)"])
+                }
                 let value = try JSONDecoder().decode(
                     T.self, from: result.data)
-                
+
 //                print(Response<Any>.self)
 //                print(result.response)
-                
                 return Response(value: value, response: result.response)
-                
+
             }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
-        
-        
+
     }
 }
 
@@ -87,22 +89,22 @@ enum SmartCitizenAPIPath: String {
 }
 
 extension SmartCitizenDB {
-    
+
     static func request(_ path: SmartCitizenAPIPath) -> AnyPublisher<SmartCitizenResponse, Error> {
-        
+
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
         //        components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
-        
+
         let request = URLRequest(url: components.url!)
-        
+
 //        print(request)
-        
+
         return apiClient.run(request)
-            
+
             .map(\.value)
             .eraseToAnyPublisher()
-        
+
     }
 }
 // define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
@@ -120,7 +122,7 @@ struct SmartCitizenDataStructure: Codable {
     //    var owner: Owner?
     var data: DataClass?
     //    var kit: Kit?
-    
+
     enum CodingKeys: String, CodingKey {
 //        case id, uuid, name
 //        case welcomeDescription = "description"
@@ -146,7 +148,7 @@ struct DataClass: Codable {
     var recordedAt, addedAt: String?
     var location: DataLocation?
     var sensors: [SensorDC]?
-    
+
     enum CodingKeys: String, CodingKey {
         case recordedAt = "recorded_at"
         case addedAt = "added_at"
@@ -161,7 +163,7 @@ struct DataLocation: Codable {
     var elevation: JSONNull?
     var latitude, longitude: Double?
     var geohash, city, countryCode, country: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case ip, exposure, elevation, latitude, longitude, geohash, city
         case countryCode = "country_code"
@@ -178,7 +180,7 @@ struct SensorDC: Codable {
     var measurementID: Int?
     var uuid: String?
     var value, rawValue, prevValue, prevRawValue: Double?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, ancestry, name
         case sensorDescription = "description"
@@ -200,7 +202,7 @@ struct HardwareInfo: Codable {
     var espBd, hwVer: String?
     var samBd: Date?
     var espVer, samVer: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, mac, time
         case espBd = "esp_bd"
@@ -216,7 +218,7 @@ struct Kit: Codable {
     var id: Int?
     var uuid, slug, name, kitDescription: String?
     var createdAt, updatedAt: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, uuid, slug, name
         case kitDescription = "description"
@@ -234,7 +236,7 @@ struct Owner: Codable {
     var joinedAt: String?
     var location: OwnerLocation?
     var deviceIDS: [JSONAny]?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, uuid, username, avatar, url
         case joinedAt = "joined_at"
@@ -246,7 +248,7 @@ struct Owner: Codable {
 // MARK: - OwnerLocation
 struct OwnerLocation: Codable {
     var city, country, countryCode: String?
-    
+
     enum CodingKeys: String, CodingKey {
         case city, country
         case countryCode = "country_code"
@@ -256,24 +258,24 @@ struct OwnerLocation: Codable {
 // MARK: - Encode/decode helpers
 
 class JSONNull: Codable, Hashable {
-    
+
     public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
         return true
     }
-    
+
     public var hashValue: Int {
         return 0
     }
-    
+
     public init() {}
-    
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if !container.decodeNil() {
             throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         try container.encodeNil()
@@ -282,38 +284,38 @@ class JSONNull: Codable, Hashable {
 
 class JSONCodingKey: CodingKey {
     let key: String
-    
+
     required init?(intValue: Int) {
         return nil
     }
-    
+
     required init?(stringValue: String) {
         key = stringValue
     }
-    
+
     var intValue: Int? {
         return nil
     }
-    
+
     var stringValue: String {
         return key
     }
 }
 
 class JSONAny: Codable {
-    
+
     let value: Any
-    
+
     static func decodingError(forCodingPath codingPath: [CodingKey]) -> DecodingError {
         let context = DecodingError.Context(codingPath: codingPath, debugDescription: "Cannot decode JSONAny")
         return DecodingError.typeMismatch(JSONAny.self, context)
     }
-    
+
     static func encodingError(forValue value: Any, codingPath: [CodingKey]) -> EncodingError {
         let context = EncodingError.Context(codingPath: codingPath, debugDescription: "Cannot encode JSONAny")
         return EncodingError.invalidValue(value, context)
     }
-    
+
     static func decode(from container: SingleValueDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -332,7 +334,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decode(from container: inout UnkeyedDecodingContainer) throws -> Any {
         if let value = try? container.decode(Bool.self) {
             return value
@@ -359,7 +361,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decode(from container: inout KeyedDecodingContainer<JSONCodingKey>, forKey key: JSONCodingKey) throws -> Any {
         if let value = try? container.decode(Bool.self, forKey: key) {
             return value
@@ -386,7 +388,7 @@ class JSONAny: Codable {
         }
         throw decodingError(forCodingPath: container.codingPath)
     }
-    
+
     static func decodeArray(from container: inout UnkeyedDecodingContainer) throws -> [Any] {
         var arr: [Any] = []
         while !container.isAtEnd {
@@ -395,7 +397,7 @@ class JSONAny: Codable {
         }
         return arr
     }
-    
+
     static func decodeDictionary(from container: inout KeyedDecodingContainer<JSONCodingKey>) throws -> [String: Any] {
         var dict = [String: Any]()
         for key in container.allKeys {
@@ -404,7 +406,7 @@ class JSONAny: Codable {
         }
         return dict
     }
-    
+
     static func encode(to container: inout UnkeyedEncodingContainer, array: [Any]) throws {
         for value in array {
             if let value = value as? Bool {
@@ -428,7 +430,7 @@ class JSONAny: Codable {
             }
         }
     }
-    
+
     static func encode(to container: inout KeyedEncodingContainer<JSONCodingKey>, dictionary: [String: Any]) throws {
         for (key, value) in dictionary {
             let key = JSONCodingKey(stringValue: key)!
@@ -453,7 +455,7 @@ class JSONAny: Codable {
             }
         }
     }
-    
+
     static func encode(to container: inout SingleValueEncodingContainer, value: Any) throws {
         if let value = value as? Bool {
             try container.encode(value)
@@ -469,7 +471,7 @@ class JSONAny: Codable {
             throw encodingError(forValue: value, codingPath: container.codingPath)
         }
     }
-    
+
     public required init(from decoder: Decoder) throws {
         if var arrayContainer = try? decoder.unkeyedContainer() {
             self.value = try JSONAny.decodeArray(from: &arrayContainer)
@@ -480,7 +482,7 @@ class JSONAny: Codable {
             self.value = try JSONAny.decode(from: container)
         }
     }
-    
+
     public func encode(to encoder: Encoder) throws {
         if let arr = self.value as? [Any] {
             var container = encoder.unkeyedContainer()
@@ -494,13 +496,6 @@ class JSONAny: Codable {
         }
     }
 }
-
-
-
-
-
-
-
 
 // define an instance of the data that can be filled by the data loader and read by the menu
 //var smartCitizenData = SmartCitizenDataStructure()

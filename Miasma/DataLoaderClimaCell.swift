@@ -76,7 +76,18 @@ public class DataLoaderClimaCell {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    print("Request failed with HTTP status \(httpResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
                 print("Miasma received from the ClimaCell API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -87,7 +98,7 @@ public class DataLoaderClimaCell {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromClimaCell = try decoder.decode(ClimaCellDataStructure.self, from: data!)
+                    let dataFromClimaCell = try decoder.decode(ClimaCellDataStructure.self, from: data)
                     climaCellData = dataFromClimaCell
                 }
                 catch {

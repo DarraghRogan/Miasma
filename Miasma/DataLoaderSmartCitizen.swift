@@ -454,7 +454,18 @@ public class DataLoaderSmartCitizen {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    print("Request failed with HTTP status \(httpResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
                 print("Miasma received from the SmartCitizen Present API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -465,7 +476,7 @@ public class DataLoaderSmartCitizen {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromSmartCitizenPresent = try decoder.decode(SmartCitizenPresentDataStructure.self, from: data!)
+                    let dataFromSmartCitizenPresent = try decoder.decode(SmartCitizenPresentDataStructure.self, from: data)
                     smartCitizenPresentData = dataFromSmartCitizenPresent
                     
                 }
@@ -495,8 +506,7 @@ public class DataLoaderSmartCitizen {
 //            if (error != nil) {
 //                print(error)
 //            } else {
-//                let httpResponse = response as? HTTPURLResponse
-//                print("Miasma received from the SmartCitizen Historical API")
+////                print("Miasma received from the SmartCitizen Historical API")
 //                if let data = data,
 //                   let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
 //                    print(urlContent)
@@ -506,7 +516,7 @@ public class DataLoaderSmartCitizen {
 //                //Parse JSON
 //                let decoder = JSONDecoder()
 //                do {
-//                    let dataFromSmartCitizenHistorical = try decoder.decode(SmartCitizenHistoricalDataStructure.self, from: data!)
+//                    let dataFromSmartCitizenHistorical = try decoder.decode(SmartCitizenHistoricalDataStructure.self, from: data)
 //                    smartCitizenHistoricalData = dataFromSmartCitizenHistorical
 //
 //                }

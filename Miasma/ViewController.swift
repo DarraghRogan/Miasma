@@ -548,26 +548,21 @@
     
     @IBAction func autoRunAtStartup(_ sender: Any) {
         let launcherAppId = "Darragh-Rogan.MiasmaLauncher"
+        let defaults = AppDelegate().defaults
+        let shouldEnable = autoRunAtStartup.state == .on
         
-        //        let isAuto = (sender as AnyObject).state == .on
-        //
-        //        SMLoginItemSetEnabled(launcherAppId as CFString, isAuto)
-        
-        if autoRunAtStartup.state.self == NSControl.StateValue.off{
-            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
-            SMLoginItemSetEnabled(launcherAppId as CFString, false)
+        guard SMLoginItemSetEnabled(launcherAppId as CFString, shouldEnable) else {
+            autoRunAtStartup.state = defaults.bool(forKey: "AutorunAtStartup") ? .on : .off
+            
+            let alert = NSAlert()
+            alert.alertStyle = .warning
+            alert.messageText = "Couldn’t Update Startup Setting"
+            alert.informativeText = "macOS couldn’t update Miasma’s login item. Check the Login Items section in System Settings and try again."
+            alert.runModal()
+            return
         }
-        else if autoRunAtStartup.state.self == NSControl.StateValue.on{
-            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
-            SMLoginItemSetEnabled(launcherAppId as CFString, true)
-        }
         
-        //        if autoRunAtStartup.state == NSControl.StateValue.off {
-        //            AppDelegate().defaults.set(false, forKey: "AutorunAtStartup")
-        //        }
-        //        if autoRunAtStartup.state == NSControl.StateValue.on {
-        //            AppDelegate().defaults.set(true, forKey: "AutorunAtStartup")
-        //        }
+        defaults.set(shouldEnable, forKey: "AutorunAtStartup")
     }
     
     
@@ -662,7 +657,7 @@
         
         MiasmaVersionLabel.stringValue = (nsObject.self ?? 1.00 as AnyObject) as! String
         
-        autoRunAtStartup.state.self = AppDelegate().defaults.object(forKey:"AutorunAtStartup") as? NSControl.StateValue ?? NSControl.StateValue(0)
+        autoRunAtStartup.state = AppDelegate().defaults.bool(forKey: "AutorunAtStartup") ? .on : .off
         
         if AppDelegate().defaults.integer(forKey:"ClimbingAQINotificationsWanted") == 1{
             receiveNotificationsButtonOutlet.state.self = NSControl.StateValue(rawValue: 1)

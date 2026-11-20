@@ -93,7 +93,18 @@ public class DataLoaderOpenSky {
             if (error != nil) {
                 print(error)
             } else {
-                let httpResponse = response as? HTTPURLResponse
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Request returned a non-HTTP response")
+                    return
+                }
+                guard (200..<300).contains(httpResponse.statusCode) else {
+                    print("Request failed with HTTP status \(httpResponse.statusCode)")
+                    return
+                }
+                guard let data = data else {
+                    print("Successful HTTP response contained no data")
+                    return
+                }
                 print("Received from the OpenSky API")
 //                if let data = data,
 //                    let urlContent = NSString(data: data, encoding: String.Encoding.ascii.rawValue) {
@@ -104,7 +115,7 @@ public class DataLoaderOpenSky {
                 //Parse JSON
                 let decoder = JSONDecoder()
                 do {
-                    let dataFromOpenSky = try decoder.decode(OpenSkyDataStructure.self, from: data!)
+                    let dataFromOpenSky = try decoder.decode(OpenSkyDataStructure.self, from: data)
                     openSkyData = dataFromOpenSky
                     //                    let counts = openSkyData.states?.count
                     //                    print(counts)
