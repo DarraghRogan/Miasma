@@ -38,7 +38,7 @@ var dailyAtmosphericCO2Data = DailyAtmosphericCO2DataStructure()
         ]
 
         let request = NSMutableURLRequest(url: NSURL(string:
-            "https://daily-atmosphere-carbon-dioxide-concentration.p.rapidapi.com/api/co2-api")! as URL,
+            "https://global-warming.org/api/co2-api")! as URL,
                                                 cachePolicy: .useProtocolCachePolicy,
                                                 timeoutInterval: 10.0)
         
