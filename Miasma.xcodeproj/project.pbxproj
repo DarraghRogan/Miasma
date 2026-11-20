@@ -186,7 +186,6 @@
 		023BBDF625251AC5006E8054 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		023BBDFD25251AE2006E8054 /* Miasma iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Miasma iOS.entitlements"; sourceTree = "<group>"; };
 		0241630B253B577100441270 /* Locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Locations.plist; sourceTree = "<group>"; };
-		02416310253B57A900441270 /* StationLocationWAQI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StationLocationWAQI.swift; sourceTree = "<group>"; };
 		025AE4D0285683B600BAC05E /* DataLoaderGlobalWarming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLoaderGlobalWarming.swift; sourceTree = "<group>"; };
 		02624DDC284232920076F8FF /* BannerAdViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerAdViewControllerRepresentable.swift; sourceTree = "<group>"; };
 		02624DDE284232FE0076F8FF /* SwiftUIBannerAd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIBannerAd.swift; sourceTree = "<group>"; };
@@ -382,7 +381,6 @@
 				0283DD8E24F051BF00E4CC07 /* Main.storyboard */,
 				0283DD9C24F0568000E4CC07 /* Menu.swift */,
 				0283DD9224F051BF00E4CC07 /* Miasma.entitlements */,
-				02416310253B57A900441270 /* StationLocationWAQI.swift */,
 				0283DD8A24F051B700E4CC07 /* ViewController.swift */,
 			);
 			path = Miasma;
@@ -1024,7 +1022,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1034,7 +1032,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.29;
+				MARKETING_VERSION = 1.30;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -1051,7 +1049,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 37;
+				CURRENT_PROJECT_VERSION = 38;
 				DEAD_CODE_STRIPPING = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				EXCLUDED_ARCHS = "";
@@ -1061,7 +1059,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
-				MARKETING_VERSION = 1.29;
+				MARKETING_VERSION = 1.30;
 				PRODUCT_BUNDLE_IDENTIFIER = "Darragh-Rogan.Miasma";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
