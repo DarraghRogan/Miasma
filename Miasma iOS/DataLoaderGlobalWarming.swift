@@ -29,7 +29,7 @@ var globalWarmingData = GlobalWarmingDataStructure()
  public class DataLoaderGlobalWarming {
 
     
-    func loadGlobalWarmingData() {
+    func loadGlobalWarmingData(onComplete: @escaping () -> Void = {}) {
         
         let headers = [
             "Accept": "application/json",
@@ -47,8 +47,9 @@ var globalWarmingData = GlobalWarmingDataStructure()
 
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
+            defer { onComplete() }
+            if let error {
+                print(error.localizedDescription)
             } else {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     print("Request returned a non-HTTP response")

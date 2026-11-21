@@ -21,26 +21,34 @@ class WAQIhereViewModel: ObservableObject {
 
     @Published var wAQIdata: WAQIDataClass = WAQIDataClass()
 
-    var wAQICancellationToken: AnyCancellable?
+    @Published var loadState: DataLoadState = .idle
 
-    init() {
-        getWAQIhere()
-    }
+
+    var wAQICancellationToken: AnyCancellable?
 
 }
 
 extension WAQIhereViewModel {
 
-    func getWAQIhere() {
+    func getWAQIhere(onComplete: @escaping () -> Void = {}) {
+        loadState = .loading
         wAQICancellationToken = WAQIhereDB.request(.city)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
             })
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: {
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.loadState = .loaded
+                    onComplete()
+                case .failure(let error):
+                    self.loadState = .failed(error.localizedDescription)
+                    onComplete()
+                }
+            }, receiveValue: {
                     self.wAQIdata = $0.wAQIdata
-                  })
+            })
 //        print(ProfileEditor().SensorID)
 //        print(_wAQIdata)
     }

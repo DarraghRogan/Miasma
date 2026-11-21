@@ -15,9 +15,10 @@ public struct ContentView: View {
     
     @State var showingProfile = false
     
-    @State var ProgressIndicatorShown = true
+    @State var ProgressIndicatorShown = false
     
     @State var airQualityDataSource: String = ProfileEditor().AirQualityDataSource
+    @State private var activeScreenID = UUID()
     
     public var body: some View {
                 
@@ -26,10 +27,13 @@ public struct ContentView: View {
             switch (airQualityDataSource) {
             case _ where airQualityDataSource == "WAQI/AQICN" :
                 ContentViewWAQI()
+                    .id(activeScreenID)
             case _ where airQualityDataSource == "PurpleAir" :
                 ContentViewPurpleAir()
+                    .id(activeScreenID)
             case _ where airQualityDataSource == "SmartCitizen" :
                 ContentViewSmartCitizen()
+                    .id(activeScreenID)
             default:
                 Link("Miasma ⇀",
                      destination: URL(string: "https://miasma.app")!)
@@ -69,18 +73,8 @@ public struct ContentView: View {
         .background(LinearGradient(gradient: Gradient(colors: [.purple, .gray]), startPoint: .leading, endPoint: .trailing))
         .sheet(isPresented: $showingProfile,
                onDismiss: {
-                if ProfileEditor().AirQualityDataSource == "WAQI/AQICN"{
-                    airQualityDataSource = "WAQI/AQICN"
-                    ContentViewWAQI().updateListEntry()
-                }
-                else if ProfileEditor().AirQualityDataSource == "PurpleAir"{
-                    airQualityDataSource = "PurpleAir"
-                    ContentViewPurpleAir().updateListEntry()
-                }
-                else if ProfileEditor().AirQualityDataSource == "SmartCitizen"{
-                    airQualityDataSource = "SmartCitizen"
-                    ContentViewPurpleAir().updateListEntry()
-                }
+                airQualityDataSource = ProfileEditor().AirQualityDataSource
+                activeScreenID = UUID()
                }) {
             ProfileHost()
         }

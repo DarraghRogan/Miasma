@@ -9,6 +9,13 @@
 import Foundation
 import Combine
 
+enum DataLoadState: Equatable {
+    case idle
+    case loading
+    case loaded
+    case failed(String)
+}
+
 struct SmartCitizenResponse: Codable {
     let smartCitizenData: DataClass
     let hardware: SmartCitizenHardwareInfo?
@@ -30,28 +37,36 @@ class SmartCitizenViewModel: ObservableObject {
     @Published var stationVersion: String? = nil
     @Published var stationLocation: DataLocation? = nil
 
-    var smartCitizenCancellationToken: AnyCancellable?
+    @Published var loadState: DataLoadState = .idle
 
-    init() {
-        getSmartCitizen()
-    }
+
+    var smartCitizenCancellationToken: AnyCancellable?
 
 }
 
 extension SmartCitizenViewModel {
 
-    func getSmartCitizen() {
+    func getSmartCitizen(onComplete: @escaping () -> Void = {}) {
+        loadState = .loading
         smartCitizenCancellationToken = SmartCitizenDB.request(.station)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
             })
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: {
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.loadState = .loaded
+                    onComplete()
+                case .failure(let error):
+                    self.loadState = .failed(error.localizedDescription)
+                    onComplete()
+                }
+            }, receiveValue: {
                     self.smartCitizenData = $0.smartCitizenData
                     self.stationVersion = $0.hardware?.version
                     self.stationLocation = $0.location
-                  })
+            })
 //        print(ProfileEditor().SensorID)
 //        print(smartCitizenData)
     }
@@ -103,7 +118,7 @@ extension SmartCitizenDB {
 
     static func request(_ path: SmartCitizenAPIPath) -> AnyPublisher<SmartCitizenResponse, Error> {
 
-        guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
+        guard let components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
         //        components.queryItems = [URLQueryItem(name: "token", value: APIKeyWAQI)]
 
@@ -274,8 +289,8 @@ class JSONNull: Codable, Hashable {
         return true
     }
 
-    public var hashValue: Int {
-        return 0
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(0)
     }
 
     public init() {}

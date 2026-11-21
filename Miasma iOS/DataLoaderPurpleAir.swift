@@ -21,27 +21,34 @@ class PurpleAirViewModel: ObservableObject {
 
     @Published var purpleAirdata: Sensor = Sensor()
 
+    @Published var loadState: DataLoadState = .idle
+
+
     var purpleAirCancellationToken: AnyCancellable?
-
-    init() {
-        getPurpleAir()
-
-    }
 
 }
 
 extension PurpleAirViewModel {
 
-    func getPurpleAir() {
+    func getPurpleAir(onComplete: @escaping () -> Void = {}) {
+        loadState = .loading
         purpleAirCancellationToken = PurpleAirDB.request(.station)
             .mapError({ (error) -> Error in
                 print(error)
                 return error
             })
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: {
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.loadState = .loaded
+                    onComplete()
+                case .failure(let error):
+                    self.loadState = .failed(error.localizedDescription)
+                    onComplete()
+                }
+            }, receiveValue: {
                     self.purpleAirdata = $0.purpleAirdata
-                  })
+            })
 //        print(purpleAirdata)
     }
 }

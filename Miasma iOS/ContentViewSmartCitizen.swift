@@ -13,7 +13,7 @@ public struct ContentViewSmartCitizen: View {
     
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
     
-    @ObservedObject var smartCitizenViewModel = SmartCitizenViewModel()
+    @StateObject private var smartCitizenViewModel = SmartCitizenViewModel()
 
     private var usesVersion23SensorLayout: Bool {
         smartCitizenViewModel.stationVersion == "2.3"
@@ -52,11 +52,12 @@ public struct ContentViewSmartCitizen: View {
             : CLLocationCoordinate2D(latitude: 53.3412, longitude: -6.2507)
     }
     
-    @ObservedObject var wAQIhereViewModel = WAQIhereViewModel()
+    @StateObject private var wAQIhereViewModel = WAQIhereViewModel()
     
-    @ObservedObject var telraamViewModel = TelraamViewModel()
+    @StateObject private var telraamViewModel = TelraamViewModel()
     
-    @State var ProgressIndicatorShown = true
+    @State var ProgressIndicatorShown = false
+    @State private var tomorrowWeatherError: String? = nil
     
     // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.3412
@@ -197,12 +198,11 @@ public struct ContentViewSmartCitizen: View {
                     .trim(from: 0, to: 100)
                     .stroke(nonStrokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut)
                 Circle()
                     .trim(from: 0, to: CGFloat(fractionCompleted))
                     .stroke(strokeColor, style: StrokeStyle(lineWidth: CGFloat(strokeWidth), lineCap: .round))
                     .rotationEffect(.degrees(-90))
-                    .animation(.easeInOut)
+                    .animation(.easeInOut, value: fractionCompleted)
             }
         }
     }
@@ -224,12 +224,27 @@ public struct ContentViewSmartCitizen: View {
             List
             {
                 
+                if case .loading = smartCitizenViewModel.loadState {
+                    ProgressView("Loading SmartCitizen data…")
+                        .font(.caption)
+                }
+                if ProfileEditor().OneHourForecastDataWanted, let tomorrowWeatherError {
+                    Label("Tomorrow.io weather unavailable: \(tomorrowWeatherError)", systemImage: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+                if case .failed(let message) = smartCitizenViewModel.loadState {
+                    Label("SmartCitizen data unavailable: \(message)", systemImage: "exclamationmark.triangle.fill")
+                        .font(.caption)
+                        .foregroundColor(.red)
+                }
+
                 VStack{
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
                     Link("\(Image(systemName: "house")) \(smartCitizenLocation?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
-                         destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
+                         destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)") ?? URL(string: "https://smartcitizen.me/kits/")!)
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 0.0)
@@ -243,8 +258,7 @@ public struct ContentViewSmartCitizen: View {
                         .padding(.top, 0.5)
                         .padding(.bottom, 7.0)
                         .font(.subheadline)
-                        .animation(.easeInOut)
-                        
+                                                
                         Divider()
                         
                         VStack{
@@ -304,7 +318,7 @@ public struct ContentViewSmartCitizen: View {
                         
                         if !usesVersion23SensorLayout {
                             ZStack{
-                                ProgressView("", value: Float16(pressureSensorValue)-980, total: 50)
+                                ProgressView("", value: min(max(Float(pressureSensorValue) - 980, 0), 50), total: 50)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
@@ -355,8 +369,7 @@ public struct ContentViewSmartCitizen: View {
                             .progressViewStyle(aQIProgressBarStyle())
                             .padding(.bottom, 7.0)
                             .font(.subheadline)
-                            .animation(.easeInOut)
-                            Divider()
+                                                        Divider()
                             ZStack{
                                 ProgressView("", value: Float16(wAQIhereViewModel.wAQIdata.iaqi?.w?.v ?? 0), total: 10)
                                     .progressViewStyle(GaugeProgressStyle())
@@ -600,8 +613,7 @@ public struct ContentViewSmartCitizen: View {
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 8.0)
                                 .font(.subheadline)
-                                .animation(.easeInOut)
-                        }
+                                                        }
                     }
                     .ignoresSafeArea()
                     
@@ -843,33 +855,41 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
     public func updateListEntry() {
         
         ProgressIndicatorShown = true
+        let initialDataGroup = DispatchGroup()
         
-        smartCitizenViewModel.getSmartCitizen()
-        smartCitizenViewModel.objectWillChange.send()
+        initialDataGroup.enter()
+        smartCitizenViewModel.getSmartCitizen { initialDataGroup.leave() }
+        
         
         if ProfileEditor().AirQualityLocalToDevice == true
         {
-            wAQIhereViewModel.getWAQIhere()
-            wAQIhereViewModel.objectWillChange.send()
+            initialDataGroup.enter()
+            wAQIhereViewModel.getWAQIhere { initialDataGroup.leave() }
+            
         }
         
         if ProfileEditor().TelraamDataWanted == true
         {
-            telraamViewModel.getTelraam()
-            telraamViewModel.objectWillChange.send()
+            initialDataGroup.enter()
+            telraamViewModel.getTelraam { initialDataGroup.leave() }
+            
         }
         
         if ProfileEditor().ClimateChangeStats == true
         {
-            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data()
-            DataLoaderGlobalWarming().loadGlobalWarmingData()
+            initialDataGroup.enter()
+            DataLoaderDailyAtmosphericCO2().loadDailyAtmosphericCO2Data { initialDataGroup.leave() }
+            initialDataGroup.enter()
+            DataLoaderGlobalWarming().loadGlobalWarmingData { initialDataGroup.leave() }
         }
         
-        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: (ProfileEditor().SensorID) as? String ?? String())
-        
-        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: (ProfileEditor().SensorID) as? String ?? String())
-        
-        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1w(id: (ProfileEditor().SensorID) as? String ?? String())
+        let sensorID = ProfileEditor().SensorID
+        initialDataGroup.enter()
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1d(id: sensorID) { initialDataGroup.leave() }
+        initialDataGroup.enter()
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1y(id: sensorID) { initialDataGroup.leave() }
+        initialDataGroup.enter()
+        DataLoaderSmartCitizenHistorical().loadSmartCitizenHistoricalData1w(id: sensorID) { initialDataGroup.leave() }
         
         func generatesmartCitizen24HourAverage(pm25historicalString:String) -> String{
             
@@ -944,8 +964,9 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
         
         
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.05) { // sort of URL session task
-            DispatchQueue.main.async { // you need to update it in main thread!
+        let enrichmentGroup = DispatchGroup()
+        initialDataGroup.notify(queue: .main) {
+
                 
                 print("running +3s data loaders")
                 
@@ -1035,14 +1056,20 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
-                    DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude))
+                    enrichmentGroup.enter()
+                    DataLoaderCO2().loadCO2Data(lat: String(sensorLatitude), lon: String(sensorLongitude)) {
+                        enrichmentGroup.leave()
+                    }
                 }
                 
                 
                 
                 if ProfileEditor().OneHourForecastDataWanted == true
                 {
-                    DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude)
+                    enrichmentGroup.enter()
+                    DataLoaderClimaCell().loadClimaCellData(lat: sensorLatitude, lon: sensorLongitude) {
+                        enrichmentGroup.leave()
+                    }
                 }
                 
                 if ProfileEditor().ClimateChangeStats == true
@@ -1057,10 +1084,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                         let dailyAtmosphericCO2Data365DaysAgo = dailyAtmosphericCO2DataArray365DaysAgo?.trend ?? "0"
                         let cO2PPMLastAnnualDelta = ((dailyAtmosphericCO2Data.co2?.last?.trend ?? "0") as NSString).doubleValue - (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue
                         
-                        let dailyAtmosphericCO2DataArray730DaysAgo = dailyAtmosphericCO2Data.co2?[dailyAtmosphericCO2DataArraySize-730]
-                        let dailyAtmosphericCO2Data730DaysAgo = dailyAtmosphericCO2DataArray730DaysAgo?.trend ?? "0"
-                        let cO2PPMPrecedingAnnualDelta = (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue - (dailyAtmosphericCO2Data730DaysAgo as NSString).doubleValue
-                        
+                                                
                         cO2PPMLastYearOnYearDeltaPercentage = (cO2PPMLastAnnualDelta / (dailyAtmosphericCO2Data365DaysAgo as NSString).doubleValue) * 100
                         
                         let daysSinceUNEPMilestone = ((((Date.timeIntervalSinceReferenceDate - 599529600)/60)/60)/24)
@@ -1111,15 +1135,14 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     globalWarmingLastTime = globalWarmingData.result?.last?.time ?? "◌"
                     
                 }
-            }
-        }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 6.05) { // sort of URL session task
+        enrichmentGroup.notify(queue: .main) {
             DispatchQueue.main.async { // you need to update it in main thread!
                 
                 print("updating +6s list entries")
                 
                 ProgressIndicatorShown = false
+                self.tomorrowWeatherError = climaCellErrorMessage
                 
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
@@ -1133,29 +1156,26 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 
                 
                 // a little protection for when over API calls to ClimaCell, a la : https://stackoverflow.com/questions/25976909/swift-array-check-if-an-index-exists
-                var isIndexValid: Bool = false
-                if 2 < climaCellData.data?.timelines?[0].intervals?.count ?? 0 {
-                    isIndexValid = true
-                } else {
-                    
-                }
+                let weatherIntervals = climaCellData.data?.timelines?.first?.intervals ?? []
+                let weatherIntervalIndex = max(0, min(1, weatherIntervals.count - 1))
+                let isIndexValid = !weatherIntervals.isEmpty
                 
                 if ProfileEditor().OneHourForecastDataWanted == true && isIndexValid == true
                 {
                     
-                    self.climaCellWindDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
-                    self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
-                    self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[1].values?.windSpeed ?? 0
-                    self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[1].values?.epaIndex ?? 0
-                    self.uvIndex = climaCellData.data?.timelines?[0].intervals?[1].values?.uvIndex ?? 0
-                    self.precipitationProbability = climaCellData.data?.timelines?[0].intervals?[1].values?.precipitationProbability ?? 0
-                    self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.treeIndex ?? 0)
-                    self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.grassIndex ?? 0)
-                    self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[1].values?.weedIndex ?? 0)
-                    self.rainAccumulation = climaCellData.data?.timelines?[0].intervals?[1].values?.rainAccumulation ?? 0
+                    self.climaCellWindDirection = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.windDirection ?? 0
+                    self.climaCellFeelsLike = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.temperatureApparent ?? 0
+                    self.climaCellWindSpeed = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.windSpeed ?? 0
+                    self.climaCellEPAAQI = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.epaIndex ?? 0
+                    self.uvIndex = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.uvIndex ?? 0
+                    self.precipitationProbability = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.precipitationProbability ?? 0
+                    self.climaCellPollenTree = Int(climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.treeIndex ?? 0)
+                    self.climaCellPollenGrass = Int(climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.grassIndex ?? 0)
+                    self.climaCellPollenWeed = Int(climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.weedIndex ?? 0)
+                    self.rainAccumulation = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.rainAccumulation ?? 0
 
                     
-                    let windDirection = climaCellData.data?.timelines?[0].intervals?[1].values?.windDirection ?? 0
+                    let windDirection = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.windDirection ?? 0
                     // directiosn from http://www.angelfire.com/space/one1/cal.html
                     switch (windDirection) {
                     case _ where windDirection < 45:
@@ -1178,9 +1198,8 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                         self.windDirection_acronymn = ""
                     }
                     
-                    let climaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[1].values?.epaPrimaryPollutant ?? 0
-                    var ClimaCellPrimaryPollutantText: String
-                    switch climaCellPrimaryPollutant {
+                    let climaCellPrimaryPollutant = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.epaPrimaryPollutant ?? 0
+                                        switch climaCellPrimaryPollutant {
                     case _ where climaCellPrimaryPollutant == 0:
                         climaCellEPAPrimaryPollutant = "PM₂.₅"
                     case _ where climaCellPrimaryPollutant == 1:
@@ -1192,13 +1211,13 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     case _ where climaCellPrimaryPollutant == 4:
                         climaCellEPAPrimaryPollutant = "CO"
                     case _ where climaCellPrimaryPollutant == 5:
-                        ClimaCellPrimaryPollutantText = "SO₂"
+                        climaCellEPAPrimaryPollutant = "SO₂"
                     default:
                         climaCellEPAPrimaryPollutant = "Unknown"
                     }
                     
                     
-                    let climaCellWeatherCodeNumeric = climaCellData.data?.timelines?[0].intervals?[1].values?.weatherCode ?? 0
+                    let climaCellWeatherCodeNumeric = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.weatherCode ?? 0
                     switch climaCellWeatherCodeNumeric {
                     case _ where climaCellWeatherCodeNumeric == 1000:
                         climaCellWeatherCode = "Clear"
@@ -1257,7 +1276,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     }
                     
                     // Calculate Farenheit from Celcius for ClimaCell
-                    celciusForCalculationClimaCell = climaCellData.data?.timelines?[0].intervals?[1].values?.temperatureApparent ?? 0
+                    celciusForCalculationClimaCell = climaCellData.data?.timelines?[0].intervals?[weatherIntervalIndex].values?.temperatureApparent ?? 0
                     func calculateFahrenheit(celcius: Double) -> String {
                         var fahrenheit: Double
                         fahrenheit = (celcius  * 9 / 5) + 32
@@ -1267,6 +1286,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     self.fahrenheitForDisplayClimaCell = calculateFahrenheit(celcius: celciusForCalculationClimaCell)
                 }
             }
+        }
         }
     }
     

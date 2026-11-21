@@ -31,13 +31,9 @@ var dailyAtmosphericCO2Data = DailyAtmosphericCO2DataStructure()
  public class DataLoaderDailyAtmosphericCO2 {
 
 
-    func loadDailyAtmosphericCO2Data() {
+    func loadDailyAtmosphericCO2Data(onComplete: @escaping () -> Void = {}) {
 
-        let headers = [
-            "Accept": "application/json",
-            "x-rapidapi-host": "daily-atmosphere-carbon-dioxide-concentration.p.rapidapi.com",
-            "x-rapidapi-key": "\(APIKeyDailyAtmosphericCO2)"
-        ]
+        let headers = ["Accept": "application/json"]
 
         let request = NSMutableURLRequest(url: NSURL(string:
             "https://global-warming.org/api/co2-api")! as URL,
@@ -51,8 +47,9 @@ var dailyAtmosphericCO2Data = DailyAtmosphericCO2DataStructure()
 
         let session = URLSession.shared
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
+            defer { onComplete() }
+            if let error {
+                print(error.localizedDescription)
             } else {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     print("Request returned a non-HTTP response")

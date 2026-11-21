@@ -36,9 +36,11 @@ struct Properties {
 
 class TelraamViewModel: ObservableObject {
     @Published var telraamData = Feature(properties: Properties())
+    @Published var loadState: DataLoadState = .idle
     private var dataTask: URLSessionDataTask?
 
-    func getTelraam() {
+    func getTelraam(onComplete: @escaping () -> Void = {}) {
+        loadState = .loading
         let segmentID = ProfileEditor().segmentID
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -46,7 +48,11 @@ class TelraamViewModel: ObservableObject {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.string(from: Date())
 
-        guard let url = URL(string: "https://telraam-api.net/v1/reports/traffic") else { return }
+        guard let url = URL(string: "https://telraam-api.net/v1/reports/traffic") else {
+            loadState = .failed("Invalid Telraam URL")
+            onComplete()
+            return
+        }
         var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -61,12 +67,29 @@ class TelraamViewModel: ObservableObject {
 
         dataTask?.cancel()
         dataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard error == nil,
-                  let response = response as? HTTPURLResponse,
-                  (200..<300).contains(response.statusCode),
-                  let data,
+            var failureMessage: String?
+            defer {
+                DispatchQueue.main.async {
+                    self?.loadState = failureMessage.map(DataLoadState.failed) ?? .loaded
+                    onComplete()
+                }
+            }
+
+            guard error == nil else {
+                failureMessage = error?.localizedDescription ?? "Request failed"
+                return
+            }
+            guard let response = response as? HTTPURLResponse,
+                  (200..<300).contains(response.statusCode) else {
+                failureMessage = "Telraam returned an unsuccessful response"
+                return
+            }
+            guard let data,
                   let reports = try? JSONDecoder().decode(TelraamDataStructure.self, from: data).report,
-                  !reports.isEmpty else { return }
+                  !reports.isEmpty else {
+                failureMessage = "Telraam returned no traffic readings"
+                return
+            }
 
             let totals = reports.reduce(into: TelraamReport()) { total, report in
                 total.pedestrian = (total.pedestrian ?? 0) + (report.pedestrian ?? 0)
