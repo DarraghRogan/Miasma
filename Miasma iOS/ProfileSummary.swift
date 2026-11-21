@@ -6,7 +6,6 @@
  */
 
 import SwiftUI
-import AppTrackingTransparency
 
 let nsObject: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject
 

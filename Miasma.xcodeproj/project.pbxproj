@@ -27,11 +27,9 @@
 		023BBDF225251AC5006E8054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF125251AC5006E8054 /* Assets.xcassets */; };
 		023BBDF525251AC5006E8054 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 023BBDF425251AC5006E8054 /* Preview Assets.xcassets */; };
 		025AE4D1285683B600BAC05E /* DataLoaderGlobalWarming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025AE4D0285683B600BAC05E /* DataLoaderGlobalWarming.swift */; };
-		02624DE12842513E0076F8FF /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02624DE02842513E0076F8FF /* AppTrackingTransparency.framework */; };
 		0269848225251DB7002BFB88 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848125251DB7002BFB88 /* APIKeys.swift */; };
 		0269848725251DD5002BFB88 /* DataLoaderWAQI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0269848625251DD5002BFB88 /* DataLoaderWAQI.swift */; };
 		0274ACB025037DC7005AB5A9 /* DataLoaderCO2Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0274ACAF25037DC7005AB5A9 /* DataLoaderCO2Signal.swift */; };
-		028199F22EEE230900D609CC /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 028199F12EEE230900D609CC /* GoogleMobileAds */; };
 		0283DD8924F051B700E4CC07 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8824F051B700E4CC07 /* AppDelegate.swift */; };
 		0283DD8B24F051B700E4CC07 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0283DD8A24F051B700E4CC07 /* ViewController.swift */; };
 		0283DD8D24F051BF00E4CC07 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0283DD8C24F051BF00E4CC07 /* Assets.xcassets */; };
@@ -63,7 +61,6 @@
 		02F3C75624FA53A5006ED277 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F3C75524FA53A5006ED277 /* AppDelegate.swift */; };
 		02F3C76824FA5487006ED277 /* MiasmaLauncher.app in Resources */ = {isa = PBXBuildFile; fileRef = 02F3C75324FA53A5006ED277 /* MiasmaLauncher.app */; };
 		02F3C77024FA54B4006ED277 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02F3C76F24FA54B4006ED277 /* ServiceManagement.framework */; };
-		C8F1147075CD7F8C11D5BFD3 /* Pods_Miasma_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B82A42B0FD5F8FE3F996AD6 /* Pods_Miasma_iOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,9 +243,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				028199F22EEE230900D609CC /* GoogleMobileAds in Frameworks */,
-				C8F1147075CD7F8C11D5BFD3 /* Pods_Miasma_iOS.framework in Frameworks */,
-				02624DE12842513E0076F8FF /* AppTrackingTransparency.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,7 +523,6 @@
 			);
 			mainGroup = 0283DD7C24F051B700E4CC07;
 			packageReferences = (
-				028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 0283DD8624F051B700E4CC07 /* Products */;
 			projectDirPath = "";
@@ -807,7 +800,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Miasma iOS/Info.plist";
@@ -835,7 +828,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Miasma iOS/Miasma iOS.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				DEVELOPMENT_ASSET_PATHS = "\"Miasma iOS/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Miasma iOS/Info.plist";
@@ -1132,25 +1125,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 12.14.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		028199F12EEE230900D609CC /* GoogleMobileAds */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 028199F02EEE230900D609CC /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
-			productName = GoogleMobileAds;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0283DD7D24F051B700E4CC07 /* Project object */;
 }
