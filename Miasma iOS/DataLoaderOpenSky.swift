@@ -90,8 +90,8 @@ public class DataLoaderOpenSky {
         let session = URLSession.shared
         
         let dataTask = session.dataTask(with: request as URLRequest, completionHandler: { (data, response, error) -> Void in
-            if (error != nil) {
-                print(error)
+            if let error {
+                print(error.localizedDescription)
             } else {
                 guard let httpResponse = response as? HTTPURLResponse else {
                     print("Request returned a non-HTTP response")
