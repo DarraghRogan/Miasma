@@ -14,6 +14,43 @@ public struct ContentViewSmartCitizen: View {
     // Heavly implementing combine per https://engineering.nodesagency.com/categories/ios/2020/03/16/Combine-networking-with-a-hint-of-swiftUI
     
     @ObservedObject var smartCitizenViewModel = SmartCitizenViewModel()
+
+    private var usesVersion23SensorLayout: Bool {
+        smartCitizenViewModel.stationVersion == "2.3"
+    }
+
+    private func sensorValue(at index: Int) -> Double {
+        guard let sensors = smartCitizenViewModel.smartCitizenData.sensors,
+              sensors.indices.contains(index) else { return 0 }
+        return sensors[index].value ?? 0
+    }
+
+    private func sensorUnit(at index: Int) -> String {
+        guard let sensors = smartCitizenViewModel.smartCitizenData.sensors,
+              sensors.indices.contains(index) else { return "" }
+        return sensors[index].unit ?? ""
+    }
+
+    private var pm25SensorValue: Double { sensorValue(at: usesVersion23SensorLayout ? 9 : 6) }
+    private var temperatureSensorValue: Double { sensorValue(at: usesVersion23SensorLayout ? 18 : 9) }
+    private var humiditySensorValue: Double { sensorValue(at: usesVersion23SensorLayout ? 17 : 8) }
+    private var pressureSensorValue: Double { sensorValue(at: 4) * 10 }
+
+    private var smartCitizenLocation: DataLocation? {
+        smartCitizenViewModel.stationLocation ?? smartCitizenViewModel.smartCitizenData.location
+    }
+
+    private var smartCitizenMapCoordinate: CLLocationCoordinate2D {
+        let location = smartCitizenLocation
+        guard let latitude = location?.latitude,
+              let longitude = location?.longitude else {
+            return CLLocationCoordinate2D(latitude: 53.3412, longitude: -6.2507)
+        }
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        return CLLocationCoordinate2DIsValid(coordinate)
+            ? coordinate
+            : CLLocationCoordinate2D(latitude: 53.3412, longitude: -6.2507)
+    }
     
     @ObservedObject var wAQIhereViewModel = WAQIhereViewModel()
     
@@ -24,7 +61,6 @@ public struct ContentViewSmartCitizen: View {
     // the default location has top-notch food :-) (pork with fish sauce for the win)
     @State var sensorLatitude: Double = 53.3412
     @State var sensorLongitude: Double = -6.2507
-    @State var locationCoordinate = CLLocationCoordinate2DMake(53.3412, -6.2507)
     
     // Defining VARs for CO2 Signal
     //    @State var fossilFuelPercentage_visual: String = "[__________]"
@@ -175,7 +211,7 @@ public struct ContentViewSmartCitizen: View {
         
         VStack
         {
-            MapView(coordinate: locationCoordinate)
+            MapView(coordinate: smartCitizenMapCoordinate)
             //                .edgesIgnoringSafeArea(.top)
                 .frame(height: 100)
                 .opacity(0.7)
@@ -192,7 +228,7 @@ public struct ContentViewSmartCitizen: View {
                     if ProgressIndicatorShown == true{
                         ProgressView()
                     }
-                    Link("\(Image(systemName: "house")) \(smartCitizenViewModel.smartCitizenData.location?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
+                    Link("\(Image(systemName: "house")) \(smartCitizenLocation?.city ?? "◌") ᴀɪʀ ǫᴜᴀʟɪᴛʏ",
                          destination: URL(string: "https://smartcitizen.me/kits/\(ProfileEditor().SensorID)" ?? "https://smartcitizen.me/kits/")!)
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -201,7 +237,7 @@ public struct ContentViewSmartCitizen: View {
                     HStack {
                         ProgressView("""
                         \(Int(aQI_CalculatedRounded)) ᴜs ᴇᴘᴀ ᴀǫɪ  /
-                        \(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0))) µɢ/ᴍ³ ᴘᴍ₂.₅
+                        \(String(Int(pm25SensorValue))) µɢ/ᴍ³ ᴘᴍ₂.₅
                         """, value: aQI_CalculatedRounded, total: 500)
                         .progressViewStyle(aQIProgressBarStyle())
                         .padding(.top, 0.5)
@@ -231,7 +267,7 @@ public struct ContentViewSmartCitizen: View {
                     
                     HStack {
                         ZStack{
-                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)+17.78, total: 57)
+                            ProgressView("", value: Float16(temperatureSensorValue)+17.78, total: 57)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
@@ -239,7 +275,7 @@ public struct ContentViewSmartCitizen: View {
                             VStack{
                                 Text("🌡")
                                     .font(.subheadline)
-                                Text("\(String(format: "%.1f", locale: Locale.current, (smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)))℃")
+                                Text("\(String(format: "%.1f", locale: Locale.current, (temperatureSensorValue)))℃")
                                     .font(.caption)
                                 Text("/ \(self.fahrenheitForDisplaySmartCitizen)℉")
                                     .font(.caption)
@@ -249,7 +285,7 @@ public struct ContentViewSmartCitizen: View {
                         Spacer()
                         
                         ZStack{
-                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0), total: 100)
+                            ProgressView("", value: Float16(humiditySensorValue), total: 100)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
@@ -257,7 +293,7 @@ public struct ContentViewSmartCitizen: View {
                             VStack{
                                 Text("💧")
                                     .font(.subheadline)
-                                Text("\(String(Int(smartCitizenViewModel.smartCitizenData.sensors?[9].value ?? 0)))%")
+                                Text("\(String(Int(humiditySensorValue)))%")
                                     .font(.caption)
                                 Text("ʀᴇʟ. ʜᴜᴍ.")
                                     .font(.caption)
@@ -266,8 +302,9 @@ public struct ContentViewSmartCitizen: View {
                         
                         Spacer()
                         
-                        ZStack{
-                            ProgressView("", value: Float16(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 98)-98, total: 5)
+                        if !usesVersion23SensorLayout {
+                            ZStack{
+                                ProgressView("", value: Float16(pressureSensorValue)-980, total: 50)
                                 .progressViewStyle(GaugeProgressStyle())
                                 .frame(width: 70, height: 70)
                                 .contentShape(Rectangle())
@@ -275,19 +312,29 @@ public struct ContentViewSmartCitizen: View {
                             VStack{
                                 Text("🌬️")
                                     .font(.subheadline)
-                                Text("\(String(format: "%.1f", locale: Locale.current,(smartCitizenViewModel.smartCitizenData.sensors?[5].value ?? 0)*10))mb")
+                                Text("\(String(format: "%.1f", locale: Locale.current,pressureSensorValue))mb")
                                     .font(.caption)
                                 Text("ᴘʀᴇs.")
                                     .font(.caption)
                             }
                         }
+                        }
                         
                     }
                     .padding(.bottom, 4.0)
+
+                    if usesVersion23SensorLayout {
+                        HStack {
+                            Text("☀️ UVA: \(Int(sensorValue(at: 0))) \(sensorUnit(at: 0)) / UVB: \(Int(sensorValue(at: 1))) \(sensorUnit(at: 1)) / UVC: \(Int(sensorValue(at: 2))) \(sensorUnit(at: 2))")
+                            Spacer()
+                            Text("🎤 Noise: \(Int(sensorValue(at: 19))) \(sensorUnit(at: 19)) / Ambient light: \(Int(sensorValue(at: 5))) \(sensorUnit(at: 5))")
+                        }
+                        .font(.caption)
+                    }
                 }
                 
                 
-                if ProfileEditor().AirQualityLocalToDevice == true
+                if ProfileEditor().AirQualityLocalToDevice == true && ProfileEditor().AirQualityDataSource == "WAQI/AQICN"
                 {
                     VStack{
                         if ProgressIndicatorShown == true{
@@ -548,7 +595,7 @@ public struct ContentViewSmartCitizen: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
-                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: carbonIntensity, total: 1000)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 8.0)
@@ -905,10 +952,12 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 ProgressIndicatorShown = true
                 
                 // Get Latitude & longitude to feed into other APIs
-                self.locationCoordinate = CLLocationCoordinate2DMake(smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0, smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0)
-                
-                self.sensorLatitude = smartCitizenViewModel.smartCitizenData.location?.latitude ?? 0
-                self.sensorLongitude = smartCitizenViewModel.smartCitizenData.location?.longitude ?? 0
+                let stationLocation = smartCitizenLocation
+                if let latitude = stationLocation?.latitude,
+                   let longitude = stationLocation?.longitude {
+                    self.sensorLatitude = latitude
+                    self.sensorLongitude = longitude
+                }
                 
                 // show historical smartcitizen pm2.5 data
                 if let pm25historicalString1d = smartCitizenHistoricalData1d.readings?[1][1]
@@ -935,7 +984,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 //                print(generatesmartCitizenAnnualAverage(pm25historicalString:outputpm25historicalString1y))
                 
                 // Calculate AQI & create images
-                self.pM2_5Value = round((smartCitizenViewModel.smartCitizenData.sensors?[8].value ?? 0.0))
+                self.pM2_5Value = round((pm25SensorValue))
                 switch (pM2_5Value) {
                 case _ where pM2_5Value >= 0 && pM2_5Value < 12:
                     
@@ -977,7 +1026,7 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                     AppDelegate().defaults.set("⚪", forKey: "PreviousStateForNotification")
                 }
                 
-                self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: smartCitizenViewModel.smartCitizenData.sensors?[10].value ?? 0)
+                self.fahrenheitForDisplaySmartCitizen = calculateFahrenheit(celcius: temperatureSensorValue)
                 
                 if ProfileEditor().AirQualityLocalToDevice == true
                 {
@@ -1075,10 +1124,10 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
-                    self.cO2Country = cO2Data.countryCode ?? ""
-                    self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
+                    self.cO2Country = cO2Data.zone ?? ""
+                    self.carbonIntensity = Double(cO2Data.carbonIntensity ?? 0)
                     
-                    self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    self.fossilFuelPercentage = 0
                     
                 }
                 

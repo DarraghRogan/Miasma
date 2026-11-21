@@ -1,166 +1,89 @@
-//
-//  DataLoader.swift
-//  Miasma
-//
-//  Created by Darragh Rogan on 21/08/2020.
-//  Copyright © 2020 Darragh Rogan. All rights reserved.
-//
-
 import Foundation
 import Combine
 
-struct TelraamResponse: Codable {
-    let telraamData: [Feature]
-
-            enum CodingKeys: String, CodingKey {
-                case telraamData = "features"
-            }
-}
-
-class TelraamViewModel: ObservableObject {
-
-    @Published var telraamData = Feature()
-
-    var telraamCancellationToken: AnyCancellable?
-
-    init() {
-        getTelraam()
-//        print(telraamData)
-
-    }
-
-}
-
-extension TelraamViewModel {
-
-    func getTelraam() {
-
-        telraamCancellationToken = TelraamDB.request(.segmentID)
-            .mapError({ (error) -> Error in
-                print(error)
-                return error
-            })
-            .sink(receiveCompletion: { _ in },
-                  receiveValue: {
-                self.telraamData = $0.telraamData[0]
-            })
-    }
-}
-
-struct TelraamAPIClient {
-
-    struct Response<T> {
-        let value: T
-        let response: URLResponse
-    }
-
-    func run<T: Decodable>(_ request: URLRequest) ->
-    AnyPublisher<Response<T>, Error> {
-        return URLSession.shared
-            .dataTaskPublisher(for: request)
-            .tryMap { result -> Response<T> in
-
-                guard let httpResponse = result.response as? HTTPURLResponse else {
-                    throw URLError(.badServerResponse)
-                }
-                guard (200..<300).contains(httpResponse.statusCode) else {
-                    throw NSError(domain: "Miasma.HTTP", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "HTTP request failed with status code \(httpResponse.statusCode)"])
-                }
-                let value = try JSONDecoder().decode(
-                    T.self, from: result.data)
-
-//                print(Response<Any>.self)
-//                print(result.response)
-//                print(result.data)
-                return Response(value: value, response: result.response)
-
-            }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
-    }
-
-}
-
-enum TelraamDB {
-    static let apiClient = TelraamAPIClient()
-    static let baseUrl = URL(string: "https://telraam-api.net/v1/segments/id/\(ProfileEditor().segmentID)")!
-}
-
-enum TelraamAPIPath: String {
-    case segmentID = ""
-}
-
-extension TelraamDB {
-
-    static func request(_ path: TelraamAPIPath) -> AnyPublisher<TelraamResponse, Error> {
-
-        guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
-        else { fatalError("Couldn't create URL Components")}
-
-        var request = URLRequest(url: components.url!)
-        request.httpMethod = "GET"
-
-        let headers = ["X-Api-Key": APIKeyTelraam]
-
-        for (key, value) in headers {
-            request.setValue(value, forHTTPHeaderField: key)
-        }
-
-//        print(request.url)
-
-        return apiClient.run(request)
-
-            .map(\.value)
-            .eraseToAnyPublisher()
-
-    }
-}
-// define the strucutre of the JSON that will be decoded - came from https://app.quicktype.io
-
 struct TelraamDataStructure: Codable {
     var statusCode: Int?
-    var message, type: String?
-    var features: [Feature]?
+    var message: String?
+    var report: [TelraamReport]?
 
     enum CodingKeys: String, CodingKey {
         case statusCode = "status_code"
-        case message, type, features
+        case message, report
     }
 }
 
-// MARK: - Feature
-struct Feature: Codable {
-    var type: String?
-    //    var geometry: Geometry?
+struct TelraamReport: Codable {
+    var pedestrian: Double?
+    var bike: Double?
+    var car: Double?
+    var heavy: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case pedestrian, bike, car, heavy
+    }
+}
+
+struct Feature {
     var properties: Properties?
 }
 
-// MARK: - Geometry
-//struct Geometry: Codable {
-//    var type: String?
-//    var coordinates: [[[Double]]]?
-//}
+struct Properties {
+    var pedestrian: Double?
+    var bike: Double?
+    var car: Double?
+    var lorry: Double?
+}
 
-// MARK: - Properties
-struct Properties: Codable {
-    var oidn: Int?
-    var firstDataPackage, lastDataPackage: String?
-    //    var speed: Int?
-    //    var oneway: Bool?
-    //    var roadType, roadSpeed: String?
-    var pedestrian, bike, car, lorry: Double?
-    //    var speedHistogram: [Double]?
-    //    var speedBuckets: [Int]?
+class TelraamViewModel: ObservableObject {
+    @Published var telraamData = Feature(properties: Properties())
+    private var dataTask: URLSessionDataTask?
 
-    enum CodingKeys: String, CodingKey {
-        case oidn
-        case firstDataPackage = "first_data_package"
-        case lastDataPackage = "last_data_package"
-        //        case speed, oneway
-        //        case roadType = "road_type"
-        //        case roadSpeed = "road_speed"
-        case pedestrian, bike, car, lorry
-        //        case speedHistogram = "speed_histogram"
-        //        case speedBuckets = "speed_buckets"
+    func getTelraam() {
+        let segmentID = ProfileEditor().segmentID
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let date = dateFormatter.string(from: Date())
+
+        guard let url = URL(string: "https://telraam-api.net/v1/reports/traffic") else { return }
+        var request = URLRequest(url: url, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue(APIKeyTelraam, forHTTPHeaderField: "X-Api-Key")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: [
+            "level": "segments",
+            "id": segmentID,
+            "format": "per-hour",
+            "time_start": "\(date) 00:00:00Z",
+            "time_end": "\(date) 23:00:00Z"
+        ])
+
+        dataTask?.cancel()
+        dataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard error == nil,
+                  let response = response as? HTTPURLResponse,
+                  (200..<300).contains(response.statusCode),
+                  let data,
+                  let reports = try? JSONDecoder().decode(TelraamDataStructure.self, from: data).report,
+                  !reports.isEmpty else { return }
+
+            let totals = reports.reduce(into: TelraamReport()) { total, report in
+                total.pedestrian = (total.pedestrian ?? 0) + (report.pedestrian ?? 0)
+                total.bike = (total.bike ?? 0) + (report.bike ?? 0)
+                total.car = (total.car ?? 0) + (report.car ?? 0)
+                total.heavy = (total.heavy ?? 0) + (report.heavy ?? 0)
+            }
+
+            DispatchQueue.main.async {
+                self?.telraamData = Feature(properties: Properties(
+                    pedestrian: totals.pedestrian,
+                    bike: totals.bike,
+                    car: totals.car,
+                    lorry: totals.heavy
+                ))
+            }
+        }
+        dataTask?.resume()
     }
 }

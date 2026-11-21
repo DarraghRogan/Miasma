@@ -107,7 +107,7 @@ public class DataLoaderSmartCitizenHistorical {
             }
     
             let request = NSMutableURLRequest(url: NSURL(string:
-                                                            "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=24h")! as URL,
+                                                            "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_key=pm_avg_2.5&rollup=24h")! as URL,
                                               cachePolicy: .useProtocolCachePolicy,
                                               timeoutInterval: 10.0)
     
@@ -171,7 +171,7 @@ public class DataLoaderSmartCitizenHistorical {
         }
 
         let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=72h")! as URL,
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_key=pm_avg_2.5&rollup=72h")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
 
@@ -235,7 +235,7 @@ public class DataLoaderSmartCitizenHistorical {
         }
 
         let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=168h")! as URL,
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_key=pm_avg_2.5&rollup=168h")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
 
@@ -299,7 +299,7 @@ public class DataLoaderSmartCitizenHistorical {
         }
 
         let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=1M")! as URL,
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_key=pm_avg_2.5&rollup=1M")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
 
@@ -363,7 +363,7 @@ public class DataLoaderSmartCitizenHistorical {
         }
 
         let request = NSMutableURLRequest(url: NSURL(string:
-                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_id=87&rollup=1y")! as URL,
+                                                        "https://api.smartcitizen.me/v0/devices/\(id)/readings?sensor_key=pm_avg_2.5&rollup=1y")! as URL,
                                           cachePolicy: .useProtocolCachePolicy,
                                           timeoutInterval: 10.0)
 

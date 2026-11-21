@@ -547,7 +547,7 @@ public struct ContentViewWAQI: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
-                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: carbonIntensity, total: 1000)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 8.0)
@@ -953,10 +953,10 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
-                    self.cO2Country = cO2Data.countryCode ?? ""
-                    self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
+                    self.cO2Country = cO2Data.zone ?? ""
+                    self.carbonIntensity = Double(cO2Data.carbonIntensity ?? 0)
                     
-                    self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    self.fossilFuelPercentage = 0
                     
                 }
                 

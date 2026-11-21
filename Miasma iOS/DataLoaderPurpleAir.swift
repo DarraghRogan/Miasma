@@ -91,7 +91,13 @@ extension PurpleAirDB {
 
         guard var components = URLComponents(url: baseUrl.appendingPathComponent(path.rawValue), resolvingAgainstBaseURL: true)
         else { fatalError("Couldn't create URL Components")}
-//        components.queryItems = [URLQueryItem(name: "X-API-Key", value: APIKeyPurpleAirNewAPI)]
+
+        components.queryItems = [
+            URLQueryItem(
+                name: "fields",
+                value: "sensor_index,name,latitude,longitude,last_seen,humidity_a,temperature_a,pressure_a,pm2.5_a,pm2.5_b,pm2.5_cf_1,pm2.5_60minute,pm2.5_24hour,pm2.5_1week"
+            )
+        ]
 
         var request = URLRequest(url: components.url!)
         request.httpMethod = "GET"
@@ -141,6 +147,9 @@ struct Sensor: Codable {
     var pm25_A: Double?
     var pm25_B: Double?
     var pm25_cf_1: Double?
+    var pm25_60minute: Double?
+    var pm25_24hour: Double?
+    var pm25_1week: Double?
 //    var pm100_A, pm100_B: Double?
 //    var the03_UmCountA: Int?
 //    var the03_UmCountB, the05_UmCountA, the05_UmCountB, the10_UmCountA: Double?
@@ -162,6 +171,18 @@ struct Sensor: Codable {
 //    var channelFlagsAuto: Int?
     var stats: Stats?
 
+    var pm25_60minuteAverage: Double {
+        stats?.pm25_60minute ?? pm25_60minute ?? 0
+    }
+
+    var pm25_24hourAverage: Double {
+        stats?.pm25_24hour ?? pm25_24hour ?? 0
+    }
+
+    var pm25_1weekAverage: Double {
+        stats?.pm25_1week ?? pm25_1week ?? 0
+    }
+
     enum CodingKeys: String, CodingKey {
         case sensorIndex = "sensor_index"
         case name
@@ -182,6 +203,9 @@ struct Sensor: Codable {
         case pm25_A = "pm2.5_a"
         case pm25_B = "pm2.5_b"
         case pm25_cf_1 = "pm2.5_cf_1"
+        case pm25_60minute = "pm2.5_60minute"
+        case pm25_24hour = "pm2.5_24hour"
+        case pm25_1week = "pm2.5_1week"
 //        case pm100_A = "pm10.0_a"
 //        case pm100_B = "pm10.0_b"
 //        case the03_UmCountA = "0.3_um_count_a"

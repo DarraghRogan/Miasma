@@ -7,12 +7,12 @@
 		<key>Miasma WidgetExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>3</integer>
 		</dict>
 		<key>Miasma iOS.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>2</integer>
 		</dict>
 		<key>Miasma.xcscheme_^#shared#^_</key>
 		<dict>
@@ -24,7 +24,7 @@
 		<key>MiasmaLauncher.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>4</integer>
 		</dict>
 		<key>MiasmaLauncherApplication.xcscheme_^#shared#^_</key>
 		<dict>
@@ -39,6 +39,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0218A775256DBBD500B2D684</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>023BBDEA25251AC3006E8054</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>0283DD8424F051B700E4CC07</key>
 		<dict>
 			<key>primary</key>

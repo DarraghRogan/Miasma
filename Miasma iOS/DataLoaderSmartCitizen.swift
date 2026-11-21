@@ -11,15 +11,24 @@ import Combine
 
 struct SmartCitizenResponse: Codable {
     let smartCitizenData: DataClass
+    let hardware: SmartCitizenHardwareInfo?
+    let location: DataLocation?
 
-        enum CodingKeys: String, CodingKey {
-            case smartCitizenData = "data"
-        }
+    enum CodingKeys: String, CodingKey {
+        case smartCitizenData = "data"
+        case hardware, location
+    }
+}
+
+struct SmartCitizenHardwareInfo: Codable {
+    let version: String?
 }
 
 class SmartCitizenViewModel: ObservableObject {
 
     @Published var smartCitizenData: DataClass = DataClass()
+    @Published var stationVersion: String? = nil
+    @Published var stationLocation: DataLocation? = nil
 
     var smartCitizenCancellationToken: AnyCancellable?
 
@@ -40,6 +49,8 @@ extension SmartCitizenViewModel {
             .sink(receiveCompletion: { _ in },
                   receiveValue: {
                     self.smartCitizenData = $0.smartCitizenData
+                    self.stationVersion = $0.hardware?.version
+                    self.stationLocation = $0.location
                   })
 //        print(ProfileEditor().SensorID)
 //        print(smartCitizenData)

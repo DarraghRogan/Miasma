@@ -38,8 +38,6 @@ public struct ContentView: View {
             
             Spacer()
             
-            SwiftUIBannerAd(adPosition: .bottom, adUnitId: "ca-app-pub-4380200549840291/2043028652")
-                .frame(height: 52)
             
             
 //            switch locationViewModel.authorizationStatus {

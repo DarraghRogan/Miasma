@@ -238,13 +238,13 @@ public struct ContentViewPurpleAir: View {
                             Text("ᴡʜᴏ ᴀᴠᴇʀᴀɢᴇs")
                                 .font(.caption2)
                             //                                .padding(.bottom, 0.5)
-                            Text("1 ʜᴏᴜʀ: \(String(Int(purpleAirViewModel.purpleAirdata.stats?.pm25_60minute ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.stats?.pm25_60minute ?? 0))")
+                            Text("1 ʜᴏᴜʀ: \(String(Int(purpleAirViewModel.purpleAirdata.pm25_60minuteAverage ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.pm25_60minute ?? 0))")
                                 .font(.caption2)
                                 .multilineTextAlignment(.trailing)
-                            Text("1 ᴅᴀʏ: \(String(Int(purpleAirViewModel.purpleAirdata.stats?.pm25_24hour ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.stats?.pm25_24hour ?? 0))")
+                            Text("1 ᴅᴀʏ: \(String(Int(purpleAirViewModel.purpleAirdata.pm25_24hourAverage ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.pm25_24hour ?? 0))")
                                 .font(.caption2)
                                 .multilineTextAlignment(.trailing)
-                            Text("1 ᴡᴇᴇᴋ: \(String(Int(purpleAirViewModel.purpleAirdata.stats?.pm25_1week ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.stats?.pm25_1week ?? 0))")
+                            Text("1 ᴡᴇᴇᴋ: \(String(Int(purpleAirViewModel.purpleAirdata.pm25_1weekAverage ?? 0))) \(generatePurepleAir24HourAverageWHO(pm25historical: purpleAirViewModel.purpleAirdata.pm25_1week ?? 0))")
                                 .font(.caption2)
                                 .multilineTextAlignment(.trailing)
                             Text("µɢ/ᴍ³ ᴘᴍ₂.₅")
@@ -310,7 +310,7 @@ public struct ContentViewPurpleAir: View {
                 }
                 .ignoresSafeArea()
                 
-                if ProfileEditor().AirQualityLocalToDevice == true
+                if ProfileEditor().AirQualityLocalToDevice == true && ProfileEditor().AirQualityDataSource == "WAQI/AQICN"
                 {
                     VStack{
                         if ProgressIndicatorShown == true{
@@ -571,7 +571,7 @@ public struct ContentViewPurpleAir: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack {
-                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: 100-(fossilFuelPercentage), total: 100)
+                            ProgressView("⚡️ \(Int(carbonIntensity))gCO₂eq/kWh ɢʀɪᴅ ᴄᴀʀʙᴏɴ ɪɴᴛᴇɴsɪᴛʏ", value: carbonIntensity, total: 1000)
                                 .accentColor(.green)
                                 .padding(.top, 0.5)
                                 .padding(.bottom, 8.0)
@@ -1011,10 +1011,9 @@ Best wishes in using the app, and wishing you have good air quality. Darragh
                 
                 if ProfileEditor().ElectricalConsumptionDataWanted == true
                 {
-                    self.cO2Country = cO2Data.countryCode ?? ""
-                    self.carbonIntensity = cO2Data.data?.carbonIntensity ?? 0
-                    
-                    self.fossilFuelPercentage = cO2Data.data?.fossilFuelPercentage ?? 0
+                    self.cO2Country = cO2Data.zone ?? ""
+                    self.carbonIntensity = Double(cO2Data.carbonIntensity ?? 0)
+                    self.fossilFuelPercentage = 0
                     
                 }
                 
